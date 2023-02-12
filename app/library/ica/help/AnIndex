@@ -1,0 +1,11 @@
+acy	acy
+ica	ica
+icafast	icafast
+icaimax	icaimax
+icajade	icajade
+icaplot	icaplot
+icasamp	icasamp
+print.icafast	ica-internal
+print.icaimax	ica-internal
+print.icajade	ica-internal
+sdiag	ica-internal

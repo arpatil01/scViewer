@@ -1,0 +1,9 @@
+sitmo-package	sitmo-package
+runif_r	runif_r
+runif_sitmo	runif_sitmo
+sitmo	sitmo-package
+sitmo_draws	sitmo_draws
+sitmo_engine_reset	sitmo_engine_reset
+sitmo_engine_seed	sitmo_engine_seed
+sitmo_parallel	sitmo_parallel
+sitmo_two_seeds	sitmo_two_seeds

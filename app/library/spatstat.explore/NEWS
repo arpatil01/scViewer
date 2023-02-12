@@ -1,0 +1,698 @@
+
+        CHANGES IN spatstat.explore VERSION 3.0-6
+
+OVERVIEW
+
+    o Internal improvements and bug fixes.
+
+        CHANGES IN spatstat.explore VERSION 3.0-5
+
+OVERVIEW
+
+    o Bug fix in pcf.
+
+    o We thank Maximilian Hesselbarth for contributions.
+    
+BUG FIXES
+
+    o pcf.ppp
+    Estimates were incorrectly scaled (they were incorrectly multiplied
+    by the area of the window.) Spotted by Maximilian Hesselbarth.
+    Bug introduced in spatstat.explore 3.0-0.
+    Fixed.
+    
+
+        CHANGES IN spatstat.explore VERSION 3.0-4
+
+OVERVIEW
+
+    o Bug fix in Kest in a very special case.
+
+    o We thank 'Marjolein9' for contributions.
+    
+BUG FIXES
+
+    o Kest
+    Isotropic edge correction weight was computed incorrectly
+    for a data point lying exactly on a corner of a rectangular window.
+    Spotted by GitHub contributor 'Marjolein9'.
+    Fixed.
+    
+        CHANGES IN spatstat.explore VERSION 3.0-3
+
+OVERVIEW
+
+    o Tweaks to placate package checker.
+
+
+        CHANGES IN spatstat.explore VERSION 3.0-2
+
+OVERVIEW
+
+    o Tweaks to placate package checker.
+
+
+        CHANGES IN spatstat.explore VERSION 3.0-1
+
+OVERVIEW
+
+    o Tweaks to placate package checker.
+
+
+        CHANGES IN spatstat.explore VERSION 3.0-0
+
+OVERVIEW
+
+    o New package
+
+    o We thank Marie-Colette van Lieshout and Daniel Manrique-Castano
+    for contributions.
+    
+    o Periodic edge correction for K function.
+
+    o Changed denominator in K function and pair correlation function.
+    
+    o Bandwidth selection for adaptive kernel estimation of intensity.
+
+    o U-shaped curves in 'rhohat'.
+
+    o Radial cumulative integral of an image.
+    
+    o Minor improvements.
+
+NEW FUNCTIONS
+
+    o bw.CvL.adaptive
+    Bandwidth selection for adaptive kernel estimation of intensity.
+
+    o radcumint
+    Radial cumulative integral of an image.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Package structure
+    The package 'spatstat.core' has been split into two packages called
+    'spatstat.explore' (for exploratory data analysis)
+    and 'spatstat.model' (for modelling and formal inference).
+
+    o spatstat.explore
+    The new package 'spatstat.explore' contains the code for
+    exploratory data analysis and nonparametric analysis
+    of spatial data. Examples include 'density.ppp', 'Kest',
+    'envelope', 'rhohat', 'clarkevans.test'.
+
+    o NEWS
+    The NEWS file for the new package 'spatstat.explore'
+    contains older news items from the defunct package 'spatstat.core'
+    (for functions which are now in 'spatstat.explore').
+
+    o Kest, Kdot, Kcross, Ldot, Lcross, Kmulti
+    These functions now accept the option 'correction="periodic"'
+    to compute the periodic (toroidal) edge correction estimate.
+
+    o Kest, pcf, Ksector, Kdot, Kcross, Kmulti
+    When ratio=TRUE, the denominator is now equal to the number of pairs of
+    points considered. This does not affect the estimate of the summary
+    function, but it changes the calculation of pooled estimates
+    when the estimates were obtained from different sized windows.
+    
+    o markcorr, markcrosscorr
+    These functions now allow negative mark values when normalise=FALSE.
+    
+    o marktable
+    This function now works for point patterns in three dimensions (class 'pp3')
+    and point patterns on a network (class 'lpp').
+    
+    o bw.relrisk
+    This function is now generic, with a method for class 'ppp'
+
+    o compileK, compilepcf
+    These functions have a new argument 'samplesize'.
+    If 'ratio=TRUE' the numerator and denominator will be rescaled
+    by a common factor so that the denominator is equal to 'samplesize'.
+
+    o adaptive.density
+    Now accepts 'method="nearest"' and passes the data to 'nndensity'.
+
+    o rhohat.ppp
+    New options 'smoother="mountain"' and 'smoother="valley"'
+    for estimating a unimodal function (U-shaped curve).
+
+    o rhohat.ppp
+    If the covariate is a 'distfun', the name of the unit of length is saved
+    and displayed on the plot.
+
+    o rhohat.ppp
+    New arguments 'jitter', 'jitterfactor', 'interpolate' allow greater
+    control over the calculation.
+
+    o rhohat.ppp
+    New argument 'do.CI' specifies whether to calculate confidence bands.
+    
+        CHANGES IN spatstat.core VERSION 2.4-4.010
+
+OVERVIEW
+
+    o Internal improvements.
+
+
+        CHANGES IN spatstat.core VERSION 2.4-4
+
+OVERVIEW
+
+    o Bug fixes and minor improvements.
+
+BUG FIXES
+
+    o rhohat.ppp
+    The argument 'subset' was not handled correctly in the internal data.
+    The estimated function 'rho' was correct, but if 'predict.rhohat' was applied,
+    predictions were computed only in the 'subset', and were possibly incorrect values.
+    Fixed.
+
+    o Gfox, Jfox
+    Warnings were issued about text formatting errors (mentioning 'sprintf' or 'fmt').
+    Fixed.
+    
+        CHANGES IN spatstat.core VERSION 2.4-3
+
+OVERVIEW
+
+    o We thank Art Stock for contributions.
+    
+    o Bug fixes and minor improvements.
+
+BUG FIXES
+
+    o Smooth.ppp
+    Crashed when 'kernel' was a function, 'at="points"' and 'scalekernel=FALSE'.
+    Fixed.
+
+    o Finhom, Ginhom, Jinhom
+    Crashed when ratio=TRUE.
+    [Spotted by Art Stock.]
+    Fixed.
+    
+    o envelope
+    Crashed for some of the summary functions when ratio=TRUE.
+    [Spotted by Art Stock.]
+    Fixed.
+
+    o "[.rat"
+    Crashed in some cases.
+    Fixed.
+
+    o Kcross
+    The result of Kcross() was 'invisible',
+    i.e. it was not automatically printed.
+    Fixed.
+    
+        CHANGES IN spatstat.core VERSION 2.4-2
+
+OVERVIEW
+
+    o Internal bug fixes.
+
+
+        CHANGES IN spatstat.core VERSION 2.4-1
+
+OVERVIEW
+
+    o We thank Frederic Lavancier, Sebastian Meyer, Suman Rakshit and Sven Wagner
+    for contributions.
+    
+    o Improved approximation of intensity of Gibbs models.
+    
+    o Experimental code to represent (theoretical) point process models
+    
+    o Extract more information about a point process model.
+
+    o Internal improvements and bug fixes.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o relrisk.ppp
+    Ratios which are close to 0/0 are handled more effectively,
+    reducing the likelihood of strange-looking plots when 'sigma' is very small.
+
+BUG FIXES
+
+    o density.ppp
+    Crashed if the observation window had zero area.
+    Fixed.
+
+    o dirichletVoronoi.ppp
+    Crashed randomly, with obscure error messages from 'im' or 'eval.im',
+    when argument 'f' had a small value.
+    [Spotted by Suman Rakshit.]
+    Fixed.
+
+    o dirichletVoronoi.ppp
+    Rarely, produced an image containing NA values.
+    [Spotted by Suman Rakshit.]
+    Fixed.
+
+    o vcov.ppm
+    Crashed in some cases, with message 'object lamdel not found'.
+    [Spotted by Sven Wagner.]
+    Fixed.
+    
+        CHANGES IN spatstat.core VERSION 2.4-0
+
+OVERVIEW
+
+    o We thank Sriram Ramamurthy for contributions.
+
+    o spatstat.core now depends on the new package 'spatstat.random'.
+
+    o Functions for generating random patterns have been removed.
+    
+    o Minor improvements and bug fixes
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o package structure
+    The code for generating random spatial patterns (including 'rpoispp',
+    'rMatClust', 'rThomas', 'rNeymanScott', 'rStrauss', 'rmh')
+    has been removed from 'spatstat.core' and placed in a new package
+    'spatstat.random'. This new package is required by 'spatstat.core'.
+
+    o reload.or.compute
+    New argument 'context' 
+
+BUG FIXES
+
+    o reload.or.compute
+    Scoping error (crashed sometimes if called from a non-global environment).
+    Fixed.
+    
+        CHANGES IN spatstat.core VERSION 2.3-2
+
+OVERVIEW
+
+    o Minor improvements and bug fixes.
+
+    o We thank Jonas Brehmer for contributions.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o pcf
+    Improved error message
+    
+BUG FIXES
+
+    o edge.Ripley
+    Results were incorrect for data points lying exactly at the corners
+    of a rectangle.
+    Fixed.
+
+        CHANGES IN spatstat.core VERSION 2.3-1
+
+OVERVIEW
+
+    o Covariates in ppm and mppm may be functions that depend on the marks
+    as well as the spatial coordinates.
+
+    o Automatic selection of threshold for defining a binary predictor.
+    
+    o Random perturbation of line segments.
+    
+    o Minor extensions, performance improvements, and bug fixes.
+
+NEW FUNCTIONS
+
+    o thresholdSelect, thresholdCI
+    Select the optimal threshold for converting a numerical predictor
+    to a binary predictor.
+    
+    o coef<-.fii
+    Changes the coefficients of a fitted interaction object
+    (a method for the generic "coef<-")
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o distcdf
+    Improved regularisation algorithm.
+    Argument 'nr=NULL' is now accepted.
+    New argument 'delta' allows the result to be interpolated
+    onto a finer grid.
+
+    o collapse.fv
+    Columns identified by the arguments 'same' and 'different'
+    may now be absent from some of the 'fv' objects that will be collapsed.
+
+    o Kest
+    When the argument 'domain' is given, the calculation of estimates of K(r)
+    has changed slightly, to adhere more closely to the description in
+    the help file.
+    
+    o reload.or.compute
+    Now prints a message indicating whether the data were recomputed
+    or reloaded from file.
+    New argument 'verbose'.
+
+    o pool.envelope
+    Now uses the value of 'nrank' which was used in the original envelopes.
+    
+    o Kmulti
+    New argument 'rmax'.
+
+    o Kinhom
+    No longer issues a warning about changed behaviour in the case where
+    'lambda' is a fitted model.
+    
+    o pcfinhom
+    No longer issues a warning about changed behaviour in the case where
+    'lambda' is a fitted model.
+    
+BUG FIXES
+
+    o segregation.test
+    The test statistic was calculated as the mean, rather than the sum,
+    of discrepancies between probabilities. (The p-value was not affected.)
+    Fixed.
+
+    o Kest
+    If 'domain' was specified, 'rmax' was ignored.
+    Fixed.
+
+    o edge.Ripley
+    Value was incorrect for a point lying exactly on a corner.
+    Fixed.
+
+    o edge.Ripley
+    Crashed when method="interpreted", if a point lay exactly on a corner.
+    Fixed.
+
+    o plot.fv, plot.envelope
+    Crashed when trying to display a significance band of width zero
+    around a constant function.
+    Fixed.
+    
+    o collapse.fv
+    Crashed if 'length(same) > 1'.
+    Fixed.
+
+        CHANGES IN spatstat.core VERSION 2.3-0
+
+OVERVIEW
+
+    o Transect of an image along a curve.
+
+    o Image cross-correlation and cross-covariance.
+    
+    o Minor bug fixes.
+
+NEW FUNCTIONS
+
+    o cov.im, cor.im
+    Correlation or covariance between several pixel images.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o transect.im
+    New argument 'curve' allows the user to specify a curved transect.
+
+BUG FIXES
+
+    o rhohat
+    The rug plot (produced by plot.rhohat) was incorrect
+    when rhohat was called with method="piecewise".
+    Fixed.
+
+    o markcrosscorr
+    Did not recognise the option 'correction="none"'.
+    Fixed.
+
+   o roc.ppp
+   The default plot of the result of roc.ppp
+   did not include the diagonal line 'y=x'.
+   Fixed.
+   
+        CHANGES IN spatstat.core VERSION 2.2-0
+
+OVERVIEW
+
+    o We thank Abdollah Jalilian, Yongtao Guan and Rasmus Waagepetersen
+    for contributions.
+    
+    o estimation of the spatial covariance function of a pixel image
+
+    o simulation of the product shot noise Cox process.
+
+    o extensions to rhohat
+    
+NEW FUNCTIONS
+
+    o rPSNCP
+    Generate simulated realisations of the product shot noise Cox process.
+    Contributed by Abdollah Jalilian, Yongtao Guan and Rasmus Waagepetersen.
+    
+    o spatcov
+    Estimate the spatial covariance function of a pixel image.
+
+    o pairMean
+    Compute the mean of a specified function of interpoint distance
+    between random points in a window.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o rhohat
+    New option (smoother='piecewise') computes a piecewise-constant
+    estimate of rho(z).
+    
+    o rhohat
+    The result now includes the 'average' intensity rho.
+
+    o distcdf
+    Arguments which are NULL will be treated as missing.
+
+    o distcdf
+    New argument 'savedenom'.
+    
+
+        CHANGES IN spatstat.core VERSION 2.1-2
+
+OVERVIEW
+
+    o Reduced CRAN check time.
+
+        CHANGES IN spatstat.core VERSION 2.1-1
+
+OVERVIEW
+
+    o Minor bug fix
+
+        CHANGES IN spatstat.core VERSION 2.1-0
+
+OVERVIEW
+
+    o densityfun.ppp handles query points outside original window
+
+    o Minor improvements and bug fixes.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o densityfun.ppp
+    The resulting function can now handle query points which lie
+    outside the window of the original data,
+    and has argument 'drop=TRUE' which specifies how to handle them.
+
+    o rpoint
+    New argument 'forcewin' forces the code to use the window 'win'
+    when 'f' is a pixel image.
+
+BUG FIXES
+
+    o cdf.test
+    Crashed if the covariate was constant.
+    Fixed.
+
+        CHANGES IN spatstat.core VERSION 2.0-0
+
+OVERVIEW
+
+    o We thank Tilman Davies,  Greg McSwiggan and Suman Rakshit
+    for contributions.
+
+    o We thank Corey Anderson, Michael Chirico, Andy Craig,
+    Marcelino de la Cruz, Tilman Davies, Pavel Fibich,
+    Kurt Hornik, Gopalan Nair, Yonatan Rosen and Rasmus Waagepetersen
+    for contributions.
+    
+    o Diffusion kernel smoothing.
+    
+    o More support for spatial logistic regression models.
+
+    o predict.mppm now works for multitype point process models.
+
+    o Improved handling of 'newdata' in predict.mppm.
+
+    o More support for multi-dimensional patterns.
+    
+NEW FUNCTIONS
+
+    o densityHeat
+    New generic function for diffusion kernel estimation of intensity
+
+    o densityHeat.ppp
+    Diffusion kernel estimation of intensity for point pattern in 2 dimensions.
+    This is an alternative to density.ppp.
+
+    o intersect.boxx
+    Compute intersection of boxes in multi-dimensional space
+
+    o scale.boxx, scale.ppx
+    Methods for 'scale' for boxes and patterns in multi-dimensional space
+
+    o shift.boxx, shift.ppx
+    Methods for 'shift' for boxes and patterns in multi-dimensional space
+
+    o is.boxx
+    Determine whether an object is a multidimensional box
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o rotmean
+    The result now has the same 'unitname' as the input object X.
+    New argument 'adjust' controls the smoothing bandwidth.
+    
+    o rlabel
+    New argument 'group' specifies that the points are divided into
+    several groups, and that relabelling is applied within each group.
+    
+    o Kcross, Gcross, Jcross
+    Function labels (shown on the plot legend) have been
+    improved when i = j.
+
+    o anova.mppm
+    Issues a warning when applied to random-effects models
+    (models fitted using the argument 'random').
+
+BUG FIXES
+
+    o Gest
+    If correction="rs" or correction="km", then both the reduced-sample
+    (border correction) and Kaplan-Meier corrected estimates were calculated.
+    [Spotted by Gopalan Nair.]
+    Fixed.
+
+    o simulate.rhohat
+    Crashed when applied to rhohat objects computed from data
+    on a linear network.
+    Fixed.
+
+        CHANGES IN spatstat.core VERSION 1.65-11
+
+OVERVIEW
+
+    o Internal tweaks.
+    
+        CHANGES IN spatstat.core VERSION 1.65-10
+
+OVERVIEW
+
+    o Minor corrections to documentation.
+
+        CHANGES IN spatstat.core VERSION 1.65-9
+
+OVERVIEW
+
+    o We thank Ian Buller for a suggestion.
+
+    o weights permitted in density calculation for line segments.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o density.psp
+    New argument 'weights'.
+
+        CHANGES IN spatstat.core VERSION 1.65-8
+
+OVERVIEW
+
+    o Minor changes to appease the compiler.
+
+        CHANGES IN spatstat.core VERSION 1.65-7
+
+OVERVIEW
+
+    o We thank Michael Chirico for a contribution.
+
+    o Minor changes to appease the compiler.
+    
+        CHANGES IN spatstat.core VERSION 1.65-6
+
+OVERVIEW
+
+    o We thank Tilman Davies and Pavel Fibich for contributions.
+
+    o Increased speed for large datasets.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o rSSI
+    Accelerated.
+    
+    o overall speed
+    Changes have been made to the internal code of spatstat 
+    which should accelerate computations involving large datasets.
+
+    o localpcf, localpcfinhom
+    New argument 'rvalue'.
+
+BUG FIXES
+
+    o rLGCP
+    Simulation results for log-Gaussian Cox processes were incorrect
+    unless the pixel dimensions and pixel spacings were identical
+    on the horizontal and vertical axes. (If pixel dimensions were not
+    specified, then the results were incorrect whenever the Frame of the
+    simulation window was not a square.) 
+    [Spotted by Tilman Davies.]
+    Fixed.
+    
+    o Vmark
+    Crashed if normalise=TRUE when there was only one column of marks.
+    (Spotted by Pavel Fibich.)
+    Fixed.
+    
+    o nnclean
+    Crashed if k >= npoints(X).
+    Fixed.
+
+    CHANGES IN spatstat.core VERSION 1.65-5
+
+OVERVIEW
+
+    o Minor changes required by CRAN.
+    
+
+        CHANGES IN spatstat.core VERSION 1.65-1
+
+OVERVIEW
+
+    o Added NEWS file.
+
+
+        CHANGES IN spatstat.core VERSION 1.65-0
+
+OVERVIEW
+
+    o Package initialised at version 1.65-0
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o spatstat.core
+    The package 'spatstat.core' has been created from a subset
+    of the code in the original 'spatstat' package version 1.65-0.
+    It contains the core functionality for statistical analysis of
+    spatial data. For an overview, see help("spatstat.core-package")
+
+    o Execution
+    The 'spatstat.core' package is slightly faster than the corresponding
+    code in the 'spatstat' package, because the procedure for calling
+    internal C functions has been streamlined.
+
+
+

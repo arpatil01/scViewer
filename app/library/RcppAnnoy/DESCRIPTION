@@ -1,0 +1,31 @@
+Package: RcppAnnoy
+Type: Package
+Title: 'Rcpp' Bindings for 'Annoy', a Library for Approximate Nearest
+        Neighbors
+Version: 0.0.20
+Date: 2022-10-27
+Author: Dirk Eddelbuettel
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Description: 'Annoy' is a small C++ library for Approximate Nearest Neighbors 
+ written for efficient memory usage as well an ability to load from / save to
+ disk. This package provides an R interface by relying on the 'Rcpp' package,
+ exposing the same interface as the original Python wrapper to 'Annoy'. See
+ <https://github.com/spotify/annoy> for more on 'Annoy'. 'Annoy' is released
+ under Version 2.0 of the Apache License. Also included is a small Windows
+ port of 'mmap' which is released under the MIT license.
+License: GPL (>= 2)
+Depends: R (>= 3.1)
+Imports: methods, Rcpp
+LinkingTo: Rcpp
+Suggests: tinytest
+URL: https://github.com/eddelbuettel/rcppannoy,
+        https://dirk.eddelbuettel.com/code/rcpp.annoy.html
+BugReports: https://github.com/eddelbuettel/rcppannoy/issues
+NeedsCompilation: yes
+RoxygenNote: 7.1.1
+Packaged: 2022-10-27 14:58:26 UTC; edd
+Repository: CRAN
+Date/Publication: 2022-10-27 23:37:56 UTC
+Built: R 4.2.2; x86_64-w64-mingw32; 2023-01-29 02:49:12 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

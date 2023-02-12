@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Tools for Single Cell Genomics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Tools for Single Cell Genomics
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;Seurat&rsquo; version 4.3.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#H">H</a>
+<a href="#I">I</a>
+<a href="#J">J</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+<a href="#W">W</a>
+</p>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Seurat-package.html">Seurat-package</a></td>
+<td>Seurat: Tools for Single Cell Genomics</td></tr>
+</table>
+
+<h2><a id="A">-- A --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="AddAzimuthResults.html">AddAzimuthResults</a></td>
+<td>Add Azimuth Results</td></tr>
+<tr><td style="width: 25%;"><a href="AddAzimuthScores.html">AddAzimuthScores</a></td>
+<td>Add Azimuth Scores</td></tr>
+<tr><td style="width: 25%;"><a href="AddModuleScore.html">AddModuleScore</a></td>
+<td>Calculate module scores for feature expression programs in single cells</td></tr>
+<tr><td style="width: 25%;"><a href="AggregateExpression.html">AggregateExpression</a></td>
+<td>Aggregated feature expression by identity class</td></tr>
+<tr><td style="width: 25%;"><a href="AnchorSet-class.html">AnchorSet</a></td>
+<td>The AnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="AnchorSet-class.html">AnchorSet-class</a></td>
+<td>The AnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="AnnotateAnchors.html">AnnotateAnchors</a></td>
+<td>Add info to anchor matrix</td></tr>
+<tr><td style="width: 25%;"><a href="AnnotateAnchors.html">AnnotateAnchors.default</a></td>
+<td>Add info to anchor matrix</td></tr>
+<tr><td style="width: 25%;"><a href="AnnotateAnchors.html">AnnotateAnchors.IntegrationAnchorSet</a></td>
+<td>Add info to anchor matrix</td></tr>
+<tr><td style="width: 25%;"><a href="AnnotateAnchors.html">AnnotateAnchors.TransferAnchorSet</a></td>
+<td>Add info to anchor matrix</td></tr>
+<tr><td style="width: 25%;"><a href="as.CellDataSet.html">as.CellDataSet</a></td>
+<td>Convert objects to CellDataSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.CellDataSet.html">as.CellDataSet.Seurat</a></td>
+<td>Convert objects to CellDataSet objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.data.frame.Matrix</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="as.Seurat.html">as.Seurat.CellDataSet</a></td>
+<td>Convert objects to 'Seurat' objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.Seurat.html">as.Seurat.SingleCellExperiment</a></td>
+<td>Convert objects to 'Seurat' objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.SingleCellExperiment.html">as.SingleCellExperiment</a></td>
+<td>Convert objects to SingleCellExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.SingleCellExperiment.html">as.SingleCellExperiment.Seurat</a></td>
+<td>Convert objects to SingleCellExperiment objects</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse.H5Group</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-class.html">Assay-class</a></td>
+<td>The Assay Class</td></tr>
+<tr><td style="width: 25%;"><a href="AugmentPlot.html">AugmentPlot</a></td>
+<td>Augments ggplot2-based plot with a PNG image.</td></tr>
+<tr><td style="width: 25%;"><a href="AutoPointSize.html">AutoPointSize</a></td>
+<td>Automagically calculate a point size for ggplot2-based scatter plots</td></tr>
+<tr><td style="width: 25%;"><a href="AverageExpression.html">AverageExpression</a></td>
+<td>Averaged feature expression by identity class</td></tr>
+</table>
+
+<h2><a id="B">-- B --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="BarcodeInflectionsPlot.html">BarcodeInflectionsPlot</a></td>
+<td>Plot the Barcode Distribution and Calculated Inflection Points</td></tr>
+<tr><td style="width: 25%;"><a href="BGTextColor.html">BGTextColor</a></td>
+<td>Determine text color based on background color</td></tr>
+<tr><td style="width: 25%;"><a href="CustomPalette.html">BlackAndWhite</a></td>
+<td>Create a custom color palette</td></tr>
+<tr><td style="width: 25%;"><a href="CustomPalette.html">BlueAndRed</a></td>
+<td>Create a custom color palette</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">BoldTitle</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="BuildClusterTree.html">BuildClusterTree</a></td>
+<td>Phylogenetic Analysis of Identity Classes</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="CalcPerturbSig.html">CalcPerturbSig</a></td>
+<td>Calculate a perturbation Signature</td></tr>
+<tr><td style="width: 25%;"><a href="CalculateBarcodeInflections.html">CalculateBarcodeInflections</a></td>
+<td>Calculate the Barcode Distribution Inflection</td></tr>
+<tr><td style="width: 25%;"><a href="CaseMatch.html">CaseMatch</a></td>
+<td>Match the case of character vectors</td></tr>
+<tr><td style="width: 25%;"><a href="cc.genes.html">cc.genes</a></td>
+<td>Cell cycle genes</td></tr>
+<tr><td style="width: 25%;"><a href="cc.genes.updated.2019.html">cc.genes.updated.2019</a></td>
+<td>Cell cycle genes: 2019 update</td></tr>
+<tr><td style="width: 25%;"><a href="CellCycleScoring.html">CellCycleScoring</a></td>
+<td>Score cell cycle phases</td></tr>
+<tr><td style="width: 25%;"><a href="CellScatter.html">CellPlot</a></td>
+<td>Cell-cell scatter plot</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.SCTModel</a></td>
+<td>Get Cell Names</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.SlideSeq</a></td>
+<td>Get Cell Names</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.STARmap</a></td>
+<td>Get Cell Names</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.VisiumV1</a></td>
+<td>Get Cell Names</td></tr>
+<tr><td style="width: 25%;"><a href="CellsByImage.html">CellsByImage</a></td>
+<td>Get a vector of cell names associated with an image (or set of images)</td></tr>
+<tr><td style="width: 25%;"><a href="CellScatter.html">CellScatter</a></td>
+<td>Cell-cell scatter plot</td></tr>
+<tr><td style="width: 25%;"><a href="CellSelector.html">CellSelector</a></td>
+<td>Cell Selector</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">CenterTitle</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="CollapseEmbeddingOutliers.html">CollapseEmbeddingOutliers</a></td>
+<td>Move outliers towards center on dimension reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="CollapseSpeciesExpressionMatrix.html">CollapseSpeciesExpressionMatrix</a></td>
+<td>Slim down a multi-species expression matrix, when only one species is primarily of interenst.</td></tr>
+<tr><td style="width: 25%;"><a href="ColorDimSplit.html">ColorDimSplit</a></td>
+<td>Color dimensional reduction plot by tree split</td></tr>
+<tr><td style="width: 25%;"><a href="CombinePlots.html">CombinePlots</a></td>
+<td>Combine ggplot2-based plots into a single plot</td></tr>
+<tr><td style="width: 25%;"><a href="contrast-theory.html">contrast-theory</a></td>
+<td>Get the intensity and/or luminance of a color</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSCTAssayObject.html">CreateSCTAssayObject</a></td>
+<td>Create a SCT Assay object</td></tr>
+<tr><td style="width: 25%;"><a href="CustomDistance.html">CustomDistance</a></td>
+<td>Run a custom distance function on an input data matrix</td></tr>
+<tr><td style="width: 25%;"><a href="CustomPalette.html">CustomPalette</a></td>
+<td>Create a custom color palette</td></tr>
+</table>
+
+<h2><a id="D">-- D --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">DarkTheme</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="DEenrichRPlot.html">DEenrichRPlot</a></td>
+<td>DE and EnrichR pathway visualization barplot</td></tr>
+<tr><td style="width: 25%;"><a href="DietSeurat.html">DietSeurat</a></td>
+<td>Slim down a Seurat object</td></tr>
+<tr><td style="width: 25%;"><a href="DimHeatmap.html">DimHeatmap</a></td>
+<td>Dimensional reduction heatmap</td></tr>
+<tr><td style="width: 25%;"><a href="DimPlot.html">DimPlot</a></td>
+<td>Dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-class.html">DimReduc-class</a></td>
+<td>The DimReduc Class</td></tr>
+<tr><td style="width: 25%;"><a href="DiscretePalette.html">DiscretePalette</a></td>
+<td>Discrete colour palettes from pals</td></tr>
+<tr><td style="width: 25%;"><a href="DoHeatmap.html">DoHeatmap</a></td>
+<td>Feature expression heatmap</td></tr>
+<tr><td style="width: 25%;"><a href="DotPlot.html">DotPlot</a></td>
+<td>Dot plot visualization</td></tr>
+</table>
+
+<h2><a id="E">-- E --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="ElbowPlot.html">ElbowPlot</a></td>
+<td>Quickly Pick Relevant Dimensions</td></tr>
+<tr><td style="width: 25%;"><a href="ExpMean.html">ExpMean</a></td>
+<td>Calculate the mean of logged values</td></tr>
+<tr><td style="width: 25%;"><a href="ExpSD.html">ExpSD</a></td>
+<td>Calculate the standard deviation of logged values</td></tr>
+<tr><td style="width: 25%;"><a href="ExpVar.html">ExpVar</a></td>
+<td>Calculate the variance of logged values</td></tr>
+</table>
+
+<h2><a id="F">-- F --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="FastRowScale.html">FastRowScale</a></td>
+<td>Scale and/or center matrix rowwise</td></tr>
+<tr><td style="width: 25%;"><a href="FeaturePlot.html">FeatureHeatmap</a></td>
+<td>Visualize 'features' on a dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="CellSelector.html">FeatureLocator</a></td>
+<td>Cell Selector</td></tr>
+<tr><td style="width: 25%;"><a href="FeaturePlot.html">FeaturePlot</a></td>
+<td>Visualize 'features' on a dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="FeatureScatter.html">FeatureScatter</a></td>
+<td>Scatter plot of single cell data</td></tr>
+<tr><td style="width: 25%;"><a href="FilterSlideSeq.html">FilterSlideSeq</a></td>
+<td>Filter stray beads from Slide-seq puck</td></tr>
+<tr><td style="width: 25%;"><a href="FindAllMarkers.html">FindAllMarkers</a></td>
+<td>Gene expression markers for all identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindAllMarkers.html">FindAllMarkersNode</a></td>
+<td>Gene expression markers for all identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindClusters.html">FindClusters</a></td>
+<td>Cluster Determination</td></tr>
+<tr><td style="width: 25%;"><a href="FindClusters.html">FindClusters.default</a></td>
+<td>Cluster Determination</td></tr>
+<tr><td style="width: 25%;"><a href="FindClusters.html">FindClusters.Seurat</a></td>
+<td>Cluster Determination</td></tr>
+<tr><td style="width: 25%;"><a href="FindConservedMarkers.html">FindConservedMarkers</a></td>
+<td>Finds markers that are conserved between the groups</td></tr>
+<tr><td style="width: 25%;"><a href="FindIntegrationAnchors.html">FindIntegrationAnchors</a></td>
+<td>Find integration anchors</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers.Assay</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers.default</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers.DimReduc</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers.SCTAssay</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkers.Seurat</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMarkers.html">FindMarkersNode</a></td>
+<td>Gene expression markers of identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="FindMultiModalNeighbors.html">FindMultiModalNeighbors</a></td>
+<td>Construct weighted nearest neighbor graph</td></tr>
+<tr><td style="width: 25%;"><a href="FindNeighbors.html">FindNeighbors</a></td>
+<td>(Shared) Nearest-neighbor graph construction</td></tr>
+<tr><td style="width: 25%;"><a href="FindNeighbors.html">FindNeighbors.Assay</a></td>
+<td>(Shared) Nearest-neighbor graph construction</td></tr>
+<tr><td style="width: 25%;"><a href="FindNeighbors.html">FindNeighbors.default</a></td>
+<td>(Shared) Nearest-neighbor graph construction</td></tr>
+<tr><td style="width: 25%;"><a href="FindNeighbors.html">FindNeighbors.dist</a></td>
+<td>(Shared) Nearest-neighbor graph construction</td></tr>
+<tr><td style="width: 25%;"><a href="FindNeighbors.html">FindNeighbors.Seurat</a></td>
+<td>(Shared) Nearest-neighbor graph construction</td></tr>
+<tr><td style="width: 25%;"><a href="FindSpatiallyVariableFeatures.html">FindSpatiallyVariableFeatures</a></td>
+<td>Find spatially variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindSpatiallyVariableFeatures.html">FindSpatiallyVariableFeatures.Assay</a></td>
+<td>Find spatially variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindSpatiallyVariableFeatures.html">FindSpatiallyVariableFeatures.default</a></td>
+<td>Find spatially variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindSpatiallyVariableFeatures.html">FindSpatiallyVariableFeatures.Seurat</a></td>
+<td>Find spatially variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindSubCluster.html">FindSubCluster</a></td>
+<td>Find subclusters under one cluster</td></tr>
+<tr><td style="width: 25%;"><a href="FindTransferAnchors.html">FindTransferAnchors</a></td>
+<td>Find transfer anchors</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableFeatures</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableFeatures.Assay</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableFeatures.default</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableFeatures.SCTAssay</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableFeatures.Seurat</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FindVariableFeatures.html">FindVariableGenes</a></td>
+<td>Find variable features</td></tr>
+<tr><td style="width: 25%;"><a href="FoldChange.html">FoldChange</a></td>
+<td>Fold Change</td></tr>
+<tr><td style="width: 25%;"><a href="FoldChange.html">FoldChange.Assay</a></td>
+<td>Fold Change</td></tr>
+<tr><td style="width: 25%;"><a href="FoldChange.html">FoldChange.default</a></td>
+<td>Fold Change</td></tr>
+<tr><td style="width: 25%;"><a href="FoldChange.html">FoldChange.DimReduc</a></td>
+<td>Fold Change</td></tr>
+<tr><td style="width: 25%;"><a href="FoldChange.html">FoldChange.Seurat</a></td>
+<td>Fold Change</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">FontSize</a></td>
+<td>Seurat Themes</td></tr>
+</table>
+
+<h2><a id="G">-- G --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="FeatureScatter.html">GenePlot</a></td>
+<td>Scatter plot of single cell data</td></tr>
+<tr><td style="width: 25%;"><a href="UpdateSymbolList.html">GeneSymbolThesarus</a></td>
+<td>Get updated synonyms for gene symbols</td></tr>
+<tr><td style="width: 25%;"><a href="GetAssay.html">GetAssay</a></td>
+<td>Get an Assay object from a given Seurat object.</td></tr>
+<tr><td style="width: 25%;"><a href="GetAssay.html">GetAssay.Seurat</a></td>
+<td>Get an Assay object from a given Seurat object.</td></tr>
+<tr><td style="width: 25%;"><a href="GetImage.html">GetImage.SlideSeq</a></td>
+<td>Get Image Data</td></tr>
+<tr><td style="width: 25%;"><a href="GetImage.html">GetImage.STARmap</a></td>
+<td>Get Image Data</td></tr>
+<tr><td style="width: 25%;"><a href="GetImage.html">GetImage.VisiumV1</a></td>
+<td>Get Image Data</td></tr>
+<tr><td style="width: 25%;"><a href="GetIntegrationData.html">GetIntegrationData</a></td>
+<td>Get integration data</td></tr>
+<tr><td style="width: 25%;"><a href="GetResidual.html">GetResidual</a></td>
+<td>Calculate pearson residuals of features not in the scale.data</td></tr>
+<tr><td style="width: 25%;"><a href="GetTissueCoordinates.html">GetTissueCoordinates.SlideSeq</a></td>
+<td>Get Tissue Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="GetTissueCoordinates.html">GetTissueCoordinates.STARmap</a></td>
+<td>Get Tissue Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="GetTissueCoordinates.html">GetTissueCoordinates.VisiumV1</a></td>
+<td>Get Tissue Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="GetTransferPredictions.html">GetTransferPredictions</a></td>
+<td>Get the predicted identity</td></tr>
+<tr><td style="width: 25%;"><a href="Graph-class.html">Graph-class</a></td>
+<td>The Graph Class</td></tr>
+<tr><td style="width: 25%;"><a href="GroupCorrelation.html">GroupCorrelation</a></td>
+<td>Compute the correlation of features broken down by groups with another covariate</td></tr>
+<tr><td style="width: 25%;"><a href="GroupCorrelationPlot.html">GroupCorrelationPlot</a></td>
+<td>Boxplot of correlation of a variable (e.g. number of UMIs) with expression data</td></tr>
+</table>
+
+<h2><a id="H">-- H --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="HoverLocator.html">HoverLocator</a></td>
+<td>Hover Locator</td></tr>
+<tr><td style="width: 25%;"><a href="HTODemux.html">HTODemux</a></td>
+<td>Demultiplex samples based on data from cell 'hashing'</td></tr>
+<tr><td style="width: 25%;"><a href="HTOHeatmap.html">HTOHeatmap</a></td>
+<td>Hashtag oligo heatmap</td></tr>
+<tr><td style="width: 25%;"><a href="HVFInfo.SCTAssay.html">HVFInfo.SCTAssay</a></td>
+<td>Get Variable Feature Information</td></tr>
+</table>
+
+<h2><a id="I">-- I --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DimPlot.html">ICAPlot</a></td>
+<td>Dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="IFeaturePlot.html">IFeaturePlot</a></td>
+<td>Visualize features in dimensional reduction space interactively</td></tr>
+<tr><td style="width: 25%;"><a href="ImageDimPlot.html">ImageDimPlot</a></td>
+<td>Spatial Cluster Plots</td></tr>
+<tr><td style="width: 25%;"><a href="ImageFeaturePlot.html">ImageFeaturePlot</a></td>
+<td>Spatial Feature Plots</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrateData.html">IntegrateData</a></td>
+<td>Integrate data</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrateEmbeddings.html">IntegrateEmbeddings</a></td>
+<td>Integrate low dimensional embeddings</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrateEmbeddings.html">IntegrateEmbeddings.IntegrationAnchorSet</a></td>
+<td>Integrate low dimensional embeddings</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrateEmbeddings.html">IntegrateEmbeddings.TransferAnchorSet</a></td>
+<td>Integrate low dimensional embeddings</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrationAnchorSet-class.html">IntegrationAnchorSet</a></td>
+<td>The IntegrationAnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrationAnchorSet-class.html">IntegrationAnchorSet-class</a></td>
+<td>The IntegrationAnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrationData-class.html">IntegrationData</a></td>
+<td>The IntegrationData Class</td></tr>
+<tr><td style="width: 25%;"><a href="IntegrationData-class.html">IntegrationData-class</a></td>
+<td>The IntegrationData Class</td></tr>
+<tr><td style="width: 25%;"><a href="contrast-theory.html">Intensity</a></td>
+<td>Get the intensity and/or luminance of a color</td></tr>
+<tr><td style="width: 25%;"><a href="ISpatialDimPlot.html">ISpatialDimPlot</a></td>
+<td>Visualize clusters spatially and interactively</td></tr>
+<tr><td style="width: 25%;"><a href="ISpatialFeaturePlot.html">ISpatialFeaturePlot</a></td>
+<td>Visualize features spatially and interactively</td></tr>
+</table>
+
+<h2><a id="J">-- J --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="JackStraw.html">JackStraw</a></td>
+<td>Determine statistical significance of PCA scores.</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-class.html">JackStrawData-class</a></td>
+<td>The JackStrawData Class</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawPlot.html">JackStrawPlot</a></td>
+<td>JackStraw Plot</td></tr>
+</table>
+
+<h2><a id="L">-- L --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="L2CCA.html">L2CCA</a></td>
+<td>L2-Normalize CCA</td></tr>
+<tr><td style="width: 25%;"><a href="L2Dim.html">L2Dim</a></td>
+<td>L2-normalization</td></tr>
+<tr><td style="width: 25%;"><a href="LabelClusters.html">LabelClusters</a></td>
+<td>Label clusters on a ggplot2-based scatter plot</td></tr>
+<tr><td style="width: 25%;"><a href="LabelPoints.html">Labeler</a></td>
+<td>Add text labels to a ggplot2 plot</td></tr>
+<tr><td style="width: 25%;"><a href="LabelPoints.html">LabelPoints</a></td>
+<td>Add text labels to a ggplot2 plot</td></tr>
+<tr><td style="width: 25%;"><a href="SCTAssay-class.html">levels.SCTAssay</a></td>
+<td>The SCTModel Class</td></tr>
+<tr><td style="width: 25%;"><a href="SCTAssay-class.html">levels&lt;-.SCTAssay</a></td>
+<td>The SCTModel Class</td></tr>
+<tr><td style="width: 25%;"><a href="LinkedPlots.html">LinkedDimPlot</a></td>
+<td>Visualize spatial and clustering (dimensional reduction) data in a linked, interactive framework</td></tr>
+<tr><td style="width: 25%;"><a href="LinkedPlots.html">LinkedFeaturePlot</a></td>
+<td>Visualize spatial and clustering (dimensional reduction) data in a linked, interactive framework</td></tr>
+<tr><td style="width: 25%;"><a href="LinkedPlots.html">LinkedPlot</a></td>
+<td>Visualize spatial and clustering (dimensional reduction) data in a linked, interactive framework</td></tr>
+<tr><td style="width: 25%;"><a href="LinkedPlots.html">LinkedPlots</a></td>
+<td>Visualize spatial and clustering (dimensional reduction) data in a linked, interactive framework</td></tr>
+<tr><td style="width: 25%;"><a href="Load10X_Spatial.html">Load10X_Spatial</a></td>
+<td>Load a 10x Genomics Visium Spatial Experiment into a 'Seurat' object</td></tr>
+<tr><td style="width: 25%;"><a href="ReadAkoya.html">LoadAkoya</a></td>
+<td>Read and Load Akoya CODEX data</td></tr>
+<tr><td style="width: 25%;"><a href="LoadAnnoyIndex.html">LoadAnnoyIndex</a></td>
+<td>Load the Annoy index file</td></tr>
+<tr><td style="width: 25%;"><a href="ReadVitessce.html">LoadHuBMAPCODEX</a></td>
+<td>Read Data From Vitessce</td></tr>
+<tr><td style="width: 25%;"><a href="ReadNanostring.html">LoadNanostring</a></td>
+<td>Read and Load Nanostring SMI data</td></tr>
+<tr><td style="width: 25%;"><a href="LoadSTARmap.html">LoadSTARmap</a></td>
+<td>Load STARmap data</td></tr>
+<tr><td style="width: 25%;"><a href="ReadVizgen.html">LoadVizgen</a></td>
+<td>Read and Load MERFISH Input from Vizgen</td></tr>
+<tr><td style="width: 25%;"><a href="ReadXenium.html">LoadXenium</a></td>
+<td>Read and Load 10x Genomics Xenium in-situ data</td></tr>
+<tr><td style="width: 25%;"><a href="LocalStruct.html">LocalStruct</a></td>
+<td>Calculate the local structure preservation metric</td></tr>
+<tr><td style="width: 25%;"><a href="LogNormalize.html">LogNormalize</a></td>
+<td>Normalize raw data</td></tr>
+<tr><td style="width: 25%;"><a href="LogVMR.html">LogVMR</a></td>
+<td>Calculate the variance to mean ratio of logged values</td></tr>
+<tr><td style="width: 25%;"><a href="contrast-theory.html">Luminance</a></td>
+<td>Get the intensity and/or luminance of a color</td></tr>
+</table>
+
+<h2><a id="M">-- M --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="MappingScore.html">MappingScore</a></td>
+<td>Metric for evaluating mapping success</td></tr>
+<tr><td style="width: 25%;"><a href="MappingScore.html">MappingScore.AnchorSet</a></td>
+<td>Metric for evaluating mapping success</td></tr>
+<tr><td style="width: 25%;"><a href="MappingScore.html">MappingScore.default</a></td>
+<td>Metric for evaluating mapping success</td></tr>
+<tr><td style="width: 25%;"><a href="MapQuery.html">MapQuery</a></td>
+<td>Map query cells to a reference</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeaturePlot.html">MeanVarPlot</a></td>
+<td>View variable features</td></tr>
+<tr><td style="width: 25%;"><a href="merge.SCTAssay.html">merge.SCTAssay</a></td>
+<td>Merge SCTAssay objects</td></tr>
+<tr><td style="width: 25%;"><a href="MetaFeature.html">MetaFeature</a></td>
+<td>Aggregate expression of multiple features into a single feature</td></tr>
+<tr><td style="width: 25%;"><a href="MinMax.html">MinMax</a></td>
+<td>Apply a ceiling and floor to all values in a matrix</td></tr>
+<tr><td style="width: 25%;"><a href="MixingMetric.html">MixingMetric</a></td>
+<td>Calculates a mixing metric</td></tr>
+<tr><td style="width: 25%;"><a href="MixscapeHeatmap.html">MixscapeHeatmap</a></td>
+<td>Differential expression heatmap for mixscape</td></tr>
+<tr><td style="width: 25%;"><a href="MixscapeLDA.html">MixscapeLDA</a></td>
+<td>Linear discriminant analysis on pooled CRISPR screen data.</td></tr>
+<tr><td style="width: 25%;"><a href="ModalityWeights-class.html">ModalityWeights</a></td>
+<td>The ModalityWeights Class</td></tr>
+<tr><td style="width: 25%;"><a href="ModalityWeights-class.html">ModalityWeights-class</a></td>
+<td>The ModalityWeights Class</td></tr>
+<tr><td style="width: 25%;"><a href="MULTIseqDemux.html">MULTIseqDemux</a></td>
+<td>Demultiplex samples based on classification method from MULTI-seq (McGinnis et al., bioRxiv 2018)</td></tr>
+</table>
+
+<h2><a id="N">-- N --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Neighbor-class.html">Neighbor-class</a></td>
+<td>The Neighbor Class</td></tr>
+<tr><td style="width: 25%;"><a href="NNPlot.html">NNPlot</a></td>
+<td>Highlight Neighbors in DimPlot</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">NoAxes</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">NoGrid</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">NoLegend</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="NormalizeData.html">NormalizeData</a></td>
+<td>Normalize Data</td></tr>
+<tr><td style="width: 25%;"><a href="NormalizeData.html">NormalizeData.Assay</a></td>
+<td>Normalize Data</td></tr>
+<tr><td style="width: 25%;"><a href="NormalizeData.html">NormalizeData.default</a></td>
+<td>Normalize Data</td></tr>
+<tr><td style="width: 25%;"><a href="NormalizeData.html">NormalizeData.Seurat</a></td>
+<td>Normalize Data</td></tr>
+</table>
+
+<h2><a id="P">-- P --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DimPlot.html">PCAPlot</a></td>
+<td>Dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="PCASigGenes.html">PCASigGenes</a></td>
+<td>Significant genes from a PCA</td></tr>
+<tr><td style="width: 25%;"><a href="DimHeatmap.html">PCHeatmap</a></td>
+<td>Dimensional reduction heatmap</td></tr>
+<tr><td style="width: 25%;"><a href="PercentAbove.html">PercentAbove</a></td>
+<td>Calculate the percentage of a vector above some threshold</td></tr>
+<tr><td style="width: 25%;"><a href="PercentageFeatureSet.html">PercentageFeatureSet</a></td>
+<td>Calculate the percentage of all counts that belong to a given set of features</td></tr>
+<tr><td style="width: 25%;"><a href="PlotClusterTree.html">PlotClusterTree</a></td>
+<td>Plot clusters as a tree</td></tr>
+<tr><td style="width: 25%;"><a href="PlotPerturbScore.html">PlotPerturbScore</a></td>
+<td>Function to plot perturbation score distributions.</td></tr>
+<tr><td style="width: 25%;"><a href="PolyDimPlot.html">PolyDimPlot</a></td>
+<td>Polygon DimPlot</td></tr>
+<tr><td style="width: 25%;"><a href="PolyFeaturePlot.html">PolyFeaturePlot</a></td>
+<td>Polygon FeaturePlot</td></tr>
+<tr><td style="width: 25%;"><a href="PredictAssay.html">PredictAssay</a></td>
+<td>Predict value from nearest neighbors</td></tr>
+<tr><td style="width: 25%;"><a href="PrepLDA.html">PrepLDA</a></td>
+<td>Function to prepare data for Linear Discriminant Analysis.</td></tr>
+<tr><td style="width: 25%;"><a href="PrepSCTFindMarkers.html">PrepSCTFindMarkers</a></td>
+<td>Prepare object to run differential expression on SCT assay with multiple models</td></tr>
+<tr><td style="width: 25%;"><a href="PrepSCTIntegration.html">PrepSCTIntegration</a></td>
+<td>Prepare an object list normalized with sctransform for integration.</td></tr>
+<tr><td style="width: 25%;"><a href="ProjectDim.html">ProjectDim</a></td>
+<td>Project Dimensional reduction onto full dataset</td></tr>
+<tr><td style="width: 25%;"><a href="ProjectUMAP.html">ProjectUMAP</a></td>
+<td>Project query into UMAP coordinates of a reference</td></tr>
+<tr><td style="width: 25%;"><a href="ProjectUMAP.html">ProjectUMAP.default</a></td>
+<td>Project query into UMAP coordinates of a reference</td></tr>
+<tr><td style="width: 25%;"><a href="ProjectUMAP.html">ProjectUMAP.DimReduc</a></td>
+<td>Project query into UMAP coordinates of a reference</td></tr>
+<tr><td style="width: 25%;"><a href="ProjectUMAP.html">ProjectUMAP.Seurat</a></td>
+<td>Project query into UMAP coordinates of a reference</td></tr>
+<tr><td style="width: 25%;"><a href="CustomPalette.html">PurpleAndYellow</a></td>
+<td>Create a custom color palette</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Radius.html">Radius.SlideSeq</a></td>
+<td>Get Spot Radius</td></tr>
+<tr><td style="width: 25%;"><a href="Radius.html">Radius.STARmap</a></td>
+<td>Get Spot Radius</td></tr>
+<tr><td style="width: 25%;"><a href="Radius.html">Radius.VisiumV1</a></td>
+<td>Get Spot Radius</td></tr>
+<tr><td style="width: 25%;"><a href="Read10X.html">Read10X</a></td>
+<td>Load in data from 10X</td></tr>
+<tr><td style="width: 25%;"><a href="Read10X_h5.html">Read10X_h5</a></td>
+<td>Read 10X hdf5 file</td></tr>
+<tr><td style="width: 25%;"><a href="Read10X_Image.html">Read10X_Image</a></td>
+<td>Load a 10X Genomics Visium Image</td></tr>
+<tr><td style="width: 25%;"><a href="ReadAkoya.html">ReadAkoya</a></td>
+<td>Read and Load Akoya CODEX data</td></tr>
+<tr><td style="width: 25%;"><a href="ReadMtx.html">ReadMtx</a></td>
+<td>Load in data from remote or local mtx files</td></tr>
+<tr><td style="width: 25%;"><a href="ReadNanostring.html">ReadNanostring</a></td>
+<td>Read and Load Nanostring SMI data</td></tr>
+<tr><td style="width: 25%;"><a href="ReadParseBio.html">ReadParseBio</a></td>
+<td>Read output from Parse Biosciences</td></tr>
+<tr><td style="width: 25%;"><a href="ReadSlideSeq.html">ReadSlideSeq</a></td>
+<td>Load Slide-seq spatial data</td></tr>
+<tr><td style="width: 25%;"><a href="ReadSTARsolo.html">ReadSTARsolo</a></td>
+<td>Read output from STARsolo</td></tr>
+<tr><td style="width: 25%;"><a href="ReadVitessce.html">ReadVitessce</a></td>
+<td>Read Data From Vitessce</td></tr>
+<tr><td style="width: 25%;"><a href="ReadVizgen.html">ReadVizgen</a></td>
+<td>Read and Load MERFISH Input from Vizgen</td></tr>
+<tr><td style="width: 25%;"><a href="ReadXenium.html">ReadXenium</a></td>
+<td>Read and Load 10x Genomics Xenium in-situ data</td></tr>
+<tr><td style="width: 25%;"><a href="RegroupIdents.html">RegroupIdents</a></td>
+<td>Regroup idents based on meta.data info</td></tr>
+<tr><td style="width: 25%;"><a href="RelativeCounts.html">RelativeCounts</a></td>
+<td>Normalize raw data to fractions</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.SCTAssay</a></td>
+<td>Rename Cells in an Object</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.SlideSeq</a></td>
+<td>Rename Cells in an Object</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.STARmap</a></td>
+<td>Rename Cells in an Object</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.VisiumV1</a></td>
+<td>Rename Cells in an Object</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">RestoreLegend</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="RidgePlot.html">RidgePlot</a></td>
+<td>Single cell ridge plot</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">RotatedAxis</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="RunCCA.html">RunCCA</a></td>
+<td>Perform Canonical Correlation Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunCCA.html">RunCCA.default</a></td>
+<td>Perform Canonical Correlation Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunCCA.html">RunCCA.Seurat</a></td>
+<td>Perform Canonical Correlation Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunICA.html">RunICA</a></td>
+<td>Run Independent Component Analysis on gene expression</td></tr>
+<tr><td style="width: 25%;"><a href="RunICA.html">RunICA.Assay</a></td>
+<td>Run Independent Component Analysis on gene expression</td></tr>
+<tr><td style="width: 25%;"><a href="RunICA.html">RunICA.default</a></td>
+<td>Run Independent Component Analysis on gene expression</td></tr>
+<tr><td style="width: 25%;"><a href="RunICA.html">RunICA.Seurat</a></td>
+<td>Run Independent Component Analysis on gene expression</td></tr>
+<tr><td style="width: 25%;"><a href="RunLDA.html">RunLDA</a></td>
+<td>Run Linear Discriminant Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunLDA.html">RunLDA.Assay</a></td>
+<td>Run Linear Discriminant Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunLDA.html">RunLDA.default</a></td>
+<td>Run Linear Discriminant Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunLDA.html">RunLDA.Seurat</a></td>
+<td>Run Linear Discriminant Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunMarkVario.html">RunMarkVario</a></td>
+<td>Run the mark variogram computation on a given position matrix and expression matrix.</td></tr>
+<tr><td style="width: 25%;"><a href="RunMixscape.html">RunMixscape</a></td>
+<td>Run Mixscape</td></tr>
+<tr><td style="width: 25%;"><a href="RunMoransI.html">RunMoransI</a></td>
+<td>Compute Moran's I value.</td></tr>
+<tr><td style="width: 25%;"><a href="RunPCA.html">RunPCA</a></td>
+<td>Run Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunPCA.html">RunPCA.Assay</a></td>
+<td>Run Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunPCA.html">RunPCA.default</a></td>
+<td>Run Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunPCA.html">RunPCA.Seurat</a></td>
+<td>Run Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunSLSI.html">RunSLSI</a></td>
+<td>Run Supervised Latent Semantic Indexing</td></tr>
+<tr><td style="width: 25%;"><a href="RunSLSI.html">RunSLSI.Assay</a></td>
+<td>Run Supervised Latent Semantic Indexing</td></tr>
+<tr><td style="width: 25%;"><a href="RunSLSI.html">RunSLSI.default</a></td>
+<td>Run Supervised Latent Semantic Indexing</td></tr>
+<tr><td style="width: 25%;"><a href="RunSLSI.html">RunSLSI.Seurat</a></td>
+<td>Run Supervised Latent Semantic Indexing</td></tr>
+<tr><td style="width: 25%;"><a href="RunSPCA.html">RunSPCA</a></td>
+<td>Run Supervised Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunSPCA.html">RunSPCA.Assay</a></td>
+<td>Run Supervised Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunSPCA.html">RunSPCA.default</a></td>
+<td>Run Supervised Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunSPCA.html">RunSPCA.Seurat</a></td>
+<td>Run Supervised Principal Component Analysis</td></tr>
+<tr><td style="width: 25%;"><a href="RunTSNE.html">RunTSNE</a></td>
+<td>Run t-distributed Stochastic Neighbor Embedding</td></tr>
+<tr><td style="width: 25%;"><a href="RunTSNE.html">RunTSNE.DimReduc</a></td>
+<td>Run t-distributed Stochastic Neighbor Embedding</td></tr>
+<tr><td style="width: 25%;"><a href="RunTSNE.html">RunTSNE.dist</a></td>
+<td>Run t-distributed Stochastic Neighbor Embedding</td></tr>
+<tr><td style="width: 25%;"><a href="RunTSNE.html">RunTSNE.matrix</a></td>
+<td>Run t-distributed Stochastic Neighbor Embedding</td></tr>
+<tr><td style="width: 25%;"><a href="RunTSNE.html">RunTSNE.Seurat</a></td>
+<td>Run t-distributed Stochastic Neighbor Embedding</td></tr>
+<tr><td style="width: 25%;"><a href="RunUMAP.html">RunUMAP</a></td>
+<td>Run UMAP</td></tr>
+<tr><td style="width: 25%;"><a href="RunUMAP.html">RunUMAP.default</a></td>
+<td>Run UMAP</td></tr>
+<tr><td style="width: 25%;"><a href="RunUMAP.html">RunUMAP.Graph</a></td>
+<td>Run UMAP</td></tr>
+<tr><td style="width: 25%;"><a href="RunUMAP.html">RunUMAP.Neighbor</a></td>
+<td>Run UMAP</td></tr>
+<tr><td style="width: 25%;"><a href="RunUMAP.html">RunUMAP.Seurat</a></td>
+<td>Run UMAP</td></tr>
+</table>
+
+<h2><a id="S">-- S --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="SampleUMI.html">SampleUMI</a></td>
+<td>Sample UMI</td></tr>
+<tr><td style="width: 25%;"><a href="SaveAnnoyIndex.html">SaveAnnoyIndex</a></td>
+<td>Save the Annoy index</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleData.html">ScaleData</a></td>
+<td>Scale and center the data.</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleData.html">ScaleData.Assay</a></td>
+<td>Scale and center the data.</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleData.html">ScaleData.default</a></td>
+<td>Scale and center the data.</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleData.html">ScaleData.Seurat</a></td>
+<td>Scale and center the data.</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleFactors.html">ScaleFactors</a></td>
+<td>Get image scale factors</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleFactors.html">scalefactors</a></td>
+<td>Get image scale factors</td></tr>
+<tr><td style="width: 25%;"><a href="ScaleFactors.html">ScaleFactors.VisiumV1</a></td>
+<td>Get image scale factors</td></tr>
+<tr><td style="width: 25%;"><a href="ScoreJackStraw.html">ScoreJackStraw</a></td>
+<td>Compute Jackstraw scores significance.</td></tr>
+<tr><td style="width: 25%;"><a href="ScoreJackStraw.html">ScoreJackStraw.DimReduc</a></td>
+<td>Compute Jackstraw scores significance.</td></tr>
+<tr><td style="width: 25%;"><a href="ScoreJackStraw.html">ScoreJackStraw.JackStrawData</a></td>
+<td>Compute Jackstraw scores significance.</td></tr>
+<tr><td style="width: 25%;"><a href="ScoreJackStraw.html">ScoreJackStraw.Seurat</a></td>
+<td>Compute Jackstraw scores significance.</td></tr>
+<tr><td style="width: 25%;"><a href="SCTAssay-class.html">SCTAssay</a></td>
+<td>The SCTModel Class</td></tr>
+<tr><td style="width: 25%;"><a href="SCTAssay-class.html">SCTAssay-class</a></td>
+<td>The SCTModel Class</td></tr>
+<tr><td style="width: 25%;"><a href="SCTAssay-class.html">SCTModel</a></td>
+<td>The SCTModel Class</td></tr>
+<tr><td style="width: 25%;"><a href="SCTransform.html">SCTransform</a></td>
+<td>Use regularized negative binomial regression to normalize UMI count data</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults.SCTAssay</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults.SCTModel</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults.Seurat</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults&lt;-</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults&lt;-.SCTAssay</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SCTResults.html">SCTResults&lt;-.SCTModel</a></td>
+<td>Get SCT results from an Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SelectIntegrationFeatures.html">SelectIntegrationFeatures</a></td>
+<td>Select integration features</td></tr>
+<tr><td style="width: 25%;"><a href="SetIntegrationData.html">SetIntegrationData</a></td>
+<td>Set integration data</td></tr>
+<tr><td style="width: 25%;"><a href="SetQuantile.html">SetQuantile</a></td>
+<td>Find the Quantile of Data</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-package.html">Seurat</a></td>
+<td>Seurat: Tools for Single Cell Genomics</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-class.html">Seurat-class</a></td>
+<td>The Seurat Class</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">SeuratAxes</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-class.html">SeuratCommand-class</a></td>
+<td>The SeuratCommand Class</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">SeuratTheme</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="SlideSeq-class.html">SlideSeq</a></td>
+<td>The SlideSeq class</td></tr>
+<tr><td style="width: 25%;"><a href="SlideSeq-class.html">SlideSeq-class</a></td>
+<td>The SlideSeq class</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialPlot.html">SpatialDimPlot</a></td>
+<td>Visualize spatial clustering and expression data.</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialPlot.html">SpatialFeaturePlot</a></td>
+<td>Visualize spatial clustering and expression data.</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-class.html">SpatialImage-class</a></td>
+<td>The SpatialImage Class</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialPlot.html">SpatialPlot</a></td>
+<td>Visualize spatial clustering and expression data.</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">SpatialTheme</a></td>
+<td>Seurat Themes</td></tr>
+<tr><td style="width: 25%;"><a href="DotPlot.html">SplitDotPlotGG</a></td>
+<td>Dot plot visualization</td></tr>
+<tr><td style="width: 25%;"><a href="SplitObject.html">SplitObject</a></td>
+<td>Splits object into a list of subsetted objects.</td></tr>
+<tr><td style="width: 25%;"><a href="STARmap-class.html">STARmap</a></td>
+<td>The STARmap class</td></tr>
+<tr><td style="width: 25%;"><a href="STARmap-class.html">STARmap-class</a></td>
+<td>The STARmap class</td></tr>
+<tr><td style="width: 25%;"><a href="subset.AnchorSet.html">subset.AnchorSet</a></td>
+<td>Subset an AnchorSet object</td></tr>
+<tr><td style="width: 25%;"><a href="SubsetByBarcodeInflections.html">SubsetByBarcodeInflections</a></td>
+<td>Subset a Seurat Object based on the Barcode Distribution Inflection Points</td></tr>
+</table>
+
+<h2><a id="T">-- T --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="TopCells.html">TopCells</a></td>
+<td>Find cells with highest scores for a given dimensional reduction technique</td></tr>
+<tr><td style="width: 25%;"><a href="TopFeatures.html">TopFeatures</a></td>
+<td>Find features with highest scores for a given dimensional reduction technique</td></tr>
+<tr><td style="width: 25%;"><a href="TopNeighbors.html">TopNeighbors</a></td>
+<td>Get nearest neighbors for given cell</td></tr>
+<tr><td style="width: 25%;"><a href="TransferAnchorSet-class.html">TransferAnchorSet</a></td>
+<td>The TransferAnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="TransferAnchorSet-class.html">TransferAnchorSet-class</a></td>
+<td>The TransferAnchorSet Class</td></tr>
+<tr><td style="width: 25%;"><a href="TransferData.html">TransferData</a></td>
+<td>Transfer data</td></tr>
+<tr><td style="width: 25%;"><a href="DimPlot.html">TSNEPlot</a></td>
+<td>Dimensional reduction plot</td></tr>
+</table>
+
+<h2><a id="U">-- U --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DimPlot.html">UMAPPlot</a></td>
+<td>Dimensional reduction plot</td></tr>
+<tr><td style="width: 25%;"><a href="UpdateSCTAssays.html">UpdateSCTAssays</a></td>
+<td>Update pre-V4 Assays generated with SCTransform in the Seurat to the new SCTAssay class</td></tr>
+<tr><td style="width: 25%;"><a href="UpdateSymbolList.html">UpdateSymbolList</a></td>
+<td>Get updated synonyms for gene symbols</td></tr>
+</table>
+
+<h2><a id="V">-- V --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="VariableFeaturePlot.html">VariableFeaturePlot</a></td>
+<td>View variable features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeaturePlot.html">VariableGenePlot</a></td>
+<td>View variable features</td></tr>
+<tr><td style="width: 25%;"><a href="VisiumV1-class.html">VisiumV1</a></td>
+<td>The VisiumV1 class</td></tr>
+<tr><td style="width: 25%;"><a href="VisiumV1-class.html">VisiumV1-class</a></td>
+<td>The VisiumV1 class</td></tr>
+<tr><td style="width: 25%;"><a href="VizDimLoadings.html">VizDimLoadings</a></td>
+<td>Visualize Dimensional Reduction genes</td></tr>
+<tr><td style="width: 25%;"><a href="VlnPlot.html">VlnPlot</a></td>
+<td>Single cell violin plot</td></tr>
+</table>
+
+<h2><a id="W">-- W --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="SeuratTheme.html">WhiteBackground</a></td>
+<td>Seurat Themes</td></tr>
+</table>
+</div></body></html>

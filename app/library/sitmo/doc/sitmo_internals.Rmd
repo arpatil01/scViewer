@@ -1,0 +1,456 @@
+---
+title: "Deployment of `sitmo` within C++ Code"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deployment of `sitmo` within C++ Code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Within this vignette, details on how to use [sitmo](https://github.com/stdfin/random/)'s
+header will be detailed. First, the background on `sitmo` will be provided.
+Secondly, function calls will be shown alongside of a description. 
+Thirdly, examples will be provided of how one can use the `sitmo` header.  
+
+# What is `sitmo` and can I eat it? 
+
+`sitmo` is the consultancy agency founded by Thijs van den Berg. They first
+released a Parallel Psuedo Random Number Generator (PPRNG) under the same
+name using work in Salmon, K., et al.'s "Parallel Random Numbers: As Easy as 1, 2, 3" 
+in the conference proceedings of the 2011 International Conference for
+High Performance Computing, Networking, Storage and Analysis.
+Support for `sitmo` exists for both C++ standards: C++98 and C++11.
+Furthermore, there are many different PPRNGs that are available:
+[trng](https://www.numbercrunch.de/trng/), 
+[SPRNG](http://www.sprng.org/), 
+[RngStreams](https://statmath.wu.ac.at/software/RngStreams/doc/rngstreams.html),
+OMPRNG. However, none are as
+appealing in my eyes than [sitmo](https://github.com/stdfin/random/), 
+which provides a straight forward interface to generating psuedo-random numbers
+(RNG), the least restrictive license (MIT), and speed. 
+
+Over the span of the last few years, the `sitmo` agency has released two
+other engines of interest for C++11: `threefry` and `vandercorput`. The `threefry` engine
+is a rewritten PPRNG version of `sitmo` for C++11 whereas the `vandercorput` engine
+provides one dimensional low-discrepancy sequencing.  The latter engines are
+also available under the MIT license.
+
+# Accessing and using engines in `sitmo`
+
+The header files for `sitmo`, `threefry`, and `vandercorput` engines
+are contained within this package. To use one of these engine header files
+within your own package, you can link to the `sitmo` package within your
+description file. e.g.
+
+    LinkingTo: Rcpp, sitmo
+    Imports:
+        Rcpp (>= 0.12.11)
+
+To use C++11's statistical distributions, you **may** want to add the
+following to your `src/Makevars` and `src/Makevars.win` file:
+
+    CXX_STD = CXX11
+
+Within a `C++` file in `src/`, then add:
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h>      // SITMO for C++98 & C++11 PPRNG
+#include <threefry.h>   // THREEFRY C++11-only PPRNG
+#include <vandercorput> // VANDERCORPUT C++11-only Low-discrepancy sequence
+```
+
+You do _not_ need to add each header file. Pick and choose the appropriate
+engine for your needs.
+
+Or you can do a direct embed in your application.
+I would advise for the prior though and, hence, the reason for this package. 
+
+Below is a breakdown of functions that are available for the engines.
+Please note, that the engine predominantly highlight is the original:
+`sitmo::prng`.
+
+## Construct an engine
+
+| Expression	                | Description
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| prng()	              | Creates an engine with a default initial state.                                                                                                                                                    | 
+| prng(prng& x)	| Creates an engine with the same initial state as the engine x.                                                                                                                                     |
+| prng(uint32_t s)	    | Creates an engine with initial state determined by s. Engines created with different initial states have the guarantee to generate independent non-overlapping random sequences of length $2^128$. |
+| prng(SeedSeq q)	    | Creates an engine with an initial state that depends on a sequence produced by one call to q.generate.                                                                                             |
+
+## Seed modifiers
+
+To use the seed modifiers, one must first construct an engine using a method detailed in the previous table.
+
+```{Rcpp, eval = FALSE}
+// Generate engine called eng_org. 
+sitmo::prng eng_org;
+
+// Generate engine called eng_org. 
+sitmo::threefry eng_tf;
+
+// Generate engine called eng_vc. 
+sitmo::vandercorput eng_vc;
+```
+
+From there, the engine state can be modified using: 
+
+| Expression	                | Description
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| e.seed()	                  | Returns the random engine to the default state. The same prng().                                                                                                                            |
+| e.seed(uint32_t s)   	      | Set the engine to a state determined by s. Same as prng(uint32_t s)                                                                                                                         |
+| e.seed(SeedSeq q)	          | Set the engine to a state that depends on a sequence produced by one call to q.generate. Same as prng(SeedSeq q)                                                                            |
+| e()	                        | Advances the internal state and returns a 32 bit random number.                                                                                                                                    |
+| e.discard(uint64_t n)	      | Advances the internal state with n steps in constant time.                                                                                                                                         |
+
+## Misc Seed 
+
+Using the same engine created above, one can access additional state information using the following: 
+
+| Expression	                | Description
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| e1 == e2	                  | Test for equivalence of two prng’s. Two engines are the same if they generate the exact same random sequence.                                                                               |
+| e1 != e2	                  | Test for non-equivalence of two prng’s. Two engines are different if they generate different random sequences.                                                                              |
+| e.version()	                | The current version of the engine, returns the value 2                                                                                                                                             |
+
+## Examples
+
+The examples displayed in the vignette are taken directly from the project's `src` directory that is found here [https://github.com/coatless/sitmo](https://github.com/coatless/sitmo). Additional commentary is added. 
+
+
+### Hello World Example
+
+Below is the most rudimentary example using `sitmo`. It describes the process of creating a `sitmo` engine and obtaining a draw. 
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+//' Example RNG Draws with sitmo
+//' 
+//' Shows a basic setup and use case for sitmo. 
+//' 
+//' @param n A \code{unsigned int} is a .
+//' @return A \code{vec} with random sequences. 
+//' @examples
+//' n = 10
+//' sitmo_draws(n)
+// [[Rcpp::export]]
+Rcpp::NumericVector sitmo_draws(unsigned int n) {
+  
+  Rcpp::NumericVector o(n);
+  
+  // Create a prng engine
+  sitmo::prng eng;
+  
+  // Draw from base engine
+  for (unsigned int i=0; i< n ; ++i){
+    o(i) = eng();  
+  }
+
+  return o;
+}
+```
+
+### Setting a Seed
+
+Here the ability for a seed to be set is used. 
+
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+//' Example Seed Set and RNG Draws with sitmo
+//' 
+//' Shows how to set a seed in sitmo. 
+//' 
+//' @param n    An \code{unsigned int} that dictates how many realizations occur.
+//' @param seed An \code{unsigned int} that controls the rng seed. 
+//' @return A \code{vector} with random sequences. 
+//' @examples
+//' n = 10
+//' a = sitmo_engine_seed(n, 1337)
+//' b = sitmo_engine_seed(n, 1337)
+//' c = sitmo_engine_seed(n, 1338)
+//' 
+//' isTRUE(all.equal(a,b))
+//' isTRUE(all.equal(a,c))
+// [[Rcpp::export]]
+Rcpp::NumericVector sitmo_engine_seed(unsigned int n, unsigned int seed) {
+  
+  // Create Rcpp Matrix
+  Rcpp::NumericVector o(n);
+  
+  // Create a prng engine with a specific seed
+  sitmo::prng eng(static_cast<uint32_t>(seed));
+  
+  // Draw from base engine
+  for (unsigned int i=0; i < n; ++i){
+    o(i) = eng();        
+  }
+
+  return o;
+}
+```
+
+
+### Reset RNG engine
+
+The code used here can be found to work when the initial state of the engine needs to be reverted. 
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+//' Example Seed Set and RNG Draws with sitmo
+//' 
+//' Shows how to set a seed in sitmo. 
+//' 
+//' @param n    An \code{unsigned int} that dictates how many realizations occur.
+//' @param seed An \code{unsigned int} that controls the rng seed. 
+//' @return A \code{matrix} with random sequences. 
+//' @examples
+//' n = 10
+//' a = sitmo_engine_seed(n, 1337)
+//' 
+//' isTRUE(all.equal(a[,1],a[,2]))
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sitmo_engine_reset(unsigned int n, unsigned int seed) {
+  
+  // Create Rcpp Vector
+  Rcpp::NumericMatrix o(n,2);
+  
+  // Create a prng engine with a specific seed
+  sitmo::prng eng(static_cast<uint32_t>(seed));
+  
+  // Draw from base engine
+  for (unsigned int i=0; i < n ; ++i){
+    o(i,0) = eng();        
+  }
+  
+  // Reset seed
+  eng.seed();
+  
+  // Draw from base engine
+  for (unsigned int i=0; i< n ; ++i){
+    o(i,1) = eng();        
+  }  
+  
+  return o;
+}
+```
+
+
+### Two RNG Streams
+
+This example displays the ability of `sitmo` to handle parallel streams of rng when a predefined number of streams is known.
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+//' Two RNG engines running side-by-side
+//' 
+//' Shows how to create two separate RNGs and increase them together. 
+//' 
+//' @param n     An \code{unsigned int} that dictates how many realizations occur.
+//' @param seeds A \code{vec} containing two integers greater than 0. 
+//' @return A \code{matrix} with random sequences. 
+//' @examples
+//' n = 10
+//' a = sitmo_two_seeds(n, c(1337,1338))
+//' 
+//' b = sitmo_two_seeds(n, c(1337,1337))
+//' 
+//' isTRUE(all.equal(a[,1],a[,2]))
+//' 
+//' isTRUE(all.equal(b[,1],b[,2]))
+//' 
+//' isTRUE(all.equal(a[,1],b[,1]))
+// [[Rcpp::export]]
+Rcpp::NumericMatrix sitmo_two_seeds(unsigned int n, Rcpp::NumericVector seeds) {
+  
+  if(seeds.size() != 2) Rcpp::stop("Need exactly two seeds for this example.");
+  
+  // Create Rcpp Matrix
+  Rcpp::NumericMatrix o(n,2);
+  
+  // Create a prng engine with a specific seed
+  sitmo::prng eng1;
+  eng1.seed(seeds(0));
+  
+  sitmo::prng eng2;
+  eng2.seed(seeds(1));
+
+  // Draw from base engine
+  for (unsigned int i=0; i< n ; ++i){
+    o(i,0) = eng1();      
+    o(i,1) = eng2();        
+  }  
+  
+  return o;
+}
+```
+
+### Uniform Random Number Generator
+
+Under C++98, one does not have access to the C++11 implementation of the Uniform distribution. This is particularly problematic as a lot of the distribution RNG rely upon being able to sample from $\left[0,1\right]$ ala the Probability Integral Transformation Theorem. Additional details are discussed in a separate vignette ("Making a Uniform PRNG with sitmo").
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+//' Random Uniform Number Generator with sitmo
+//' 
+//' The function provides an implementation of sampling from a random uniform distribution
+//' 
+//' @param n    An \code{unsigned integer} denoting the number of realizations to generate.
+//' @param min  A \code{double} indicating the minimum \eqn{a} value 
+//'               in the uniform's interval \eqn{\left[a,b\right]}
+//' @param max  A \code{double} indicating the maximum \eqn{b} value 
+//'               in the uniform's interval \eqn{\left[a,b\right]}
+//' @param seed A special \code{unsigned integer} containing a single seed.
+//' @return A \code{vec} containing the realizations.
+//' @export
+//' @examples
+//' a = runif_sitmo(10)
+// [[Rcpp::export]]
+Rcpp::NumericVector runif_sitmo(unsigned int n, double min = 0.0, double max = 1.0, uint32_t seed = 1) {
+  Rcpp::NumericVector o(n);
+  
+  // Create a prng engine
+  sitmo::prng eng(seed);
+  // Obtain the range between max and min
+  double dis = max - min; 
+  
+  for(int i = 0; i < n; ++i) {
+    // Sample from the RNG and divide it by the maximum value possible (can also use SITMO_RAND_MAX, which is 4294967295)
+    // Apply appropriate scale (MAX-MIN)
+    o[i] = min + ((double) eng() / (sitmo::prng::max())) * (dis);
+  }
+  
+  return o;
+}
+```
+
+### OpenMP Example
+
+One of the primary reasons why `sitmo` is desirable is because it can be used under parallelization via OpenMP and MPI. Below is an example where it is used in a parallel setting to generate numbers. Note, to ensure that code works cross-platform, please protect against OpenMP includes as the package will otherwise fail on OS X. 
+
+To protect against a lack of OpenMP headers use:
+
+```{Rcpp, eval = FALSE}
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+```
+
+When writing sections of parallelized code, also protect that code using:
+
+```{Rcpp, eval = FALSE}
+#ifdef _OPENMP
+// multithreaded OpenMP version of code
+#else
+// single-threaded version of code
+#endif
+```
+
+Furthermore, add the following to your `Makevars` and `Makevars.win`:
+
+```{r engine='asis', eval = F}
+PKG_LIBS =  $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) $(SHLIB_OPENMP_CFLAGS)
+PKG_CFLAGS = $(SHLIB_OPENMP_CFLAGS)
+```
+
+With this being said, let's take a look at an example parallelization using `sitmo`:
+
+```{Rcpp, eval = FALSE}
+#include <Rcpp.h>
+#include <sitmo.h> // SITMO PPRNG
+
+// [[Rcpp::depends(sitmo)]]
+
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
+// [[Rcpp::plugins(openmp)]]
+
+//' Test Generation using sitmo and C++11
+//' 
+//' The function provides an implementation of creating realizations from the default engine.
+//' 
+//' @param n An \code{unsigned integer} denoting the number of realizations to generate.
+//' @param seeds A \code{vec} containing a list of seeds. Each seed is run on its own core.
+//' @return A \code{vec} containing the realizations.
+//' @details
+//' The following function's true power is only accessible on platforms that support OpenMP (e.g. Windows and Linux).
+//' However, it does provide a very good example as to how to make ones code applicable across multiple platforms.
+//' 
+//' With this being said, how we determine how many cores to split the generation to is governed by the number of seeds supplied.
+//' In the event that one is using OS X, only the first seed supplied is used. 
+//' 
+//' @export
+//' @examples
+//' a = sitmo_parallel(10, 5.0, c(1))
+//' 
+//' b = sitmo_parallel(10, 5.0, c(1))
+//' 
+//' c = sitmo_parallel(10, 5.0, c(2))
+//' 
+//' isTRUE(all.equal(a,b))
+//' 
+//' isTRUE(all.equal(a,c))
+// [[Rcpp::export]]
+Rcpp::NumericVector sitmo_parallel(unsigned int n, Rcpp::NumericVector& seeds){ 
+  
+  unsigned int ncores = seeds.size();
+
+  Rcpp::NumericVector q(n);
+  
+  #ifdef _OPENMP
+  #pragma omp parallel num_threads(ncores) if(ncores > 1)
+  {
+  #endif
+  
+    // Engine requires uint32_t inplace of unsigned int
+    uint32_t active_seed;
+      
+    // Write the active seed per core or just write one of the seeds.
+    #ifdef _OPENMP
+      active_seed = static_cast<uint32_t>(seeds[omp_get_thread_num()]);
+    #else
+      active_seed = static_cast<uint32_t>(seeds[0]);
+    #endif
+    
+    sitmo::prng eng( active_seed );
+  
+    // Parallelize the Loop
+    #ifdef _OPENMP
+    #pragma omp for schedule(static)
+    #endif
+    for (unsigned int i = 0; i < n; i++){
+      q[i] = eng(). 
+    }
+
+  #ifdef _OPENMP
+  }
+  #endif
+  
+  return q;
+}
+```

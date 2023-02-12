@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Data Structures for Single Cell Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Data Structures for Single Cell Data
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;SeuratObject&rsquo; version 4.1.3</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#H">H</a>
+<a href="#I">I</a>
+<a href="#J">J</a>
+<a href="#K">K</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#O">O</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+<a href="#W">W</a>
+<a href="#misc">misc</a>
+</p>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="SeuratObject-package.html">SeuratObject-package</a></td>
+<td>SeuratObject: Data Structures for Single Cell Data</td></tr>
+</table>
+
+<h2><a id="A">-- A --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="AddMetaData.html">AddMetaData</a></td>
+<td>Add in metadata associated with either cells or features.</td></tr>
+<tr><td style="width: 25%;"><a href="AddMetaData.html">AddMetaData.Assay</a></td>
+<td>Add in metadata associated with either cells or features.</td></tr>
+<tr><td style="width: 25%;"><a href="AddMetaData.html">AddMetaData.Seurat</a></td>
+<td>Add in metadata associated with either cells or features.</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">AddSamples</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="aggregate.html">aggregate</a></td>
+<td>Aggregate Molecules into an Expression Matrix</td></tr>
+<tr><td style="width: 25%;"><a href="aggregate.html">aggregate.FOV</a></td>
+<td>Aggregate Molecules into an Expression Matrix</td></tr>
+<tr><td style="width: 25%;"><a href="aggregate.html">aggregate.Molecules</a></td>
+<td>Aggregate Molecules into an Expression Matrix</td></tr>
+<tr><td style="width: 25%;"><a href="as.Centroids.html">as.Centroids</a></td>
+<td>Convert Segmentation Layers</td></tr>
+<tr><td style="width: 25%;"><a href="as.Centroids.html">as.Centroids.Segmentation</a></td>
+<td>Convert Segmentation Layers</td></tr>
+<tr><td style="width: 25%;"><a href="as.Graph.html">as.Graph</a></td>
+<td>Coerce to a 'Graph' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.Graph.html">as.Graph.Matrix</a></td>
+<td>Coerce to a 'Graph' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.Graph.html">as.Graph.matrix</a></td>
+<td>Coerce to a 'Graph' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.Graph.html">as.Graph.Neighbor</a></td>
+<td>Coerce to a 'Graph' Object</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">as.list.SeuratCommand</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-methods.html">as.logical.JackStrawData</a></td>
+<td>'JackStrawData' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="as.Neighbor.html">as.Neighbor</a></td>
+<td>Coerce to a 'Neighbor' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.Neighbor.html">as.Neighbor.Graph</a></td>
+<td>Coerce to a 'Neighbor' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.Centroids.html">as.Segmentation</a></td>
+<td>Convert Segmentation Layers</td></tr>
+<tr><td style="width: 25%;"><a href="as.Centroids.html">as.Segmentation.Centroids</a></td>
+<td>Convert Segmentation Layers</td></tr>
+<tr><td style="width: 25%;"><a href="as.Seurat.html">as.Seurat</a></td>
+<td>Coerce to a 'Seurat' Object</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse.data.frame</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse.Matrix</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse.matrix</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="as.sparse.html">as.sparse.ngCMatrix</a></td>
+<td>Cast to Sparse</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-class.html">Assay</a></td>
+<td>The Assay Class</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-class.html">Assay-class</a></td>
+<td>The Assay Class</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">Assay-methods</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">AssayData</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="ObjectAccess.html">Assays</a></td>
+<td>Query Specific Object Types</td></tr>
+<tr><td style="width: 25%;"><a href="AttachDeps.html">AttachDeps</a></td>
+<td>Attach Required Packages</td></tr>
+</table>
+
+<h2><a id="B">-- B --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Boundaries.html">Boundaries</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">Boundaries.FOV</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Cells.html">Cells</a></td>
+<td>Cell and Feature Names</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">Cells.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.default</a></td>
+<td>Cell and Feature Names</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.DimReduc</a></td>
+<td>Cell and Feature Names</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">Cells.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Cells.html">Cells.Neighbor</a></td>
+<td>Cell and Feature Names</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">Cells.Segmentation</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">Cells.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="CellsByIdentities.html">CellsByIdentities</a></td>
+<td>Get cell names grouped by identity class</td></tr>
+<tr><td style="width: 25%;"><a href="CellsByImage.html">CellsByImage</a></td>
+<td>Get a vector of cell names associated with an image (or set of images)</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-class.html">Centroids-class</a></td>
+<td>The 'Centroids' Class</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">Centroids-methods</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="CheckGC.html">CheckGC</a></td>
+<td>Conditional Garbage Collection</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">colMeans-method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">colMeans-method</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">colSums-method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">colSums-method</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Command.html">Command</a></td>
+<td>Get SeuratCommands</td></tr>
+<tr><td style="width: 25%;"><a href="Command.html">Command.Seurat</a></td>
+<td>Get SeuratCommands</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">coordinates-method</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="CreateAssayObject.html">CreateAssayObject</a></td>
+<td>Create an Assay object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateCentroids.html">CreateCentroids</a></td>
+<td>Create a 'Centroids' Objects</td></tr>
+<tr><td style="width: 25%;"><a href="CreateDimReducObject.html">CreateDimReducObject</a></td>
+<td>Create a DimReduc object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateFOV.html">CreateFOV</a></td>
+<td>Create Spatial Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="CreateFOV.html">CreateFOV.Centroids</a></td>
+<td>Create Spatial Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="CreateFOV.html">CreateFOV.data.frame</a></td>
+<td>Create Spatial Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="CreateFOV.html">CreateFOV.list</a></td>
+<td>Create Spatial Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="CreateFOV.html">CreateFOV.Segmentation</a></td>
+<td>Create Spatial Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="CreateMolecules.html">CreateMolecules</a></td>
+<td>Create a 'Molecules' Object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateMolecules.html">CreateMolecules.data.frame</a></td>
+<td>Create a 'Molecules' Object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateMolecules.html">CreateMolecules.Molecules</a></td>
+<td>Create a 'Molecules' Object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateMolecules.html">CreateMolecules.NULL</a></td>
+<td>Create a 'Molecules' Object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSegmentation.html">CreateSegmentation</a></td>
+<td>Create a 'Segmentation' Objects</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSegmentation.html">CreateSegmentation.data.frame</a></td>
+<td>Create a 'Segmentation' Objects</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSegmentation.html">CreateSegmentation.Segmentation</a></td>
+<td>Create a 'Segmentation' Objects</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSeuratObject.html">CreateSeuratObject</a></td>
+<td>Create a 'Seurat' object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSeuratObject.html">CreateSeuratObject.Assay</a></td>
+<td>Create a 'Seurat' object</td></tr>
+<tr><td style="width: 25%;"><a href="CreateSeuratObject.html">CreateSeuratObject.default</a></td>
+<td>Create a 'Seurat' object</td></tr>
+<tr><td style="width: 25%;"><a href="Crop.html">Crop</a></td>
+<td>Crop Coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="Crop.html">Crop.FOV</a></td>
+<td>Crop Coordinates</td></tr>
+</table>
+
+<h2><a id="D">-- D --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay.Assay</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay.DimReduc</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay.Graph</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay.Seurat</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay.SeuratCommand</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">DefaultAssay.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay&lt;-</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay&lt;-.Assay</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay&lt;-.DimReduc</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay&lt;-.Graph</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultAssay.html">DefaultAssay&lt;-.Seurat</a></td>
+<td>Default Assay</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">DefaultAssay&lt;-.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">DefaultBoundary</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">DefaultBoundary.FOV</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">DefaultBoundary&lt;-</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">DefaultBoundary&lt;-.FOV</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultDimReduc.html">DefaultDimReduc</a></td>
+<td>Find the default 'DimReduc'</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultFOV.html">DefaultFOV</a></td>
+<td>Get and Set the Default FOV</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultFOV.html">DefaultFOV.Seurat</a></td>
+<td>Get and Set the Default FOV</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultFOV.html">DefaultFOV&lt;-</a></td>
+<td>Get and Set the Default FOV</td></tr>
+<tr><td style="width: 25%;"><a href="DefaultFOV.html">DefaultFOV&lt;-.Seurat</a></td>
+<td>Get and Set the Default FOV</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">dim.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">dim.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Neighbor-methods.html">dim.Neighbor</a></td>
+<td>'Neighbor' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">dim.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">dim.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">dimnames.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">dimnames.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">dimnames.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-class.html">DimReduc</a></td>
+<td>The Dimensional Reduction Class</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-class.html">DimReduc-class</a></td>
+<td>The Dimensional Reduction Class</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">DimReduc-methods</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Distances.html">Distances</a></td>
+<td>Get the Neighbor nearest neighbors distance matrix</td></tr>
+<tr><td style="width: 25%;"><a href="Distances.html">Distances.Neighbor</a></td>
+<td>Get the Neighbor nearest neighbors distance matrix</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">droplevels.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+</table>
+
+<h2><a id="E">-- E --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Embeddings.html">Embeddings</a></td>
+<td>Get Cell Embeddings</td></tr>
+<tr><td style="width: 25%;"><a href="Embeddings.html">Embeddings.DimReduc</a></td>
+<td>Get Cell Embeddings</td></tr>
+<tr><td style="width: 25%;"><a href="Embeddings.html">Embeddings.Seurat</a></td>
+<td>Get Cell Embeddings</td></tr>
+</table>
+
+<h2><a id="F">-- F --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Cells.html">Features</a></td>
+<td>Cell and Feature Names</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">Features.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-methods.html">Features.Molecules</a></td>
+<td>'Molecules' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FetchData.html">FetchData</a></td>
+<td>Access cellular data</td></tr>
+<tr><td style="width: 25%;"><a href="FetchData.html">FetchData.DimReduc</a></td>
+<td>Access cellular data</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">FetchData.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FetchData.html">FetchData.Seurat</a></td>
+<td>Access cellular data</td></tr>
+<tr><td style="width: 25%;"><a href="FilterObjects.html">FilterObjects</a></td>
+<td>Find Sub-objects of a Certain Class</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-class.html">FOV</a></td>
+<td>The Field of View Object</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-class.html">FOV-class</a></td>
+<td>The Field of View Object</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">FOV-methods</a></td>
+<td>'FOV' Methods</td></tr>
+</table>
+
+<h2><a id="G">-- G --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="AssayData.html">GetAssayData</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">GetAssayData.Assay</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">GetAssayData.Seurat</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="GetImage.html">GetImage</a></td>
+<td>Get image data</td></tr>
+<tr><td style="width: 25%;"><a href="GetImage.html">GetImage.Seurat</a></td>
+<td>Get image data</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">GetImage.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="GetTissueCoordinates.html">GetTissueCoordinates</a></td>
+<td>Get tissue coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">GetTissueCoordinates.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">GetTissueCoordinates.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-methods.html">GetTissueCoordinates.Molecules</a></td>
+<td>'Molecules' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">GetTissueCoordinates.Segmentation</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="GetTissueCoordinates.html">GetTissueCoordinates.Seurat</a></td>
+<td>Get tissue coordinates</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">GetTissueCoordinates.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Graph-class.html">Graph</a></td>
+<td>The Graph Class</td></tr>
+<tr><td style="width: 25%;"><a href="Graph-class.html">Graph-class</a></td>
+<td>The Graph Class</td></tr>
+<tr><td style="width: 25%;"><a href="ObjectAccess.html">Graphs</a></td>
+<td>Query Specific Object Types</td></tr>
+</table>
+
+<h2><a id="H">-- H --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Assay-methods.html">head.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">head.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">HVFInfo</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">HVFInfo.Assay</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">HVFInfo.Seurat</a></td>
+<td>Highly Variable Features</td></tr>
+</table>
+
+<h2><a id="I">-- I --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Idents.html">Idents</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">Idents.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">Idents&lt;-</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">Idents&lt;-.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Images.html">Images</a></td>
+<td>Pull spatial image names</td></tr>
+<tr><td style="width: 25%;"><a href="Index.html">Index</a></td>
+<td>Get Neighbor algorithm index</td></tr>
+<tr><td style="width: 25%;"><a href="Index.html">Index.Neighbor</a></td>
+<td>Get Neighbor algorithm index</td></tr>
+<tr><td style="width: 25%;"><a href="Index.html">Index&lt;-</a></td>
+<td>Get Neighbor algorithm index</td></tr>
+<tr><td style="width: 25%;"><a href="Index.html">Index&lt;-.Neighbor</a></td>
+<td>Get Neighbor algorithm index</td></tr>
+<tr><td style="width: 25%;"><a href="Indices.html">Indices</a></td>
+<td>Get Neighbor nearest neighbor index matrices</td></tr>
+<tr><td style="width: 25%;"><a href="Indices.html">Indices.Neighbor</a></td>
+<td>Get Neighbor nearest neighbor index matrices</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">is.finite.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">is.infinite.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="IsGlobal.html">IsGlobal</a></td>
+<td>Is an object global/persistent?</td></tr>
+<tr><td style="width: 25%;"><a href="IsGlobal.html">IsGlobal.default</a></td>
+<td>Is an object global/persistent?</td></tr>
+<tr><td style="width: 25%;"><a href="IsGlobal.html">IsGlobal.DimReduc</a></td>
+<td>Is an object global/persistent?</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">IsGlobal.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="IsMatrixEmpty.html">IsMatrixEmpty</a></td>
+<td>Check if a matrix is empty</td></tr>
+<tr><td style="width: 25%;"><a href="IsNamedList.html">IsNamedList</a></td>
+<td>Check List Names</td></tr>
+<tr><td style="width: 25%;"><a href="s4list.html">IsS4List</a></td>
+<td>S4/List Conversion</td></tr>
+</table>
+
+<h2><a id="J">-- J --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="JackStrawData-class.html">JackStrawData</a></td>
+<td>The JackStrawData Class</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-class.html">JackStrawData-class</a></td>
+<td>The JackStrawData Class</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-methods.html">JackStrawData-methods</a></td>
+<td>'JackStrawData' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS</a></td>
+<td>Get and set JackStraw information</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS.DimReduc</a></td>
+<td>Get and set JackStraw information</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS.JackStrawData</a></td>
+<td>Get and set JackStraw information</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS&lt;-</a></td>
+<td>Get and set JackStraw information</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS&lt;-.DimReduc</a></td>
+<td>Get and set JackStraw information</td></tr>
+<tr><td style="width: 25%;"><a href="JS.html">JS&lt;-.JackStrawData</a></td>
+<td>Get and set JackStraw information</td></tr>
+</table>
+
+<h2><a id="K">-- K --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Key.html">Key</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key.Assay</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key.DimReduc</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key.Seurat</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">Key.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key&lt;-</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key&lt;-.Assay</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Key&lt;-.DimReduc</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">Key&lt;-.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Keys</a></td>
+<td>Get and set object keys</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">Keys.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Key.html">Keys.Seurat</a></td>
+<td>Get and set object keys</td></tr>
+</table>
+
+<h2><a id="L">-- L --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">length.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">length.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">length.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">lengths.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">lengths.Segmentation</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">levels.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">levels&lt;-.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="s4list.html">ListToS4</a></td>
+<td>S4/List Conversion</td></tr>
+<tr><td style="width: 25%;"><a href="Loadings.html">Loadings</a></td>
+<td>Get and set feature loadings</td></tr>
+<tr><td style="width: 25%;"><a href="Loadings.html">Loadings.DimReduc</a></td>
+<td>Get and set feature loadings</td></tr>
+<tr><td style="width: 25%;"><a href="Loadings.html">Loadings.Seurat</a></td>
+<td>Get and set feature loadings</td></tr>
+<tr><td style="width: 25%;"><a href="Loadings.html">Loadings&lt;-</a></td>
+<td>Get and set feature loadings</td></tr>
+<tr><td style="width: 25%;"><a href="Loadings.html">Loadings&lt;-.DimReduc</a></td>
+<td>Get and set feature loadings</td></tr>
+<tr><td style="width: 25%;"><a href="LogMap-class.html">LogMap</a></td>
+<td>A Logical Map</td></tr>
+<tr><td style="width: 25%;"><a href="LogMap-class.html">LogMap-class</a></td>
+<td>A Logical Map</td></tr>
+<tr><td style="width: 25%;"><a href="LogSeuratCommand.html">LogSeuratCommand</a></td>
+<td>Log a command</td></tr>
+</table>
+
+<h2><a id="M">-- M --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="MatchCells.html">MatchCells</a></td>
+<td>Match Cells</td></tr>
+<tr><td style="width: 25%;"><a href="MatchCells.html">MatchCells.character</a></td>
+<td>Match Cells</td></tr>
+<tr><td style="width: 25%;"><a href="MatchCells.html">MatchCells.NULL</a></td>
+<td>Match Cells</td></tr>
+<tr><td style="width: 25%;"><a href="MatchCells.html">MatchCells.numeric</a></td>
+<td>Match Cells</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">merge</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">merge.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">merge.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">merge.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">MergeSeurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc.Assay</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc.DimReduc</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc.Seurat</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc&lt;-</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc&lt;-.Assay</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc&lt;-.DimReduc</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">Misc&lt;-.Seurat</a></td>
+<td>Get and set miscellaneous data</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">Molecules</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-class.html">Molecules-class</a></td>
+<td>The Spatial Molecules Class</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-methods.html">Molecules-methods</a></td>
+<td>'Molecules' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Boundaries.html">Molecules.FOV</a></td>
+<td>Get, Set, and Query Segmentation Boundaries</td></tr>
+</table>
+
+<h2><a id="N">-- N --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">names.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">names.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">names.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Neighbor-class.html">Neighbor</a></td>
+<td>The Neighbor class</td></tr>
+<tr><td style="width: 25%;"><a href="Neighbor-class.html">Neighbor-class</a></td>
+<td>The Neighbor class</td></tr>
+<tr><td style="width: 25%;"><a href="Neighbor-methods.html">Neighbor-methods</a></td>
+<td>'Neighbor' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="ObjectAccess.html">Neighbors</a></td>
+<td>Query Specific Object Types</td></tr>
+</table>
+
+<h2><a id="O">-- O --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Overlay.html">Overlay</a></td>
+<td>Overlay 'Spatial' Objects Over One Another</td></tr>
+<tr><td style="width: 25%;"><a href="Overlay.html">Overlay-method</a></td>
+<td>Overlay 'Spatial' Objects Over One Another</td></tr>
+</table>
+
+<h2><a id="P">-- P --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="PackageCheck.html">PackageCheck</a></td>
+<td>Check the existence of a package</td></tr>
+<tr><td style="width: 25%;"><a href="pbmc_small.html">pbmc_small</a></td>
+<td>A small example version of the PBMC dataset</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">print</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">print.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Project.html">Project</a></td>
+<td>Get and set project information</td></tr>
+<tr><td style="width: 25%;"><a href="Project.html">Project.Seurat</a></td>
+<td>Get and set project information</td></tr>
+<tr><td style="width: 25%;"><a href="Project.html">Project&lt;-</a></td>
+<td>Get and set project information</td></tr>
+<tr><td style="width: 25%;"><a href="Project.html">Project&lt;-.Seurat</a></td>
+<td>Get and set project information</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Radius.html">Radius</a></td>
+<td>Get the spot radius from an image</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">Radius.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">Radius.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="RandomName.html">RandomName</a></td>
+<td>Generate a random name</td></tr>
+<tr><td style="width: 25%;"><a href="ObjectAccess.html">Reductions</a></td>
+<td>Query Specific Object Types</td></tr>
+<tr><td style="width: 25%;"><a href="RenameAssays.html">RenameAssays</a></td>
+<td>Rename assays in a 'Seurat' object</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells</a></td>
+<td>Rename cells</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.Assay</a></td>
+<td>Rename cells</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">RenameCells.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.DimReduc</a></td>
+<td>Rename cells</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">RenameCells.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.Neighbor</a></td>
+<td>Rename cells</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">RenameCells.Segmentation</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="RenameCells.html">RenameCells.Seurat</a></td>
+<td>Rename cells</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">RenameCells.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">RenameIdent</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">RenameIdents</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">RenameIdents.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">ReorderIdent</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">ReorderIdent.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">rowMeans-method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">rowMeans-method</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="RowMergeSparseMatrices.html">RowMergeSparseMatrices</a></td>
+<td>Merge Sparse Matrices by Row</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">rowSums-method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">rowSums-method</a></td>
+<td>Seurat Methods</td></tr>
+</table>
+
+<h2><a id="S">-- S --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="s4list.html">s4list</a></td>
+<td>S4/List Conversion</td></tr>
+<tr><td style="width: 25%;"><a href="s4list.html">S4ToList</a></td>
+<td>S4/List Conversion</td></tr>
+<tr><td style="width: 25%;"><a href="s4list.html">S4ToList.default</a></td>
+<td>S4/List Conversion</td></tr>
+<tr><td style="width: 25%;"><a href="s4list.html">S4ToList.list</a></td>
+<td>S4/List Conversion</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-class.html">Segmentation-class</a></td>
+<td>The 'Segmentation' Class</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">Segmentation-methods</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="set-if-na.html">set-if-na</a></td>
+<td>Set if 'NA'</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">SetAssayData</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">SetAssayData.Assay</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="AssayData.html">SetAssayData.Seurat</a></td>
+<td>Get and Set Assay Data</td></tr>
+<tr><td style="width: 25%;"><a href="CreateDimReducObject.html">SetDimReduction</a></td>
+<td>Create a DimReduc object</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">SetIdent</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">SetIdent.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-class.html">Seurat</a></td>
+<td>The Seurat Class</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-class.html">Seurat-class</a></td>
+<td>The Seurat Class</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">Seurat-methods</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="AddMetaData.html">SeuratAccess</a></td>
+<td>Add in metadata associated with either cells or features.</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-class.html">SeuratCommand</a></td>
+<td>The SeuratCommand Class</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-class.html">SeuratCommand-class</a></td>
+<td>The SeuratCommand Class</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">SeuratCommand-methods</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratObject-package.html">SeuratObject</a></td>
+<td>SeuratObject: Data Structures for Single Cell Data</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">show-method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">show-method</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">show-method</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">show-method</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-methods.html">show-method</a></td>
+<td>'JackStrawData' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="LogMap-class.html">show-method</a></td>
+<td>A Logical Map</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-methods.html">show-method</a></td>
+<td>'Molecules' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Neighbor-methods.html">show-method</a></td>
+<td>'Neighbor' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">show-method</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">show-method</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">show-method</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">show-method</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="Simplify.html">Simplify</a></td>
+<td>Simplify Geometry</td></tr>
+<tr><td style="width: 25%;"><a href="Simplify.html">Simplify.Spatial</a></td>
+<td>Simplify Geometry</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-class.html">SpatialImage</a></td>
+<td>The SpatialImage class</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-class.html">SpatialImage-class</a></td>
+<td>The SpatialImage class</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">SpatialImage-methods</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SpatiallyVariableFeatures</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SpatiallyVariableFeatures.Assay</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SpatiallyVariableFeatures.Seurat</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">StashIdent</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Idents.html">StashIdent.Seurat</a></td>
+<td>Get, set, and manipulate an object's identity classes</td></tr>
+<tr><td style="width: 25%;"><a href="Stdev.html">Stdev</a></td>
+<td>Get the standard deviations for an object</td></tr>
+<tr><td style="width: 25%;"><a href="Stdev.html">Stdev.DimReduc</a></td>
+<td>Get the standard deviations for an object</td></tr>
+<tr><td style="width: 25%;"><a href="Stdev.html">Stdev.Seurat</a></td>
+<td>Get the standard deviations for an object</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">subset</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">subset.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">subset.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">subset.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">subset.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Molecules-methods.html">subset.Molecules</a></td>
+<td>'Molecules' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">subset.Segmentation</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">subset.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">subset.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SVFInfo</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SVFInfo.Assay</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">SVFInfo.Seurat</a></td>
+<td>Highly Variable Features</td></tr>
+</table>
+
+<h2><a id="T">-- T --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="Assay-methods.html">tail.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">tail.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Theta.html">Theta</a></td>
+<td>Get the offset angle</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">Theta.Centroids</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Tool.html">Tool</a></td>
+<td>Get and set additional tool data</td></tr>
+<tr><td style="width: 25%;"><a href="Tool.html">Tool.Seurat</a></td>
+<td>Get and set additional tool data</td></tr>
+<tr><td style="width: 25%;"><a href="Tool.html">Tool&lt;-</a></td>
+<td>Get and set additional tool data</td></tr>
+<tr><td style="width: 25%;"><a href="Tool.html">Tool&lt;-.Seurat</a></td>
+<td>Get and set additional tool data</td></tr>
+<tr><td style="width: 25%;"><a href="Tool.html">Tools</a></td>
+<td>Get and set additional tool data</td></tr>
+</table>
+
+<h2><a id="U">-- U --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="UpdateSeuratObject.html">UpdateSeuratObject</a></td>
+<td>Update old Seurat object to accommodate new features</td></tr>
+<tr><td style="width: 25%;"><a href="UpdateSlots.html">UpdateSlots</a></td>
+<td>Update slots in an object</td></tr>
+</table>
+
+<h2><a id="V">-- V --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures.Assay</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures.Seurat</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures&lt;-</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures&lt;-.Assay</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="VariableFeatures.html">VariableFeatures&lt;-.Seurat</a></td>
+<td>Highly Variable Features</td></tr>
+<tr><td style="width: 25%;"><a href="Version.html">Version</a></td>
+<td>Get Version Information</td></tr>
+<tr><td style="width: 25%;"><a href="Version.html">Version.Seurat</a></td>
+<td>Get Version Information</td></tr>
+</table>
+
+<h2><a id="W">-- W --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="WhichCells.html">WhichCells</a></td>
+<td>Identify cells matching certain criteria</td></tr>
+<tr><td style="width: 25%;"><a href="WhichCells.html">WhichCells.Assay</a></td>
+<td>Identify cells matching certain criteria</td></tr>
+<tr><td style="width: 25%;"><a href="WhichCells.html">WhichCells.Seurat</a></td>
+<td>Identify cells matching certain criteria</td></tr>
+</table>
+
+<h2><a id="misc">-- misc --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="FOV-methods.html">$.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-methods.html">$.JackStrawData</a></td>
+<td>'JackStrawData' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">$.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">$.SeuratCommand</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">$&lt;-.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="set-if-na.html">%!NA%</a></td>
+<td>Set if 'NA'</td></tr>
+<tr><td style="width: 25%;"><a href="set-if-na.html">%!na%</a></td>
+<td>Set if 'NA'</td></tr>
+<tr><td style="width: 25%;"><a href="set-if-na.html">%NA%</a></td>
+<td>Set if 'NA'</td></tr>
+<tr><td style="width: 25%;"><a href="set-if-na.html">%na%</a></td>
+<td>Set if 'NA'</td></tr>
+<tr><td style="width: 25%;"><a href="JackStrawData-methods.html">.DollarNames.JackStrawData</a></td>
+<td>'JackStrawData' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">.DollarNames.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">.DollarNames.SeuratCommand</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Centroids-methods.html">[-method</a></td>
+<td>'Centroids' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Segmentation-methods.html">[-method</a></td>
+<td>'Segmentation' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">[.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">[.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">[.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">[.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SeuratCommand-methods.html">[.SeuratCommand</a></td>
+<td>'SeuratCommand' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="SpatialImage-methods.html">[.SpatialImage</a></td>
+<td>'SpatialImage' methods</td></tr>
+<tr><td style="width: 25%;"><a href="LogMap-class.html">[[-method</a></td>
+<td>A Logical Map</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">[[.Assay</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="DimReduc-methods.html">[[.DimReduc</a></td>
+<td>'DimReduc' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">[[.FOV</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">[[.Seurat</a></td>
+<td>Seurat Methods</td></tr>
+<tr><td style="width: 25%;"><a href="Assay-methods.html">[[&lt;--method</a></td>
+<td>'Assay' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="FOV-methods.html">[[&lt;--method</a></td>
+<td>'FOV' Methods</td></tr>
+<tr><td style="width: 25%;"><a href="LogMap-class.html">[[&lt;--method</a></td>
+<td>A Logical Map</td></tr>
+<tr><td style="width: 25%;"><a href="Seurat-methods.html">[[&lt;--method</a></td>
+<td>Seurat Methods</td></tr>
+</table>
+</div></body></html>

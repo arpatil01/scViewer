@@ -1,0 +1,186 @@
+
+        CHANGES IN spatstat.random VERSION 3.1-3
+
+OVERVIEW
+
+    o We thank Bethany Macdonald for contributions.
+    
+    o Bug fixes and internal improvements.
+
+        CHANGES IN spatstat.random VERSION 3.1-2
+
+OVERVIEW
+
+    o We thank Ya-Mei Chang for substantial contributions.
+    
+    o Faster algorithms for simulating cluster processes.
+    
+    o Bug fixes and internal improvements.
+
+NEW FUNCTIONS
+
+    o rpoisnonzero
+    Generate Poisson random variables conditioned to be positive.
+    
+    o rpoistrunc
+    Generate 'truncated' Poisson random variables,
+    conditioned to be greater than or equal to a specified minimum value.
+
+    o rclusterBKBC
+    (Advanced use) Internal algorithm to simulate any Neyman-Scott cluster
+    process using either the naive, Brix-Kendall, or Baddeley-Chang algorithm.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o rCauchy, rThomas, rMatClust, rVarGamma
+    These algorithms have been accelerated by several orders of magnitude
+    in the case where the cluster radius is large.
+    
+    o rCauchy, rThomas, rMatClust, rVarGamma
+    These functions now offer a choice of simulation algorithms.
+    
+    o rCauchy, rThomas, rMatClust, rVarGamma, rNeymanScott
+    Formal arguments have changed. 
+
+    o rNeymanScott
+    Argument 'lmax' has been replaced by 'kappamax'.
+    New argument 'mumax'.
+
+    o rPoissonCluster
+    Argument 'lmax' has been replaced by 'kappamax'.
+
+BUG FIXES
+
+    o rThomas, rMatClust, rCauchy, rVarGamma
+    If the model was very close to a Poisson process,
+    and if saveLambda=TRUE was selected,
+    the attribute "Lambda" was incorrectly labelled "lambda".
+    Fixed.
+
+    o clusterradius
+    Crashed sometimes with message about infinite values of the integrand.
+    Fixed.
+
+        CHANGES IN spatstat.random VERSION 3.1-0
+
+OVERVIEW
+
+    o Internal improvements.
+    
+
+        CHANGES IN spatstat.random VERSION 3.0-2
+
+OVERVIEW
+
+    o Pakes distribution.
+
+NEW FUNCTIONS
+
+    o dpakes, ppakes, qpakes, rpakes
+    Density, cumulative probability, quantiles, and random generator
+    for the Pakes distribution.
+
+        CHANGES IN spatstat.random VERSION 3.0-1
+
+OVERVIEW
+
+    o Tweaks to placate package checker.
+
+
+        CHANGES IN spatstat.random VERSION 3.0-0
+
+OVERVIEW
+
+    o We thank Liu Yijia for contributions.
+
+    o spatstat.random now suggests the new packages 'spatstat.explore'
+    and 'spatstat.model' rather than the old 'spatstat.core'.
+    
+    o Bug fixes and internal improvements.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Package dependence
+    'spatstat.random' now suggests the new packages 'spatstat.explore'
+    and 'spatstat.model' rather than the old 'spatstat.core'.
+    
+    o random generators
+    Random generators now accept 'nsim=0', and return a zero-length list.
+    
+    o random generators
+    Code in the case 'nsim > 1' has been accelerated.
+    
+BUG FIXES
+
+    o rmpoint
+    Crashed if 'f' was a pixel image.
+    [Spotted by Liu Yijia.]
+    Fixed.
+
+        CHANGES IN spatstat.random VERSION 2.2-0
+
+OVERVIEW
+
+    o Bug fixes and internal improvements.
+
+BUG FIXES
+
+    o Internal code
+    Fix a bug in internal code that causes bug in spatstat.core::kppm
+
+        CHANGES IN spatstat.random VERSION 2.1-0
+
+OVERVIEW
+
+    o Indefinite integral.
+
+    o Internal repairs, code acceleration, and improvements.
+
+NEW FUNCTIONS
+
+    o indefinteg
+    Numerically computes the indefinite integral of a function.
+
+
+        CHANGES IN spatstat.random VERSION 2.0-0
+
+OVERVIEW
+
+    o We thank Dominic Schuhmacher for contributions.
+
+    o This is a new package containing code removed from spatstat.core
+
+    o Bug fixes in rmh visual debugger.
+
+    o Minor improvements
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o spatstat.random
+    The 'spatstat.core' package has been divided into two packages,
+    called 'spatstat.random' and 'spatstat.core'.
+    The new 'spatstat.random' package consists of functions for
+    generating random point patterns, and other random spatial data,
+    that were originally in 'spatstat.core'.
+
+    o rMatClust, rThomas, rCauchy, rVarGamma
+    New argument 'nonempty'
+
+BUG FIXES
+
+    o rmh
+    The visual debugger did not display accepted births and deaths correctly.
+    [Spotted by Dominic Schuhmacher.]
+    Fixed.
+
+    o rmh
+    The visual debugger exited prematurely sometimes,
+    if the current state was the empty point pattern.
+    [Spotted by Dominic Schuhmacher.]
+    Fixed.
+
+
+
+    
+    
+    

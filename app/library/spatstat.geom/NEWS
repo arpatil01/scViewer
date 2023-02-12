@@ -1,0 +1,699 @@
+        CHANGES IN spatstat.geom VERSION 3.0-6
+
+OVERVIEW
+
+    o Bug fix.
+    
+BUG FIXES
+
+    o harmoniseLevels
+    Crashed sometimes, in older versions of R,
+    with an obscure error message from 'mapply'.
+    Fixed.
+
+        CHANGES IN spatstat.geom VERSION 3.0-5
+
+OVERVIEW
+
+    o Convert several factors or factor-valued images to a common set of levels.
+    
+    o Extension to rjitter
+
+    o Alternative to rjitter
+
+    o Quantile function as a function
+
+    o Improvements to plot code.
+
+NEW FUNCTIONS
+
+    o harmoniseLevels
+    Given several factors or factor-valued pixel images,
+    convert them all to have the same set of factor levels.
+
+    o rexplode
+    'Explode' a point pattern by randomly displacing each
+    group of duplicated points to make a circular pattern
+    around the original location. An alternative to 'rjitter'.
+
+    o quantilefun
+    Return a function that computes any quantiles of a given dataset.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o rjitter.ppp
+    If 'trim=TRUE', the displacement radius will be constrained
+    to be less than or equal to the distance from the data point
+    to the window boundary. 
+    
+    o plot.ppp
+    For multitype point patterns, a warning is issued if 
+    the plot legend does not represent every possible type of point
+    due to space restrictions.
+
+    o plot.symbolmap
+    New argument 'warn'.
+
+    o plot.symbolmap
+    Issues a warning if the plot of a discrete symbol map does not
+    represent every possible input value, due to space restrictions.
+
+    o plot.solist
+    When equal.ribbon=TRUE, the images may now be factor-valued
+    or character-valued. Character-valued images will be converted
+    to factor-valued images. The common colour map will combine the
+    levels of all the factor images. 
+    
+BUG FIXES
+
+    o "[<-.im"
+    Errors occurred in x[] <- v when x and v were both factor-valued
+    but with different sets of levels.
+
+    o rjitter.ppp
+    If retry=FALSE, marks were ignored.
+    Fixed.
+    
+        CHANGES IN spatstat.geom VERSION 3.0-4
+
+OVERVIEW
+
+    o Improvements to perspective plots.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o perspPoints, perspLines, perspSegments, perspContour
+    New argument 'occluded' specifies whether the surface
+    should be treated as opaque or transparent.
+
+
+        CHANGES IN spatstat.geom VERSION 3.0-3
+
+OVERVIEW
+
+    o Minor internal changes to satisfy package checker.
+
+        CHANGES IN spatstat.geom VERSION 3.0-2
+
+OVERVIEW
+
+    o Minor internal changes to satisfy package checker.
+
+        CHANGES IN spatstat.geom VERSION 3.0-1
+
+OVERVIEW
+
+    o Minor internal changes.
+
+        CHANGES IN spatstat.geom VERSION 3.0-0
+
+OVERVIEW
+
+    o Minor improvements and bug fixes.
+
+    o Changes to package dependence.
+    
+NEW FUNCTIONS
+
+    o is.linnet
+    Test whether an object is a linear network.
+
+    o as.data.frame.ppplist
+    Method for 'as.data.frame' for lists of point patterns.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Package dependence
+    spatstat.geom now suggests the new packages spatstat.explore and
+    spatstat.model, which have replaced spatstat.core.
+    
+    o crosspairs.ppp
+    New argument 'periodic' specifies whether to use
+    periodic (toroidal) distances.
+
+    o crosspairs.ppp
+    New arguments 'iX', 'iY' make it possible to eliminate pairs
+    in which the two points are identical.
+    
+    o bufftess 
+    The result now has attribute 'breaks' which is the vector of
+    distance breakpoints.
+
+    o contour.im
+    New argument 'log' specifies whether the contour lines
+    should be equally spaced on a logarithmic scale.
+    
+    o plot.im, image.im
+    New argument 'addcontour' specifies that contour lines should be drawn
+    over the image plot.
+
+    o invoke.symbolmap
+    New argument 'angleref'.
+
+    o funxy
+    The result now has a unitname, inherited from the argument W.
+
+    o integral.im
+    New argument 'weight' specifies a weight function for the integration.
+    
+    o markstat, applynbd
+    These functions now work for point patterns in three dimensions
+    (class 'pp3') and point patterns on a network (class 'lpp').
+
+    o plot.psp
+    New argument 'use.marks', for consistency with other methods.
+    
+BUG FIXES
+
+    o framedist.pixels
+    Result was always a matrix, regardless of the value of 'style'.
+    Fixed.
+
+    o plot.im
+    Ignored ribargs$labels.
+    Fixed.
+
+    o plot.ppp
+    Crashed with an obscure message when argument 'shape' was given,
+    unless argument 'size' was also given.
+    Fixed.
+
+    o closepairs
+    Crashed if npoints(X)^2 exceeded the largest possible integer.
+    Fixed.
+
+    o crosspairs
+    Crashed if npoints(X) * npoints(Y) exceeded the largest possible integer.
+    Fixed.
+    
+        CHANGES IN spatstat.geom VERSION 2.4-0
+
+OVERVIEW
+
+    o We thank Fernando Milesi, Suman Rakshit and Mark Walsh for contributions.
+
+    o Bug fixes in 'distmap' and 'distfun'.
+    
+    o Bug fixes in 'closepairs'.
+
+    o Bug fixes in 'nncross.ppp'.
+
+    o Minor improvements and bug fixes.
+
+NEW FUNCTIONS
+
+    o framedist.pixels
+    Computes distance from each pixel to the enclosing rectangle.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o nncross.ppp
+    When X is a point pattern and Y is a line segment pattern,
+    higher order neighbours (k > 1) are now supported.
+
+    o intersect.tess
+    New argument 'keepempty'.
+
+    o unnormdensity
+    Argument 'weights' may have length 1.
+    New argument 'defaults'.
+
+    o distmap.owin
+    Behaviour has been altered so that, when X is a binary mask, the results of
+    distmap(X, invert=TRUE) and distmap(complement.owin(X)) are identical.
+    This affects a few pixels close to the edge of the frame.
+    [Suggested by Fernando Milesi.]
+
+    o distmap.ppp
+    New argument 'clip'.
+    
+BUG FIXES
+
+    o distmap.owin
+    If the window was a binary mask, the distance values were
+    slightly too large (by a factor 1 + 1/n where n is the pixel grid dimension),
+    due to a coding error.
+    [Spotted by Fernando Milesi.]
+    Fixed.
+    
+    o distfun.owin
+    If the window was a binary mask, the distance values were
+    slightly too small (typically reduced by 1/20 of a pixel width).
+    [Spotted by Fernando Milesi.]
+    Fixed.
+
+    o distmap.owin
+    Values were incorrect if X was an empty window (is.empty(X) = TRUE).
+    Fixed.
+    
+    o distmap.ppp, distmap.psp
+    Values were incorrect if X was an empty pattern (npoints(X) = 0).
+    Fixed.
+    
+    o distmap.psp
+    Values were incorrect if X was an empty pattern (nsegments(X) = 0).
+    Fixed.
+    
+    o closepairs.ppp
+    If distinct=FALSE and what="all", the resulting vectors
+    'yi' and 'yj' contained incorrect values, and had the wrong length.
+    Fixed.
+
+    o nncross.ppp
+    When k > 1, distance values were incorrectly replaced by 'Inf' in some cases.
+    Fixed.
+    
+    o closepairs.ppp
+    Crashed with a message 'unable to allocate memory'
+    if the window of X had zero area.
+    Fixed.
+
+    o crosspairs.ppp
+    Crashed with a message 'unable to allocate memory'
+    if the window of Y had zero area.
+    Fixed.
+
+    o closepairs.pp3
+    Crashed with a message 'unable to allocate memory'
+    if the domain of X had zero volume.
+    Fixed.
+
+    o crosspairs.pp3
+    Crashed with a message 'unable to allocate memory'
+    if the domain of Y had zero volume.
+    Fixed.
+
+    o as.im.owin
+    If 'value' was a categorical (factor) value, the result was not a factor-valued image.
+    Fixed.
+
+    o tile.areas
+    For a tessellation defined by a pixel image,
+    the result of tile.areas() was not a numeric vector.
+    [Spotted by Suman Rakshit.]
+    Fixed.
+
+    o dirichlet
+    Rarely, the number of tiles in the tessellation
+    was less than the number of unique data points.
+    This occurred only when the window was a binary mask.
+    [Spotted by Suman Rakshit.]
+    Fixed.
+
+
+        CHANGES IN spatstat.geom VERSION 2.3-2
+
+OVERVIEW
+
+    o 'spatstat.geom' now suggests the package 'spatstat.random'.
+    
+    o Updated help files to refer to 'spatstat.random'.
+
+
+        CHANGES IN spatstat.geom VERSION 2.3-1
+
+OVERVIEW
+
+    o New options for weighted.quantile
+
+    o Minor improvements.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o weighted.quantile
+    New argument 'type' allows the user to choose between several rules
+    for the weighted quantile.
+
+    o weighted.median
+    New argument 'type' allows the user to choose between several rules
+    for the weighted median. The default rule has changed.
+
+    o perspSegments
+    Improved quality of result when pixels are not square.
+
+    o nndist.ppp, nnwhich.ppp
+    Argument 'by' can be a factor, a logical vector,
+    a pixel image with factor values, a tessellation, a window,
+    the string 'marks' (if marks(x) is a factor),
+    or the name of one of the columns of marks (if marks(x) is a data frame).
+
+    o nndist.pp3, nnwhich.pp3
+    Argument 'by' can be a factor, a logical vector,
+    the string 'marks' (if marks(x) is a factor), or
+    the name of one of the columns of marks (if marks(x) is a data frame).
+
+    o split.ppp, split.ppx
+    The argument 'f' may now be the character string "marks",
+    signifying 'f=marks(X)', provided 'marks(X)' is a factor.
+
+    o owin
+    If argument 'mask' is a logical matrix,
+    NA entries will be accepted, and converted to FALSE.
+    
+        CHANGES IN spatstat.geom VERSION 2.3-0
+
+OVERVIEW
+
+    o Quantile transformation.
+
+    o Distance metric based on a convex set.
+
+    o Basic support for calculations using non-Euclidean distance metrics.
+
+    o Improvements to 'rjitter'.
+    
+NEW CLASSES
+
+    o metric
+    An object of class 'metric' represents a distance metric.
+    See help(metric.object).
+    
+NEW FUNCTIONS
+
+    o transformquantiles
+    Transform the quantiles of a vector, matrix, array or pixel image.
+
+    o convexmetric
+    Distance metric based on a convex set.
+
+    o mean.ecdf, mean.ewcdf
+    Calculate the mean of an empirical cumulative distribution function.
+    
+    o invoke.metric
+    Low level function to perform a desired operation using a given metric.
+
+    o rjitter.ppp
+    This function was previously called 'rjitter'. It is now a method
+    for the new generic function 'rjitter'.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o pairdist.ppp, crossdist.ppp, nndist.ppp, nnwhich.ppp, nncross.ppp
+    New argument 'metric' specifies a non-Euclidean distance metric
+    to measure the distances.
+    
+    o distmap.ppp, distmap.owin, distmap.psp
+    New argument 'metric' specifies a non-Euclidean distance metric
+    to measure the distances.
+    
+    o disc
+    New argument 'metric' specifies a non-Euclidean distance metric
+    defining the disc.
+
+    o rjitter
+    The function previously called 'rjitter' is now called 'rjitter.ppp'
+    and is now a method for the new generic 'rjitter'.
+
+    o rjitter.ppp
+    The argument 'radius' may be a numeric vector, specifying a different
+    displacement radius for each data point.
+
+BUG FIXES
+
+    o as.mask
+    Crashed if 'Frame(w)' had zero height or zero width.
+    Fixed.
+
+        CHANGES IN spatstat.geom VERSION 2.2-2
+
+OVERVIEW
+
+    o Bug fix in package information.
+    
+
+        CHANGES IN spatstat.geom VERSION 2.2-1
+
+OVERVIEW
+
+    o More options for converting a window to a mask.
+
+    o Minor improvements and internal upgrades.
+
+NEW FUNCTIONS
+
+    o owin2mask
+    Convert a window to a mask, with various options,
+    affecting the treatment of the boundary.
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o where.max, where.min
+    Argument 'x' may be either a pixel image (class 'im')
+    or data that can be converted to a pixel image by 'as.im'.
+
+
+        CHANGES IN spatstat.geom VERSION 2.2-0
+
+OVERVIEW
+
+    o We thank Warick Brown for contributions.
+
+    o Buffer tessellation
+    
+    o New options for distmap.psp
+
+NEW FUNCTIONS
+
+    o bufftess
+    Distance buffer tessellation
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o distmap.psp
+    New arguments 'extras' and 'clip' 
+
+         CHANGES IN spatstat.geom VERSION 2.1-0
+
+OVERVIEW
+
+    o We thank Hank Stevens for contributions.
+    
+    o Extension to 'discretise'.
+
+    o Bug fix in nncross
+
+    o Minor improvements and bug fixes
+    
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o discretise
+    New argument 'move.points' determines whether the point coordinates
+    are also discretised.
+
+    o summary.im
+    Output improved when the image is empty (i.e. when all pixel values
+    are undefined).
+    
+BUG FIXES
+
+    o nncross.ppp
+    If the argument 'by' was given, some of the results were incorrect.
+    [Spotted by Hank Stevens.]
+    Fixed.
+
+    o nncross.ppp, nncross.pp3
+    If 'iX' and 'iY' were given, some of the results were incorrect.
+    Fixed.
+
+        CHANGES IN spatstat.geom VERSION 2.0-1
+
+OVERVIEW
+
+    o Minor bug fix
+
+BUG FIXES
+
+    o pixellate.ppp
+    crashed if 'weights' contained any NA values.
+    Fixed.
+    
+        CHANGES IN spatstat.geom VERSION 2.0-0
+
+OVERVIEW
+
+    o Reduced package dependence.
+
+    o Improvement to venn.tess.
+
+    o Changed default value of 'stringsAsFactors'.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o spatstat.geom
+    No longer depends on 'spatstat.sparse'.
+    
+    o venn.tess
+    New argument 'labels'.
+
+    o hyperframe, as.im.function
+    The formal default value of 'stringsAsFactors' has been changed
+    to 'NULL' to conform to changes in R. (The actual default value
+    is TRUE for R < 4.1.0 and FALSE for R >= 4.1.0)
+
+    o plot.psp
+    The code for 'style="width"' has been completely rewritten,
+    so that it no longer depends on plot.linim, and is more efficient.
+    The formal argument list has been extended.
+
+    o integral.im
+    Accelerated in the case where 'domain' is a tessellation.
+
+    o cbind.hyperframe
+    Row names are not altered (previously they were altered
+    using 'make.names')
+
+    o [.ppx
+    New argument 'clip'
+
+BUG FIXES
+
+    o colourmap
+    If a colour map was applied to numbers lying outside the range of the
+    colour map, the wrong number of NA's was sometimes produced.
+    Fixed.
+
+    o MinkowskiSum
+    Crashed sometimes with an error message about 'sumconnected'.
+    Fixed.
+
+    o hyperframe
+    Crashed if the argument 'row.names' was given
+    and the hyperframe had exactly one row.
+    Fixed.
+    
+
+        CHANGES IN spatstat.geom VERSION 1.65-8
+
+OVERVIEW
+
+    o Reduced package dependence.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o spatstat.geom
+    No longer depends on 'spatstat.sparse'.
+    
+
+        CHANGES IN spatstat.geom VERSION 1.65-7
+
+OVERVIEW
+
+    o Tweak.
+    
+        CHANGES IN spatstat.geom VERSION 1.65-6
+
+OVERVIEW
+
+    o We thank Jean-Francois Coeurjolly for contributions.
+    
+    o Bug fix in 'inradius'
+
+BUG FIXES
+
+    o inradius
+    Coded incorrectly for rectangular windows.
+    [Spotted by Jean-Francois Coeurjolly]
+    Fixed.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-5
+
+OVERVIEW
+
+    o Minor changes to satisfy CRAN.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-4
+
+OVERVIEW
+
+    o Minor changes to satisfy CRAN.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-3
+
+OVERVIEW
+
+    o NEWS file initialised.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-2
+
+OVERVIEW
+
+    o Minor changes to satisfy CRAN.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-1
+
+OVERVIEW
+
+    o Minor changes to satisfy CRAN.
+
+
+        CHANGES IN spatstat.geom VERSION 1.65-0
+
+OVERVIEW
+
+    o Package initialised at version 1.65-0 from a subset of spatstat.
+
+    o Increased speed for large datasets.
+
+    o Bug fix in crossdist.pp3 with periodic distances.
+    
+    o Bug fixes and minor improvements.
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o spatstat.geom
+    The package 'spatstat.geom' has been created from a subset
+    of the code in the original 'spatstat' package version 1.65-0.
+    It contains definitions of geometrical objects (windows, point patterns,
+    pixel images, etc) and operations on them (geometry, superposition,
+    image arithmetic, etc).
+
+    o Execution
+    The 'spatstat.geom' package is slightly faster than the corresponding
+    code in the 'spatstat' package, because the procedure for calling
+    internal C functions has been streamlined.
+
+    o dirichletEdges
+    New argument 'clip'.
+
+    o harmonise.im
+    The result belongs to class 'solist' and 'imlist'
+    so that it can be plotted.
+
+BUG FIXES
+
+    o crossdist.pp3
+    Results with periodic=TRUE were partially incorrect.
+    Fixed.
+    
+    o affine.owin
+    For mask windows, the pixel resolution of the result
+    was too fine, leading to very large datasets.
+    Fixed.
+
+    o affine.im
+    If the transformation matrix was not diagonal, the pixel resolution
+    of the result was too fine, leading to very large datasets.
+    Fixed.
+
+    o plot.ppp
+    For a point pattern in a binary mask window,
+    if both arguments 'col' and 'cols' were given,
+    the points were coloured according to 'col', which was incorrect.
+    Fixed.
+    
+    o dirichletEdges
+    Crashed if any edges crossed the boundary of the window.
+    Fixed.
+
+    o unitname
+    Spatial datasets with incorrect internal format
+    (or using an out-of-date version of the spatstat format)
+    caused an error if the 'units' package was loaded.
+    Fixed.
+
+

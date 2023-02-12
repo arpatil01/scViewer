@@ -1,0 +1,43 @@
+Package: fitdistrplus
+Title: Help to Fit of a Parametric Distribution to Non-Censored or
+        Censored Data
+Version: 1.1-8
+Authors@R: c(person("Marie-Laure", "Delignette-Muller", role = "aut", email = "marielaure.delignettemuller@vetagro-sup.fr"),
+             person("Christophe", "Dutang", role = "aut", email = "christophe.dutang@ensimag.fr"),
+             person("Regis", "Pouillot", role = "ctb"),
+             person("Jean-Baptiste", "Denis", role = "ctb"),
+             person("Aurelie", "Siberchicot", role = c("aut", "cre"), email = "aurelie.siberchicot@univ-lyon1.fr"))
+Description: Extends the fitdistr() function (of the MASS package) with several functions 
+  to help the fit of a parametric distribution to non-censored or censored data. 
+  Censored data may contain left censored, right censored and interval censored values, 
+  with several lower and upper bounds. In addition to maximum likelihood estimation (MLE), 
+  the package provides moment matching (MME), quantile matching (QME), maximum goodness-of-fit 
+  estimation (MGE) and maximum spacing estimation (MSE) methods (available only for 
+  non-censored data). Weighted versions of MLE, MME, QME and MSE are available. See e.g. 
+  Casella & Berger (2002), Statistical inference, Pacific Grove, for a general introduction 
+  to parametric estimation.
+Depends: R (>= 3.5.0), MASS, grDevices, survival, methods
+Imports: stats
+Suggests: actuar, rgenoud, mc2d, gamlss.dist, knitr, ggplot2,
+        GeneralizedHyperbolic, rmarkdown, Hmisc
+VignetteBuilder: knitr
+BuildVignettes: true
+License: GPL (>= 2)
+Encoding: UTF-8
+URL: https://lbbe.univ-lyon1.fr/fr/fitdistrplus,
+        https://github.com/aursiber/fitdistrplus
+BugReports: https://github.com/aursiber/fitdistrplus/issues
+Contact: Marie-Laure Delignette-Muller
+        <marielaure.delignettemuller@vetagro-sup.fr> or Christophe
+        Dutang <christophe.dutang@ensimag.fr>
+NeedsCompilation: no
+Packaged: 2022-03-10 08:41:08 UTC; siberchicot
+Author: Marie-Laure Delignette-Muller [aut],
+  Christophe Dutang [aut],
+  Regis Pouillot [ctb],
+  Jean-Baptiste Denis [ctb],
+  Aurelie Siberchicot [aut, cre]
+Maintainer: Aurelie Siberchicot <aurelie.siberchicot@univ-lyon1.fr>
+Repository: CRAN
+Date/Publication: 2022-03-10 11:40:02 UTC
+Built: R 4.2.2; ; 2023-01-29 03:52:27 UTC; windows

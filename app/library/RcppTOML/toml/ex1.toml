@@ -1,0 +1,37 @@
+# This is a document
+#
+# Printing is in reverse
+
+title = "Some text for title"
+fltnum = 3.14
+boolval = true
+intnum = 42
+
+
+[secA]
+aaa = "1"
+bbb = "2"
+ccc = "3"
+
+[secB]
+## NB these don't seem to come in a integers
+aaa = 1
+bbb = 2
+ccc = 3
+
+[secC]
+aaa = 1.1
+bbb = 2.2
+ccc = 3.3
+
+[secD]
+foo = [ 1, 2, 3 ]
+bar = [ 1.1, 2.2, 3.3 ]
+biz = [ "1", "2", "3" ]
+# bla = [ 1979-05-27T07:32:00Z, 1979-05-28T07:32:00Z ]
+
+  [secD.subA]
+  bar = 1
+  biz = 7
+  
+

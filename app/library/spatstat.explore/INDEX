@@ -1,0 +1,287 @@
+CDF                     Cumulative Distribution Function From Kernel
+                        Density Estimate
+Emark                   Diagnostics for random marking
+F3est                   Empty Space Function of a Three-Dimensional
+                        Point Pattern
+Fest                    Estimate the Empty Space Function or its Hazard
+                        Rate
+Finhom                  Inhomogeneous Empty Space Function
+FmultiInhom             Inhomogeneous Marked F-Function
+G3est                   Nearest Neighbour Distance Distribution
+                        Function of a Three-Dimensional Point Pattern
+Gcross                  Multitype Nearest Neighbour Distance Function
+                        (i-to-j)
+Gdot                    Multitype Nearest Neighbour Distance Function
+                        (i-to-any)
+Gest                    Nearest Neighbour Distance Function G
+Gfox                    Foxall's Distance Functions
+Ginhom                  Inhomogeneous Nearest Neighbour Function
+Gmulti                  Marked Nearest Neighbour Distance Function
+GmultiInhom             Inhomogeneous Marked G-Function
+Hest                    Spherical Contact Distribution Function
+Iest                    Estimate the I-function
+Jcross                  Multitype J Function (i-to-j)
+Jdot                    Multitype J Function (i-to-any)
+Jest                    Estimate the J-function
+Jinhom                  Inhomogeneous J-function
+Jmulti                  Marked J Function
+K3est                   K-function of a Three-Dimensional Point Pattern
+Kcross                  Multitype K Function (Cross-type)
+Kcross.inhom            Inhomogeneous Cross K Function
+Kdot                    Multitype K Function (i-to-any)
+Kdot.inhom              Inhomogeneous Multitype K Dot Function
+Kest                    K-function
+Kest.fft                K-function using FFT
+Kinhom                  Inhomogeneous K-function
+Kmark                   Mark-Weighted K Function
+Kmeasure                Reduced Second Moment Measure
+Kmulti                  Marked K-Function
+Kmulti.inhom            Inhomogeneous Marked K-Function
+Kscaled                 Locally Scaled K-function
+Ksector                 Sector K-function
+Lcross                  Multitype L-function (cross-type)
+Lcross.inhom            Inhomogeneous Cross Type L Function
+Ldot                    Multitype L-function (i-to-any)
+Ldot.inhom              Inhomogeneous Multitype L Dot Function
+Lest                    L-function
+Linhom                  Inhomogeneous L-function
+PPversion               Transform a Function into its P-P or Q-Q
+                        Version
+Smooth                  Spatial smoothing of data
+Smooth.fv               Apply Smoothing to Function Values
+Smooth.ppp              Spatial smoothing of observations at irregular
+                        points
+Smooth.ssf              Smooth a Spatially Sampled Function
+Smoothfun.ppp           Smooth Interpolation of Marks as a Spatial
+                        Function
+Tstat                   Third order summary statistic
+Window.quadrattest      Extract Window of Spatial Object
+[.fasp                  Extract Subset of Function Array
+[.fv                    Extract or Replace Subset of Function Values
+[.ssf                   Subset of spatially sampled function
+adaptive.density        Adaptive Estimate of Intensity of Point Pattern
+allstats                Calculate four standard summary functions of a
+                        point pattern.
+alltypes                Calculate Summary Statistic for All Types in a
+                        Multitype Point Pattern
+as.data.frame.envelope
+                        Coerce Envelope to Data Frame
+as.function.fv          Convert Function Value Table to Function
+as.function.rhohat      Convert Function Table to Function
+as.fv                   Convert Data To Class fv
+as.owin.quadrattest     Convert Data To Class owin
+as.tess.quadrattest     Convert Data To Tessellation
+auc                     Area Under ROC Curve
+berman.test             Berman's Tests for Point Process Model
+bind.fv                 Combine Function Value Tables
+bits.envelope           Global Envelopes for Balanced Independent
+                        Two-Stage Test
+bits.test               Balanced Independent Two-Stage Monte Carlo Test
+blur                    Apply Gaussian Blur to a Pixel Image
+bw.CvL                  Cronie and van Lieshout's Criterion for
+                        Bandwidth Selection for Kernel Density
+bw.CvL.adaptive         Select Adaptive Bandwidth for Kernel Estimation
+                        Using Cronie-Van Lieshout Criterion
+bw.CvLHeat              Bandwidth Selection for Diffusion Smoother by
+                        Cronie-van Lieshout Rule
+bw.abram                Abramson's Adaptive Bandwidths
+bw.diggle               Cross Validated Bandwidth Selection for Kernel
+                        Density
+bw.frac                 Bandwidth Selection Based on Window Geometry
+bw.pcf                  Cross Validated Bandwidth Selection for Pair
+                        Correlation Function
+bw.ppl                  Likelihood Cross Validation Bandwidth Selection
+                        for Kernel Density
+bw.pplHeat              Bandwidth Selection for Diffusion Smoother by
+                        Likelihood Cross-Validation
+bw.relrisk              Cross Validated Bandwidth Selection for
+                        Relative Risk Estimation
+bw.scott                Scott's Rule for Bandwidth Selection for Kernel
+                        Density
+bw.smoothppp            Cross Validated Bandwidth Selection for Spatial
+                        Smoothing
+bw.stoyan               Stoyan's Rule of Thumb for Bandwidth Selection
+cdf.test                Spatial Distribution Test for Point Pattern or
+                        Point Process Model
+circdensity             Density Estimation for Circular Data
+clarkevans              Clark and Evans Aggregation Index
+clarkevans.test         Clark and Evans Test
+clusterset              Allard-Fraley Estimator of Cluster Feature
+collapse.fv             Collapse Several Function Tables into One
+compatible.fasp         Test Whether Function Arrays Are Compatible
+compatible.fv           Test Whether Function Objects Are Compatible
+compileK                Generic Calculation of K Function and Pair
+                        Correlation Function
+cov.im                  Covariance and Correlation between Images
+dclf.progress           Progress Plot of Test of Spatial Pattern
+dclf.sigtrace           Significance Trace of Cressie-Loosmore-Ford or
+                        Maximum Absolute Deviation Test
+dclf.test               Diggle-Cressie-Loosmore-Ford and Maximum
+                        Absolute Deviation Tests
+density.ppp             Kernel Smoothed Intensity of Point Pattern
+density.psp             Kernel Smoothing of Line Segment Pattern
+density.splitppp        Kernel Smoothed Intensity of Split Point
+                        Pattern
+densityAdaptiveKernel   Adaptive Kernel Estimate of Intensity of Point
+                        Pattern
+densityHeat             Diffusion Estimate of Point Pattern Intensity
+densityHeat.ppp         Diffusion Estimate of Point Pattern Intensity
+densityVoronoi          Intensity Estimate of Point Pattern Using
+                        Voronoi-Dirichlet Tessellation
+densityfun.ppp          Kernel Estimate of Intensity as a Spatial
+                        Function
+deriv.fv                Calculate Derivative of Function Values
+dg.envelope             Global Envelopes for Dao-Genton Test
+dg.progress             Progress Plot of Dao-Genton Test of Spatial
+                        Pattern
+dg.sigtrace             Significance Trace of Dao-Genton Test
+dg.test                 Dao-Genton Adjusted Goodness-Of-Fit Test
+dimhat                  Estimate Dimension of Central Subspace
+distcdf                 Distribution Function of Interpoint Distance
+dkernel                 Kernel distributions and random generation
+domain.quadrattest      Extract the Domain of any Spatial Object
+edge.Ripley             Ripley's Isotropic Edge Correction
+edge.Trans              Translation Edge Correction
+envelope                Simulation Envelopes of Summary Function
+envelope.envelope       Recompute Envelopes
+envelope.pp3            Simulation Envelopes of Summary Function for 3D
+                        Point Pattern
+envelopeArray           Array of Simulation Envelopes of Summary
+                        Function
+eval.fasp               Evaluate Expression Involving Function Arrays
+eval.fv                 Evaluate Expression Involving Functions
+fasp.object             Function Arrays for Spatial Patterns
+formula.fv              Extract or Change the Plot Formula for a
+                        Function Value Table
+fryplot                 Fry Plot of Point Pattern
+fv                      Create a Function Value Table
+fv.object               Function Value Table
+fvnames                 Abbreviations for Groups of Columns in Function
+                        Value Table
+harmonise.fv            Make Function Tables Compatible
+hopskel                 Hopkins-Skellam Test
+hotbox                  Heat Kernel for a Two-Dimensional Rectangle
+idw                     Inverse-distance weighted smoothing of
+                        observations at irregular points
+increment.fv            Increments of a Function
+kaplan.meier            Kaplan-Meier Estimator using Histogram Data
+kernel.factor           Scale factor for density kernel
+kernel.moment           Moment of Smoothing Kernel
+kernel.squint           Integral of Squared Kernel
+km.rs                   Kaplan-Meier and Reduced Sample Estimator using
+                        Histograms
+laslett                 Laslett's Transform
+localK                  Neighbourhood density function
+localKcross             Local Multitype K Function (Cross-Type)
+localKcross.inhom       Inhomogeneous Multitype K Function
+localKdot               Local Multitype K Function (Dot-Type)
+localKinhom             Inhomogeneous Neighbourhood Density Function
+localpcf                Local pair correlation function
+lohboot                 Bootstrap Confidence Bands for Summary Function
+markconnect             Mark Connection Function
+markcorr                Mark Correlation Function
+markcrosscorr           Mark Cross-Correlation Function
+markmarkscatter         Mark-Mark Scatter Plot
+marktable               Tabulate Marks in Neighbourhood of Every Point
+                        in a Point Pattern
+markvario               Mark Variogram
+methods.rho2hat         Methods for Intensity Functions of Two Spatial
+                        Covariates
+methods.rhohat          Methods for Intensity Functions of Spatial
+                        Covariate
+methods.ssf             Methods for Spatially Sampled Functions
+miplot                  Morisita Index Plot
+nnclean                 Nearest Neighbour Clutter Removal
+nncorr                  Nearest-Neighbour Correlation Indices of Marked
+                        Point Pattern
+nndensity.ppp           Estimate Intensity of Point Pattern Using
+                        Nearest Neighbour Distances
+nnorient                Nearest Neighbour Orientation Distribution
+pairMean                Mean of a Function of Interpoint Distance
+pairorient              Point Pair Orientation Distribution
+pairs.im                Scatterplot Matrix for Pixel Images
+panel.contour           Panel Plots using Colour Image or Contour Lines
+pcf                     Pair Correlation Function
+pcf.fasp                Pair Correlation Function obtained from array
+                        of K functions
+pcf.fv                  Pair Correlation Function obtained from K
+                        Function
+pcf.ppp                 Pair Correlation Function of Point Pattern
+pcf3est                 Pair Correlation Function of a
+                        Three-Dimensional Point Pattern
+pcfcross                Multitype pair correlation function
+                        (cross-type)
+pcfcross.inhom          Inhomogeneous Multitype Pair Correlation
+                        Function (Cross-Type)
+pcfdot                  Multitype pair correlation function (i-to-any)
+pcfdot.inhom            Inhomogeneous Multitype Pair Correlation
+                        Function (Type-i-To-Any-Type)
+pcfinhom                Inhomogeneous Pair Correlation Function
+pcfmulti                Marked pair correlation function
+plot.bermantest         Plot Result of Berman Test
+plot.cdftest            Plot a Spatial Distribution Test
+plot.envelope           Plot a Simulation Envelope
+plot.fasp               Plot a Function Array
+plot.fv                 Plot Function Values
+plot.laslett            Plot Laslett Transform
+plot.quadrattest        Display the result of a quadrat counting test.
+plot.scan.test          Plot Result of Scan Test
+plot.ssf                Plot a Spatially Sampled Function
+plot.studpermutest      Plot a Studentised Permutation Test
+pool                    Pool Data
+pool.anylist            Pool Data from a List of Objects
+pool.envelope           Pool Data from Several Envelopes
+pool.fasp               Pool Data from Several Function Arrays
+pool.fv                 Pool Several Functions
+pool.quadrattest        Pool Several Quadrat Tests
+pool.rat                Pool Data from Several Ratio Objects
+quadrat.test            Dispersion Test for Spatial Point Pattern Based
+                        on Quadrat Counts
+quadrat.test.splitppp   Dispersion Test of CSR for Split Point Pattern
+                        Based on Quadrat Counts
+quantile.density        Quantiles of a Density Estimate
+radcumint               Radial Cumulative Integral
+range.fv                Range of Function Values
+rat                     Ratio object
+rectcontact             Contact Distribution Function using Rectangular
+                        Structuring Element
+reduced.sample          Reduced Sample Estimator using Histogram Data
+reload.or.compute       Compute Unless Previously Saved
+relrisk                 Estimate of Spatially-Varying Relative Risk
+relrisk.ppp             Nonparametric Estimate of Spatially-Varying
+                        Relative Risk
+rho2hat                 Smoothed Relative Density of Pairs of Covariate
+                        Values
+rhohat                  Nonparametric Estimate of Intensity as Function
+                        of a Covariate
+roc                     Receiver Operating Characteristic
+rose                    Rose Diagram
+rotmean                 Rotational Average of a Pixel Image
+scan.test               Spatial Scan Test
+scanLRTS                Likelihood Ratio Test Statistic for Scan Test
+sdr                     Sufficient Dimension Reduction
+sdrPredict              Compute Predictors from Sufficient Dimension
+                        Reduction
+segregation.test        Test of Spatial Segregation of Types
+sharpen                 Data Sharpening of Point Pattern
+spatcov                 Estimate the Spatial Covariance Function of a
+                        Random Field
+spatialcdf              Spatial Cumulative Distribution Function
+spatstat.explore-package
+                        The spatstat.explore Package
+ssf                     Spatially Sampled Function
+stieltjes               Compute Integral of Function Against Cumulative
+                        Distribution
+stienen                 Stienen Diagram
+studpermu.test          Studentised Permutation Test
+subspaceDistance        Distance Between Linear Spaces
+thresholdCI             Confidence Interval for Threshold of Numerical
+                        Predictor
+thresholdSelect         Select Threshold to Convert Numerical Predictor
+                        to Binary Predictor
+transect.im             Pixel Values Along a Transect
+varblock                Estimate Variance of Summary Statistic by
+                        Subdivision
+with.fv                 Evaluate an Expression in a Function Table
+with.ssf                Evaluate Expression in a Spatially Sampled
+                        Function

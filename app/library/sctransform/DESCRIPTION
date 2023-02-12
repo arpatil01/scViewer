@@ -1,0 +1,42 @@
+Package: sctransform
+Type: Package
+Title: Variance Stabilizing Transformations for Single Cell UMI Data
+Version: 0.3.5
+Date: 2022-09-21
+Authors@R: c(
+  person(given = "Christoph", family = "Hafemeister", email = "christoph.hafemeister@nyu.edu", role = "aut", comment = c(ORCID = "0000-0001-6365-8254")),
+  person(given = "Saket", family = "Choudhary", email = "schoudhary@nygenome.org", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-5202-7633")),
+  person(given = "Rahul", family = "Satija", email = "rsatija@nygenome.org", role = "ctb", comment = c(ORCID = "0000-0001-9448-8833"))
+  )
+Description: A normalization method for single-cell UMI count data using a 
+  variance stabilizing transformation. The transformation is based on a 
+  negative binomial regression model with regularized parameters. As part of the
+  same regression framework, this package also provides functions for
+  batch correction, and data correction. See Hafemeister and Satija (2019)
+  <doi:10.1186/s13059-019-1874-1>, and Choudhary and Satija (2022) <doi:10.1186/s13059-021-02584-9>
+  for more details.
+URL: https://github.com/satijalab/sctransform
+BugReports: https://github.com/satijalab/sctransform/issues
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.5.0)
+LinkingTo: RcppArmadillo, Rcpp (>= 0.11.0)
+SystemRequirements: C++11
+Imports: dplyr, magrittr, MASS, Matrix (>= 1.5.0), methods,
+        future.apply, future, ggplot2, reshape2, rlang, gridExtra,
+        matrixStats
+Suggests: irlba, testthat, knitr
+Enhances: glmGamPoi
+RoxygenNote: 7.2.1
+NeedsCompilation: yes
+Packaged: 2022-09-21 16:33:54 UTC; choudharys
+Author: Christoph Hafemeister [aut] (<https://orcid.org/0000-0001-6365-8254>),
+  Saket Choudhary [aut, cre] (<https://orcid.org/0000-0001-5202-7633>),
+  Rahul Satija [ctb] (<https://orcid.org/0000-0001-9448-8833>)
+Maintainer: Saket Choudhary <schoudhary@nygenome.org>
+Repository: CRAN
+Date/Publication: 2022-09-21 17:10:07 UTC
+Built: R 4.2.2; x86_64-w64-mingw32; 2023-01-29 04:59:58 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

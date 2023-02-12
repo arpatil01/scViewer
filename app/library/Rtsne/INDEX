@@ -1,0 +1,3 @@
+Rtsne                   Barnes-Hut implementation of t-Distributed
+                        Stochastic Neighbor Embedding
+normalize_input         Normalize input data matrix
