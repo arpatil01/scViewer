@@ -214,7 +214,11 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
   , width = 10)
 )))
 
-server <- shinyServer(function(input,output)({
+server <- shinyServer(function(input,output,session)({
+  
+  session$onSessionEnded(function(){
+    stopApp()
+  })
   
   # Return the requested dataset
   datasetInput <- reactive(
