@@ -46,11 +46,15 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
                      textInput("gene1",label="First Gene"),
                      helpText("Enter the first gene to measure co-expression"), br(),
                      textInput("gene2",label="Second Gene"),
-                     helpText("Enter the first gene to measure co-expression"), br(),
+                     helpText("Enter the second gene to measure co-expression"), br(),
+                     numericInput("threshold_coexp",label="Threshold", 0), 
+                     helpText("Enter the threshold for determining co-expression of genes. \n For ex, Default is 0 i.e., Genes with expression > 0 is said to be expressed."), br(),
                      actionButton("submit_coxp", "Submit", class = "btn-success")),
     conditionalPanel(condition="input.tabselected==5", 
                      textInput("geneGV1",label="Enter Gene Name"), 
                      helpText("Measure the differential expression of gene of your interest"), br(), 
+                     numericInput("threshold",label="Threshold", 0), 
+                     helpText("Enter the threshold for computing DE of gene- Applied for Fisher's exact test. \n For ex, Default is 0 i.e., Genes with expression > 0 is said to be expressed."), br(),
                      actionButton("submit2", "Submit", class = "btn-success"))
     , width = 2
   ),
@@ -197,11 +201,12 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
                       downloadButton(outputId = "plot_sum4_DEA_download.output",
                                      label = "Download the csv file"), br(),br(),br()),
                htmlOutput("text4_inputD_3"), br(),
-               # h4("Plots showing expression variablity at sample level (Using Pseudo-bulk approach)", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
-               column(12, align="center", br(), br(),
-                      plotOutput('plot_sum7.output', width = "700px", height = "700px"), br(), br(),
-                      downloadButton(outputId = "plot_sum7_download.output",
-                                     label = "Download the variability plots"), br(),br(),br())),
+               ## h4("Plots showing expression variablity at sample level (Using Pseudo-bulk approach)", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
+               # column(12, align="center", br(), br(),
+               #        plotOutput('plot_sum7.output', width = "700px", height = "700px"), br(), br(),
+               #        downloadButton(outputId = "plot_sum7_download.output",
+               #                       label = "Download the variability plots"), br(),br(),br())
+               ),
       tabPanel(h4("Resources"),
                uiOutput("hlinks")),
       id = "tabselected"
@@ -209,19 +214,7 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
   , width = 10)
 )))
 
-onSessionEnded = function(callback) {
-  "Registers the given callback to be invoked when the session is closed
-(i.e. the connection to the client has been severed). The return value
-is a function which unregisters the callback. If multiple callbacks are
-registered, the order in which they are invoked is not guaranteed."
-  return(.closedCallbacks$register(callback))
-}
-
-server <- shinyServer(function(input,output,session)({
-  
-  session$onSessionEnded(function(){
-    stopApp()
-  })
+server <- shinyServer(function(input,output)({
   
   # Return the requested dataset
   datasetInput <- reactive(
@@ -337,7 +330,7 @@ server <- shinyServer(function(input,output,session)({
      }
      else
      {
-       HTML(paste("The below Table shows the Average expression and Percent expressed metrics of all the cells irrespective of condition (Case/Control) across different cell types. <br>"))
+       HTML(paste("The below Table shows the Average expression and Percent expressed metrics of all the cells irrespective of condition (Case/Control) across different cell types.  <br>"))
      }
    }                                   
   })
@@ -404,8 +397,10 @@ server <- shinyServer(function(input,output,session)({
        else
        {
          HTML(paste("<b>","The detailed distribution of gene expression among all the cells in patient samples can be found in below Table.", "</b>", "<br> <br>",
-                    "The first row shows the gene1 and the number of cells in which it is expressed, the second row shows the gene2 and the number of cells in which it is expressed, 
-                      the third row shows the number of cells in which both the genes were co-expression. Finally, none indicates the number of cells among patient samples in which both the genes were not expressed.", "<br> <br>"))       }
+                    "The first row shows the gene1, the number of cells, and the percent of cells in which it is expressed, 
+                    the second row shows the gene2, the number of cells, and the percent of cells in which it is expressed, 
+                    the third row shows the number of cells, and the percent of cells in which both the genes were co-expression. 
+                    Finally, none indicates the number of cells among patient samples in which both the genes were not expressed.", "<br> <br>"))       }
      }
    }
   )
@@ -523,9 +518,9 @@ server <- shinyServer(function(input,output,session)({
        else
        {
          HTML(paste("<b>","The detailed distribution of gene expression among all the cells in normal samples can be found in below Table.", "</b>", "<br> <br>",
-                    "The first row shows the gene1 and the number of cells in which it is expressed, 
-               the second row shows the gene2 and the number of cells in which it is expressed, 
-               the third row shows the number of cells in which both the genes were co-expression. 
+                    "The first row shows the gene1, the number of cells, and the percent of cells in which it is expressed, 
+               the second row shows the gene2, the number of cells, and the percent of cells in which it is expressed, 
+               the third row shows the number of cells, and the percent of cells in which both the genes were co-expression. 
                Finally, none indicates the number of cells among normal samples in which both the genes were not expressed.", "<br> <br>"))       }
        }
   }
@@ -607,37 +602,37 @@ server <- shinyServer(function(input,output,session)({
      }
      else
      {
-       HTML(paste("The below Table shows the Average expression and Percent expressed metrics of all the cells irrespective of condition (Case/Control) across different cell types. <br>"))
+       HTML(paste("The below Table shows the Differential Expression between Case/Control across different cell types using Fisher's exact test and Wilcoxon rank sum tests. The Fisher's exact test results are based on the threshold's entered.<br>"))
      }
    }                                   
   })
 
-  # text4_input2 <- function()
-  text4_input_3 <- eventReactive(input$submit2,
-  {
-     rds_file <- datasetInput()
-     
-     if (is.null(rds_file))
-     {
-       return(invisible())
-     }
-     else
-     { 
-       sc_file <- rds_file
-       # umap
-       gene_queryGV1 <- toupper(input$geneGV1)
-       
-       if (input$geneGV1=="")
-       {
-         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
-         text(0.5,0.5,"Please enter gene symbols", cex = 1.2)
-       }
-       else
-       {
-         HTML(paste("Plots showing expression variablity at sample level (Using Pseudo-bulk approach) <br>"))
-       }
-     }                                   
- })
+ #  ## Pseudobulk-text
+ #  text4_input_3 <- eventReactive(input$submit2,
+ #  {
+ #     rds_file <- datasetInput()
+ #     
+ #     if (is.null(rds_file))
+ #     {
+ #       return(invisible())
+ #     }
+ #     else
+ #     { 
+ #       sc_file <- rds_file
+ #       # umap
+ #       gene_queryGV1 <- toupper(input$geneGV1)
+ #       
+ #       if (input$geneGV1=="")
+ #       {
+ #         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
+ #         text(0.5,0.5,"Please enter gene symbols", cex = 1.2)
+ #       }
+ #       else
+ #       {
+ #         HTML(paste("Plots showing expression variablity at sample level (Using Pseudo-bulk approach) <br>"))
+ #       }
+ #     }                                   
+ # })
   
     
   ## Expression plots-1
@@ -829,11 +824,12 @@ server <- shinyServer(function(input,output,session)({
       
       # umap
       gene_queryGV1 <- toupper(input$geneGV1)
-      
+      thresh = input$threshold
+      # thresh=1
       if (input$geneGV1=="")
       {
         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
-        text(0.5,0.5,"Please enter cell type and gene symbols", cex = 1.2)
+        text(0.5,0.5,"Please enter gene symbols", cex = 1.2)
       }
       else
       {
@@ -841,7 +837,7 @@ server <- shinyServer(function(input,output,session)({
         sc_file_AD <- subset(sc_file, subset = grp==names(table(sc_file$grp)[ names(table(sc_file$grp))!= "normal"]))
         sc_file_normal <- subset(sc_file, subset = grp=="normal")
         
-        calc_scores <- function(seurat_obj, gene_queryGV1)
+        calc_scores <- function(seurat_obj, gene_queryGV1, thresh)
         {
           list_AD <- SplitObject(seurat_obj, split.by = "cell_type")
           
@@ -852,11 +848,11 @@ server <- shinyServer(function(input,output,session)({
           for (p in list_AD) 
           {
             
-            tmp.cellnames <- names(table(p$cell_type)[table(p$cell_type)>0])
+            tmp.cellnames <- names(table(p$cell_type)[table(p$cell_type)>thresh])
             tmp.cellnames.list[[length(tmp.cellnames.list)+1]] <- tmp.cellnames
             tmp.cellnames <- unlist(tmp.cellnames.list)
             
-            tmp.cellval <- sum(GetAssayData(object = p, slot = "data")[gene_queryGV1,]>0)
+            tmp.cellval <- sum(GetAssayData(object = p, slot = "data")[gene_queryGV1,]>thresh)
             tmp.cellval.list[[length(tmp.cellval.list)+1]] <- tmp.cellval
             tmp.cellval <- unlist(tmp.cellval.list)
             
@@ -864,7 +860,7 @@ server <- shinyServer(function(input,output,session)({
             tmp.cellcount.list[[length(tmp.cellcount.list)+1]] <- tmp.cellcount
             tmp.cellcount <- unlist(tmp.cellcount.list)
             
-            tmp.cellperc <- round(sum(GetAssayData(object = p, slot = "data")[gene_queryGV1,]>0)/nrow(p@meta.data)*100,2)
+            tmp.cellperc <- round(sum(GetAssayData(object = p, slot = "data")[gene_queryGV1,]>thresh)/nrow(p@meta.data)*100,2)
             tmp.cellperc.list[[length(tmp.cellperc.list)+1]] <- tmp.cellperc
             tmp.cellperc <- unlist(tmp.cellperc.list)
             
@@ -899,8 +895,8 @@ server <- shinyServer(function(input,output,session)({
           colnames(df)[ncol(df)] <- "Fisher's exact test (P-Value)"
           return(df)  
         }
-        Dis <- calc_scores(sc_file_AD, gene_queryGV1)
-        Normal <- calc_scores(sc_file_normal, gene_queryGV1)
+        Dis <- calc_scores(sc_file_AD, gene_queryGV1, thresh)
+        Normal <- calc_scores(sc_file_normal, gene_queryGV1, thresh)
         df <- merge(Dis, Normal, by="Cell Types")
         df <- calc_fisher_score(df)
 
@@ -921,7 +917,7 @@ server <- shinyServer(function(input,output,session)({
           tmp.wilcox[[i]] <- FindMarkers(sc_file, ident.1 = tmp.celltype.stim[[i]][1], ident.2 = tmp.celltype.stim[[i]][2], 
                                   features = gene_queryGV1, 
                                   logfc.threshold=0.0, min.pct = 0, 
-                                  min.cells.feature = 0, min.cells.group = 0, 
+                                  # min.cells.feature = 3, min.cells.group = 3, 
                                   verbose = FALSE)
         }
 
@@ -1019,6 +1015,8 @@ server <- shinyServer(function(input,output,session)({
       # umap
       gene_query1 <- toupper(input$gene1)
       gene_query2 <- toupper(input$gene2)
+      thresh_coexp = input$threshold_coexp
+      
       if (input$gene1=="" &  input$gene2=="")
       {
         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
@@ -1046,7 +1044,7 @@ server <- shinyServer(function(input,output,session)({
         df2$GENE2 <- as.numeric(as.character(df2$GENE2))
         
         df <- data.frame("GENE1"=df1$GENE1, "GENE2"=df2$GENE2)
-        df[df > 0] <- 1 
+        df[df > thresh_coexp] <- 1 ## Here- Default thresh_coexp=0
         df$Sum <- rowSums(df)
         
         gene1.all <- length(df$GENE1[df$GENE1>0])
@@ -1055,8 +1053,8 @@ server <- shinyServer(function(input,output,session)({
         genes.both<-table(df$Sum)[names(table(df$Sum))==2]
         names(genes.both) <- NULL
         
-        genes.none<-table(df$Sum)[names(table(df$Sum))==0]
-        names(genes.none) <- NULL
+        # genes.none<-table(df$Sum)[names(table(df$Sum))==0] ## Here
+        # names(genes.none) <- NULL
         
         gene1.only <- gene1.all-genes.both
         gene2.only <- gene2.all-genes.both
@@ -1071,11 +1069,27 @@ server <- shinyServer(function(input,output,session)({
 
         genes.both <- is_empty(genes.both)
         
-        Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)"), "None"); 
-        nCells <- c(gene1.all, gene2.all, genes.both, genes.none); 
+        Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)")); #, "None"
+        nCells <- c(gene1.all, gene2.all, genes.both);# genes.none
         print(nCells)
         
-        df <- data.frame(Genes, nCells) # , Percent
+        total.cells <- sum(gene1.all, gene2.all, genes.both) # genes.none
+        
+        perc.gene1.only <- round(gene1.only/total.cells*100,2)
+        perc.gene2.only <- round(gene2.only/total.cells*100,2)
+        
+        perc.gene1.all <- round(gene1.all/total.cells*100,2)
+        perc.gene2.all <- round(gene2.all/total.cells*100,2)
+        
+        perc.geneboth <- round(genes.both/total.cells*100,2)
+        # perc.genenone <- round(genes.none/total.cells*100,2)
+        
+        # sum(perc.gene1.only, perc.gene2.only, perc.geneboth, perc.genenone)
+        # sum(perc.gene1.all, perc.gene2.all, perc.geneboth, perc.genenone)
+        
+        Percent = c(perc.gene1.all, perc.gene2.all, perc.geneboth) # perc.genenone
+        
+        df <- data.frame(Genes, nCells, Percent) # , Percent
         print(df, row.names = F)
       }
     }
@@ -1097,6 +1111,8 @@ server <- shinyServer(function(input,output,session)({
       # umap
       gene_query1 <- toupper(input$gene1)
       gene_query2 <- toupper(input$gene2)
+      thresh_coexp = input$threshold_coexp
+      
       if (input$gene1=="" &  input$gene2=="")
       {
         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
@@ -1124,7 +1140,7 @@ server <- shinyServer(function(input,output,session)({
         df2$GENE2 <- as.numeric(as.character(df2$GENE2))
         
         df <- data.frame("GENE1"=df1$GENE1, "GENE2"=df2$GENE2)
-        df[df > 0] <- 1 
+        df[df > thresh_coexp] <- 1 
         df$Sum <- rowSums(df)
         
         rownames(df) <- rownames(df1)
@@ -1149,6 +1165,105 @@ server <- shinyServer(function(input,output,session)({
   }
   )
 
+  sum6_input_Normal <- eventReactive(input$submit_coxp,
+   {
+     rds_file <- datasetInput()
+     
+     if (is.null(rds_file))
+     {
+       return(invisible())
+     }
+     else
+     { 
+       sc_file <- rds_file
+       
+       # umap
+       gene_query1 <- toupper(input$gene1)
+       gene_query2 <- toupper(input$gene2)
+       thresh_coexp = input$threshold_coexp
+       
+       if (input$gene1=="" &  input$gene2=="")
+       {
+         plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
+         text(0.5,0.5,"Please enter gene symbol", cex = 1.2)
+       }
+       else
+       {
+         sc_file <- subset(sc_file, subset = grp=="normal")
+         ## gene co-expression for plotting purposes
+         p <-FeaturePlot(object = sc_file, features = c(gene_query1, gene_query2), reduction = 'umap',
+                         pt.size = 1.5, blend = T, cols = c("grey", "red", "blue"), label = T) # blend.threshold = 0.5,
+         
+         ## gene expression analysis for individual genes for detailed metrics
+         p1 <-FeaturePlot(object = sc_file, features = c(gene_query1), reduction = 'umap',
+                          pt.size = 1.5,label = T)
+         ## df1
+         df1 <- p1$data
+         colnames(df1)[4] <- c("GENE1")
+         df1$GENE1 <- as.numeric(as.character(df1$GENE1))
+         
+         p2 <-FeaturePlot(object = sc_file, features = c(gene_query2), reduction = 'umap',
+                          pt.size = 1.5,label = T)
+         ## df2
+         df2 <- p2$data
+         colnames(df2)[4] <- c("GENE2")
+         df2$GENE2 <- as.numeric(as.character(df2$GENE2))
+         
+         df <- data.frame("GENE1"=df1$GENE1, "GENE2"=df2$GENE2)
+         df[df > thresh_coexp] <- 1 
+         df$Sum <- rowSums(df)
+         
+         gene1.all <- length(df$GENE1[df$GENE1>0])
+         gene2.all <- length(df$GENE2[df$GENE2>0])
+         
+         genes.both<-table(df$Sum)[names(table(df$Sum))==2]
+         names(genes.both) <- NULL
+         
+         # genes.none<-table(df$Sum)[names(table(df$Sum))==0]
+         # names(genes.none) <- NULL
+         
+         gene1.only <- gene1.all-genes.both
+         gene2.only <- gene2.all-genes.both
+         
+         is_empty <- function(x) {
+           if (length(x) == 0 & !is.null(x)) {
+             x <- 0
+           } else {
+             x
+           }
+         }
+         
+         genes.both <- is_empty(genes.both)
+         
+         Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)")); #, "None"
+         nCells <- c(gene1.all, gene2.all, genes.both); #genes.none
+         print(nCells)
+         
+         total.cells <- sum(gene1.all, gene2.all, genes.both) #genes.none
+         
+         perc.gene1.only <- round(gene1.only/total.cells*100,2)
+         perc.gene2.only <- round(gene2.only/total.cells*100,2)
+         
+         perc.gene1.all <- round(gene1.all/total.cells*100,2)
+         perc.gene2.all <- round(gene2.all/total.cells*100,2)
+         
+         perc.geneboth <- round(genes.both/total.cells*100,2)
+         # perc.genenone <- round(genes.none/total.cells*100,2)
+         
+         # sum(perc.gene1.only, perc.gene2.only, perc.geneboth, perc.genenone)
+         # sum(perc.gene1.all, perc.gene2.all, perc.geneboth, perc.genenone)
+         
+         Percent = c(perc.gene1.all, perc.gene2.all, perc.geneboth) #perc.genenone
+         
+         df <- data.frame(Genes, nCells, Percent) # , Percent
+         print(df, row.names = F)
+         
+       }
+     }
+   }
+  )
+  
+  
   sum6_input_Normal_Vln <- eventReactive(input$submit_coxp,
   {
    rds_file <- datasetInput()
@@ -1164,6 +1279,8 @@ server <- shinyServer(function(input,output,session)({
      # umap
      gene_query1 <- toupper(input$gene1)
      gene_query2 <- toupper(input$gene2)
+     thresh_coexp = input$threshold_coexp
+     
      if (input$gene1=="" &  input$gene2=="")
      {
        plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
@@ -1192,7 +1309,7 @@ server <- shinyServer(function(input,output,session)({
        df2$GENE2 <- as.numeric(as.character(df2$GENE2))
        
        df <- data.frame("GENE1"=df1$GENE1, "GENE2"=df2$GENE2)
-       df[df > 0] <- 1 
+       df[df > thresh_coexp] <- 1 
        df$Sum <- rowSums(df)
        
        rownames(df) <- rownames(df1)
@@ -1218,146 +1335,87 @@ server <- shinyServer(function(input,output,session)({
   )
   
       
-  sum6_input_Normal <- eventReactive(input$submit_coxp,
-  {
-    rds_file <- datasetInput()
-    
-    if (is.null(rds_file))
-    {
-      return(invisible())
-    }
-    else
-    { 
-      sc_file <- rds_file
-      
-      # umap
-      gene_query1 <- toupper(input$gene1)
-      gene_query2 <- toupper(input$gene2)
-      if (input$gene1=="" &  input$gene2=="")
-      {
-        plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
-        text(0.5,0.5,"Please enter gene symbol", cex = 1.2)
-      }
-      else
-      {
-        sc_file <- subset(sc_file, subset = grp=="normal")
-        ## gene co-expression for plotting purposes
-        p <-FeaturePlot(object = sc_file, features = c(gene_query1, gene_query2), reduction = 'umap',
-                        pt.size = 1.5, blend = T, cols = c("grey", "red", "blue"), label = T) # blend.threshold = 0.5,
-        
-        ## gene expression analysis for individual genes for detailed metrics
-        p1 <-FeaturePlot(object = sc_file, features = c(gene_query1), reduction = 'umap',
-                         pt.size = 1.5,label = T)
-        ## df1
-        df1 <- p1$data
-        colnames(df1)[4] <- c("GENE1")
-        df1$GENE1 <- as.numeric(as.character(df1$GENE1))
-        
-        p2 <-FeaturePlot(object = sc_file, features = c(gene_query2), reduction = 'umap',
-                         pt.size = 1.5,label = T)
-        ## df2
-        df2 <- p2$data
-        colnames(df2)[4] <- c("GENE2")
-        df2$GENE2 <- as.numeric(as.character(df2$GENE2))
-        
-        df <- data.frame("GENE1"=df1$GENE1, "GENE2"=df2$GENE2)
-        df[df > 0] <- 1 
-        df$Sum <- rowSums(df)
-        
-        gene1.all <- length(df$GENE1[df$GENE1>0])
-        gene2.all <- length(df$GENE2[df$GENE2>0])
-        
-        genes.both<-table(df$Sum)[names(table(df$Sum))==2]
-        names(genes.both) <- NULL
-        
-        genes.none<-table(df$Sum)[names(table(df$Sum))==0]
-        names(genes.none) <- NULL
-        
-        gene1.only <- gene1.all-genes.both
-        gene2.only <- gene2.all-genes.both
-        
-        is_empty <- function(x) {
-          if (length(x) == 0 & !is.null(x)) {
-            x <- 0
-          } else {
-            x
-          }
-        }
 
-        genes.both <- is_empty(genes.both)
-        
-        Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)"), "None"); 
-        nCells <- c(gene1.all, gene2.all, genes.both, genes.none); 
-        print(nCells)
-        
-        df <- data.frame(Genes, nCells) # , Percent
-        print(df, row.names = F)
-        
-      }
-    }
-  }
-  )
   
-  sum7_input <- eventReactive(input$submit2,
-  {
-    rds_file <- datasetInput()
-    
-    if (is.null(rds_file))
-    {
-      return(invisible())
-    }
-    else
-    { 
-      sc_file <- rds_file
-      # umap
-      gene_queryGV1 <- toupper(input$geneGV1)
-      
-      if (input$geneGV1=="")
-      {
-        plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
-        text(0.5,0.5,"Please enter gene symbols", cex = 1.2)
-      }
-      
-      else
-      {
-        # ids <- substr(rownames(sc_file@meta.data), nchar(rownames(sc_file@meta.data))-1,  nchar(rownames(sc_file@meta.data)))
-        # sc_file$sample_ids <- paste0(sc_file$grp,ids)
-        
-        which_cell <- names(table(sc_file$cell_type))
-        
-        ## for 1 gene
-        p <- list()
-        for (cell.type in which_cell)
-        {
-          disease_order <- c("normal", paste0(names(table(sc_file$grp)[ names(table(sc_file$grp))!= "normal"])))
-          t1 <- paste0("^", gene_queryGV1, "$"); 
-          local_cell <- subset(sc_file, subset = cell_type == cell.type)
-          gene_var <- c(grep(t1, rownames(local_cell), value = TRUE))
-          
-          gene1<- FetchData(local_cell, vars = gene_var)
-          colnames(gene1) <- "gene"
-          df <- data.frame(local_cell$sample_ids, local_cell$grp, gene1$gene)
-          colnames(df) <- c("Samples", "Type", "Gene")
-          
-          df<-setDT(df)[ , .(Gene = mean(Gene)), by = Samples]
-          
-          df <- add_column(df, Type = str_extract(str = df$Samples, pattern = "[^_]+"), .after = "Samples")
-          res <- wilcox.test(Gene ~ Type, data = df,
-                             exact = FALSE)
-          # res$p.value
-          
-          p[[cell.type]] <- ggviolin(df, x = "Type", y = "Gene", fill = "Type",
-                                     palette = c("#00AFBB", "#FC4E07"), #"#E7B800",
-                                     add=c("boxplot", "jitter"),add.params = list(fill="white"),
-                                     order = disease_order,
-                                     shape = "Type", #size = 0.1,
-                                     ylab = gene_var, xlab = FALSE) + ggtitle(paste0(cell.type, "\n","P-value = ", format(res$p.value, digits=3))) + theme(plot.title = element_text(hjust = 0.5))
-        }
-        plot1 <- CombinePlots(p)
-      }
-    }
-  }
-  )
+  # ## Pseudobulk
+  # sum7_input <- eventReactive(input$submit2,
+  # {
+  #   rds_file <- datasetInput()
+  #   
+  #   if (is.null(rds_file))
+  #   {
+  #     return(invisible())
+  #   }
+  #   else
+  #   { 
+  #     sc_file <- rds_file
+  #     # umap
+  #     gene_queryGV1 <- toupper(input$geneGV1)
+  #     
+  #     if (input$geneGV1=="")
+  #     {
+  #       plot(NA, xlim=c(0,1), ylim=c(0,1), bty='n',xaxt='n',yaxt='n', xlab = NA, ylab = NA)
+  #       text(0.5,0.5,"Please enter gene symbols", cex = 1.2)
+  #     }
+  #     
+  #     else
+  #     {
+  #       # ids <- substr(rownames(sc_file@meta.data), nchar(rownames(sc_file@meta.data))-1,  nchar(rownames(sc_file@meta.data)))
+  #       # sc_file$sample_ids <- paste0(sc_file$grp,ids)
+  #       
+  #       which_cell <- names(table(sc_file$cell_type))
+  #       
+  #       ## for 1 gene
+  #       p <- list()
+  #       for (cell.type in which_cell)
+  #       {
+  #         disease_order <- c("normal", paste0(names(table(sc_file$grp)[ names(table(sc_file$grp))!= "normal"])))
+  #         t1 <- paste0("^", gene_queryGV1, "$"); 
+  #         local_cell <- subset(sc_file, subset = cell_type == cell.type)
+  #         gene_var <- c(grep(t1, rownames(local_cell), value = TRUE))
+  #         
+  #         gene1<- FetchData(local_cell, vars = gene_var)
+  #         colnames(gene1) <- "gene"
+  #         df <- data.frame(local_cell$sample_ids, local_cell$grp, gene1$gene)
+  #         colnames(df) <- c("Samples", "Type", "Gene")
+  #         
+  #         ## Try running wilcox before aggregating
+  #         # res <- wilcox.test(Gene ~ Type, data = df,
+  #         #                    exact = FALSE)
+  #         
+  #         ## Try sum instead of mean and check ? p-val=1
+  #         # df<-setDT(df)[ , .(Gene = sum(Gene)), by = Samples]
+  #         
+  #         
+  #         ## Adding filters ??
+  #         # df <- df[df$Gene>0,]
+  #         
+  #         ## Calc logFC
+  #         # normal= df[df$Type=="normal",]
+  #         # dis= df[df$Type=="AD",]
+  #         # normal_mean=mean(normal$Gene)
+  #         # dis_mean=mean(dis$Gene)
+  #         # log2FC <- log(dis_mean/normal_mean,2)
+  #         
+  #         df<-setDT(df)[ , .(Gene = mean(Gene)), by = Samples]
+  #         
+  #         df <- add_column(df, Type = str_extract(str = df$Samples, pattern = "[^_]+"), .after = "Samples")
+  #         res <- wilcox.test(Gene ~ Type, data = df,
+  #                            exact = FALSE)
+  #         # res$p.value
+  #         
+  #         p[[cell.type]] <- ggviolin(df, x = "Type", y = "Gene", fill = "Type",
+  #                                    palette = c("#00AFBB", "#FC4E07"), #"#E7B800",
+  #                                    add=c("boxplot", "jitter"),add.params = list(fill="white"),
+  #                                    order = disease_order,
+  #                                    shape = "Type", #size = 0.1,
+  #                                    ylab = gene_var, xlab = FALSE) + ggtitle(paste0(cell.type, "\n","P-value = ", format(res$p.value, digits=3))) + theme(plot.title = element_text(hjust = 0.5))
+  #       }
+  #       plot1 <- CombinePlots(p)
+  #     }
+  #   }
+  # }
+  # )
   
   ## URLs
   urldg1 <- a("Trigeminal Ganglion Cell Atlas", href="https://painseq.shinyapps.io/tg-painseq/")
@@ -1483,10 +1541,11 @@ server <- shinyServer(function(input,output,session)({
     print(text4_input_2())
   })
 
-  output$text4_inputD_3 <- renderUI(
-  {
-    print(text4_input_3())
-  })
+  ## Pseudobulk
+  # output$text4_inputD_3 <- renderUI(
+  # {
+  #   print(text4_input_3())
+  # })
   
   ## Render plots
   output$plot_sum.output <- renderPlot(
