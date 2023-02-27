@@ -31,5 +31,9 @@ The package dependencies can also be found here- ```scViewer -> app -> packages.
 ## Data
 The demo dataset can be found in ```scViewer -> app -> data ```
 
-### Users can store the processed single-cell RNA_seq data (Seurat .RDS object) in the data folder. The uploaded object will be available in the drop-down menu of Load data tab
+Users can store the processed single-cell RNA_seq data (Seurat .RDS object) in the data folder. The uploaded object will be available in the drop-down menu of Load data tab
 
+## Supplementary Code documentation for processing raw data
+The scRNA-seq data processing code can be found in the vignette here ```scViewer -> Supplementary_File.html```
+
+We provide the step-by-step example code documentation for processing the scRNA-seq data. We also provide the metadata format for the scRNA-seq data that is compatible with the app. 
