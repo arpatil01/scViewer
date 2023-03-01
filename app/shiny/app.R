@@ -39,20 +39,20 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
                      numericInput("obs", "Number of observations to view from Metadata:",100), helpText("Option to display metadata information")
                      ),
     conditionalPanel(condition="input.tabselected==3", textInput("genes",label="Enter Gene Name"), 
-                     helpText("Measure the expression of gene of your interest"), br(), 
+                     helpText("Measure the expression of gene of your interest. For ex- PTPRG"), br(), 
                      actionButton("submit1", "Submit", class = "btn-success")),
                      ## primary- color options for buttons
     conditionalPanel(condition="input.tabselected==4", 
                      textInput("gene1",label="First Gene"),
-                     helpText("Enter the first gene to measure co-expression"), br(),
+                     helpText("Enter the first gene to measure co-expression. For ex- PTPRG"), br(),
                      textInput("gene2",label="Second Gene"),
-                     helpText("Enter the second gene to measure co-expression"), br(),
+                     helpText("Enter the second gene to measure co-expression. For ex- P2RX7"), br(),
                      numericInput("threshold_coexp",label="Threshold", 0), 
                      helpText("Enter the threshold for determining co-expression of genes. \n For ex, Default is 0 i.e., Genes with expression > 0 is said to be expressed."), br(),
                      actionButton("submit_coxp", "Submit", class = "btn-success")),
     conditionalPanel(condition="input.tabselected==5", 
                      textInput("geneGV1",label="Enter Gene Name"), 
-                     helpText("Measure the differential expression of gene of your interest"), br(), 
+                     helpText("Measure the differential expression of gene of your interest. For ex- PTPRG"), br(), 
                      numericInput("threshold",label="Threshold", 0), 
                      helpText("Enter the threshold for computing DE of gene- Applied for Fisher's exact test. \n For ex, Default is 0 i.e., Genes with expression > 0 is said to be expressed."), br(),
                      actionButton("submit2", "Submit", class = "btn-success"))
@@ -110,7 +110,8 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
                Depending on the study design, the cell types are annotated based on marker genes using manual annotation methods such as- FindMarkers, Differential Expression between one cluster compared to other clusters, or using automatic annotation tools such as scSorter etc. 
                Please refer to the original published study of the loaded dataset to know about cell annotation method applied."),
 
-               h4("UMAP showing cell types", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
+               # h4("UMAP showing cell types", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
+               h4("UMAP", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
                print("Below is the UMAP plot showing different cell populations. Each dot is a single-cell and the different colors corresponds to cell types."), br(),
                column(12, align="center", br(), 
                       plotOutput(outputId= 'plot_sum.output', width = "700px", height = "500px"), #50%
@@ -255,7 +256,7 @@ server <- shinyServer(function(input,output,session)({
       sc_file <- rds_file
       
       # umap/tsne
-      sc_file <- RunUMAP(sc_file, dims = 1:10)
+      sc_file <- RunUMAP(sc_file, dims = 1:15)
       p <- DimPlot(sc_file, reduction = "umap", label=T, label.size=6)
     }
   })
@@ -871,6 +872,7 @@ server <- shinyServer(function(input,output,session)({
             tmp.cellval2 <- tmp.cellcount - tmp.cellval
             
             df <- data.frame(tmp.cellnames, tmp.cellval, tmp.cellval2, tmp.cellcount, tmp.cellperc)
+            # df <- data.frame(tmp.cellnames, tmp.cellval, tmp.cellcount, tmp.cellperc)
             colnames(df) <- c("Cell Types",
                               paste0("# of cells expressing ",gene_queryGV1," in ", names(table(p$grp))),
                               paste0("# of cells not expressing ",gene_queryGV1," in ", names(table(p$grp))),
@@ -903,8 +905,31 @@ server <- shinyServer(function(input,output,session)({
         Normal <- calc_scores(sc_file_normal, gene_queryGV1, thresh)
         df <- merge(Dis, Normal, by="Cell Types")
         df <- calc_fisher_score(df)
-
-        print(df, row.names = F)
+        df[,c(3,7)] <- NULL
+        # print(df, row.names = F)
+        
+        avg.exp.case <- AverageExpression(sc_file_AD, assays = "RNA", gene_queryGV1,
+                                          slot = "data", group.by = c("cell_type"))
+        avg.exp.case <- as.data.frame(t(avg.exp.case$RNA))
+        avg.exp.case <- round(avg.exp.case,2)
+        # avg.exp.case <- sort(rownames(avg.exp.case))
+        
+        avg.exp.case <- data.frame(names(table(sc_file_AD$cell_type)),
+                                   avg.exp.case[rownames(avg.exp.case),])
+        colnames(avg.exp.case) <- c("Cell Types" , paste0("Average Expression"," of ", gene_queryGV1, " in ", names(table(sc_file_AD$grp))))
+        
+        df <- merge(df, avg.exp.case, by= "Cell Types")
+        
+        avg.exp.normal <- AverageExpression(sc_file_normal, assays = "RNA", gene_queryGV1,
+                                            slot = "data", group.by = c("cell_type"))
+        avg.exp.normal <- as.data.frame(t(avg.exp.normal$RNA))
+        avg.exp.normal <- round(avg.exp.normal,2)
+        
+        avg.exp.normal <- data.frame(names(table(sc_file_normal$cell_type)),
+                                     avg.exp.normal[rownames(avg.exp.normal),])
+        colnames(avg.exp.normal) <- c("Cell Types" , paste0("Average Expression"," of ", gene_queryGV1, " in ", names(table(sc_file_normal$grp))))
+        
+        df <- merge(df, avg.exp.normal, by= "Cell Types")
         
         sc_file$celltype.stim <- paste(Idents(sc_file), sc_file$grp, sep = "_")
         Idents(sc_file) <- "celltype.stim"
@@ -934,6 +959,7 @@ server <- shinyServer(function(input,output,session)({
           avg_log2FC[i] <- tmp.wilcox[[i]][2]
           p_val_adj[i] <- tmp.wilcox[[i]][5]
         }
+        
         wilcox.df <- data.frame("Wilcoxon test (P-value)"=unlist(p_val), 
                                 "Wilcoxon test (Avg log2FC)"=unlist(avg_log2FC), 
                                 "Wilcoxon test (Adj.P-value)"=unlist(p_val_adj))
@@ -1073,7 +1099,8 @@ server <- shinyServer(function(input,output,session)({
 
         genes.both <- is_empty(genes.both)
         
-        Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)")); #, "None"
+        # Genes <- c(gene_query1, gene_query2, paste0(gene_query1, " and ", gene_query2, " (Both)")); #, "None"
+        Genes <- c(gene_query1, gene_query2, paste0("Both")); #, "None"
         nCells <- c(gene1.all, gene2.all, genes.both);# genes.none
         print(nCells)
         
@@ -1239,7 +1266,8 @@ server <- shinyServer(function(input,output,session)({
          
          genes.both <- is_empty(genes.both)
          
-         Genes <- c(gene_query1, gene_query2, paste0(gene_query1, "_", gene_query2, " (Both)")); #, "None"
+         # Genes <- c(gene_query1, gene_query2, paste0(gene_query1, " and ", gene_query2, " (Both)")); #, "None"
+         Genes <- c(gene_query1, gene_query2, paste0("Both")); #, "None"
          nCells <- c(gene1.all, gene2.all, genes.both); #genes.none
          print(nCells)
          
