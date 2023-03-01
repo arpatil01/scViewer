@@ -1,7 +1,7 @@
 # scViewer Application- A single-cell data viewer shiny application
 
-#![image1](https://user-images.githubusercontent.com/105444693/218345466-95a6b952-34b7-4534-81b7-6b1b1e8c9c86.png)
-![image](https://user-images.githubusercontent.com/105444693/222183498-ad590a58-5822-4f63-8f71-1e8ce028ad45.png)
+![image](https://user-images.githubusercontent.com/105444693/222184812-7618529e-8eda-4889-a090-9e3f2eba044b.png)
+
 
 
 ## Windows users
