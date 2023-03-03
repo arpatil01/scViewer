@@ -13,7 +13,7 @@ All the dependencies such as R packages etc are pre-compiled and loaded into the
 ## Linux or Mac users
 1. Download the scViewer GitHub zip repo and 
 2. Unzip the scViewer folder
-3. Install the following packages in your R studio/ R
+3. Option1- Install the following packages in your R studio/ R
 
 The package dependencies can also be found here- ```scViewer -> app -> packages.txt```
 
@@ -26,7 +26,7 @@ The package dependencies can also be found here- ```scViewer -> app -> packages.
   ```install.packages("ggpubr")```
   ```install.packages("tibble")```
 
-Linux/ Mac users can also redirect by loading the pre-compiled libraries from ```scViewer -> app -> library ``` folder instead of installing them.
+3. Option2- Linux/ Mac users can also redirect by loading the pre-compiled libraries from ```scViewer -> app -> library ``` folder instead of installing them.
 
 For ex, ```library(devtools)``` then load package w/o installing using the PATH of pre-installed packages using- ```load_all('/scViewer/app/library/packagename')```
  
