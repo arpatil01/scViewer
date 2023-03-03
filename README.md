@@ -28,9 +28,7 @@ The package dependencies can also be found here- ```scViewer -> app -> packages.
 
 Linux/ Mac users can also redirect by loading the pre-compiled libraries from ```scViewer -> app -> library ``` folder instead of installing them.
 
-For ex, ```library(devtools)``` then load package w/o installing using the PATH of pre-installed packages using-
-
-```load_all('/scViewer/app/library/packagename')```
+For ex, ```library(devtools)``` then load package w/o installing using the PATH of pre-installed packages using- ```load_all('/scViewer/app/library/packagename')```
  
 4. Go to ```scViewer -> app -> shiny``` folder where you can locate the data, www folder, and app.R script to run the shiny app.
 5. Run the shiny app using the ```app.R``` script
