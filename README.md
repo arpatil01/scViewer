@@ -28,10 +28,7 @@ The package dependencies can also be found here- ```scViewer -> app -> packages.
 
 Linux/ Mac users can also redirect by loading the pre-compiled libraries from ```scViewer -> app -> library ``` folder instead of installing them.
 
-For ex, 
-```library(devtools)```
-
-load package w/o installing using the PATH of pre-installed packages
+For ex, ```library(devtools)``` then load package w/o installing using the PATH of pre-installed packages using-
 
 ```load_all('/scViewer/app/library/packagename')```
  
