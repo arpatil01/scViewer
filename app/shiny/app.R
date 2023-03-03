@@ -111,7 +111,7 @@ ui <- shinyUI(fluidPage(theme = shinytheme("readable"), pageWithSidebar(
                Please refer to the original published study of the loaded dataset to know about cell annotation method applied."),
 
                # h4("UMAP showing cell types", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
-               h4("UMAP", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
+               h4("UMAP Plot", align="left",style = "font-family: 'times'; font-si14pt; line-height:1.8"),
                print("Below is the UMAP plot showing different cell populations. Each dot is a single-cell and the different colors corresponds to cell types."), br(),
                column(12, align="center", br(), 
                       plotOutput(outputId= 'plot_sum.output', width = "700px", height = "500px"), #50%
@@ -256,7 +256,7 @@ server <- shinyServer(function(input,output,session)({
       sc_file <- rds_file
       
       # umap/tsne
-      sc_file <- RunUMAP(sc_file, dims = 1:15)
+      # sc_file <- RunUMAP(sc_file, dims = 1:20)
       p <- DimPlot(sc_file, reduction = "umap", label=T, label.size=6)
     }
   })
