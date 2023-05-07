@@ -1,7 +1,0 @@
-RcppTOML-package	RcppTOML-package
-parseTOML	parseTOML
-parseToml	parseTOML
-print.toml	parseTOML
-RcppTOML	RcppTOML-package
-summary.toml	parseTOML
-tomlparse	parseTOML

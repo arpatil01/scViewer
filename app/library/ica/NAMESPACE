@@ -1,9 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-
-S3method(print, icafast)
-S3method(print, icaimax)
-S3method(print, icajade)
-
-importFrom("graphics", "par", "plot")
-
-importFrom("stats", "dexp", "dnorm", "dt", "rexp", "rnorm", "rt", "runif")
