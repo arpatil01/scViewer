@@ -1,1 +1,0 @@
-wscript dist\script\wsf\run.wsf
