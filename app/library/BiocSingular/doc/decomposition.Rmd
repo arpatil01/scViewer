@@ -1,0 +1,159 @@
+---
+title: Singular value decomposition for Bioconductor packages 
+author: 
+- name: Aaron Lun
+  affiliation: Cancer Research UK Cambridge Institute, Cambridge, United Kingdom
+date: "Revised: 9 February 2019"
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: BiocSingular 
+vignette: >
+  %\VignetteIndexEntry{1. SVD and PCA} 
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library(BiocSingular)
+set.seed(100)
+```
+
+# Overview
+
+The singular value decomposition (SVD) is an important procedure in general data analysis, primarily due to its use in the principal components analysis (PCA).
+The `r Biocpkg("BiocSingular")` package provides methods to perform both exact and approximate SVD with a single wrapper function.
+Our aim is to provide a standard framework for use in other Bioconductor packages, where users can easily switch between different SVD algorithms.
+We also support parallelization throughout various parts of the SVD calculations via the `r Biocpkg("BiocParallel")` framework.
+
+# SVD algorithm choices
+
+To perform any SVD, we call the `runSVD()` function.
+The code below performs an exact SVD to obtain the first `k` singular vectors and values (in this case, 10):
+
+```{r}
+dummy <- matrix(rnorm(10000), ncol=25)
+e.out <- runSVD(dummy, k=10, BSPARAM=ExactParam())
+str(e.out)
+```
+
+... but we can change the algorithm by specifying a different `BiocSingularParam` class to the `BSPARAM=` argument.
+For example, we could use an approximate approach with `r CRANpkg("irlba")` instead:
+
+```{r}
+set.seed(1000)
+i.out <- runSVD(dummy, k=10, BSPARAM=IrlbaParam())
+```
+
+... or we could use a randomized SVD via `r CRANpkg("rsvd")`:
+
+```{r}
+set.seed(1000)
+r.out <- runSVD(dummy, k=10, BSPARAM=RandomParam())
+```
+
+By default, the exact algorithm is used when `BSPARAM=NULL`. 
+The other algorithms are approximate but are much faster than the exact SVD for low `k`.
+They also involve randomization, so note the use of a random seed.
+
+# Taking the cross-product
+
+For tall or fat matrices, it may be faster to perform the SVD on the cross-product rather than on the matrix itself.
+The cross-product is usually much smaller than the original matrix and can be decomposed rapidly, with time savings offsettting the cost of the cross-product in the first place.
+The results of the cross-product decomposition is used to obtain the decomposition results for the original matrix.
+
+The definition of "tall" or "fat" is based on the fold difference in dimensions.
+All `BiocSingularParam` objects have a `fold` slot that specifies the minimum fold difference between dimensions for a cross-product to be computed.
+This provides an automated mechanism for deciding whether or not a cross-product should be used.
+
+```{r}
+epam <- ExactParam(fold=10)
+epam
+cr.out <- runSVD(dummy, k=10, BSPARAM=epam)
+```
+
+Setting `fold=1` will compute the cross-product for all matrices, even for square matrices where the gains are negligible.
+Setting `fold=Inf` will never compute the cross-product for any matrix.
+The default is to use `fold=5`.
+
+# Centering and/or scaling
+
+Centering and scaling of the input matrix can be performed with the `center=` and `scale=` arguments, respectively.
+These should be numeric vectors of length equal to the number of rows of the input matrix.
+The SVD will then be effectively performed on `t(t(dummy)-center)/scale)`.
+
+```{r}
+cs.out <- runSVD(dummy, k=10, scale=runif(ncol(dummy)), 
+    center=rnorm(ncol(dummy)))
+```
+
+Many of the approximate algorithms (and computation of the cross-product) involve matrix multiplications.
+By default, any centering and scaling is applied before any multiplication.
+However, it is possible to "defer" the centering and scaling such that the multiplication can make use of features of the underlying matrix representation (e.g., sparsity).
+This enables faster calculations at the expense of numerical stability.
+
+```{r}
+set.seed(2000)
+def.out <- runSVD(dummy, k=10, scale=runif(ncol(dummy)), 
+    center=rnorm(ncol(dummy)), BSPARAM=IrlbaParam(deferred=TRUE))
+```
+
+# Other SVD-related options
+
+Each individual algorithm has its own parameters that may need tuning.
+These can be set in the constructors for the relevant `BiocSingularParam` objects:
+
+```{r}
+ipam <- IrlbaParam(tol=1e-8, extra.work=10)
+ipam
+```
+
+... which will be used in the `irlba()` function when `runSVD()` is called:
+
+```{r}
+set.seed(3000)
+i.out <- runSVD(dummy, k=10, BSPARAM=ipam)
+```
+
+Internal matrix multiplications can be parallelized by setting the `BPPARAM=` argument.
+This can speed up calculations when dealing with very large input matrices, e.g., from the `r Biocpkg("HDF5Array")` package.
+
+```{r}
+set.seed(4000)
+library(BiocParallel)
+i.out <- runSVD(dummy, k=10, BSPARAM=ipam, BPPARAM=bpparam())
+```
+
+The number of left or right singular vectors to return can be directly controlled with the `nv=` and `nu=` arguments.
+This can avoid wasting time in computing these vectors when they are not required.
+
+# Running the PCA
+
+The main practical purpose of the SVD is to perform PCAs.
+This is achieved with the `runPCA()` wrapper function, which also accepts a `BSPARAM=` argument specifying the type of algorithm to use:
+
+```{r}
+pcs.out <- runPCA(dummy, rank=10, BSPARAM=ExactParam())
+str(pcs.out)
+```
+
+The output is equivalent to that of `prcomp()` - a matrix of principal component scores, the rotation vectors, and the standard deviation explained by each component.
+
+```{r}
+head(pcs.out$x)
+```
+
+Column centering is performed by default with `center=TRUE`.
+Standardization of each column can be enabled with `scale=TRUE`.
+Alternatively, numeric vectors can be passed to either argument for subtraction from and scaling of each column.
+
+# Session information
+
+```{r}
+sessionInfo()
+```

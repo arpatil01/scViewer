@@ -1,0 +1,19 @@
+Files: inst/include/pcg_*
+Copyright: 2014-2017 Melissa O'Neill and the PCG Project contributors.
+License: Apache-2.0 or MIT
+URL: https://github.com/imneme/pcg-cpp
+
+File: inst/include/xoshiro.h
+Copyright: 2016, 2018 David Blackman and Sebastiano Vigna
+           2018 Ralf Stubner (daqana GmbH)
+License: CC0
+URL: http://xoshiro.di.unimi.it/.
+
+Files: inst/include/convert_seed.h, inst/include/R_randgen.h,
+       src/generateSeedVector.cpp
+Copyright: 2019 Aaron Lun
+License: AGPL-3
+
+Files: *
+Copyright: 2018-2019 Ralf Stubner (daqana GmbH)
+License: AGPL-3

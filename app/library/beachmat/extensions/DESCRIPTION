@@ -1,0 +1,14 @@
+Package: morebeach
+Version: 1.0.0
+Date: 2019-03-10
+Title: Test whether we can extend beachmat properly
+Author: Aaron Lun <alun@wehi.edu.au>
+Maintainer: Aaron Lun <alun@wehi.edu.au>
+Imports: Rcpp, methods, DelayedArray
+Suggests: beachmat, devtools, testthat
+Description: For testing beachmat extension settings.
+License: GPL-3
+NeedsCompilation: yes
+SystemRequirements: C++11
+LinkingTo: Rcpp
+RoxygenNote: 7.0.0

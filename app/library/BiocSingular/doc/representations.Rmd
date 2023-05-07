@@ -1,0 +1,71 @@
+---
+title: Matrix representations to support decomposition 
+author: 
+- name: Aaron Lun
+  affiliation: Cancer Research UK Cambridge Institute, Cambridge, United Kingdom
+date: "Revised: 26 May 2019"
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: BiocSingular 
+vignette: >
+  %\VignetteIndexEntry{2. Matrix classes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library(BiocSingular)
+set.seed(100)
+```
+
+# Overview
+
+`r Biocpkg("BiocSingular")` implements several useful `DelayedMatrix` backends for dealing with principal components analysis (PCA).
+This vignette aims to provide an overview of these classes and how they can be used in other packages to improve efficiency prior to or after PCA.
+
+# The `DeferredMatrix` class
+
+This has now been moved to its own `r Biocpkg("ScaledMatrix")` package.
+Check it out, it's pretty cool.
+
+# The `LowRankMatrix` class
+
+Once a PCA is performed, it is occasionally desirable to obtain a low-rank approximation of the input matrix by taking the cross-product of the rotation vectors and PC scores.
+Naively doing so results in the formation of a dense matrix of the same dimensions as the input.
+This may be prohibitively memory-consuming for a large data set.
+Instead, we can construct a `LowRankMatrix` class that mimics the output of the cross-product without actually computing it.
+
+```{r}
+library(Matrix)
+a <- rsparsematrix(10000, 1000, density=0.01)
+out <- runPCA(a, rank=5, BSPARAM=IrlbaParam(deferred=TRUE)) # deferring for speed.
+recon <- LowRankMatrix(out$rotation, out$x)
+recon    
+```
+
+This is useful for convenient extraction of row- or column vectors without needing to manually perform a cross-product.
+A `LowRankMatrix` is thus directly interoperable with downstream procedures (e.g., for visualization) that expect a matrix of the same dimensionality as the input.
+
+```{r}
+summary(recon[,1])
+summary(recon[2,])
+```
+
+Again, most operations will cause the `LowRankMatrix` to collapse gracefully into `DelayedMatrix` for further processing.
+
+# The `ResidualMatrix` class
+
+This has now been moved to its own `r Biocpkg("ResidualMatrix")` package.
+Check it out, it's pretty cool.
+
+# Session information
+
+```{r}
+sessionInfo()
+```

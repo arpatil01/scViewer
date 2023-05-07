@@ -1,0 +1,69 @@
+Package: GenomicRanges
+Title: Representation and manipulation of genomic intervals
+Description: The ability to efficiently represent and manipulate genomic
+	annotations and alignments is playing a central role when it comes
+	to analyzing high-throughput sequencing data (a.k.a. NGS data).
+	The GenomicRanges package defines general purpose containers for
+	storing and manipulating genomic intervals and variables defined along
+	a genome. More specialized containers for representing and manipulating
+	short alignments against a reference genome, or a matrix-like
+	summarization of an experiment, are defined in the GenomicAlignments
+	and SummarizedExperiment packages, respectively. Both packages build
+	on top of the GenomicRanges infrastructure.
+biocViews: Genetics, Infrastructure, DataRepresentation, Sequencing,
+        Annotation, GenomeAnnotation, Coverage
+URL: https://bioconductor.org/packages/GenomicRanges
+BugReports: https://github.com/Bioconductor/GenomicRanges/issues
+Version: 1.50.2
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(
+	person("Patrick", "Aboyoun", role="aut"),
+	person("Hervé", "Pagès", role=c("aut", "cre"),
+		email="hpages.on.github@gmail.com"),
+	person("Michael", "Lawrence", role="aut"))
+Depends: R (>= 4.0.0), methods, stats4, BiocGenerics (>= 0.37.0),
+        S4Vectors (>= 0.27.12), IRanges (>= 2.31.2), GenomeInfoDb (>=
+        1.15.2)
+Imports: utils, stats, XVector (>= 0.29.2)
+LinkingTo: S4Vectors, IRanges
+Suggests: Matrix, Biobase, AnnotationDbi, annotate, Biostrings (>=
+        2.25.3), SummarizedExperiment (>= 0.1.5), Rsamtools (>=
+        1.13.53), GenomicAlignments, rtracklayer, BSgenome,
+        GenomicFeatures, Gviz, VariantAnnotation, AnnotationHub,
+        DESeq2, DEXSeq, edgeR, KEGGgraph, RNAseqData.HNRNPC.bam.chr14,
+        pasillaBamSubset, KEGGREST, hgu95av2.db, hgu95av2probe,
+        BSgenome.Scerevisiae.UCSC.sacCer2, BSgenome.Hsapiens.UCSC.hg19,
+        BSgenome.Mmusculus.UCSC.mm10,
+        TxDb.Athaliana.BioMart.plantsmart22,
+        TxDb.Dmelanogaster.UCSC.dm3.ensGene,
+        TxDb.Hsapiens.UCSC.hg19.knownGene,
+        TxDb.Mmusculus.UCSC.mm10.knownGene, RUnit, digest, knitr,
+        rmarkdown, BiocStyle
+VignetteBuilder: knitr
+Collate: normarg-utils.R utils.R phicoef.R transcript-utils.R
+        constraint.R strand-utils.R genomic-range-squeezers.R
+        GenomicRanges-class.R GenomicRanges-comparison.R
+        GRanges-class.R GPos-class.R GRangesFactor-class.R
+        DelegatingGenomicRanges-class.R GNCList-class.R
+        GenomicRangesList-class.R GRangesList-class.R
+        makeGRangesFromDataFrame.R makeGRangesListFromDataFrame.R
+        RangedData-methods.R findOverlaps-methods.R
+        intra-range-methods.R inter-range-methods.R coverage-methods.R
+        setops-methods.R subtract-methods.R nearest-methods.R
+        absoluteRanges.R tileGenome.R tile-methods.R genomicvars.R
+        zzz.R
+git_url: https://git.bioconductor.org/packages/GenomicRanges
+git_branch: RELEASE_3_16
+git_last_commit: 6125839
+git_last_commit_date: 2022-12-15
+Date/Publication: 2022-12-27
+NeedsCompilation: yes
+Packaged: 2022-12-28 00:00:56 UTC; biocbuild
+Author: Patrick Aboyoun [aut],
+  Hervé Pagès [aut, cre],
+  Michael Lawrence [aut]
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Built: R 4.2.2; x86_64-w64-mingw32; 2022-12-28 12:55:52 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

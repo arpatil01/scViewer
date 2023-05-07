@@ -1,0 +1,30 @@
+This file documents changes and updates to the ROCR package.
+
+Version 1.0-10 (Mar 31, 2020)
+- added area under the Precision/Recall curve (aucpr)
+
+Version 1.0-8 (Mar 26, 2020)
+- Changed maintainer email address
+- fixed issues for R 4.0
+
+Version 1.0-7 (Mar 26, 2015)
+- Changed maintainer email address
+
+Version 1.0-5 (May 12, 2013)
+- Used standardized license specification in DESCRIPTION file
+- Removed LICENCE file
+- Removed .First.lib in zzz.R
+- CITATION moved into inst folder and adjusted
+
+Version 1.0-4 (Dec 08, 2009)
+- fixes bug with 1.0-3 that prevented plot arguments getting passed through
+
+Version 1.0-3
+- adapted to more strict R CMD CHECK rules in R > 2.9
+
+Version 1.0-2 (Jan 27, 2007)
+- fixed minor bug in 'prediction' function concerning the optional
+  parameter 'label.ordering' (thanks to Robert Perdisci for notifying us).
+- added an optional parameter 'fpr.stop' to the performance measure 'auc',
+  allowing to calculate the partial area under the ROC curve
+  up to the false positive rate given by 'fpr.stop'.

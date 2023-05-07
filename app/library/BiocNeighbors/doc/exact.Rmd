@@ -1,0 +1,157 @@
+---
+title: Detecting exact nearest neighbors 
+author: 
+- name: Aaron Lun
+  affiliation: Cancer Research UK Cambridge Institute, Cambridge, United Kingdom
+date: "Revised: 2 December 2018"
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: BiocNeighbors 
+vignette: >
+  %\VignetteIndexEntry{1. Detecting exact nearest neighbors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+bibliography: ref.bib  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+library(BiocNeighbors)
+```
+
+# Introduction
+
+The `r Biocpkg("BiocNeighbors")` package implements a few algorithms for exact nearest neighbor searching:
+
+- The k-means for k-nearest neighbors (KMKNN) algorithm [@wang2012fast] uses k-means clustering to create an index.
+Within each cluster, the distance of each of that cluster's points to the cluster center are computed and used to sort all points.
+Given a query point, the distance to each cluster center is determined and the triangle inequality is applied to determine which points in each cluster warrant a full distance calculation.
+- The vantage point (VP) tree algorithm [@yianilos1993data] involves constructing a tree where each node is located at a data point and is associated with a subset of neighboring points.
+Each node progressively partitions points into two subsets that are either closer or further to the node than a given threshold. 
+Given a query point, the triangle inequality is applied at each node in the tree to determine if the child nodes warrant searching.
+- The exhaustive search is a simple brute-force algorithm that computes distances to between all data and query points.
+This has the worst computational complexity but can actually be faster than the other exact algorithms in situations where indexing provides little benefit, e.g., data sets with few points and/or a very large number of dimensions.
+
+Both KMKNN and VP-trees involve a component of randomness during index construction, though the k-nearest neighbors result is fully deterministic^[Except in the presence of ties, see `?"BiocNeighbors-ties"` for details.].
+
+# Identifying k-nearest neighbors
+
+The most obvious application is to perform a k-nearest neighbors search.
+We'll mock up an example here with a hypercube of points, for which we want to identify the 10 nearest neighbors for each point.
+
+```{r}
+nobs <- 10000
+ndim <- 20
+data <- matrix(runif(nobs*ndim), ncol=ndim)
+```
+    
+The `findKNN()` method expects a numeric matrix as input with data points as the rows and variables/dimensions as the columns.
+We indicate that we want to use the KMKNN algorithm by setting `BNPARAM=KmknnParam()` (which is also the default, so this is not strictly necessary here).
+We could use a VP tree instead by setting `BNPARAM=VptreeParam()`.
+
+```{r}
+fout <- findKNN(data, k=10, BNPARAM=KmknnParam())
+head(fout$index)
+head(fout$distance)
+```
+
+Each row of the `index` matrix corresponds to a point in `data` and contains the row indices in `data` that are its nearest neighbors.
+For example, the 3rd point in `data` has the following nearest neighbors:
+
+```{r}
+fout$index[3,]
+```
+
+... with the following distances to those neighbors:
+
+```{r}
+fout$distance[3,]
+```
+
+Note that the reported neighbors are sorted by distance.
+
+# Querying k-nearest neighbors
+
+Another application is to identify the k-nearest neighbors in one dataset based on query points in another dataset.
+Again, we mock up a small data set:
+
+```{r}
+nquery <- 1000
+ndim <- 20
+query <- matrix(runif(nquery*ndim), ncol=ndim)
+```
+    
+We then use the `queryKNN()` function to identify the 5 nearest neighbors in `data` for each point in `query`.
+
+```{r}
+qout <- queryKNN(data, query, k=5, BNPARAM=KmknnParam())
+head(qout$index)
+head(qout$distance)
+```
+
+Each row of the `index` matrix contains the row indices in `data` that are the nearest neighbors of a point in `query`.
+For example, the 3rd point in `query` has the following nearest neighbors in `data`:
+
+```{r}
+qout$index[3,]
+```
+
+... with the following distances to those neighbors:
+
+```{r}
+qout$distance[3,]
+```
+
+Again, the reported neighbors are sorted by distance.
+
+# Further options
+
+Users can perform the search for a subset of query points using the `subset=` argument.
+This yields the same result as but is more efficient than performing the search for all points and subsetting the output.
+
+```{r}
+findKNN(data, k=5, subset=3:5)
+```
+
+If only the indices are of interest, users can set `get.distance=FALSE` to avoid returning the matrix of distances.
+This will save some time and memory.
+
+```{r}
+names(findKNN(data, k=2, get.distance=FALSE))
+```
+
+It is also simple to speed up functions by parallelizing the calculations with the `r Biocpkg("BiocParallel")` framework.
+
+```{r}
+library(BiocParallel)
+out <- findKNN(data, k=10, BPPARAM=MulticoreParam(3))
+```
+
+For multiple queries to a constant `data`, the pre-clustering can be performed in a separate step with `buildIndex()`.
+The result can then be passed to multiple calls, avoiding the overhead of repeated clustering^[The algorithm type is automatically determined when `BNINDEX` is specified, so there is no need to also specify `BNPARAM` in the later functions.].
+
+```{r}
+pre <- buildIndex(data, BNPARAM=KmknnParam())
+out1 <- findKNN(BNINDEX=pre, k=5)
+out2 <- queryKNN(BNINDEX=pre, query=query, k=2)
+```
+
+The default setting is to search on the Euclidean distance.
+Alternatively, we can use the Manhattan distance by setting `distance="Manhattan"` in the `BiocNeighborParam` object.
+
+```{r}
+out.m <- findKNN(data, k=5, BNPARAM=KmknnParam(distance="Manhattan"))
+```
+
+Advanced users may also be interested in the `raw.index=` argument, which returns indices directly to the precomputed object rather than to `data`.
+This may be useful inside package functions where it may be more convenient to work on a common precomputed object.
+
+# Session information
+
+```{r}
+sessionInfo()
+```
+
+# References

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: S4 Generic Summary Statistic Functions that Operate on
+Matrix-Like Objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> S4 Generic Summary Statistic Functions that Operate on
+Matrix-Like Objects
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;MatrixGenerics&rsquo; version 1.10.0</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#C">C</a>
+<a href="#M">M</a>
+<a href="#R">R</a>
+</p>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="MatrixGenerics-package.html">MatrixGenerics-package</a></td>
+<td>The MatrixGenerics package</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="MatrixGenerics-package.html">class:matrix_OR_array_OR_table_OR_numeric</a></td>
+<td>The MatrixGenerics package</td></tr>
+<tr><td style="width: 25%;"><a href="rowAlls.html">colAlls</a></td>
+<td>Check if all elements in a row (column) of a matrix-like object are equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAlls.html">colAlls-method</a></td>
+<td>Check if all elements in a row (column) of a matrix-like object are equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnyNAs.html">colAnyNAs</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is missing</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnyNAs.html">colAnyNAs-method</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is missing</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnys.html">colAnys</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnys.html">colAnys-method</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAvgsPerColSet.html">colAvgsPerRowSet</a></td>
+<td>Calculates for each row (column) a summary statistic for equally sized subsets of columns (rows)</td></tr>
+<tr><td style="width: 25%;"><a href="rowAvgsPerColSet.html">colAvgsPerRowSet-method</a></td>
+<td>Calculates for each row (column) a summary statistic for equally sized subsets of columns (rows)</td></tr>
+<tr><td style="width: 25%;"><a href="rowCollapse.html">colCollapse</a></td>
+<td>Extract one cell from each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCollapse.html">colCollapse-method</a></td>
+<td>Extract one cell from each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCounts.html">colCounts</a></td>
+<td>Count how often an element in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowCounts.html">colCounts-method</a></td>
+<td>Count how often an element in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummaxs.html">colCummaxs</a></td>
+<td>Calculates the cumulative maxima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummaxs.html">colCummaxs-method</a></td>
+<td>Calculates the cumulative maxima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummins.html">colCummins</a></td>
+<td>Calculates the cumulative minima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummins.html">colCummins-method</a></td>
+<td>Calculates the cumulative minima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumprods.html">colCumprods</a></td>
+<td>Calculates the cumulative product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumprods.html">colCumprods-method</a></td>
+<td>Calculates the cumulative product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumsums.html">colCumsums</a></td>
+<td>Calculates the cumulative sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumsums.html">colCumsums-method</a></td>
+<td>Calculates the cumulative sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowDiffs.html">colDiffs</a></td>
+<td>Calculates the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowDiffs.html">colDiffs-method</a></td>
+<td>Calculates the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRDiffs.html">colIQRDiffs</a></td>
+<td>Calculates the interquartile range of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRDiffs.html">colIQRDiffs-method</a></td>
+<td>Calculates the interquartile range of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRs.html">colIQRs</a></td>
+<td>Calculates the interquartile range for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRs.html">colIQRs-method</a></td>
+<td>Calculates the interquartile range for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowLogSumExps.html">colLogSumExps</a></td>
+<td>Accurately calculates the logarithm of the sum of exponentials for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowLogSumExps.html">colLogSumExps-method</a></td>
+<td>Accurately calculates the logarithm of the sum of exponentials for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMadDiffs.html">colMadDiffs</a></td>
+<td>Calculates the mean absolute deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMadDiffs.html">colMadDiffs-method</a></td>
+<td>Calculates the mean absolute deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMads.html">colMads</a></td>
+<td>Calculates the median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMads.html">colMads-method</a></td>
+<td>Calculates the median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMaxs.html">colMaxs</a></td>
+<td>Calculates the maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMaxs.html">colMaxs-method</a></td>
+<td>Calculates the maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMeans2.html">colMeans2</a></td>
+<td>Calculates the mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMeans2.html">colMeans2-method</a></td>
+<td>Calculates the mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMedians.html">colMedians</a></td>
+<td>Calculates the median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMedians.html">colMedians-method</a></td>
+<td>Calculates the median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMins.html">colMins</a></td>
+<td>Calculates the minimum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMins.html">colMins-method</a></td>
+<td>Calculates the minimum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowOrderStats.html">colOrderStats</a></td>
+<td>Calculates an order statistic for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowOrderStats.html">colOrderStats-method</a></td>
+<td>Calculates an order statistic for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowProds.html">colProds</a></td>
+<td>Calculates the product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowProds.html">colProds-method</a></td>
+<td>Calculates the product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowQuantiles.html">colQuantiles</a></td>
+<td>Calculates quantiles for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowQuantiles.html">colQuantiles-method</a></td>
+<td>Calculates quantiles for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanges.html">colRanges</a></td>
+<td>Calculates the minimum and maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanges.html">colRanges-method</a></td>
+<td>Calculates the minimum and maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanks.html">colRanks</a></td>
+<td>Calculates the rank of the elements for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanks.html">colRanks-method</a></td>
+<td>Calculates the rank of the elements for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSdDiffs.html">colSdDiffs</a></td>
+<td>Calculates the standard deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSdDiffs.html">colSdDiffs-method</a></td>
+<td>Calculates the standard deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSds.html">colSds</a></td>
+<td>Calculates the standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSds.html">colSds-method</a></td>
+<td>Calculates the standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSums2.html">colSums2</a></td>
+<td>Calculates the sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSums2.html">colSums2-method</a></td>
+<td>Calculates the sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowTabulates.html">colTabulates</a></td>
+<td>Tabulates the values in a matrix-like object by row (column)</td></tr>
+<tr><td style="width: 25%;"><a href="rowTabulates.html">colTabulates-method</a></td>
+<td>Tabulates the values in a matrix-like object by row (column)</td></tr>
+<tr><td style="width: 25%;"><a href="rowVarDiffs.html">colVarDiffs</a></td>
+<td>Calculates the variance of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVarDiffs.html">colVarDiffs-method</a></td>
+<td>Calculates the variance of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVars.html">colVars</a></td>
+<td>Calculates the variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVars.html">colVars-method</a></td>
+<td>Calculates the variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMads.html">colWeightedMads</a></td>
+<td>Calculates the weighted median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMads.html">colWeightedMads-method</a></td>
+<td>Calculates the weighted median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMeans.html">colWeightedMeans</a></td>
+<td>Calculates the weighted mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMeans.html">colWeightedMeans-method</a></td>
+<td>Calculates the weighted mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMedians.html">colWeightedMedians</a></td>
+<td>Calculates the weighted median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMedians.html">colWeightedMedians-method</a></td>
+<td>Calculates the weighted median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedSds.html">colWeightedSds</a></td>
+<td>Calculates the weighted standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedSds.html">colWeightedSds-method</a></td>
+<td>Calculates the weighted standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedVars.html">colWeightedVars</a></td>
+<td>Calculates the weighted variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedVars.html">colWeightedVars-method</a></td>
+<td>Calculates the weighted variance for each row (column) of a matrix-like object</td></tr>
+</table>
+
+<h2><a id="M">-- M --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="MatrixGenerics-package.html">matrix_OR_array_OR_table_OR_numeric</a></td>
+<td>The MatrixGenerics package</td></tr>
+<tr><td style="width: 25%;"><a href="MatrixGenerics-package.html">matrix_OR_array_OR_table_OR_numeric-class</a></td>
+<td>The MatrixGenerics package</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="rowAlls.html">rowAlls</a></td>
+<td>Check if all elements in a row (column) of a matrix-like object are equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAlls.html">rowAlls-method</a></td>
+<td>Check if all elements in a row (column) of a matrix-like object are equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnyNAs.html">rowAnyNAs</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is missing</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnyNAs.html">rowAnyNAs-method</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is missing</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnys.html">rowAnys</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAnys.html">rowAnys-method</a></td>
+<td>Check if any elements in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowAvgsPerColSet.html">rowAvgsPerColSet</a></td>
+<td>Calculates for each row (column) a summary statistic for equally sized subsets of columns (rows)</td></tr>
+<tr><td style="width: 25%;"><a href="rowAvgsPerColSet.html">rowAvgsPerColSet-method</a></td>
+<td>Calculates for each row (column) a summary statistic for equally sized subsets of columns (rows)</td></tr>
+<tr><td style="width: 25%;"><a href="rowCollapse.html">rowCollapse</a></td>
+<td>Extract one cell from each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCollapse.html">rowCollapse-method</a></td>
+<td>Extract one cell from each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCounts.html">rowCounts</a></td>
+<td>Count how often an element in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowCounts.html">rowCounts-method</a></td>
+<td>Count how often an element in a row (column) of a matrix-like object is equal to a value</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummaxs.html">rowCummaxs</a></td>
+<td>Calculates the cumulative maxima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummaxs.html">rowCummaxs-method</a></td>
+<td>Calculates the cumulative maxima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummins.html">rowCummins</a></td>
+<td>Calculates the cumulative minima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCummins.html">rowCummins-method</a></td>
+<td>Calculates the cumulative minima for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumprods.html">rowCumprods</a></td>
+<td>Calculates the cumulative product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumprods.html">rowCumprods-method</a></td>
+<td>Calculates the cumulative product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumsums.html">rowCumsums</a></td>
+<td>Calculates the cumulative sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowCumsums.html">rowCumsums-method</a></td>
+<td>Calculates the cumulative sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowDiffs.html">rowDiffs</a></td>
+<td>Calculates the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowDiffs.html">rowDiffs-method</a></td>
+<td>Calculates the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRDiffs.html">rowIQRDiffs</a></td>
+<td>Calculates the interquartile range of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRDiffs.html">rowIQRDiffs-method</a></td>
+<td>Calculates the interquartile range of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRs.html">rowIQRs</a></td>
+<td>Calculates the interquartile range for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowIQRs.html">rowIQRs-method</a></td>
+<td>Calculates the interquartile range for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowLogSumExps.html">rowLogSumExps</a></td>
+<td>Accurately calculates the logarithm of the sum of exponentials for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowLogSumExps.html">rowLogSumExps-method</a></td>
+<td>Accurately calculates the logarithm of the sum of exponentials for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMadDiffs.html">rowMadDiffs</a></td>
+<td>Calculates the mean absolute deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMadDiffs.html">rowMadDiffs-method</a></td>
+<td>Calculates the mean absolute deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMads.html">rowMads</a></td>
+<td>Calculates the median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMads.html">rowMads-method</a></td>
+<td>Calculates the median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMaxs.html">rowMaxs</a></td>
+<td>Calculates the maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMaxs.html">rowMaxs-method</a></td>
+<td>Calculates the maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMeans2.html">rowMeans2</a></td>
+<td>Calculates the mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMeans2.html">rowMeans2-method</a></td>
+<td>Calculates the mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMedians.html">rowMedians</a></td>
+<td>Calculates the median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMedians.html">rowMedians-method</a></td>
+<td>Calculates the median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMins.html">rowMins</a></td>
+<td>Calculates the minimum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowMins.html">rowMins-method</a></td>
+<td>Calculates the minimum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowOrderStats.html">rowOrderStats</a></td>
+<td>Calculates an order statistic for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowOrderStats.html">rowOrderStats-method</a></td>
+<td>Calculates an order statistic for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowProds.html">rowProds</a></td>
+<td>Calculates the product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowProds.html">rowProds-method</a></td>
+<td>Calculates the product for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowQuantiles.html">rowQuantiles</a></td>
+<td>Calculates quantiles for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowQuantiles.html">rowQuantiles-method</a></td>
+<td>Calculates quantiles for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanges.html">rowRanges</a></td>
+<td>Calculates the minimum and maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanges.html">rowRanges-method</a></td>
+<td>Calculates the minimum and maximum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanks.html">rowRanks</a></td>
+<td>Calculates the rank of the elements for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowRanks.html">rowRanks-method</a></td>
+<td>Calculates the rank of the elements for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSdDiffs.html">rowSdDiffs</a></td>
+<td>Calculates the standard deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSdDiffs.html">rowSdDiffs-method</a></td>
+<td>Calculates the standard deviation of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSds.html">rowSds</a></td>
+<td>Calculates the standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSds.html">rowSds-method</a></td>
+<td>Calculates the standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSums2.html">rowSums2</a></td>
+<td>Calculates the sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowSums2.html">rowSums2-method</a></td>
+<td>Calculates the sum for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowTabulates.html">rowTabulates</a></td>
+<td>Tabulates the values in a matrix-like object by row (column)</td></tr>
+<tr><td style="width: 25%;"><a href="rowTabulates.html">rowTabulates-method</a></td>
+<td>Tabulates the values in a matrix-like object by row (column)</td></tr>
+<tr><td style="width: 25%;"><a href="rowVarDiffs.html">rowVarDiffs</a></td>
+<td>Calculates the variance of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVarDiffs.html">rowVarDiffs-method</a></td>
+<td>Calculates the variance of the difference between each element of a row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVars.html">rowVars</a></td>
+<td>Calculates the variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowVars.html">rowVars-method</a></td>
+<td>Calculates the variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMads.html">rowWeightedMads</a></td>
+<td>Calculates the weighted median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMads.html">rowWeightedMads-method</a></td>
+<td>Calculates the weighted median absolute deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMeans.html">rowWeightedMeans</a></td>
+<td>Calculates the weighted mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMeans.html">rowWeightedMeans-method</a></td>
+<td>Calculates the weighted mean for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMedians.html">rowWeightedMedians</a></td>
+<td>Calculates the weighted median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedMedians.html">rowWeightedMedians-method</a></td>
+<td>Calculates the weighted median for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedSds.html">rowWeightedSds</a></td>
+<td>Calculates the weighted standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedSds.html">rowWeightedSds-method</a></td>
+<td>Calculates the weighted standard deviation for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedVars.html">rowWeightedVars</a></td>
+<td>Calculates the weighted variance for each row (column) of a matrix-like object</td></tr>
+<tr><td style="width: 25%;"><a href="rowWeightedVars.html">rowWeightedVars-method</a></td>
+<td>Calculates the weighted variance for each row (column) of a matrix-like object</td></tr>
+</table>
+</div></body></html>

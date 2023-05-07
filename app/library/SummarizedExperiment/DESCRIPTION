@@ -1,0 +1,49 @@
+Package: SummarizedExperiment
+Title: SummarizedExperiment container
+Description: The SummarizedExperiment container contains one or more assays,
+	each represented by a matrix-like object of numeric or other mode.
+	The rows typically represent genomic ranges of interest and the columns
+	represent samples.
+biocViews: Genetics, Infrastructure, Sequencing, Annotation, Coverage,
+        GenomeAnnotation
+URL: https://bioconductor.org/packages/SummarizedExperiment
+BugReports: https://github.com/Bioconductor/SummarizedExperiment/issues
+Version: 1.28.0
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(
+	person("Martin", "Morgan", role="aut"),
+	person("Valerie", "Obenchain", role="aut"),
+	person("Jim", "Hester", role="aut"),
+	person("Hervé", "Pagès", role=c("aut", "cre"),
+		email="hpages.on.github@gmail.com"))
+Depends: R (>= 4.0.0), methods, MatrixGenerics (>= 1.1.3),
+        GenomicRanges (>= 1.41.5), Biobase
+Imports: utils, stats, tools, Matrix, BiocGenerics (>= 0.37.0),
+        S4Vectors (>= 0.33.7), IRanges (>= 2.23.9), GenomeInfoDb (>=
+        1.13.1), DelayedArray (>= 0.15.10)
+Suggests: HDF5Array (>= 1.7.5), annotate, AnnotationDbi, hgu95av2.db,
+        GenomicFeatures, TxDb.Hsapiens.UCSC.hg19.knownGene, jsonlite,
+        rhdf5, airway (>= 1.15.1), BiocStyle, knitr, rmarkdown, RUnit,
+        testthat, digest
+VignetteBuilder: knitr
+Collate: Assays-class.R SummarizedExperiment-class.R
+        RangedSummarizedExperiment-class.R intra-range-methods.R
+        inter-range-methods.R coverage-methods.R combine-methods.R
+        findOverlaps-methods.R nearest-methods.R
+        makeSummarizedExperimentFromExpressionSet.R
+        makeSummarizedExperimentFromDataFrame.R
+        makeSummarizedExperimentFromLoom.R readKallisto.R zzz.R
+git_url: https://git.bioconductor.org/packages/SummarizedExperiment
+git_branch: RELEASE_3_16
+git_last_commit: ba55dac
+git_last_commit_date: 2022-11-01
+Date/Publication: 2022-11-01
+NeedsCompilation: no
+Packaged: 2022-11-02 03:33:48 UTC; biocbuild
+Author: Martin Morgan [aut],
+  Valerie Obenchain [aut],
+  Jim Hester [aut],
+  Hervé Pagès [aut, cre]
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Built: R 4.2.1; ; 2022-11-02 14:26:46 UTC; windows

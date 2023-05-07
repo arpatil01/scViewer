@@ -1,0 +1,9 @@
+runif_r                 Random Uniform Number Generator using base R
+runif_sitmo             Random Uniform Number Generator with sitmo
+sitmo-package           sitmo: Parallel Pseudo Random Number Generator
+                        (PPRNG) 'sitmo' Header Files
+sitmo_draws             Example RNG Draws with sitmo
+sitmo_engine_reset      Example Seed Set and RNG Draws with sitmo
+sitmo_engine_seed       Example Seed Set and RNG Draws with sitmo
+sitmo_parallel          Test Generation using sitmo and C++11
+sitmo_two_seeds         Two RNG engines running side-by-side

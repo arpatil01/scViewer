@@ -1,0 +1,6 @@
+AnnoyIndex              Approximate Nearest Neighbors with Annoy
+RcppAnnoy-package       Rcpp bindings for the Annoy C++ library for
+                        approximate nearest neighbors.
+getAnnoyVersion         Get the Annoy library version
+getArchictectureStatus
+                        Report CPU Architecture and Compiler

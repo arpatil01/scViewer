@@ -1,0 +1,11 @@
+colBlockApply	colBlockApply
+isFileBackedMatrix	realizeFileBackedMatrix
+realizeFileBackedMatrix	realizeFileBackedMatrix
+rowBlockApply	colBlockApply
+toCsparse	toCsparse
+whichNonZero	whichNonZero
+whichNonZero,ANY-method	whichNonZero
+whichNonZero,CsparseMatrix-method	whichNonZero
+whichNonZero,DelayedMatrix-method	whichNonZero
+whichNonZero,SparseArraySeed-method	whichNonZero
+whichNonZero,TsparseMatrix-method	whichNonZero

@@ -1,0 +1,156 @@
+---
+title: Using the `ScaledMatrix` class
+author: 
+- name: Aaron Lun
+  email: infinite.monkeys.with.keyboards@gmail.com 
+date: "Revised: 12 December 2020"
+output:
+  BiocStyle::html_document:
+    toc_float: true 
+package: ResidualMatrix
+vignette: >
+  %\VignetteIndexEntry{Using the ScaledMatrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+knitr::opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+# Overview
+
+The `ScaledMatrix` provides yet another method of running `scale()` on a matrix.
+In other words, these three operations are equivalent:
+
+```{r}
+mat <- matrix(rnorm(10000), ncol=10)
+
+smat1 <- scale(mat)
+head(smat1)
+
+library(DelayedArray)
+smat2 <- scale(DelayedArray(mat))
+head(smat2)
+
+library(ScaledMatrix)
+smat3 <- ScaledMatrix(mat, center=TRUE, scale=TRUE)
+head(smat3)
+```
+
+The biggest difference lies in how they behave in downstream matrix operations.
+
+- `smat1` is an ordinary matrix, with the scaled and centered values fully realized in memory.
+Nothing too unusual here.
+- `smat2` is a `DelayedMatrix` and undergoes block processing whereby chunks are realized and operated on, one at a time.
+This sacrifices speed for greater memory efficiency by avoiding a copy of the entire matrix. 
+In particular, it preserves the structure of the original `mat`, e.g., from a sparse or file-backed representation. 
+- `smat3` is a `ScaledMatrix` that refactors certain operations so that they can be applied to the original `mat` without any scaling or centering.
+This takes advantage of the original data structure to speed up matrix multiplication and row/column sums,
+albeit at the cost of numerical precision.
+
+# Matrix multiplication
+
+Given an original matrix $\mathbf{X}$ with $n$ columns, a vector of column centers $\mathbf{c}$ and a vector of column scaling values $\mathbf{s}$, 
+our scaled matrix can be written as:
+
+$$
+\mathbf{Y} = (\mathbf{X} - \mathbf{c} \cdot \mathbf{1}_n^T) \mathbf{S}
+$$
+
+where $\mathbf{S} = \text{diag}(s_1^{-1}, ..., s_n^{-1})$.
+If we wanted to right-multiply it with another matrix $\mathbf{A}$, we would have:
+
+$$
+\mathbf{YA} = \mathbf{X}\mathbf{S}\mathbf{A} - \mathbf{c} \cdot \mathbf{1}_n^T \mathbf{S}\mathbf{A}
+$$
+
+The right-most expression is simply the outer product of $\mathbf{c}$ with the column sums of $\mathbf{SA}$.
+More important is the fact that we can use the matrix multiplication operator for $\mathbf{X}$ with $\mathbf{SA}$,
+as this allows us to use highly efficient algorithms for certain data representations, e.g., sparse matrices.
+
+```{r}
+library(Matrix)
+mat <- rsparsematrix(20000, 10000, density=0.01)
+smat <- ScaledMatrix(mat, center=TRUE, scale=TRUE)
+
+blob <- matrix(runif(ncol(mat) * 5), ncol=5)
+system.time(out <- smat %*% blob)
+
+# The slower way with block processing.
+da <- scale(DelayedArray(mat))
+system.time(out2 <- da %*% blob)
+```
+
+The same logic applies for left-multiplication and cross-products.
+This allows us to easily speed up high-level operations involving matrix multiplication by just switching to a `ScaledMatrix`,
+e.g., in approximate PCA algorithms from the `r Biocpkg("BiocSingular")` package.
+
+```{r}
+library(BiocSingular)
+set.seed(1000)
+system.time(pcs <- runSVD(smat, k=10, BSPARAM=IrlbaParam()))
+```
+
+# Other utilities
+
+Row and column sums are special cases of matrix multiplication and can be computed quickly:
+
+```{r}
+system.time(rowSums(smat))
+system.time(rowSums(da))
+```
+
+Subsetting, transposition and renaming of the dimensions are all supported without loss of the `ScaledMatrix` representation:
+
+```{r}
+smat[,1:5]
+t(smat)
+rownames(smat) <- paste0("GENE_", 1:20000)
+smat
+```
+
+Other operations will cause the `ScaledMatrix` to collapse to the general `DelayedMatrix` representation, after which point block processing will be used.
+
+```{r}
+smat + 1
+```
+
+# Caveats 
+
+For most part, the implementation of the multiplication assumes that the $\mathbf{A}$ matrix and the matrix product are small compared to $\mathbf{X}$.
+It is also possible to multiply two `ScaledMatrix`es together if the underlying matrices have efficient operators for their product.
+However, if this is not the case, the `ScaledMatrix` offers little benefit for increased overhead.
+
+It is also worth noting that this speed-up is not entirely free. 
+The expression above involves subtracting two matrix with potentially large values, which runs the risk of catastrophic cancellation.
+The example below demonstrates how `ScaledMatrix` is more susceptible to loss of precision than a normal `DelayedArray`:
+
+```{r}
+set.seed(1000)
+mat <- matrix(rnorm(1000000), ncol=100000) 
+big.mat <- mat + 1e12
+
+# The 'correct' value, unaffected by numerical precision.
+ref <- rowMeans(scale(mat))
+head(ref)
+
+# The value from scale'ing a DelayedArray.
+library(DelayedArray)
+smat2 <- scale(DelayedArray(big.mat))
+head(rowMeans(smat2))
+
+# The value from a ScaledMatrix.
+library(ScaledMatrix)
+smat3 <- ScaledMatrix(big.mat, center=TRUE, scale=TRUE)
+head(rowMeans(smat3))
+```
+
+In most practical applications, though, this does not seem to be a major concern, 
+especially as most values (e.g., log-normalized expression matrices) lie close to zero anyway.
+
+# Session information {-}
+
+```{r}
+sessionInfo()
+```

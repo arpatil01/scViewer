@@ -1,0 +1,457 @@
+CHANGES IN VERSION 1.32
+-----------------------
+
+NEW FEATURES
+
+    o (v 1.31.10) bpiterate() when ITER is not a function will use
+    bpiterateAlong() to attempt to iterate over elements ITER[[1]],
+    ITER[[2]], etc.
+    https://stat.ethz.ch/pipermail/bioc-devel/2022-July/019075.html
+
+USER VISIBLE CHANGES
+
+    o (v 1.31.3) Deprecate BatchJobsParam in favor of BatchtoolsParam
+
+    o (v 1.31.11) Replace Random Number .Rnw vignette with Rmd (html)
+    version (thanks Madelyn Carlson!)
+    https://github.com/Bioconductor/BiocParallel/pull/215
+
+    o (v 1.31.12) clarify default number of cores, and use on shared
+    clusters (thanks Dario Strbenac)
+    https://github.com/Bioconductor/BiocParallel/pull/218
+    https://github.com/Bioconductor/BiocParallel/issues/217
+
+    o (v 1.31.15) Replace Introduction to BiocParallel .Rnw vignette
+    with Rmd (html) version (thanks Phylis Atieno!)
+    https://github.com/Bioconductor/BiocParallel/pull/226
+
+BUG FIXES
+
+    o (v 1.31.1) suppress package startup messages on workers
+    https://github.com/Bioconductor/BiocParallel/issues/198
+
+    o (v 1.31.1) coerce timeout to integer (typically from numeric)
+    https://github.com/Bioconductor/BiocParallel/issues/200
+
+    o (v 1.31.2) avoid segfault when ipcmutex() functions generate C++
+    errors. This occurs very rarely, for instance when the directory
+    used by boost for file locking (under /tmp) was created by another
+    user.
+    https://github.com/Bioconductor/BiocParallel/pull/202
+
+    o (v 1.31.2) resetting bpRNGseed() after bpstart() is reproducible
+    https://github.com/Bioconductor/BiocParallel/pull/204
+
+    o (v 1.31.5) enable logs for multiple managers sharing the same
+    workers.
+    https://github.com/Bioconductor/BiocParallel/pull/207
+
+    o (v 1.31.13 / v 1.30.4) only export variables in `.GlobalEnv` or
+    `package:`
+    <https://github.com/Bioconductor/BiocParallel/issues/223>
+    <https://github.com/Bioconductor/BiocParallel/pull/224>
+
+    o (v 1.31.14) Reduce bpmapply memory usage. Thanks Sergio Oller.
+    <https://github.com/Bioconductor/BiocParallel/pull/227>
+
+    o (v 1.32.3) Restore 'exported' global variables in SerialParam()
+    <https://github.com/Bioconductor/BiocParallel/issues/234>
+
+    o (v 1.32.4) 'configure.ac' uses C++ compiler and checks for existence
+    of required header
+    <https://github.com/Bioconductor/BiocParallel/pull/236>
+
+    o (v 1.32.5) set socket idle timeout to a large value, to avoid
+    premature worker termination and to be consistent with snow /
+    parallel defaults.
+    <https://github.com/Bioconductor/BiocParallel/issues/237>
+
+    o (v 1.32.6) be sure to clean up TransientMulticoreParam state at
+    start of each job.
+    <https://github.com/Bioconductor/BiocParallel/issues/243>
+    
+
+CHANGES IN VERSION 1.30
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.29.1) Report first remote error in its entirety.
+    https://github.com/Bioconductor/BiocParallel/issues/165
+
+    o (v 1.29.4) Add bpresult() (extract result vector from return value
+    of tryCatch(bplapply(...))) and allow direct use of tryCatch(bplapply(...))
+    return value as arugment to bplapply(BPREDO= ...). Closes #157
+
+    o (v 1.29.8) The default timeout for worker computation changes
+    from 30 days to .Machine$integer.max (no timeout), allowing for
+    performance improvements when not set.
+
+    o (v 1.29.11) The timeout for establishing a socket connection is
+    set to getOption("timeout") (default 60 seconds).
+
+    o (v 1.29.15) Check for and report failed attempts to open SnowParam
+    ports.
+
+    o (v 1.29.18) add bpfallback= option to control use of `lapply()`
+    (fallback) when 0 or 1 workers are available.
+
+    o (v 1.29.19) add bpexportvariables= option to automatically
+    export global variables, or variables found in packages on the
+    search path, in user-provided `FUN=` functions.
+
+BUG FIXES
+
+    o (v 1.29.2) Fix regression in use of debug() with SerialParam.
+    https://github.com/Bioconductor/BiocParallel/issues/128
+
+    o (v 1.29.3) Fix regression in progress bar display with bplapply().
+    https://github.com/Bioconductor/BiocParallel/issues/172
+
+    o (v 1.29.5) Fix default seed generation when user has non-default
+    generator. https://github.com/Bioconductor/BiocParallel/pull/176
+
+    o (v 1.29.9) Fix validity when workers, specified as character(),
+    are more numerous than (non-zero) tasks.
+    https://github.com/Bioconductor/BiocParallel/pull/181
+
+CHANGES IN VERSION 1.28
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.27.3) Setting `progressbar = TRUE` for SnowParam() or
+    MulticoreParam() changes the default value of `tasks` from 0 to
+    `.Machine$integer.max`, so that progress on each element of `X` is
+    reported.
+
+    o (v 1.27.3) `tasks` greater than `length(X)` are set to
+    `length(X)`. Thus `.Machine$integer.max`, for instance, assures
+    that each element of `X` is a separate task.
+
+    o (v 1.27.5) Use of random numbers is robust to the distribution
+    of jobs across tasks for SerialParam(), SnowParam(), and
+    MulticoreParam(), for both bplapply() and bpiterate(), using the
+    RNGseed= argument to each *Param(). The change is NOT backward
+    compatible -- users wishing to exactly reproduce earlier results
+    should use a previous version of the package.
+
+    o (v 1.27.8) Standardize SerialParam() construct to enable setting
+    additional fields. Standardize coercion of other BiocParallelParam types
+    (e.g., SnowParam(), MulticoreParam()) to SerialParam() with
+    as(., "SerialParam").
+
+    o (v. 1.27.9) By defualt, do _not_ only run garbage collection
+    after every call to FUN(), except under MulticoreParam(). R's
+    garbage collection algorithm only fails to do well when forked
+    processes (i.e., MulticoreParam) assume that they are the only
+    consumers of process memory.
+
+    o (v 1.27.11) Developer-oriented functions bploop.*() arguments changed.
+
+    o (v 1.27.12) Ignore set.seed() and never increment the global random
+    number stream. This reverts a side-effect of behavior introduced in v.
+    1.27.5 to behavior more consistent with version 1.26.
+
+    o (v 1.27.16) Better BPREDO support for previously started BPPARAM, and
+    'transient' BPPARAM without RNGseed.
+
+BUG FIXES
+
+    o (v 1.27.10) Typo in coercion to SerialParam when only a single worker
+    specified. https://github.com/Bioconductor/BiocParallel/issues/151
+
+CHANGES IN VERSION 1.26
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.25.2) bpvalidate() gains an argument to control warning /
+    error / silent signaling, and returns a 'BPValidate' object.
+
+BUG FIXES
+
+    o (v 1.26.1) bptry(bplapply(X, ...)) returns a list of length X,
+    appropriately annotated, when SerialParam(stop.on.error =
+    TRUE). See https://github.com/Bioconductor/BiocParallel/issues/142
+
+CHANGES IN VERSION 1.24
+-----------------------
+
+BUG FIXES
+
+    o (v.1.23.1) bpvalidate() detects variables defined in parent
+    environments; warns on use of global variables.
+
+    o (v.1.23.2) bplapply() runs gc() after each evaluation of `FUN()`, so
+    that workers do not accumulate excessive memory allocations (memory
+    on a per-process basis is not excessive, but cluster-wise could be). See
+    https://github.com/Bioconductor/BiocParallel/pull/124
+
+    o (v.1.24.1) Add 'topLevelEnvironment' to list of blocked global variable
+    exports to address performance regression introduced by testthat 3.0. See
+    https://github.com/Bioconductor/BiocParallel/issues/127
+
+CHANGES IN VERSION 1.22
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.20.2) don't advance random number stream when used 'internally'.
+    This behavior alters reproducibility of existing scripts relying
+    (probably implicitly) on the advancing stream.
+    https://github.com/Bioconductor/BiocParallel/issues/110
+
+BUG FIXES
+
+    o (v 1.20.1) bplapply(), bpmapply(), bpvec() propagate names on arguments
+    more correctly, https://github.com/Bioconductor/BiocParallel/issues/108
+
+CHANGES IN VERSION 1.20
+-----------------------
+
+BUG FIXES
+
+    o (v 1.19.2) Improve efficiency of MulticoreParam() when state
+    does not persist across calls to bplapply().
+
+CHANGES IN VERSION 1.18
+-----------------------
+
+USER VISIBLE CHANGES
+
+    o (v 1.17.6) Initial use of registered BPPARAM does not advance
+    random number seed, see
+    https://stat.ethz.ch/pipermail/bioc-devel/2019-January/014526.html
+
+    o (v 1.17.7) Loading package does not advance random number seed, see
+    https://stat.ethz.ch/pipermail/bioc-devel/2019-January/014535.html
+
+    o (v. 1.17.7) removed deprecated functions bplasterror(),
+    bpresume(), bpcatchError() and field catch.error.
+
+    o (v. 1.17.7) Make logdir, resultdir fields of BiocParallelParam.
+
+    o (v. 1.17.7) replaced internal use of BatchJobs:::checkDir()
+    (testing existence and read / write ability of log and other
+    directories) with BiocParallelParam validity check.
+
+    o (v. 1.17.7) expose 'developer' interface, `?DeveloperInterface`
+
+    o (v. 1.17.11) on Windows, coerce `MulticoreParam(n)` to
+    `MulticoreParam(1)` == SerialParam()`
+
+BUG FIXES
+
+    o (v 1.17.4) port 1.16.3 (no '>' on SnowParam() worker end) and 1.16.4
+    (bpRNGseed<-() accepts NULL)
+
+    o (v 1.17.5) port 1.16.4 (bpRNGseed() can reset seed to NULL),
+    1.16.5 (number of available cores defaults to 1 if cannot be
+    determined).
+
+CHANGES IN VERSION 1.16
+-----------------------
+
+NEW FEATURES
+
+    o (v 1.15.9) BatchtoolsParam() gains resources=list() for template file
+    substitution.
+
+    o (v 1.15.12) bpexportglobals() for all BPPARAM exports global
+    options (i.e., base::options()) to workers. Default TRUE.
+
+BUG FIXES
+
+    o (v 1.15.6) bpiterate,serial-method does not return a list() when
+    REDUCE present (https://github.com/Bioconductor/BiocParallel/issues/77)
+
+    o (v 1.15.7) bpaggregate,formula-method failed to find BPREDO
+    (https://support.bioconductor.org/p/110784)
+
+    o (v 1.15.13) bplappy,BatchtoolsParam() coerces List to list
+    (https://github.com/Bioconductor/BiocParallel/issues/82)
+
+    o (v 1.15.14) implicit loading of BiocParallel when loading a third-
+    party package failed because reference class `initialize()` methods are
+    not installed correctly. This bug fix results in signficant revision
+    in the implementation, so that valid objects must be constructed through
+    the public constructors, e.g., `BatchtoolsParam()`
+
+    o (v 1.16.3) do not print '>' for each terminating SnowParam() worker
+
+    o (v 1.16.4) allow bpRNGseed() to reset seed to NULL
+
+    o (v 1.16.5) number of available cores defaults to 1 on machines
+    where number of cores available cannot be determined. See
+    https://github.com/Bioconductor/BiocParallel/issues/91.
+
+CHANGES IN VERSION 1.14
+-----------------------
+
+BUG FIXES
+
+    o (v 1.13.1) bpiterate,serial-method does not unlist the result of
+    FUN before passing to REDUCE.
+
+CHANGES IN VERSION 1.12
+-----------------------
+
+BUG FIXES
+
+    o (v. 1.11.1) Change registered backend initialization  to first
+      invocation, rather than on load.
+
+    o (v 1.11.8) Ensure registry is initiailized before (public) use.
+      Issue #65
+
+NEW FEATURES
+
+    o (v. 1.11.2) bpiterate() gains a progress counter.
+
+    o (v. 1.11.5) ipclock(), etc: inter-process locks and counters
+
+CHANGES IN VERSION 1.10
+----------------------
+
+BUG FIXES
+
+    o (v. 1.9.6) use of logdir= no longer tries to double-close log
+      file.
+
+CHANGES IN VERSION 1.8
+----------------------
+
+BUG FIXES
+
+    o (v. 1.7.4) Allow more than 125 MPI nodes,
+      https://github.com/Bioconductor/BiocParallel/issues/55
+
+NEW FEATURES
+
+    o Throttle number of cores used on Bioconductor build systems
+      (with environment variable BBS_HOME set) to 4
+
+CHANGES IN VERSION 1.6
+----------------------
+
+NEW FEATURES
+
+    o stop.on.error returns catchable 'remote_error'
+
+    o bplapply() signals a 'bplist_error' when any element is an error.
+
+    o 'bplist_error' includes an attribute 'result' containing
+       computed results; when stop.on.error = FALSE, the result vector
+       is parallel to (has the same geometry as) the input vector.
+
+    o bpvec() signals a 'bpvec_error' when length(FUN(X)) != length(X)
+
+USER-VISIBLE CHANGES
+
+    o Rename bpslaveLoop to (S3 generic) bploop
+
+    o bpiterate() returns values consistent with REDUCE, rather than
+      wrapping in list()
+
+    o BatchJobsParam() passes more arguments to BatchJobs'
+      makeRegistry(), setConfig(), submitJobs()
+
+BUG FIXES
+
+    o workers=1, tasks=0 assigns all elements of X in one chunk
+
+    o SerialParam() respects stop.on.error
+
+    o bpmapply,ANY,* methods did not honor all arguments, particularly
+      MoreArgs.
+
+CHANGES IN VERSION 1.2.0
+------------------------
+
+NEW FEATURES
+
+    o Add support for iterative REDUCE in .bpiterate_serial()
+
+    o Refactor BiocParallelParam class:
+      - add 'log', 'tasks', 'threshold', 'logdir', 'resultdir' fields
+      - 'tasks' is used by SnowParam and MulticoreParam only
+
+    o MulticoreParam now uses SnowParam(..., type=FORK)
+
+    o Add bpvalidate()
+
+MODIFICATIONS
+
+    o Add check to bipiterate() for Windows
+
+    o Invoke REDUCE without '...' in .bpiterate_serial()
+
+    o Update README and bpvec() man page
+
+    o Change default BPPARAM to SnowParam() for Windows
+
+    o Update bpiterate() man pages for Windows
+
+    o Add note to vignette re: module load in template file
+      from Thomas Girke
+
+    o SnowParam:
+      - bpmapply() now dispatches to bplapply()
+      - remove BPRESUME
+      - logging, gc ouput on worker
+      - write results or logs to file
+      - new error handling with futile.logger
+
+    o Lighten the NAMESPACE by importing only parallel, snow
+
+    o Modify which params are registered at load time:
+      - Windows: SnowParam(), SerialParam()
+      - Non-Windows: MulticoreParam(), SnowParam(), SerialParam()
+
+    o bpvalidate() looks for symbols in 'fun' environment, NAMESPACE
+      of loaded libraries, and the search path
+
+BUG FIXES
+
+    o Bug fix in bpiterate_multicore(); update doc examples
+
+    o Bug fix in bpiterate() in ordering results from Martin
+
+    o Bug fix in .bpiterate_serial() when REDUCE is given
+
+
+CHANGES IN VERSION 1.0.0
+------------------------
+
+NEW FEATURES
+
+    o Add vignette sections for cluster managers, AMI
+
+    o Add bpiterate generic and methods
+
+    o Add REDUCE to bpiterate()
+
+    o Add 'reduce.in.order' to bpiterate()
+
+
+MODIFICATIONS
+
+    o Update vignette examples, reorganize sections
+
+    o Allow 'workers' in BiocParallelParam to be character or integer
+
+    o Enhance register() man page; add examples
+
+    o Improve default registration for SnowParam:
+      - max 8 cores
+      - use detectcores() / mc.cores if available
+
+    o Modify .convertToSimpleError() to convert NULL to NA_character_
+
+
+BUG FIXES
+
+    o Fix recursion problem for BPPARAM as list
+
+    o Modify bpaggregate() to run in parallel

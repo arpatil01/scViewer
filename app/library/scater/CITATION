@@ -1,0 +1,17 @@
+bibentry(
+    bibtype = "Article",
+    author = c(
+        person(c("Davis", "J."), "McCarthy"),
+        person(c("Kieran", "R."), "Campbell"),
+        person(c("Aaron", "T.", "L."), "Lun"),
+        person(c("Quin", "F."), "Willis")
+    ),
+    title = "Scater: pre-processing, quality control, normalisation and visualisation of single-cell {R}{N}{A}-seq data in {R}",
+    journal = "Bioinformatics",
+    year = "2017",
+    volume = "33",
+    issue = "8",
+    pages = "1179-1186",
+    doi =  "10.1093/bioinformatics/btw777"
+)
+

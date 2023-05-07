@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Representation and manipulation of genomic intervals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Representation and manipulation of genomic intervals
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;GenomicRanges&rsquo; version 1.50.2</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#I">I</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#O">O</a>
+<a href="#P">P</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#W">W</a>
+<a href="#misc">misc</a>
+</p>
+
+
+<h2><a id="A">-- A --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="absoluteRanges.html">absoluteRanges</a></td>
+<td>Transform genomic ranges into "absolute" ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">as.character-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">as.data.frame-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">as.data.frame-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">as.data.frame.GPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">as.factor-method</a></td>
+<td>GRanges objects</td></tr>
+</table>
+
+<h2><a id="B">-- B --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="genomicvars.html">bindAsGRanges</a></td>
+<td>Manipulating genomic variables</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">bindROWS-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="genomicvars.html">binnedAverage</a></td>
+<td>Manipulating genomic variables</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="constraint.html">checkConstraint</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">class:CompressedGenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">class:CompressedGRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">class:Constraint</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">class:Constraint_OR_NULL</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">class:DelegatingGenomicRanges</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">class:GenomicPos</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">class:GenomicRanges</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">class:GenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">class:GenomicRanges_OR_GenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">class:GenomicRanges_OR_GRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">class:GNCList</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">class:GPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">class:GRanges</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">class:GRangesFactor</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">class:GRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">class:IRanges_OR_IPos</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">class:SimpleGenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">class:SimpleGRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">class:StitchedGPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">class:UnstitchedGPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">coerce-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">coerce-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">coerce-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">coerce-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">coerce-method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="genomicvars.html">coerce-method</a></td>
+<td>Manipulating genomic variables</td></tr>
+<tr><td style="width: 25%;"><a href="makeGRangesFromDataFrame.html">coerce-method</a></td>
+<td>Make a GRanges object from a data.frame or DataFrame</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">CompressedGenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">CompressedGenomicRangesList-class</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">CompressedGRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">CompressedGRangesList-class</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">Constraint</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">constraint</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">Constraint-class</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">constraint&lt;-</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">Constraints</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">Constraint_OR_NULL</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="constraint.html">Constraint_OR_NULL-class</a></td>
+<td>Enforcing constraints thru Constraint objects</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">countOverlaps</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">countOverlaps-method</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="coverage-methods.html">coverage</a></td>
+<td>Coverage of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="coverage-methods.html">coverage-method</a></td>
+<td>Coverage of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="coverage-methods.html">coverage-methods</a></td>
+<td>Coverage of a GRanges or GRangesList object</td></tr>
+</table>
+
+<h2><a id="D">-- D --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">DelegatingGenomicRanges-class</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">disjoin</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">disjoin-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">disjointBins</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">disjointBins-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">distance</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">distance-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">distanceToNearest</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">distanceToNearest-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">duplicated-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">duplicated.GenomicRanges</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+</table>
+
+<h2><a id="E">-- E --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">elementMetadata-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">elementMetadata&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">end-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">end-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">end&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">end&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">extractROWS-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+</table>
+
+<h2><a id="F">-- F --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">FactorToClass-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">findOverlaps</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">findOverlaps-method</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">findOverlaps-methods</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">flank</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">flank-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">follow</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">follow-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">from_GPos_to_GRanges</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+</table>
+
+<h2><a id="G">-- G --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">gaps</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">gaps-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="genomic-range-squeezers.html">genomic-range-squeezers</a></td>
+<td>Squeeze the genomic ranges out of a range-based object</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GenomicPos</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GenomicPos-class</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GenomicRanges</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GenomicRanges-class</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">GenomicRanges-comparison</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">GenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">GenomicRangesList-class</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">GenomicRanges_OR_GenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">GenomicRanges_OR_GenomicRangesList-class</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">GenomicRanges_OR_GRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">GenomicRanges_OR_GRangesList-class</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GenomicRanges_OR_missing-class</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="genomicvars.html">genomicvariables</a></td>
+<td>Manipulating genomic variables</td></tr>
+<tr><td style="width: 25%;"><a href="genomicvars.html">genomicvars</a></td>
+<td>Manipulating genomic variables</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">getListElement-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">getListElement-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">GNCList</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">GNCList-class</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">GPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">GPos-class</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GRanges</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="genomic-range-squeezers.html">granges</a></td>
+<td>Squeeze the genomic ranges out of a range-based object</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">GRanges-class</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">granges-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">granges-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">granges-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">GRangesFactor</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">GRangesFactor-class</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">GRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">GRangesList-class</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="genomic-range-squeezers.html">grglist</a></td>
+<td>Squeeze the genomic ranges out of a range-based object</td></tr>
+<tr><td style="width: 25%;"><a href="genomic-range-squeezers.html">grglist-method</a></td>
+<td>Squeeze the genomic ranges out of a range-based object</td></tr>
+</table>
+
+<h2><a id="I">-- I --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">inter-range-methods</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">intersect</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">intersect-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">intra-range-methods</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="strand-utils.html">invertStrand-method</a></td>
+<td>Strand utilities</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">IRanges_OR_IPos</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">IRanges_OR_IPos-class</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">is.unsorted-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">isDisjoint</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">isDisjoint-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="absoluteRanges.html">isSmallGenome</a></td>
+<td>Transform genomic ranges into "absolute" ranges</td></tr>
+</table>
+
+<h2><a id="L">-- L --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GNCList-class.html">length-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">length-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">length-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+</table>
+
+<h2><a id="M">-- M --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="makeGRangesFromDataFrame.html">makeGRangesFromDataFrame</a></td>
+<td>Make a GRanges object from a data.frame or DataFrame</td></tr>
+<tr><td style="width: 25%;"><a href="makeGRangesListFromDataFrame.html">makeGRangesListFromDataFrame</a></td>
+<td>Make a GRangesList object from a data.frame or DataFrame</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">makeGRangesListFromFeatureFragments</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">match-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="genomicvars.html">mcolAsRleList</a></td>
+<td>Manipulating genomic variables</td></tr>
+</table>
+
+<h2><a id="N">-- N --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GNCList-class.html">names-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">names-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">names-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">names&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">names&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">narrow-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">nearest</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">nearest-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">nearest-methods</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">nearestKNeighbors</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">nearestKNeighbors-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+</table>
+
+<h2><a id="O">-- O --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">order-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">overlapsAny</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+</table>
+
+<h2><a id="P">-- P --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GRanges-class.html">parallel_slot_names-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">pcompare</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">pcompare-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">pgap</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">pgap-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="phicoef.html">phicoef</a></td>
+<td>Calculate the "phi coefficient" between two binary variables</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">pintersect</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">pintersect-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">pos-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">pos-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">precede</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="nearest-methods.html">precede-method</a></td>
+<td>Finding the nearest genomic range/position neighbor</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">promoters</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">promoters-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">psetdiff</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">psetdiff-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">punion</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">punion-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">range</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">range-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">ranges-method</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">ranges-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">ranges-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">ranges-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">ranges-method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">ranges&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">ranges&lt;--method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">rank-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">reduce</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="inter-range-methods.html">reduce-method</a></td>
+<td>Inter range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="absoluteRanges.html">relativeRanges</a></td>
+<td>Transform genomic ranges into "absolute" ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">relistToClass-method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">resize</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">resize-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">restrict</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">restrict-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+</table>
+
+<h2><a id="S">-- S --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GRanges-class.html">score-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">score-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">score&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">score&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">selfmatch-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">seqinfo-method</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">seqinfo-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">seqinfo-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">seqinfo-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">seqinfo-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">seqinfo&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">seqinfo&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">seqnames-method</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">seqnames-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">seqnames-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">seqnames-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">seqnames-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">seqnames&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">seqnames&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">setdiff</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">setdiff-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">setops-methods</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">shift-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">show-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">show-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">show-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">show-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">SimpleGenomicRangesList</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">SimpleGenomicRangesList-class</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">SimpleGRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">SimpleGRangesList-class</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="tile-methods.html">slidingWindows</a></td>
+<td>Generate windows for a GenomicRanges</td></tr>
+<tr><td style="width: 25%;"><a href="tile-methods.html">slidingWindows-method</a></td>
+<td>Generate windows for a GenomicRanges</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">sort-method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">sort-method</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRanges-comparison.html">sort.GenomicRanges</a></td>
+<td>Comparing and ordering genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">sort.GRangesList</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">start-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">start-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">start-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">start&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">start&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">StitchedGPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">StitchedGPos-class</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">strand-method</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GNCList-class.html">strand-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">strand-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">strand-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">strand-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="strand-utils.html">strand-method</a></td>
+<td>Strand utilities</td></tr>
+<tr><td style="width: 25%;"><a href="strand-utils.html">strand-utils</a></td>
+<td>Strand utilities</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">strand&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">strand&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="strand-utils.html">strand&lt;--method</a></td>
+<td>Strand utilities</td></tr>
+<tr><td style="width: 25%;"><a href="findOverlaps-methods.html">subsetByOverlaps</a></td>
+<td>Finding overlapping genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="subtract-methods.html">subtract</a></td>
+<td>Subtract a set of genomic ranges from a GRanges object</td></tr>
+<tr><td style="width: 25%;"><a href="subtract-methods.html">subtract-method</a></td>
+<td>Subtract a set of genomic ranges from a GRanges object</td></tr>
+<tr><td style="width: 25%;"><a href="subtract-methods.html">subtract-methods</a></td>
+<td>Subtract a set of genomic ranges from a GRanges object</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">summary-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">summary-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">summary.GenomicRanges</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">summary.GPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+</table>
+
+<h2><a id="T">-- T --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="tile-methods.html">tile</a></td>
+<td>Generate windows for a GenomicRanges</td></tr>
+<tr><td style="width: 25%;"><a href="tile-methods.html">tile-method</a></td>
+<td>Generate windows for a GenomicRanges</td></tr>
+<tr><td style="width: 25%;"><a href="tile-methods.html">tile-methods</a></td>
+<td>Generate windows for a GenomicRanges</td></tr>
+<tr><td style="width: 25%;"><a href="tileGenome.html">tileGenome</a></td>
+<td>Put (virtual) tiles on a given genome</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">trim</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">trim-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+</table>
+
+<h2><a id="U">-- U --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="setops-methods.html">union</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="setops-methods.html">union-method</a></td>
+<td>Set operations on genomic ranges</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">unlist-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">UnstitchedGPos</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">UnstitchedGPos-class</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="DelegatingGenomicRanges-class.html">update-method</a></td>
+<td>DelegatingGenomicRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">update-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GPos-class.html">updateObject-method</a></td>
+<td>Memory-efficient representation of genomic positions</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">updateObject-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">updateObject-method</a></td>
+<td>GenomicRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="intra-range-methods.html">update_ranges-method</a></td>
+<td>Intra range transformations of a GRanges or GRangesList object</td></tr>
+</table>
+
+<h2><a id="W">-- W --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GNCList-class.html">width-method</a></td>
+<td>GNCList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">width-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesFactor-class.html">width-method</a></td>
+<td>GRangesFactor objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">width&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GenomicRangesList-class.html">width&lt;--method</a></td>
+<td>GenomicRangesList objects</td></tr>
+</table>
+
+<h2><a id="misc">-- misc --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="GRanges-class.html">$-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">$&lt;--method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRanges-class.html">[-method</a></td>
+<td>GRanges objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">[-method</a></td>
+<td>GRangesList objects</td></tr>
+<tr><td style="width: 25%;"><a href="GRangesList-class.html">[&lt;--method</a></td>
+<td>GRangesList objects</td></tr>
+</table>
+</div></body></html>

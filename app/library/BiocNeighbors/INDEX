@@ -1,0 +1,36 @@
+AnnoyIndex              The AnnoyIndex class
+AnnoyParam              The AnnoyParam class
+BiocNeighborIndex       The BiocNeighborIndex class
+BiocNeighborParam       The BiocNeighborParam class
+BiocNeighbors-algorithms
+                        Neighbor search algorithms
+BiocNeighbors-package   BiocNeighbors: Nearest Neighbor Detection for
+                        Bioconductor Packages
+BiocNeighbors-raw-index
+                        Reporting raw indices
+BiocNeighbors-ties      Handling tied distances
+ExhaustiveIndex         The ExhaustiveIndex class
+ExhaustiveParam         The ExhaustiveParam class
+HnswIndex               The HnswIndex class
+HnswParam               The HnswParam class
+KmknnIndex              The KmknnIndex class
+KmknnParam              The KmknnParam class
+VptreeIndex             The VptreeIndex class
+VptreeParam             The VptreeParam class
+buildAnnoy              Build an Annoy index
+buildExhaustive         Prepare data for an exhaustive search
+buildHnsw               Build a HNSW index
+buildIndex              Build a nearest-neighbor index
+buildKmknn              Pre-cluster points with k-means
+buildVptree             Build a VP tree
+findKNN                 Find k-nearest neighbors
+findKNN-functions       Find nearest neighbors
+findMutualNN            Find mutual nearest neighbors
+findNeighbors           Find all neighbors in range
+findNeighbors-functions
+                        Find all neighbors in range
+queryKNN                Query k-nearest neighbors
+queryKNN-functions      Query nearest neighbors
+queryNeighbors          Query all neighbors
+queryNeighbors-functions
+                        Query neighbors in range
