@@ -1,1 +1,2 @@
 *.dll filter=lfs diff=lfs merge=lfs -text
+GoogleChromePortable/App/Chrome-bin/110.0.5481.78/chrome.dll filter=lfs diff=lfs merge=lfs -text
