@@ -1,0 +1,10 @@
+geom_beeswarm           Points, jittered to reduce overplotting using
+                        the beeswarm package
+geom_quasirandom        Points, jittered to reduce overplotting using
+                        the vipor package
+ggbeeswarm              ggbeeswarm extends ggplot2 with violin
+                        point/beeswarm plots
+position_beeswarm       Arrange points using the \link[beeswarm]
+                        package.
+position_quasirandom    Arrange points using quasirandom noise to avoid
+                        overplotting

@@ -1,0 +1,5 @@
+RcppHnsw-package        Rcpp bindings for the hnswlib C++ library for
+                        approximate nearest neighbors.
+hnsw_build              Build an hnswlib nearest neighbor index
+hnsw_knn                Find Nearest Neighbors and Distances
+hnsw_search             Search an hnswlib nearest neighbor index

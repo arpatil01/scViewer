@@ -1,0 +1,54 @@
+Package: ROCR
+Authors@R: c(person("Tobias","Sing",
+                    email = "tobias.sing@gmail.com",role="aut"),
+             person("Oliver","Sander",
+                    email = "osander@gmail.com",role="aut"),
+             person("Niko","Beerenwinkel",
+                    role="aut"),
+             person("Thomas","Lengauer",
+                    role="aut"),
+             person("Thomas","Unterthiner",
+                    role="ctb"),
+             person("Felix G.M.","Ernst",
+                    email = "felix.gm.ernst@outlook.com",role="cre",
+                    comment = c(ORCID = "0000-0001-5064-0928")))
+Version: 1.0-11
+Date: 2020-05-01
+Title: Visualizing the Performance of Scoring Classifiers
+Description: ROC graphs, sensitivity/specificity curves, lift charts,
+  and precision/recall plots are popular examples of trade-off
+  visualizations for specific pairs of performance measures. ROCR is a
+  flexible tool for creating cutoff-parameterized 2D performance curves
+  by freely combining two from over 25 performance measures (new
+  performance measures can be added using a standard interface).
+  Curves from different cross-validation or bootstrapping runs can be
+  averaged by different methods, and standard deviations, standard
+  errors or box plots can be used to visualize the variability across
+  the runs. The parameterization can be visualized by printing cutoff
+  values at the corresponding curve positions, or by coloring the
+  curve according to cutoff. All components of a performance plot can
+  be quickly adjusted using a flexible parameter dispatching
+  mechanism. Despite its flexibility, ROCR is easy to use, with only
+  three commands and reasonable default values for all optional
+  parameters.
+Encoding: UTF-8
+License: GPL (>= 2)
+NeedsCompilation: no
+Depends: R (>= 3.6)
+Imports: methods, graphics, grDevices, gplots, stats
+Suggests: testthat, knitr, rmarkdown
+URL: http://ipa-tys.github.io/ROCR/
+BugReports: https://github.com/ipa-tys/ROCR/issues
+RoxygenNote: 7.1.0
+VignetteBuilder: knitr
+Packaged: 2020-05-01 11:43:23 UTC; flixr
+Author: Tobias Sing [aut],
+  Oliver Sander [aut],
+  Niko Beerenwinkel [aut],
+  Thomas Lengauer [aut],
+  Thomas Unterthiner [ctb],
+  Felix G.M. Ernst [cre] (<https://orcid.org/0000-0001-5064-0928>)
+Maintainer: Felix G.M. Ernst <felix.gm.ernst@outlook.com>
+Repository: CRAN
+Date/Publication: 2020-05-02 14:50:05 UTC
+Built: R 4.2.3; ; 2023-05-01 01:09:37 UTC; windows

@@ -1,0 +1,18 @@
+GenomeDescription-class
+                        GenomeDescription objects
+NCBI-utils              Utility functions to access NCBI resources
+Seqinfo-class           Seqinfo objects
+getChromInfoFromEnsembl
+                        Get chromosome information for an Ensembl
+                        species
+getChromInfoFromNCBI    Get chromosome information for an NCBI assembly
+getChromInfoFromUCSC    Get chromosome information for a UCSC genome
+loadTaxonomyDb          Return a data.frame that lists the known
+                        taxonomy IDs and their corresponding organisms.
+mapGenomeBuilds         Mapping between UCSC and Ensembl Genome Builds
+rankSeqlevels           Assign sequence IDs to sequence names
+seqinfo                 Accessing/modifying sequence information
+seqlevels-wrappers      Convenience wrappers to the seqlevels() getter
+                        and setter
+seqlevelsStyle          Conveniently rename the seqlevels of an object
+                        according to a given style

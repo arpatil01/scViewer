@@ -1,0 +1,279 @@
+---
+title: Single-cell analysis toolkit for expression in R
+author:
+- name: Davis McCarthy
+  affiliation: 
+  - EMBL European Bioinformatics Institute
+- name: Aaron Lun
+  email: infinite.monkeys.with.keyboards@gmail.com
+date: "Revised: February 4, 2020"
+package: scater
+output:
+  BiocStyle::html_document:
+    toc_float: yes
+vignette: >
+  %\VignetteIndexEntry{Overview of scater functionality}
+  %\VignetteEngine{knitr::rmarkdown}
+  %VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE, results="hide"}
+knitr::opts_chunk$set(error=FALSE, warning=FALSE, message=FALSE)
+library(BiocStyle)
+set.seed(10918)
+```
+
+# Introduction
+
+`r Biocpkg("scater")` provides tools for visualization of single-cell transcriptomic data. 
+It is based on the `SingleCellExperiment` class (from the `r Biocpkg("SingleCellExperiment")` package),
+and thus is interoperable with many other Bioconductor packages such as `r Biocpkg("scran")`, 
+`r Biocpkg("scuttle")` and `r Biocpkg("iSEE")`.
+To demonstrate the use of the various `r Biocpkg("scater")` functions,
+we will load in the classic Zeisel dataset:
+
+```{r quickstart-load-data, message=FALSE, warning=FALSE}
+library(scRNAseq)
+example_sce <- ZeiselBrainData()
+example_sce
+```
+
+**Note:** A more comprehensive description of the use of `r Biocpkg("scater")` 
+(along with other packages) in a scRNA-seq analysis workflow is available at https://osca.bioconductor.org.
+
+# Diagnostic plots for quality control
+
+Quality control to remove damaged cells and poorly sequenced libraries is a common step in single-cell analysis pipelines.
+We will use some utilities from the `r Biocpkg("scuttle")` package 
+(conveniently loaded for us when we load `r Biocpkg("scater")`) 
+to compute the usual quality control metrics for this dataset.
+
+```{r}
+library(scater)
+example_sce <- addPerCellQC(example_sce, 
+    subsets=list(Mito=grep("mt-", rownames(example_sce))))
+```
+
+Metadata variables can be plotted against each other using the `plotColData()` function, as shown below.
+We expect to see an increasing number of detected genes with increasing total count.
+Each point represents a cell that is coloured according to its tissue of origin.
+
+```{r}
+plotColData(example_sce, x = "sum", y="detected", colour_by="tissue") 
+```
+
+Here, we have plotted the total count for each cell against the mitochondrial content.
+Well-behaved cells should have a large number of expressed features and and a low percentage of expression from feature controls. 
+High percentage expression from feature controls and few expressed features are indicative of blank and failed cells.
+For some variety, we have faceted by the tissue of origin.
+
+```{r plot-pdata-pct-exprs-controls}
+plotColData(example_sce, x = "sum", y="subsets_Mito_percent", 
+    other_fields="tissue") + facet_wrap(~tissue)
+```
+
+On the gene level, we can look at a plot that shows the top 50 (by default) most-expressed features. 
+Each row in the plot below corresponds to a gene; each bar corresponds to the expression of a gene in a single cell;
+and the circle indicates the median expression of each gene, with which genes are sorted.
+We expect to see the "usual suspects", i.e., mitochondrial genes, actin, ribosomal protein, MALAT1. 
+A few spike-in transcripts may also be present here, though if all of the spike-ins are in the top 50, it suggests that too much spike-in RNA was added.
+A large number of pseudo-genes or predicted genes may indicate problems with alignment.
+
+<!--
+The damn thing was timing out on Windows due to some graphics issue.
+WHATEVER. 
+Fuck Windows and their stupid shit.
+-->
+
+```{r plot-highest, fig.asp=1, fig.wide=TRUE, eval=.Platform$OS.type!="windows"}
+plotHighestExprs(example_sce, exprs_values = "counts")
+```
+
+Variable-level metrics are computed by the `getVarianceExplained()` function (after normalization, see below).
+This calculates the percentage of variance of each gene's expression that is explained by each variable in the `colData` of the `SingleCellExperiment` object.
+We can then use this to determine which experimental factors are contributing most to the variance in expression.
+This is useful for diagnosing batch effects or to quickly verify that a treatment has an effect.
+
+```{r}
+# Computing variance explained on the log-counts,
+# so that the statistics reflect changes in relative expression.
+example_sce <- logNormCounts(example_sce)
+
+vars <- getVarianceExplained(example_sce,
+    variables=c("tissue", "total mRNA mol", "sex", "age"))
+head(vars)
+
+plotExplanatoryVariables(vars)
+```
+
+# Visualizing expression values
+
+The `plotExpression()` function makes it easy to plot expression values for a subset of genes or features.
+This can be particularly useful for further examination of features identified from differential expression testing, pseudotime analysis or other analyses.
+By default, it uses expression values in the `"logcounts"` assay, but this can be changed through the `exprs_values` argument.
+
+```{r plot-expression, fig.wide=TRUE}
+plotExpression(example_sce, rownames(example_sce)[1:6], x = "level1class")
+```
+
+Setting `x` will determine the covariate to be shown on the x-axis.
+This can be a field in the column metadata or the name of a feature (to obtain the expression profile across cells).
+Categorical covariates will yield grouped violins as shown above, with one panel per feature.
+By comparison, continuous covariates will generate a scatter plot in each panel, as shown below.
+
+```{r plot-expression-scatter}
+plotExpression(example_sce, rownames(example_sce)[1:6],
+    x = rownames(example_sce)[10])
+```
+
+The points can also be coloured, shaped or resized by the column metadata or expression values.
+
+```{r plot-expression-col}
+plotExpression(example_sce, rownames(example_sce)[1:6],
+    x = "level1class", colour_by="tissue")
+```
+
+Directly plotting the gene expression without any `x` or other visual parameters will generate a set of grouped violin plots, coloured in an aesthetically pleasing manner.
+
+```{r plot-expression-many}
+plotExpression(example_sce, rownames(example_sce)[1:6])
+```
+
+# Dimensionality reduction 
+
+## Principal components analysis
+
+Principal components analysis (PCA) is often performed to denoise and compact the data prior to downstream analyses.
+The `runPCA()` function provides a simple wrapper around the base machinery in `r Biocpkg("BiocSingular")` for computing PCs from log-transformed expression values.
+This stores the output in the `reducedDims` slot of the `SingleCellExperiment`, which can be easily retrieved (along with the percentage of variance explained by each PC) as shown below:
+
+```{r}
+example_sce <- runPCA(example_sce)
+str(reducedDim(example_sce, "PCA"))
+```
+
+By default, `runPCA()` uses the top 500 genes with the highest variances to compute the first PCs.
+This can be tuned by specifying `subset_row` to pass in an explicit set of genes of interest,
+and by using `ncomponents` to determine the number of components to compute.
+The `name` argument can also be used to change the name of the result in the `reducedDims` slot.
+
+```{r}
+example_sce <- runPCA(example_sce, name="PCA2",
+    subset_row=rownames(example_sce)[1:1000],
+    ncomponents=25)
+str(reducedDim(example_sce, "PCA2"))
+```
+
+## Other dimensionality reduction methods
+
+$t$-distributed stochastic neighbour embedding ($t$-SNE) is widely used for visualizing complex single-cell data sets.
+The same procedure described for PCA plots can be applied to generate $t$-SNE plots using `plotTSNE`, with coordinates obtained using `runTSNE` via the `r CRANpkg("Rtsne")` package.
+We strongly recommend generating plots with different random seeds and perplexity values, to ensure that any conclusions are robus
+t to different visualizations.
+
+```{r plot-tsne-1comp-colby-sizeby-exprs}
+# Perplexity of 10 just chosen here arbitrarily.
+set.seed(1000)
+example_sce <- runTSNE(example_sce, perplexity=10)
+head(reducedDim(example_sce, "TSNE"))
+```
+
+A more common pattern involves using the pre-existing PCA results as input into the $t$-SNE algorithm.
+This is useful as it improves speed by using a low-rank approximation of the expression matrix; and reduces random noise, by focusing on the major factors of variation.
+The code below uses the first 10 dimensions of the previously computed PCA result to perform the $t$-SNE.
+
+```{r plot-tsne-from-pca}
+set.seed(1000)
+example_sce <- runTSNE(example_sce, perplexity=50, 
+    dimred="PCA", n_dimred=10)
+head(reducedDim(example_sce, "TSNE"))
+```
+
+The same can be done for uniform manifold with approximate projection (UMAP) via the `runUMAP()` function, itself based on the `r CRANpkg("uwot")` package.
+
+```{r}
+example_sce <- runUMAP(example_sce)
+head(reducedDim(example_sce, "UMAP"))
+```
+
+## Visualizing reduced dimensions
+
+Any dimensionality reduction result can be plotted using the `plotReducedDim` function.
+Here, each point represents a cell and is coloured according to its cell type label.
+
+```{r plot-reduceddim-4comp-colby-shapeby}
+plotReducedDim(example_sce, dimred = "PCA", colour_by = "level1class")
+```
+
+Some result types have dedicated wrappers for convenience, e.g., `plotTSNE()` for $t$-SNE results:
+
+```{r plot-pca-4comp-colby-sizeby-exprs}
+plotTSNE(example_sce, colour_by = "Snap25")
+```
+
+The dedicated `plotPCA()` function also adds the percentage of variance explained to the axes:
+
+```{r plot-pca-default}
+plotPCA(example_sce, colour_by="Mog")
+```
+
+Multiple components can be plotted in a series of pairwise plots.
+When more than two components are plotted, the diagonal boxes in the scatter plot matrix show the density for each component.
+
+```{r plot-pca-4comp-colby-shapeby}
+example_sce <- runPCA(example_sce, ncomponents=20)
+plotPCA(example_sce, ncomponents = 4, colour_by = "level1class")
+```
+
+We separate the execution of these functions from the plotting to enable the same coordinates to be re-used across multiple plots.
+This avoids repeatedly recomputing those coordinates just to change an aesthetic across plots.
+
+# Utilities for custom visualization
+
+We provide some helper functions to easily convert from a `SingleCellExperiment` object to a `data.frame` for use in, say, `r CRANpkg("ggplot2")` functions.
+This allows users to create highly customized plots that are not covered by the existing `r Biocpkg("scater")` functions.
+The `ggcells()` function will intelligently retrieve fields from the `colData()`, `assays()`, `altExps()` or `reducedDims()` to create a single `data.frame` for immediate use.
+In the example below, we create boxplots of _Snap25_ expression stratified by cell type and tissue of origin:
+
+```{r, fig.wide=TRUE}
+ggcells(example_sce, mapping=aes(x=level1class, y=Snap25)) + 
+    geom_boxplot() +
+    facet_wrap(~tissue)
+```
+
+Reduced dimension results are easily pulled in to create customized equivalents of the `plotReducedDim()` output.
+In this example, we create a $t$-SNE plot faceted by tissue and coloured by _Snap25_ expression:
+
+```{r}
+ggcells(example_sce, mapping=aes(x=TSNE.1, y=TSNE.2, colour=Snap25)) +
+    geom_point() +
+    stat_density_2d() +
+    facet_wrap(~tissue) +
+    scale_colour_distiller(direction=1)
+```
+
+It is also straightforward to examine the relationship between the size factors on the normalized gene expression:
+
+```{r}
+ggcells(example_sce, mapping=aes(x=sizeFactor, y=Actb)) +
+    geom_point() +
+    geom_smooth()
+```
+
+Similar operations can be performed on the features using the `ggfeatures()` function,
+which will retrieve values either from `rowData` or from the columns of the `assays`.
+Here, we examine the relationship between the feature type and the expression within a given cell;
+note the renaming of the otherwise syntactically invalid cell name.
+
+```{r}
+colnames(example_sce) <- make.names(colnames(example_sce))
+ggfeatures(example_sce, mapping=aes(x=featureType, y=X1772062111_E06)) + 
+    geom_violin()
+```
+
+# Session information {.unnumbered}
+
+```{r}
+sessionInfo()
+```
+

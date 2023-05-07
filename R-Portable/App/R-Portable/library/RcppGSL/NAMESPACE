@@ -1,0 +1,15 @@
+useDynLib("RcppGSL", .registration=TRUE)
+
+importFrom("Rcpp", "evalCpp")
+importFrom("stats", "model.frame", "model.matrix", "model.response", "fitted", "coef", "printCoefmat", "pt")
+
+export(fastLmPure,
+       fastLm,
+       LdFlags,
+       CFlags)
+S3method(fastLm, default)
+S3method(fastLm, formula)
+S3method(predict, fastLm)
+S3method(print, fastLm)
+S3method(summary, fastLm)
+S3method(print, summary.fastLm)

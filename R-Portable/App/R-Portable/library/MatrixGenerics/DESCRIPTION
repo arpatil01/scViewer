@@ -1,0 +1,53 @@
+Package: MatrixGenerics
+Title: S4 Generic Summary Statistic Functions that Operate on
+        Matrix-Like Objects
+Description: S4 generic functions modeled after the 'matrixStats' API
+    for alternative matrix implementations. Packages with alternative matrix
+    implementation can depend on this package and implement the generic
+    functions that are defined here for a useful set of row and column
+    summary statistics. Other package developers can import this package
+    and handle a different matrix implementations without worrying
+    about incompatibilities.
+biocViews: Infrastructure, Software
+URL: https://bioconductor.org/packages/MatrixGenerics
+BugReports: https://github.com/Bioconductor/MatrixGenerics/issues
+Version: 1.10.0
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(person("Constantin", "Ahlmann-Eltze",
+                email = "artjom31415@googlemail.com", role = c("aut"),
+                comment = c(ORCID = "0000-0002-3762-068X")),
+            person("Peter", "Hickey", role = c("aut", "cre"),
+                email = "peter.hickey@gmail.com",
+                comment = c(ORCID = "0000-0002-8153-6258")),
+            person("Hervé", "Pagès", email = "hpages.on.github@gmail.com",
+                role = "aut"))
+Depends: matrixStats (>= 0.60.1)
+Imports: methods
+Suggests: sparseMatrixStats, DelayedMatrixStats, SummarizedExperiment,
+        testthat (>= 2.1.0), Matrix
+RoxygenNote: 7.2.0
+Roxygen: list(markdown = TRUE, old_usage = TRUE)
+Collate: 'MatrixGenerics-package.R' 'rowAlls.R' 'rowAnyNAs.R'
+        'rowAnys.R' 'rowAvgsPerColSet.R' 'rowCollapse.R' 'rowCounts.R'
+        'rowCummaxs.R' 'rowCummins.R' 'rowCumprods.R' 'rowCumsums.R'
+        'rowDiffs.R' 'rowIQRDiffs.R' 'rowIQRs.R' 'rowLogSumExps.R'
+        'rowMadDiffs.R' 'rowMads.R' 'rowMaxs.R' 'rowMeans2.R'
+        'rowMedians.R' 'rowMins.R' 'rowOrderStats.R' 'rowProds.R'
+        'rowQuantiles.R' 'rowRanges.R' 'rowRanks.R' 'rowSdDiffs.R'
+        'rowSds.R' 'rowSums2.R' 'rowTabulates.R' 'rowVarDiffs.R'
+        'rowVars.R' 'rowWeightedMads.R' 'rowWeightedMeans.R'
+        'rowWeightedMedians.R' 'rowWeightedSds.R' 'rowWeightedVars.R'
+git_url: https://git.bioconductor.org/packages/MatrixGenerics
+git_branch: RELEASE_3_16
+git_last_commit: 6d9d907
+git_last_commit_date: 2022-11-01
+Date/Publication: 2022-11-01
+NeedsCompilation: no
+Packaged: 2022-11-02 01:12:50 UTC; biocbuild
+Author: Constantin Ahlmann-Eltze [aut]
+    (<https://orcid.org/0000-0002-3762-068X>),
+  Peter Hickey [aut, cre] (<https://orcid.org/0000-0002-8153-6258>),
+  Hervé Pagès [aut]
+Maintainer: Peter Hickey <peter.hickey@gmail.com>
+Built: R 4.2.1; ; 2022-11-02 13:51:23 UTC; windows

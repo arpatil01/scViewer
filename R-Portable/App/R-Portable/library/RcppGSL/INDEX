@@ -1,0 +1,4 @@
+LdFlags                 Provide RcppGSL Compiler and Linker Flags
+RcppGSL-package         'Rcpp' Integration for 'GNU GSL' Vectors and
+                        Matrices
+fastLm                  Bare-bones linear model fitting function

@@ -1,0 +1,24 @@
+Assays-class            Assays objects
+RangedSummarizedExperiment-class
+                        RangedSummarizedExperiment objects
+SummarizedExperiment-class
+                        SummarizedExperiment objects
+coverage-methods        Coverage of a RangedSummarizedExperiment object
+findOverlaps-methods    Finding overlapping ranges in
+                        RangedSummarizedExperiment objects
+inter-range-methods     Inter range transformations of a
+                        RangedSummarizedExperiment object
+intra-range-methods     Intra range transformations of a
+                        RangedSummarizedExperiment object
+makeSummarizedExperimentFromDataFrame
+                        Make a RangedSummarizedExperiment from a
+                        data.frame or DataFrame
+makeSummarizedExperimentFromExpressionSet
+                        Make a RangedSummarizedExperiment object from
+                        an ExpressionSet and vice-versa
+makeSummarizedExperimentFromLoom
+                        Make a SummarizedExperiment from a '.loom' hdf5
+                        file
+nearest-methods         Finding the nearest range neighbor in
+                        RangedSummarizedExperiment objects
+readKallisto            Input kallisto or kallisto bootstrap results.

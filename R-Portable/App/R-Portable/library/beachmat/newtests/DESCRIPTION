@@ -1,0 +1,14 @@
+Package: morebeachtests
+Version: 1.0.0
+Date: 2020-09-16
+Title: Test whether we can use beachmat v3 properly
+Description: For testing beachmat compilation settings.
+Authors@R: person("Aaron", "Lun", role=c("cre", "aut"),
+    email="infinite.monkeys.with.keyboards@gmail.com")
+Imports: Rcpp
+LinkingTo: Rcpp, beachmat
+Suggests: Matrix, DelayedArray, testthat
+License: GPL-3
+NeedsCompilation: yes
+SystemRequirements: C++11
+RoxygenNote: 7.1.1

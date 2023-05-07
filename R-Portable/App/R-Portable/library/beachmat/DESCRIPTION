@@ -1,0 +1,36 @@
+Package: beachmat
+Version: 2.14.2
+Date: 2023-04-06
+Title: Compiling Bioconductor to Handle Each Matrix Type
+Encoding: UTF-8
+Authors@R: c(person("Aaron", "Lun", role = c("aut", "cre"), email = "infinite.monkeys.with.keyboards@gmail.com"),
+        person("Hervé", "Pagès", role="aut"),
+        person("Mike", "Smith", role="aut"))
+Imports: methods, DelayedArray (>= 0.15.14), BiocGenerics, Matrix, Rcpp
+Suggests: testthat, BiocStyle, knitr, rmarkdown, rcmdcheck,
+        BiocParallel, HDF5Array
+LinkingTo: Rcpp
+biocViews: DataRepresentation, DataImport, Infrastructure
+Description: Provides a consistent C++ class interface for reading from and 
+        writing data to a variety of commonly used matrix types. Ordinary 
+        matrices and several sparse/dense Matrix classes are directly supported, 
+        third-party S4 classes may be supported by external linkage, while all
+        other matrices are handled by DelayedArray block processing.
+License: GPL-3
+NeedsCompilation: yes
+VignetteBuilder: knitr
+SystemRequirements: C++11
+RoxygenNote: 7.1.1
+git_url: https://git.bioconductor.org/packages/beachmat
+git_branch: RELEASE_3_16
+git_last_commit: bfc3e8a
+git_last_commit_date: 2023-04-06
+Date/Publication: 2023-04-07
+Packaged: 2023-04-07 21:20:54 UTC; biocbuild
+Author: Aaron Lun [aut, cre],
+  Hervé Pagès [aut],
+  Mike Smith [aut]
+Maintainer: Aaron Lun <infinite.monkeys.with.keyboards@gmail.com>
+Built: R 4.2.3; x86_64-w64-mingw32; 2023-04-08 11:36:17 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

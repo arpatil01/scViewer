@@ -1,0 +1,26 @@
+Package: beeswarm
+Title: The Bee Swarm Plot, an Alternative to Stripchart
+Description: The bee swarm plot is a one-dimensional scatter plot like
+    "stripchart", but with closely-packed, non-overlapping points. 
+Version: 0.4.0
+Date: 2021-05-07
+Authors@R: c(
+    person("Aron", "Eklund", , "aroneklund@gmail.com",
+           role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0861-1001")),
+    person("James", "Trimble", role = "aut",
+           comment = c(ORCID = "0000-0001-7282-8745"))
+    )
+Imports: stats, graphics, grDevices, utils
+NeedsCompilation: yes
+License: Artistic-2.0
+URL: https://github.com/aroneklund/beeswarm
+BugReports: https://github.com/aroneklund/beeswarm/issues
+Packaged: 2021-05-07 08:52:45 UTC; aron
+Author: Aron Eklund [aut, cre] (<https://orcid.org/0000-0003-0861-1001>),
+  James Trimble [aut] (<https://orcid.org/0000-0001-7282-8745>)
+Maintainer: Aron Eklund <aroneklund@gmail.com>
+Repository: CRAN
+Date/Publication: 2021-06-01 21:40:02 UTC
+Built: R 4.2.0; x86_64-w64-mingw32; 2022-04-24 01:27:50 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

@@ -1,0 +1,117 @@
+colAlls,xgCMatrix-method
+                        Check if all elements in a row (column) of a
+                        matrix-like object are equal to a value
+colAnyNAs,xgCMatrix-method
+                        Check if any elements in a row (column) of a
+                        matrix-like object is missing
+colAnys,xgCMatrix-method
+                        Check if any elements in a row (column) of a
+                        matrix-like object is equal to a value
+colAvgsPerRowSet,xgCMatrix-method
+                        Calculates for each row (column) a summary
+                        statistic for equally sized subsets of columns
+                        (rows)
+colCollapse,xgCMatrix-method
+                        Extract one cell from each row (column) of a
+                        matrix-like object
+colCounts,xgCMatrix-method
+                        Count how often an element in a row (column) of
+                        a matrix-like object is equal to a value
+colCummaxs,dgCMatrix-method
+                        Calculates the cumulative maxima for each row
+                        (column) of a matrix-like object
+colCummins,dgCMatrix-method
+                        Calculates the cumulative minima for each row
+                        (column) of a matrix-like object
+colCumprods,xgCMatrix-method
+                        Calculates the cumulative product for each row
+                        (column) of a matrix-like object
+colCumsums,xgCMatrix-method
+                        Calculates the cumulative sum for each row
+                        (column) of a matrix-like object
+colDiffs,dgCMatrix-method
+                        Calculates the difference between each element
+                        of a row (column) of a matrix-like object
+colIQRDiffs,dgCMatrix-method
+                        Calculates the interquartile range of the
+                        difference between each element of a row
+                        (column) of a matrix-like object
+colIQRs,xgCMatrix-method
+                        Calculates the interquartile range for each row
+                        (column) of a matrix-like object
+colLogSumExps,xgCMatrix-method
+                        Accurately calculates the logarithm of the sum
+                        of exponentials for each row (column) of a
+                        matrix-like object
+colMadDiffs,dgCMatrix-method
+                        Calculates the mean absolute deviation of the
+                        difference between each element of a row
+                        (column) of a matrix-like object
+colMads,dgCMatrix-method
+                        Calculates the median absolute deviation for
+                        each row (column) of a matrix-like object
+colMaxs,dgCMatrix-method
+                        Calculates the maximum for each row (column) of
+                        a matrix-like object
+colMeans2,xgCMatrix-method
+                        Calculates the mean for each row (column) of a
+                        matrix-like object
+colMedians,dgCMatrix-method
+                        Calculates the median for each row (column) of
+                        a matrix-like object
+colMins,dgCMatrix-method
+                        Calculates the minimum for each row (column) of
+                        a matrix-like object
+colOrderStats,dgCMatrix-method
+                        Calculates an order statistic for each row
+                        (column) of a matrix-like object
+colProds,xgCMatrix-method
+                        Calculates the product for each row (column) in
+                        a matrix
+colQuantiles,xgCMatrix-method
+                        Calculates quantiles for each row (column) of a
+                        matrix-like object
+colRanges,dgCMatrix-method
+                        Calculates the minimum and maximum for each row
+                        (column) of a matrix-like object
+colRanks,dgCMatrix-method
+                        Calculates the rank of the elements for each
+                        row (column) of a matrix-like object
+colSdDiffs,dgCMatrix-method
+                        Calculates the standard deviation of the
+                        difference between each element of a row
+                        (column) of a matrix-like object
+colSds,xgCMatrix-method
+                        Calculates the standard deviation for each row
+                        (column) of a matrix-like object
+colSums2,xgCMatrix-method
+                        Calculates the sum for each row (column) of a
+                        matrix-like object
+colTabulates,xgCMatrix-method
+                        Tabulates the values in a matrix-like object by
+                        row (column)
+colVarDiffs,dgCMatrix-method
+                        Calculates the variance of the difference
+                        between each element of a row (column) of a
+                        matrix-like object
+colVars,xgCMatrix-method
+                        Calculates the variance for each row (column)
+                        of a matrix-like object
+colWeightedMads,dgCMatrix-method
+                        Calculates the weighted median absolute
+                        deviation for each row (column) of a
+                        matrix-like object
+colWeightedMeans,xgCMatrix-method
+                        Calculates the weighted mean for each row
+                        (column) of a matrix-like object
+colWeightedMedians,dgCMatrix-method
+                        Calculates the weighted median for each row
+                        (column) of a matrix-like object
+colWeightedSds,xgCMatrix-method
+                        Calculates the weighted standard deviation for
+                        each row (column) of a matrix-like object
+colWeightedVars,xgCMatrix-method
+                        Calculates the weighted variance for each row
+                        (column) of a matrix-like object
+xgCMatrix-class         Union of double and logical column-sparse
+                        matrices

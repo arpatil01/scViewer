@@ -1,0 +1,8 @@
+RcppGSL-package	RcppGSL-package
+CFlags	LdFlags
+fastLm	fastLm
+fastLm.default	fastLm
+fastLm.formula	fastLm
+fastLmPure	fastLm
+LdFlags	LdFlags
+RcppGSL	RcppGSL-package

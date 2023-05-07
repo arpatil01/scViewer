@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: A unified framework for working transparently with on-disk and
+in-memory array-like datasets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> A unified framework for working transparently with on-disk and
+in-memory array-like datasets
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;DelayedArray&rsquo; version 0.23.2</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#G">G</a>
+<a href="#I">I</a>
+<a href="#L">L</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#P">P</a>
+<a href="#Q">Q</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+<a href="#W">W</a>
+<a href="#misc">misc</a>
+</p>
+
+
+<h2><a id="A">-- A --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="bind-arrays.html">acbind</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">acbind-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="bind-arrays.html">acbind-method</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">all-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">any-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">anyNA-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">anyNA-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">aperm-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">aperm-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">aperm-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">aperm.ArbitraryArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">aperm.DelayedArray</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">aperm.DummyArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">aperm.RegularArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">aperm.SparseArraySeed</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">apply</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">apply-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="bind-arrays.html">arbind</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">arbind-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="bind-arrays.html">arbind-method</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArbitraryArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArbitraryArrayGrid-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">array selection</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">array selections</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArrayGrid-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">arrayRealizationSink-class</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ArrayViewport-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">array_selection</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">array_selections</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">as.array-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">as.array.SparseArraySeed</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">as.character-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">as.character.ArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">as.matrix-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">as.matrix.SparseArraySeed</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">AutoBlock-global-settings</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">AutoGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">AutoRealizationSink</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+</table>
+
+<h2><a id="B">-- B --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="bind-arrays.html">bind arrays</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="bind-arrays.html">bind-arrays</a></td>
+<td>Bind arrays along their rows or columns</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">bindROWS-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">block processing</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">blockApply</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">blockGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">blockReduce</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">block_processing</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="realize.html">BLOCK_write_to_sink</a></td>
+<td>Realize a DelayedArray object</td></tr>
+</table>
+
+<h2><a id="C">-- C --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">c-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="makeCappedVolumeBox.html">capped_volume_boxes</a></td>
+<td>Utilities to make capped volume boxes</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">cbind</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">cbind-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">cbind-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">ChunkedRleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">ChunkedRleArraySeed-class</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:ArbitraryArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:ArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">class:arrayRealizationSink</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:ArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">class:ChunkedRleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">class:ConstantArray</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">class:ConstantArraySeed</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">class:ConstantMatrix</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">class:DelayedAbind</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">class:DelayedAperm</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">class:DelayedArray</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">class:DelayedArray1</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">class:DelayedMatrix</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">class:DelayedNaryIsoOp</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">class:DelayedNaryOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">class:DelayedOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">class:DelayedSetDimnames</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">class:DelayedSubassign</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">class:DelayedSubset</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">class:DelayedUnaryIsoOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">class:DelayedUnaryIsoOpStack</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">class:DelayedUnaryIsoOpWithArgs</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">class:DelayedUnaryOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:DummyArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:DummyArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">class:RealizationSink</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:RegularArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">class:RleArray</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">class:RleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">class:RleMatrix</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">class:RleRealizationSink</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">class:SafeArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">class:SolidRleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">class:SparseArraySeed</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">classNameForDisplay-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">close-method</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">coerce-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">coerce-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">coerce-method</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">coerce-method</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">coerce-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">coerce-method</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">colAutoGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">colGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMaxs</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMaxs-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMeans</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMeans-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMins</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colMins-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colRanges</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colRanges-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">colsum</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">colsum-method</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="sparseMatrix-utils.html">colsum-method</a></td>
+<td>sparseMatrix utilities</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colSums</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">colSums-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantArray</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantArray-class</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantArraySeed</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantArraySeed-class</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantMatrix</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">ConstantMatrix-class</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">contentIsPristine</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">currentBlockId</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">currentViewport</a></td>
+<td>blockApply() and family</td></tr>
+</table>
+
+<h2><a id="D">-- D --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dbinom</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dbinom-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">defaultAutoGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">defaultSinkAutoGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">DelayedAbind</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">DelayedAbind-class</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">DelayedAperm</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">DelayedAperm-class</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedArray</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedArray-class</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">DelayedArray-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedArray-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">DelayedArray-method</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">DelayedArray-stats</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">DelayedArray-utils</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedArray1</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedArray1-class</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedMatrix</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">DelayedMatrix-class</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">DelayedMatrix-stats</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">DelayedMatrix-utils</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">DelayedNaryIsoOp</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">DelayedNaryIsoOp-class</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedNaryOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedNaryOp-class</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedOp-class</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">DelayedSetDimnames</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">DelayedSetDimnames-class</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">DelayedSubassign</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">DelayedSubassign-class</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">DelayedSubset</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">DelayedSubset-class</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedUnaryIsoOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedUnaryIsoOp-class</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">DelayedUnaryIsoOpStack</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">DelayedUnaryIsoOpStack-class</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">DelayedUnaryIsoOpWithArgs</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">DelayedUnaryIsoOpWithArgs-class</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedUnaryOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">DelayedUnaryOp-class</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">dense2sparse</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">dim-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">dim-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">dim-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">dim-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">dim-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">dim-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">dim-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">dim-method</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">dim-method</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">dim&lt;--method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">dimnames-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">dimnames-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">dimnames-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">dimnames-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">dimnames-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">dimnames-method</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">dimnames-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">dimnames-method</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">dimnames-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">dimnames&lt;--method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">dimnames&lt;--method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">dims</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">dims-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dlogis</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dlogis-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dnorm</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dnorm-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">downsample</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">downsample-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dpois</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">dpois-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">drop-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">DummyArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">DummyArrayGrid-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">DummyArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">DummyArrayViewport-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+</table>
+
+<h2><a id="E">-- E --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="blockApply.html">effectiveGrid</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">end-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">extract_array-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">extract_array-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">extract_array-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">extract_array-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">extract_array-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">extract_array-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">extract_array-method</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">extract_array-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">extract_array-method</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">extract_array-method</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">extract_array-method</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">extract_array-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">extract_sparse_array</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">extract_sparse_array-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">extract_sparse_array-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">extract_sparse_array-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">extract_sparse_array-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">extract_sparse_array-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">extract_sparse_array-method</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">extract_sparse_array-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">extract_sparse_array-method</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">extract_sparse_array-method</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">extract_sparse_array-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+</table>
+
+<h2><a id="G">-- G --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">getAutoBlockLength</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">getAutoBlockShape</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">getAutoBlockSize</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">getAutoBPPARAM</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">getAutoGridMaker</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">getAutoRealizationBackend</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">getRealizationBackend</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">get_type_size</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">grepl-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">gridApply</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">gridReduce</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">gsub-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+</table>
+
+<h2><a id="I">-- I --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">is.finite-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">is.infinite-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">is.infinite-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">is.na-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">is.na-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">is.nan-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">is.nan-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="makeCappedVolumeBox.html">isLinear</a></td>
+<td>Utilities to make capped volume boxes</td></tr>
+<tr><td style="width: 25%;"><a href="makeCappedVolumeBox.html">isLinear-method</a></td>
+<td>Utilities to make capped volume boxes</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">isPristine</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">is_noop</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">is_noop-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">is_noop-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">is_noop-method</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">is_noop-method</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">is_noop-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="read_block.html">is_sparse</a></td>
+<td>Read array blocks</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">is_sparse-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">is_sparse-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">is_sparse-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">is_sparse-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">is_sparse-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">is_sparse-method</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">is_sparse-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">is_sparse-method</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">is_sparse-method</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">is_sparse-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">is_sparse&lt;-</a></td>
+<td>SparseArraySeed objects</td></tr>
+</table>
+
+<h2><a id="L">-- L --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="array_selection.html">L-index</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">lengths-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">lengths-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">Lindex</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">Lindex2Mindex</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">linearInd</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">log-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+</table>
+
+<h2><a id="M">-- M --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="array_selection.html">M-index</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="makeCappedVolumeBox.html">makeCappedVolumeBox</a></td>
+<td>Utilities to make capped volume boxes</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">makeNindexFromArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="makeCappedVolumeBox.html">makeRegularArrayGridOfCappedLengthViewports</a></td>
+<td>Utilities to make capped volume boxes</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">matrixClass</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ConstantArray-class.html">matrixClass-method</a></td>
+<td>A DelayedArray subclass that contains a constant value</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">matrixClass-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">matrixClass-method</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">max-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">maxlength</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">maxlength-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">mean</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">mean-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">mean-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">mean.DelayedArray</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">mean.SparseArraySeed</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">min-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">Mindex</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">Mindex2Lindex</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">modify_seeds</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+</table>
+
+<h2><a id="N">-- N --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="array_selection.html">N-index</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">names-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">names&lt;--method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">nchar-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">nchar-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">netSubsetAndAperm</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">netSubsetAndAperm-method</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">new_DelayedArray</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="array_selection.html">Nindex</a></td>
+<td>Manipulation of array selections</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">nseed</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">nseed-method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">nzdata</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">nzdata-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">nzindex</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">nzindex-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+</table>
+
+<h2><a id="P">-- P --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="showtree.html">path</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">path-method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">path&lt;--method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">pbinom</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">pbinom-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">plogis</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">plogis-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">pmax2</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">pmax2-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">pmin2</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">pmin2-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">pnorm</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">pnorm-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">ppois</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">ppois-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">prod-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+</table>
+
+<h2><a id="Q">-- Q --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qbinom</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qbinom-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qlogis</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qlogis-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qnorm</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qnorm-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qpois</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-stats.html">qpois-method</a></td>
+<td>Statistical functions on DelayedArray objects</td></tr>
+</table>
+
+<h2><a id="R">-- R --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">range</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">range-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">range-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">range.DelayedArray</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">range.SparseArraySeed</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">ranges-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">rbind</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">rbind-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">rbind-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="read_block.html">read_block</a></td>
+<td>Read array blocks</td></tr>
+<tr><td style="width: 25%;"><a href="read_block.html">read_block-method</a></td>
+<td>Read array blocks</td></tr>
+<tr><td style="width: 25%;"><a href="read_block.html">read_sparse_block</a></td>
+<td>Read array blocks</td></tr>
+<tr><td style="width: 25%;"><a href="read_block.html">read_sparse_block-method</a></td>
+<td>Read array blocks</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">RealizationSink</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">RealizationSink-class</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="realize.html">realize</a></td>
+<td>Realize a DelayedArray object</td></tr>
+<tr><td style="width: 25%;"><a href="realize.html">realize-method</a></td>
+<td>Realize a DelayedArray object</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">refdim</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">refdim-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">RegularArrayGrid</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">RegularArrayGrid-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">RleArray</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">RleArray-class</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">RleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">RleArraySeed-class</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">RleMatrix</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">RleMatrix-class</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">RleRealizationSink</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">RleRealizationSink-class</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">round-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">rowAutoGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">rowGrid</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMaxs</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMaxs-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMeans</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMeans-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMins</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowMins-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowRanges</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowRanges-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">rowsum</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">rowsum-method</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="sparseMatrix-utils.html">rowsum-method</a></td>
+<td>sparseMatrix utilities</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">rowsum.DelayedMatrix</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="sparseMatrix-utils.html">rowsum.dgCMatrix</a></td>
+<td>sparseMatrix utilities</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowSums</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-stats.html">rowSums-method</a></td>
+<td>DelayedMatrix row/col summarization</td></tr>
+</table>
+
+<h2><a id="S">-- S --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">SafeArrayViewport</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">SafeArrayViewport-class</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">scale</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">scale-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">scale.DelayedMatrix</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">seed</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">seed-method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">seed&lt;-</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">seed&lt;--method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">seedApply</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">setAutoBlockShape</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="AutoBlock-global-settings.html">setAutoBlockSize</a></td>
+<td>Control the geometry of automatic blocks</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">setAutoBPPARAM</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="AutoGrid.html">setAutoGridMaker</a></td>
+<td>Create automatic grids to use for block processing of array-like objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">setAutoRealizationBackend</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">setRealizationBackend</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">set_grid_context</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">show-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">show-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">show-method</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="showtree.html">showtree</a></td>
+<td>Visualize and access the leaves of a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">signif-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">simplify</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="simplify.html">simplify-method</a></td>
+<td>Simplify a tree of delayed operations</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">sinkApply</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">SolidRleArraySeed</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">SolidRleArraySeed-class</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">sparse2dense</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">SparseArraySeed</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">SparseArraySeed-class</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">SparseArraySeed-utils</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="sparseMatrix-utils.html">sparseMatrix-utils</a></td>
+<td>sparseMatrix utilities</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">sparsity</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-class.html">sparsity-method</a></td>
+<td>SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">split-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">split.DelayedArray</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">splitAsList-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">start-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">sub-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">sum-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">summary-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">summary-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">summary-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">summary-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">summary-method</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">summary-method</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">summary-method</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">summary-method</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">summary-method</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">summary.DelayedAbind</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">summary.DelayedAperm</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">summary.DelayedNaryIsoOp</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">summary.DelayedOp</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">summary.DelayedSetDimnames</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubassign-class.html">summary.DelayedSubassign</a></td>
+<td>DelayedSubassign objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSubset-class.html">summary.DelayedSubset</a></td>
+<td>DelayedSubset objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpStack-class.html">summary.DelayedUnaryIsoOpStack</a></td>
+<td>DelayedUnaryIsoOpStack objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedUnaryIsoOpWithArgs-class.html">summary.DelayedUnaryIsoOpWithArgs</a></td>
+<td>DelayedUnaryIsoOpWithArgs objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">supportedRealizationBackends</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">sweep</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">sweep-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+</table>
+
+<h2><a id="T">-- T --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">t</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">table</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">table-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">tolower-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">tolower-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">toupper-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">toupper-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">type</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="RleArraySeed-class.html">type-method</a></td>
+<td>RleArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">type&lt;--method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+</table>
+
+<h2><a id="U">-- U --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">unique</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">unique-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">unique.DelayedArray</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAbind-class.html">updateObject-method</a></td>
+<td>DelayedAbind objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedAperm-class.html">updateObject-method</a></td>
+<td>DelayedAperm objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">updateObject-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedNaryIsoOp-class.html">updateObject-method</a></td>
+<td>DelayedNaryIsoOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedOp-class.html">updateObject-method</a></td>
+<td>DelayedOp objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedSetDimnames-class.html">updateObject-method</a></td>
+<td>DelayedSetDimnames objects</td></tr>
+</table>
+
+<h2><a id="V">-- V --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="blockApply.html">viewportApply</a></td>
+<td>blockApply() and family</td></tr>
+<tr><td style="width: 25%;"><a href="blockApply.html">viewportReduce</a></td>
+<td>blockApply() and family</td></tr>
+</table>
+
+<h2><a id="W">-- W --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">which-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="SparseArraySeed-utils.html">which-method</a></td>
+<td>Operate natively on SparseArraySeed objects</td></tr>
+<tr><td style="width: 25%;"><a href="ArrayGrid-class.html">width-method</a></td>
+<td>ArrayGrid and ArrayViewport objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">write_block</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+<tr><td style="width: 25%;"><a href="RleArray-class.html">write_block-method</a></td>
+<td>RleArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="write_block.html">write_block-method</a></td>
+<td>Write blocks of data to a RealizationSink</td></tr>
+</table>
+
+<h2><a id="misc">-- misc --</a></h2>
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">!-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">%*%</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedMatrix-utils.html">%*%-method</a></td>
+<td>Common operations on DelayedMatrix objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">+-method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-utils.html">--method</a></td>
+<td>Common operations on DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">[-method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">[&lt;--method</a></td>
+<td>DelayedArray objects</td></tr>
+<tr><td style="width: 25%;"><a href="DelayedArray-class.html">[[-method</a></td>
+<td>DelayedArray objects</td></tr>
+</table>
+</div></body></html>

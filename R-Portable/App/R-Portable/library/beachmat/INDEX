@@ -1,0 +1,5 @@
+colBlockApply           Apply over blocks of columns or rows
+realizeFileBackedMatrix
+                        Realize a file-backed DelayedMatrix
+toCsparse               Convert a SparseArraySeed to a CsparseMatrix
+whichNonZero            Find non-zero entries of a matrix

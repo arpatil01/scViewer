@@ -1,0 +1,43 @@
+addPerCellQCMetrics     Add QC metrics to a SummarizedExperiment
+aggregateAcrossCells    Aggregate data across groups of cells
+aggregateAcrossFeatures
+                        Aggregate feature sets in a
+                        SummarizedExperiment
+calculateAverage        Calculate per-feature average counts
+calculateCPM            Calculate CPMs
+calculateFPKM           Calculate FPKMs
+calculateTPM            Calculate TPMs
+cleanSizeFactors        Clean out non-positive size factors
+computePooledFactors    Normalization by deconvolution
+computeSpikeFactors     Normalization with spike-in counts
+correctGroupSummary     Correct group-level summaries
+downsampleBatches       Downsample batches to equal coverage
+downsampleMatrix        Downsample a count matrix
+fitLinearModel          Fit a linear model
+geometricSizeFactors    Compute geometric size factors
+isOutlier               Identify outlier values
+librarySizeFactors      Compute library size factors
+logNormCounts           Compute log-normalized expression values
+makePerCellDF           Create a per-cell data.frame
+makePerFeatureDF        Create a per-feature data.frame
+medianSizeFactors       Compute median-based size factors
+mockSCE                 Mock up a SingleCellExperiment
+normalizeCounts         Compute normalized expression values
+numDetectedAcrossCells
+                        Number of detected expression values per group
+                        of cells
+numDetectedAcrossFeatures
+                        Number of detected expression values per group
+                        of features
+perCellQCFilters        Compute filters for low-quality cells
+perCellQCMetrics        Per-cell quality control metrics
+perFeatureQCMetrics     Per-feature quality control metrics
+quickPerCellQC          Quick cell-level QC
+readSparseCounts        Read sparse count matrix from file
+scuttle-pkg             Single-cell utilities
+scuttle-utils           Developer utilities
+sumCountsAcrossCells    Sum expression across groups of cells
+sumCountsAcrossFeatures
+                        Sum counts across feature sets
+summarizeAssayByGroup   Summarize an assay by group
+uniquifyFeatureNames    Make feature names unique

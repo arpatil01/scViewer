@@ -1,0 +1,31 @@
+LinearEmbeddingMatrix   LinearEmbeddingMatrix class
+SCE-assays              Named assay getters and setters
+SCE-combine             Combining or subsetting SingleCellExperiment
+                        objects
+SCE-internals           Internal SingleCellExperiment functions
+SCE-miscellaneous       Miscellaneous SingleCellExperiment methods
+SingleCellExperiment-class
+                        The SingleCellExperiment class
+[,LinearEmbeddingMatrix,ANY-method
+                        LEM subsetting methods
+altExps                 Alternative Experiment methods
+applySCE                Applying over parts of a SingleCellExperiment
+colLabels               Get or set column labels
+colPairs                Column pair methods
+defunct                 Defunct methods
+rbind,LinearEmbeddingMatrix-method
+                        LEM combining methods
+reduced.dim.matrix      The reduced.dim.matrix class
+reducedDims             Reduced dimensions methods
+rowPairs                Row pair methods
+rowSubset               Get or set the row subset
+sampleFactors           LinearEmbeddingMatrix getters/setters
+show,LinearEmbeddingMatrix-method
+                        Miscellaneous LEM methods
+simplifyToSCE           Simplify a list to a single
+                        SingleCellExperiment
+sizeFactors             Size factor methods
+splitAltExps            Split off alternative features
+swapAltExp              Swap main and alternative Experiments
+unsplitAltExps          Unsplit the alternative experiments
+updateObject            Update a SingleCellExperiment object

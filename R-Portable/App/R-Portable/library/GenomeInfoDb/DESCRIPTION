@@ -1,0 +1,54 @@
+Package: GenomeInfoDb
+Title: Utilities for manipulating chromosome names, including modifying
+        them to follow a particular naming style
+Description: Contains data and functions that
+	define and allow translation between different chromosome
+	sequence naming conventions (e.g., "chr1" versus "1"),
+	including a function that attempts to place sequence names in
+	their natural, rather than lexicographic, order.
+biocViews: Genetics, DataRepresentation, Annotation, GenomeAnnotation
+URL: https://bioconductor.org/packages/GenomeInfoDb
+Video: http://youtu.be/wdEjCYSXa7w
+BugReports: https://github.com/Bioconductor/GenomeInfoDb/issues
+Version: 1.34.9
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(
+	person("Sonali", "Arora", role="aut"),
+	person("Martin", "Morgan", role="aut"),
+	person("Marc", "Carlson", role="aut"),
+	person("Hervé", "Pagès", role=c("aut", "cre"),
+		email="hpages.on.github@gmail.com"),
+	person("Prisca Chidimma", "Maduka", role="ctb"),
+	person("Atuhurira Kirabo", "Kakopo", role="ctb"),
+	person("Emmanuel Chigozie", "Elendu", role="ctb"))
+Depends: R (>= 4.0.0), methods, BiocGenerics (>= 0.37.0), S4Vectors (>=
+        0.25.12), IRanges (>= 2.13.12)
+Imports: stats, stats4, utils, RCurl, GenomeInfoDbData
+Suggests: GenomicRanges, Rsamtools, GenomicAlignments, GenomicFeatures,
+        TxDb.Dmelanogaster.UCSC.dm3.ensGene, BSgenome,
+        BSgenome.Scerevisiae.UCSC.sacCer2, BSgenome.Celegans.UCSC.ce2,
+        BSgenome.Hsapiens.NCBI.GRCh38, RUnit, BiocStyle, knitr
+VignetteBuilder: knitr
+Collate: utils.R list_ftp_dir.R rankSeqlevels.R NCBI-utils.R
+        UCSC-utils.R Ensembl-utils.R getChromInfoFromNCBI.R
+        getChromInfoFromUCSC.R getChromInfoFromEnsembl.R
+        loadTaxonomyDb.R mapGenomeBuilds.R seqinfo.R Seqinfo-class.R
+        seqlevelsStyle.R seqlevels-wrappers.R GenomeDescription-class.R
+        zzz.R
+git_url: https://git.bioconductor.org/packages/GenomeInfoDb
+git_branch: RELEASE_3_16
+git_last_commit: 24d7cb9
+git_last_commit_date: 2023-02-02
+Date/Publication: 2023-02-02
+NeedsCompilation: no
+Packaged: 2023-02-02 23:57:11 UTC; biocbuild
+Author: Sonali Arora [aut],
+  Martin Morgan [aut],
+  Marc Carlson [aut],
+  Hervé Pagès [aut, cre],
+  Prisca Chidimma Maduka [ctb],
+  Atuhurira Kirabo Kakopo [ctb],
+  Emmanuel Chigozie Elendu [ctb]
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Built: R 4.2.2; ; 2023-02-03 12:50:14 UTC; windows

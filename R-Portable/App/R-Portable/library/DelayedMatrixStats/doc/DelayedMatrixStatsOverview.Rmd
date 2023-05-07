@@ -1,0 +1,335 @@
+---
+title: "Overview of DelayedMatrixStats"
+author: "Peter Hickey"
+date: "Modified: 06 Feb 2021 Compiled: `r format(Sys.Date(), '%d %b %Y')`"
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Overview of DelayedMatrixStats}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE, setup}
+knitr::opts_chunk$set(echo = TRUE, comment = "#>", collapse = TRUE,
+                      message = FALSE)
+library(BiocStyle)
+```
+
+# Overview
+
+`r Biocpkg("DelayedMatrixStats")` ports the `r CRANpkg("matrixStats")` API 
+to work with *DelayedMatrix* objects from the `r Biocpkg("DelayedArray")` 
+package. It provides high-performing functions operating on rows and columns of 
+*DelayedMatrix* objects, including all subclasses such as *RleArray* (from the 
+`r Biocpkg("DelayedArray")` package) and *HDF5Array* (from the 
+`r Biocpkg("HDF5Array")`) as well as supporting all types of *seeds*, such as 
+*matrix* (from the *base* package) and *Matrix* (from the `r CRANpkg("Matrix")` 
+package).
+
+# How can DelayedMatrixStats help me?
+
+The `r Biocpkg("DelayedArray")` package allows developers to store array-like 
+data using in-memory or on-disk representations (e.g., in HDF5 files) and 
+provides a common and familiar array-like interface for interacting with these 
+data.
+
+The `r Biocpkg("DelayedMatrixStats")` package is designed to make life easier 
+for Bioconductor developers wanting to use `r Biocpkg("DelayedArray")` by 
+providing a rich set of column-wise and row-wise summary functions. 
+
+We briefly demonstrate and explain these two features using a simple example.
+We'll simulate some (unrealistic) RNA-seq read counts data from 10,000 genes 
+and 20 samples and store it on disk as a *HDF5Array*:
+
+```{r data_sim, message = FALSE}
+library(DelayedArray)
+
+x <- do.call(cbind, lapply(1:20, function(j) {
+  rpois(n = 10000, lambda = sample(20:40, 10000, replace = TRUE))
+}))
+colnames(x) <- paste0("S", 1:20)
+x <- realize(x, "HDF5Array")
+x
+```
+
+Suppose you wish to compute the standard deviation of the read counts for each 
+gene. 
+
+You might think to use `apply()` like in the following:
+
+```{r apply}
+system.time(row_sds <- apply(x, 1, sd))
+head(row_sds)
+```
+
+This works, but takes quite a while.
+
+Or perhaps you already know that the `r CRANpkg("matrixStats")` package 
+provides a `rowSds()` function:
+
+```{r matrixStats, error = TRUE}
+matrixStats::rowSds(x)
+```
+
+Unfortunately (and perhaps unsurprisingly) this doesn't work. 
+`r CRANpkg("matrixStats")` is designed for use on in-memory *matrix* objects. 
+Well, why don't we just first realize our data in-memory and then use 
+`r CRANpkg("matrixStats")`
+
+```{r realization}
+system.time(row_sds <- matrixStats::rowSds(as.matrix(x)))
+head(row_sds)
+```
+
+This works and is many times faster than the `apply()`-based approach! However, 
+it rather defeats the purpose of using a *HDF5Array* for storing the 
+data since we have to bring all the data into memory at once to compute the 
+result. 
+
+Instead, we can use `DelayedMatrixStats::rowSds()`, which has the speed 
+benefits of `matrixStats::rowSds()`[^speed] but without having to load the 
+entire data into memory at once[^block_size]:
+
+[^speed]: In fact, it currently uses `matrixStats::rowSds()` under the hood.
+[^block_size]: In this case, it loads blocks of data row-by-row. The amount of 
+data loaded into memory at any one time is controlled by the 
+*default block size* global setting; see `?DelayedArray::getAutoBlockSize`
+for details. Notably, if the data are small enough (and the default block size
+is large enough) then all the data is loaded as a single block, but this
+approach  generalizes and still works when the data are too large to be
+loaded into memory in one block.
+
+```{r DelayedMatrixStats}
+library(DelayedMatrixStats)
+
+system.time(row_sds <- rowSds(x))
+head(row_sds)
+```
+
+Finally, by using `r Biocpkg("DelayedMatrixStats")` we can use the same code, 
+(`colMedians(x)`) regardless of whether the input is an ordinary *matrix* or a 
+*DelayedMatrix*. This is useful for packages wishing to support both types of 
+objects, e.g., packages wanting to retain backward compatibility or during a 
+transition period from *matrix*-based to *DelayeMatrix*-based objects.
+
+# Supported methods
+
+The initial release of `r Biocpkg("DelayedMatrixStats")` supports the complete 
+column-wise and row-wise API `r CRANpkg("matrixStats")` API[^api]. Please 
+see the `r CRANpkg("matrixStats")` vignette 
+([available online](https://cran.r-project.org/package=matrixStats/vignettes/matrixStats-methods.html)) 
+for a summary these methods. The following table documents the API coverage and 
+availability of ['seed-aware' methods](#seed_aware_methods) in the current 
+version of `r Biocpkg("DelayedMatrixStats")`, where:
+
+- ✔ = Implemented in `r Biocpkg("DelayedMatrixStats")`
+- ☑️ = Implemented in [**DelayedArray**](http://bioconductor.org/packages/DelayedArray/) or [**sparseMatrixStats**](http://bioconductor.org/packages/sparseMatrixStats/)
+- ❌ = Not yet implemented
+
+[^api]: Some of the API is covered via inheritance to functionality in `r Biocpkg("DelayedArray")`
+
+
+```{r API, echo = FALSE}
+matrixStats <- sort(
+  c("colsum", "rowsum", grep("^(col|row)", 
+                             getNamespaceExports("matrixStats"), 
+                             value = TRUE)))
+sparseMatrixStats <- getNamespaceExports("sparseMatrixStats")
+DelayedMatrixStats <- getNamespaceExports("DelayedMatrixStats")
+DelayedArray <- getNamespaceExports("DelayedArray")
+
+api_df <- data.frame(
+  Method = paste0("`", matrixStats, "()`"),
+  `Block processing` = ifelse(
+    matrixStats %in% DelayedMatrixStats,
+    "✔",
+    ifelse(matrixStats %in% c(DelayedArray, sparseMatrixStats), "☑️", "❌")),
+  `_base::matrix_ optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "matrix_OR_array_OR_table_OR_numeric"), 
+           "✔", 
+           "❌"),
+  `_Matrix::dgCMatrix_ optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "xgCMatrix") | sapply(matrixStats, existsMethod, signature = "dgCMatrix"), 
+           "✔", 
+           "❌"),
+  `_Matrix::lgCMatrix_ optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "xgCMatrix") | sapply(matrixStats, existsMethod, signature = "lgCMatrix"), 
+           "✔", 
+           "❌"),
+  `_DelayedArray::RleArray_ (_SolidRleArraySeed_) optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "SolidRleArraySeed"),
+           "✔", 
+           "❌"),
+  `_DelayedArray::RleArray_  (_ChunkedRleArraySeed_) optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "ChunkedRleArraySeed"),
+           "✔", 
+           "❌"),
+  `_HDF5Array::HDF5Matrix_ optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "HDF5ArraySeed"),
+           "✔", 
+           "❌"),
+  `_base::data.frame_ optimized` = 
+    ifelse(sapply(matrixStats, existsMethod, signature = "data.frame"),
+           "✔", 
+           "❌"),
+  `_S4Vectors::DataFrame_ optimized` =
+    ifelse(sapply(matrixStats, existsMethod, signature = "DataFrame"),
+           "✔", 
+           "❌"), 
+  check.names = FALSE)
+knitr::kable(api_df, row.names = FALSE)
+```
+
+# 'Seed-aware' methods {#seed_aware_methods}
+
+As well as offering a familiar API, `r Biocpkg("DelayedMatrixStats")` provides 
+'seed-aware' methods that are optimized for specific types of *DelayedMatrix* 
+objects. 
+
+To illustrate this idea, we will compare two ways of computing the column sums 
+of a *DelayedMatrix* object:
+
+1. The 'block-processing' strategy. This was developed in the `r Biocpkg("DelayedArray")` package and is available for all methods in the `r Biocpkg("DelayedMatrixStats")` through the `force_block_processing` argument
+2. The 'seed-aware' strategy. This is implemented in the `r Biocpkg("DelayedMatrixStats")` and is optimized for both speed and memory but only for *DelayedMatrix* objects with certain types of *seed*.
+
+We will demonstrate this by computing the column sums matrices with 20,000 rows 
+and 600 columns where the data have different structure and are stored in 
+*DelayedMatrix* objects with different types of seed:
+
+- Dense data with values in $(0, 1)$ using an ordinary _matrix_ as the seed
+- Sparse data with values in $[0, 1)$, where $60\%$ are zeros, using a _dgCMatrix_, a sparse matrix representation from the `r CRANpkg("Matrix")` package, as the seed
+- Dense data in ${0, 1, \ldots, 100}$, where there are multiple runs of identical values, using a _RleArraySeed_ from the `r Biocpkg("DelayedArray")` package as the seed
+
+We use the `r CRANpkg("microbenchmark")` package to measure running time and 
+the `r CRANpkg("profmem")` package to measure the total memory allocations of 
+each method. 
+
+In each case, the 'seed-aware' method is many times faster and allocates 
+substantially lower total memory.
+
+```{r benchmarking, message = FALSE, echo = TRUE, error = TRUE}
+library(DelayedMatrixStats)
+library(sparseMatrixStats)
+library(microbenchmark)
+library(profmem)
+
+set.seed(666)
+
+# -----------------------------------------------------------------------------
+# Dense with values in (0, 1)
+# Fast, memory-efficient column sums of DelayedMatrix with ordinary matrix seed
+#
+
+# Generate some data
+dense_matrix <- matrix(runif(20000 * 600), 
+                       nrow = 20000,
+                       ncol = 600)
+
+# Benchmark
+dm_matrix <- DelayedArray(dense_matrix)
+class(seed(dm_matrix))
+dm_matrix
+microbenchmark(
+  block_processing = colSums2(dm_matrix, force_block_processing = TRUE),
+  seed_aware = colSums2(dm_matrix),
+  times = 10)
+total(profmem(colSums2(dm_matrix, force_block_processing = TRUE)))
+total(profmem(colSums2(dm_matrix)))
+
+# -----------------------------------------------------------------------------
+# Sparse (60% zero) with values in (0, 1)
+# Fast, memory-efficient column sums of DelayedMatrix with ordinary matrix seed
+#
+
+# Generate some data
+sparse_matrix <- dense_matrix
+zero_idx <- sample(length(sparse_matrix), 0.6 * length(sparse_matrix))
+sparse_matrix[zero_idx] <- 0
+
+# Benchmark
+dm_dgCMatrix <- DelayedArray(Matrix(sparse_matrix, sparse = TRUE))
+class(seed(dm_dgCMatrix))
+dm_dgCMatrix
+microbenchmark(
+  block_processing = colSums2(dm_dgCMatrix, force_block_processing = TRUE),
+  seed_aware = colSums2(dm_dgCMatrix),
+  times = 10)
+total(profmem(colSums2(dm_dgCMatrix, force_block_processing = TRUE)))
+total(profmem(colSums2(dm_dgCMatrix)))
+
+# -----------------------------------------------------------------------------
+# Dense with values in {0, 100} featuring runs of identical values
+# Fast, memory-efficient column sums of DelayedMatrix with Rle-based seed
+#
+
+# Generate some data
+runs <- rep(sample(100, 500000, replace = TRUE), rpois(500000, 100))
+runs <- runs[seq_len(20000 * 600)]
+runs_matrix <- matrix(runs, 
+                      nrow = 20000,
+                      ncol = 600)
+
+# Benchmark
+dm_rle <- RleArray(Rle(runs),
+                   dim = c(20000, 600))
+class(seed(dm_rle))
+dm_rle
+microbenchmark(
+  block_processing = colSums2(dm_rle, force_block_processing = TRUE),
+  seed_aware = colSums2(dm_rle),
+  times = 10)
+total(profmem(colSums2(dm_rle, force_block_processing = TRUE)))
+total(profmem(colSums2(dm_rle)))
+```
+
+The development of 'seed-aware' methods is ongoing work (see the [Roadmap](#roadmap)), and for now only a few methods and seed-types have a 
+'seed-aware' method.
+
+An extensive set of benchmarks is under development at [http://peterhickey.org/BenchmarkingDelayedMatrixStats/](http://peterhickey.org/BenchmarkingDelayedMatrixStats/). 
+
+# Delayed operations
+
+A key feature of a _DelayedArray_ is the ability to register 'delayed 
+operations'. For example, let's compute `sin(dm_matrix)`:
+
+```{r sin}
+system.time(sin_dm_matrix <- sin(dm_matrix))
+```
+
+This instantaneous because the operation is not actually performed, rather 
+it is registered and only performed when the object is _realized_. All methods 
+in `r Biocpkg("DelayedMatrixStats")` will correctly realise these delayed 
+operations before computing the final result. For example, let's compute  
+`colSums2(sin_dm_matrix)` and compare check we get the correct answer:
+
+```{r colSums2_sin}
+all.equal(colSums2(sin_dm_matrix), colSums(sin(as.matrix(dm_matrix))))
+```
+
+# Roadmap {#roadmap}
+
+The initial version of `r Biocpkg("DelayedMatrixStats")` provides complete 
+coverage of the `r CRANpkg("matrixStats")` column-wise and row-wise API[^api], 
+allowing package developers to use these functions with _DelayedMatrix_ objects 
+as well as with ordinary _matrix_ objects. This should simplify package 
+development and assist authors to support to their software for large datasets 
+stored in disk-backed data structures such as _HDF5Array_. Such large datasets 
+are increasingly common with the rise of single-cell genomics.
+
+Future releases of `r Biocpkg("DelayedMatrixStats")` will improve the 
+performance of these methods, specifically by developing additional 'seed-aware' 
+methods. The plan is to prioritise commonly used methods (e.g.,  
+`colMeans2()`/`rowMeans2()`, `colSums2()`/`rowSums2()`, etc.) and the 
+development of 'seed-aware' methods for the _HDF5Matrix_ class. To do so, we 
+will leverage the `r Biocpkg("beachmat")` package. Proof-of-concept code 
+has shown that this can greatly increase the performance when analysing such 
+disk-backed data.
+
+Importantly, all package developers using methods from 
+`r Biocpkg("DelayedMatrixStats")` will immediately gain from performance 
+improvements to these low-level routines. By using 
+`r Biocpkg("DelayedMatrixStats")`, package developers will be able to focus on 
+higher level programming tasks and address important scientific questions and 
+technological challenges in high-throughput biology.

@@ -1,0 +1,243 @@
+AddAzimuthResults       Add Azimuth Results
+AddAzimuthScores        Add Azimuth Scores
+AddModuleScore          Calculate module scores for feature expression
+                        programs in single cells
+AggregateExpression     Aggregated feature expression by identity class
+AnchorSet-class         The AnchorSet Class
+AnnotateAnchors         Add info to anchor matrix
+Assay-class             The Assay Class
+AugmentPlot             Augments ggplot2-based plot with a PNG image.
+AutoPointSize           Automagically calculate a point size for
+                        ggplot2-based scatter plots
+AverageExpression       Averaged feature expression by identity class
+BGTextColor             Determine text color based on background color
+BarcodeInflectionsPlot
+                        Plot the Barcode Distribution and Calculated
+                        Inflection Points
+BlackAndWhite           Create a custom color palette
+BuildClusterTree        Phylogenetic Analysis of Identity Classes
+CalcPerturbSig          Calculate a perturbation Signature
+CalculateBarcodeInflections
+                        Calculate the Barcode Distribution Inflection
+CaseMatch               Match the case of character vectors
+CellCycleScoring        Score cell cycle phases
+CellScatter             Cell-cell scatter plot
+CellSelector            Cell Selector
+Cells.SCTModel          Get Cell Names
+CellsByImage            Get a vector of cell names associated with an
+                        image (or set of images)
+CollapseEmbeddingOutliers
+                        Move outliers towards center on dimension
+                        reduction plot
+CollapseSpeciesExpressionMatrix
+                        Slim down a multi-species expression matrix,
+                        when only one species is primarily of
+                        interenst.
+ColorDimSplit           Color dimensional reduction plot by tree split
+CombinePlots            Combine ggplot2-based plots into a single plot
+CreateSCTAssayObject    Create a SCT Assay object
+CustomDistance          Run a custom distance function on an input data
+                        matrix
+DEenrichRPlot           DE and EnrichR pathway visualization barplot
+DietSeurat              Slim down a Seurat object
+DimHeatmap              Dimensional reduction heatmap
+DimPlot                 Dimensional reduction plot
+DimReduc-class          The DimReduc Class
+DiscretePalette         Discrete colour palettes from pals
+DoHeatmap               Feature expression heatmap
+DotPlot                 Dot plot visualization
+ElbowPlot               Quickly Pick Relevant Dimensions
+ExpMean                 Calculate the mean of logged values
+ExpSD                   Calculate the standard deviation of logged
+                        values
+ExpVar                  Calculate the variance of logged values
+FastRowScale            Scale and/or center matrix rowwise
+FeaturePlot             Visualize 'features' on a dimensional reduction
+                        plot
+FeatureScatter          Scatter plot of single cell data
+FilterSlideSeq          Filter stray beads from Slide-seq puck
+FindAllMarkers          Gene expression markers for all identity
+                        classes
+FindClusters            Cluster Determination
+FindConservedMarkers    Finds markers that are conserved between the
+                        groups
+FindIntegrationAnchors
+                        Find integration anchors
+FindMarkers             Gene expression markers of identity classes
+FindMultiModalNeighbors
+                        Construct weighted nearest neighbor graph
+FindNeighbors           (Shared) Nearest-neighbor graph construction
+FindSpatiallyVariableFeatures
+                        Find spatially variable features
+FindSubCluster          Find subclusters under one cluster
+FindTransferAnchors     Find transfer anchors
+FindVariableFeatures    Find variable features
+FoldChange              Fold Change
+GetAssay                Get an Assay object from a given Seurat object.
+GetImage.SlideSeq       Get Image Data
+GetIntegrationData      Get integration data
+GetResidual             Calculate pearson residuals of features not in
+                        the scale.data
+GetTissueCoordinates.SlideSeq
+                        Get Tissue Coordinates
+GetTransferPredictions
+                        Get the predicted identity
+Graph-class             The Graph Class
+GroupCorrelation        Compute the correlation of features broken down
+                        by groups with another covariate
+GroupCorrelationPlot    Boxplot of correlation of a variable (e.g.
+                        number of UMIs) with expression data
+HTODemux                Demultiplex samples based on data from cell
+                        'hashing'
+HTOHeatmap              Hashtag oligo heatmap
+HVFInfo.SCTAssay        Get Variable Feature Information
+HoverLocator            Hover Locator
+IFeaturePlot            Visualize features in dimensional reduction
+                        space interactively
+ISpatialDimPlot         Visualize clusters spatially and interactively
+ISpatialFeaturePlot     Visualize features spatially and interactively
+ImageDimPlot            Spatial Cluster Plots
+ImageFeaturePlot        Spatial Feature Plots
+IntegrateData           Integrate data
+IntegrateEmbeddings     Integrate low dimensional embeddings
+IntegrationAnchorSet-class
+                        The IntegrationAnchorSet Class
+IntegrationData-class   The IntegrationData Class
+JackStraw               Determine statistical significance of PCA
+                        scores.
+JackStrawData-class     The JackStrawData Class
+JackStrawPlot           JackStraw Plot
+L2CCA                   L2-Normalize CCA
+L2Dim                   L2-normalization
+LabelClusters           Label clusters on a ggplot2-based scatter plot
+LabelPoints             Add text labels to a ggplot2 plot
+LinkedPlots             Visualize spatial and clustering (dimensional
+                        reduction) data in a linked, interactive
+                        framework
+Load10X_Spatial         Load a 10x Genomics Visium Spatial Experiment
+                        into a 'Seurat' object
+LoadAnnoyIndex          Load the Annoy index file
+LoadSTARmap             Load STARmap data
+LoadXenium              Read and Load 10x Genomics Xenium in-situ data
+LocalStruct             Calculate the local structure preservation
+                        metric
+LogNormalize            Normalize raw data
+LogVMR                  Calculate the variance to mean ratio of logged
+                        values
+MULTIseqDemux           Demultiplex samples based on classification
+                        method from MULTI-seq (McGinnis et al., bioRxiv
+                        2018)
+MapQuery                Map query cells to a reference
+MappingScore            Metric for evaluating mapping success
+MetaFeature             Aggregate expression of multiple features into
+                        a single feature
+MinMax                  Apply a ceiling and floor to all values in a
+                        matrix
+MixingMetric            Calculates a mixing metric
+MixscapeHeatmap         Differential expression heatmap for mixscape
+MixscapeLDA             Linear discriminant analysis on pooled CRISPR
+                        screen data.
+ModalityWeights-class   The ModalityWeights Class
+NNPlot                  Highlight Neighbors in DimPlot
+Neighbor-class          The Neighbor Class
+NormalizeData           Normalize Data
+PCASigGenes             Significant genes from a PCA
+PercentAbove            Calculate the percentage of a vector above some
+                        threshold
+PercentageFeatureSet    Calculate the percentage of all counts that
+                        belong to a given set of features
+PlotClusterTree         Plot clusters as a tree
+PlotPerturbScore        Function to plot perturbation score
+                        distributions.
+PolyDimPlot             Polygon DimPlot
+PolyFeaturePlot         Polygon FeaturePlot
+PredictAssay            Predict value from nearest neighbors
+PrepLDA                 Function to prepare data for Linear
+                        Discriminant Analysis.
+PrepSCTFindMarkers      Prepare object to run differential expression
+                        on SCT assay with multiple models
+PrepSCTIntegration      Prepare an object list normalized with
+                        sctransform for integration.
+ProjectDim              Project Dimensional reduction onto full dataset
+ProjectUMAP             Project query into UMAP coordinates of a
+                        reference
+Radius.SlideSeq         Get Spot Radius
+Read10X                 Load in data from 10X
+Read10X_Image           Load a 10X Genomics Visium Image
+Read10X_h5              Read 10X hdf5 file
+ReadAkoya               Read and Load Akoya CODEX data
+ReadMtx                 Load in data from remote or local mtx files
+ReadNanostring          Read and Load Nanostring SMI data
+ReadParseBio            Read output from Parse Biosciences
+ReadSTARsolo            Read output from STARsolo
+ReadSlideSeq            Load Slide-seq spatial data
+ReadVitessce            Read Data From Vitessce
+ReadVizgen              Read and Load MERFISH Input from Vizgen
+RegroupIdents           Regroup idents based on meta.data info
+RelativeCounts          Normalize raw data to fractions
+RenameCells.SCTAssay    Rename Cells in an Object
+RidgePlot               Single cell ridge plot
+RunCCA                  Perform Canonical Correlation Analysis
+RunICA                  Run Independent Component Analysis on gene
+                        expression
+RunLDA                  Run Linear Discriminant Analysis
+RunMarkVario            Run the mark variogram computation on a given
+                        position matrix and expression matrix.
+RunMixscape             Run Mixscape
+RunMoransI              Compute Moran's I value.
+RunPCA                  Run Principal Component Analysis
+RunSLSI                 Run Supervised Latent Semantic Indexing
+RunSPCA                 Run Supervised Principal Component Analysis
+RunTSNE                 Run t-distributed Stochastic Neighbor Embedding
+RunUMAP                 Run UMAP
+SCTAssay-class          The SCTModel Class
+SCTResults              Get SCT results from an Assay
+SCTransform             Use regularized negative binomial regression to
+                        normalize UMI count data
+STARmap-class           The STARmap class
+SampleUMI               Sample UMI
+SaveAnnoyIndex          Save the Annoy index
+ScaleData               Scale and center the data.
+ScaleFactors            Get image scale factors
+ScoreJackStraw          Compute Jackstraw scores significance.
+SelectIntegrationFeatures
+                        Select integration features
+SetIntegrationData      Set integration data
+SetQuantile             Find the Quantile of Data
+Seurat-class            The Seurat Class
+Seurat-package          Seurat: Tools for Single Cell Genomics
+SeuratCommand-class     The SeuratCommand Class
+SeuratTheme             Seurat Themes
+SlideSeq-class          The SlideSeq class
+SpatialImage-class      The SpatialImage Class
+SpatialPlot             Visualize spatial clustering and expression
+                        data.
+SplitObject             Splits object into a list of subsetted objects.
+SubsetByBarcodeInflections
+                        Subset a Seurat Object based on the Barcode
+                        Distribution Inflection Points
+TopCells                Find cells with highest scores for a given
+                        dimensional reduction technique
+TopFeatures             Find features with highest scores for a given
+                        dimensional reduction technique
+TopNeighbors            Get nearest neighbors for given cell
+TransferAnchorSet-class
+                        The TransferAnchorSet Class
+TransferData            Transfer data
+UpdateSCTAssays         Update pre-V4 Assays generated with SCTransform
+                        in the Seurat to the new SCTAssay class
+UpdateSymbolList        Get updated synonyms for gene symbols
+VariableFeaturePlot     View variable features
+VisiumV1-class          The VisiumV1 class
+VizDimLoadings          Visualize Dimensional Reduction genes
+VlnPlot                 Single cell violin plot
+as.CellDataSet          Convert objects to CellDataSet objects
+as.Seurat.CellDataSet   Convert objects to 'Seurat' objects
+as.SingleCellExperiment
+                        Convert objects to SingleCellExperiment objects
+as.sparse.H5Group       Cast to Sparse
+cc.genes                Cell cycle genes
+cc.genes.updated.2019   Cell cycle genes: 2019 update
+contrast-theory         Get the intensity and/or luminance of a color
+merge.SCTAssay          Merge SCTAssay objects
+subset.AnchorSet        Subset an AnchorSet object
