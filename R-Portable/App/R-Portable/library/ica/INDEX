@@ -1,7 +1,0 @@
-acy                     Amari-Cichocki-Yang Error
-ica                     ICA via FastICA, Infomax, or JADE
-icafast                 ICA via FastICA Algorithm
-icaimax                 ICA via Infomax Algorithm
-icajade                 ICA via JADE Algorithm
-icaplot                 Plot Densities of Source Signal Distributions
-icasamp                 Sample from Various Source Signal Distributions
