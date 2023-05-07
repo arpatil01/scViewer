@@ -1,3 +1,0 @@
-RcppTOML-package        R Access to Parser for TOML (Tom's Obvious
-                        Markup Language)
-parseTOML               Parse a TOML file
