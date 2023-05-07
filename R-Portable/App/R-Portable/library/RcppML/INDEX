@@ -1,0 +1,9 @@
+RcppML                  RcppML: Rcpp Machine Learning Library
+bipartition             Bipartition a sample set
+dclust                  Divisive clustering
+getRcppMLthreads        Get the number of threads RcppML should use
+mse                     Mean Squared Error loss of a factor model
+nmf                     Non-negative matrix factorization
+nnls                    Non-negative least squares
+project                 Project a linear factor model
+setRcppMLthreads        Set the number of threads RcppML should use

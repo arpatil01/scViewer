@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Single-Cell RNA-Seq Analysis Utilities</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Single-Cell RNA-Seq Analysis Utilities
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;scuttle&rsquo; version 1.8.4</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.assignIndicesToWorkers</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.bpNotSharedOrUp</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.checkCountMatrix</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.guessMinMean</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.ranksafeQR</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.splitColsByWorkers</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.splitRowsByWorkers</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.splitVectorByWorkers</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.subset2index</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">.unpackLists</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="addPerCellQCMetrics.html">addPerCellQC</a></td>
+<td>Add QC metrics to a SummarizedExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="addPerCellQCMetrics.html">addPerCellQCMetrics</a></td>
+<td>Add QC metrics to a SummarizedExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="addPerCellQCMetrics.html">addPerFeatureQC</a></td>
+<td>Add QC metrics to a SummarizedExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="addPerCellQCMetrics.html">addPerFeatureQCMetrics</a></td>
+<td>Add QC metrics to a SummarizedExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="aggregateAcrossCells.html">aggregateAcrossCells</a></td>
+<td>Aggregate data across groups of cells</td></tr>
+<tr><td style="width: 25%;"><a href="aggregateAcrossCells.html">aggregateAcrossCells-method</a></td>
+<td>Aggregate data across groups of cells</td></tr>
+<tr><td style="width: 25%;"><a href="aggregateAcrossFeatures.html">aggregateAcrossFeatures</a></td>
+<td>Aggregate feature sets in a SummarizedExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="calculateAverage.html">calculateAverage</a></td>
+<td>Calculate per-feature average counts</td></tr>
+<tr><td style="width: 25%;"><a href="calculateAverage.html">calculateAverage-method</a></td>
+<td>Calculate per-feature average counts</td></tr>
+<tr><td style="width: 25%;"><a href="calculateCPM.html">calculateCPM</a></td>
+<td>Calculate CPMs</td></tr>
+<tr><td style="width: 25%;"><a href="calculateCPM.html">calculateCPM-method</a></td>
+<td>Calculate CPMs</td></tr>
+<tr><td style="width: 25%;"><a href="calculateFPKM.html">calculateFPKM</a></td>
+<td>Calculate FPKMs</td></tr>
+<tr><td style="width: 25%;"><a href="calculateTPM.html">calculateTPM</a></td>
+<td>Calculate TPMs</td></tr>
+<tr><td style="width: 25%;"><a href="calculateTPM.html">calculateTPM-method</a></td>
+<td>Calculate TPMs</td></tr>
+<tr><td style="width: 25%;"><a href="cleanSizeFactors.html">cleanSizeFactors</a></td>
+<td>Clean out non-positive size factors</td></tr>
+<tr><td style="width: 25%;"><a href="geometricSizeFactors.html">computeGeometricFactors</a></td>
+<td>Compute geometric size factors</td></tr>
+<tr><td style="width: 25%;"><a href="librarySizeFactors.html">computeLibraryFactors</a></td>
+<td>Compute library size factors</td></tr>
+<tr><td style="width: 25%;"><a href="medianSizeFactors.html">computeMedianFactors</a></td>
+<td>Compute median-based size factors</td></tr>
+<tr><td style="width: 25%;"><a href="computePooledFactors.html">computePooledFactors</a></td>
+<td>Normalization by deconvolution</td></tr>
+<tr><td style="width: 25%;"><a href="computeSpikeFactors.html">computeSpikeFactors</a></td>
+<td>Normalization with spike-in counts</td></tr>
+<tr><td style="width: 25%;"><a href="correctGroupSummary.html">correctGroupSummary</a></td>
+<td>Correct group-level summaries</td></tr>
+<tr><td style="width: 25%;"><a href="downsampleBatches.html">downsampleBatches</a></td>
+<td>Downsample batches to equal coverage</td></tr>
+<tr><td style="width: 25%;"><a href="downsampleMatrix.html">downsampleMatrix</a></td>
+<td>Downsample a count matrix</td></tr>
+<tr><td style="width: 25%;"><a href="fitLinearModel.html">fitLinearModel</a></td>
+<td>Fit a linear model</td></tr>
+<tr><td style="width: 25%;"><a href="geometricSizeFactors.html">geometricSizeFactors</a></td>
+<td>Compute geometric size factors</td></tr>
+<tr><td style="width: 25%;"><a href="geometricSizeFactors.html">geometricSizeFactors-method</a></td>
+<td>Compute geometric size factors</td></tr>
+<tr><td style="width: 25%;"><a href="isOutlier.html">isOutlier</a></td>
+<td>Identify outlier values</td></tr>
+<tr><td style="width: 25%;"><a href="librarySizeFactors.html">librarySizeFactors</a></td>
+<td>Compute library size factors</td></tr>
+<tr><td style="width: 25%;"><a href="librarySizeFactors.html">librarySizeFactors-method</a></td>
+<td>Compute library size factors</td></tr>
+<tr><td style="width: 25%;"><a href="logNormCounts.html">logNormCounts</a></td>
+<td>Compute log-normalized expression values</td></tr>
+<tr><td style="width: 25%;"><a href="logNormCounts.html">logNormCounts-method</a></td>
+<td>Compute log-normalized expression values</td></tr>
+<tr><td style="width: 25%;"><a href="makePerCellDF.html">makePerCellDF</a></td>
+<td>Create a per-cell data.frame</td></tr>
+<tr><td style="width: 25%;"><a href="makePerFeatureDF.html">makePerFeatureDF</a></td>
+<td>Create a per-feature data.frame</td></tr>
+<tr><td style="width: 25%;"><a href="medianSizeFactors.html">medianSizeFactors</a></td>
+<td>Compute median-based size factors</td></tr>
+<tr><td style="width: 25%;"><a href="medianSizeFactors.html">medianSizeFactors-method</a></td>
+<td>Compute median-based size factors</td></tr>
+<tr><td style="width: 25%;"><a href="mockSCE.html">mockSCE</a></td>
+<td>Mock up a SingleCellExperiment</td></tr>
+<tr><td style="width: 25%;"><a href="normalizeCounts.html">normalizeCounts</a></td>
+<td>Compute normalized expression values</td></tr>
+<tr><td style="width: 25%;"><a href="normalizeCounts.html">normalizeCounts-method</a></td>
+<td>Compute normalized expression values</td></tr>
+<tr><td style="width: 25%;"><a href="numDetectedAcrossCells.html">numDetectedAcrossCells</a></td>
+<td>Number of detected expression values per group of cells</td></tr>
+<tr><td style="width: 25%;"><a href="numDetectedAcrossCells.html">numDetectedAcrossCells-method</a></td>
+<td>Number of detected expression values per group of cells</td></tr>
+<tr><td style="width: 25%;"><a href="numDetectedAcrossFeatures.html">numDetectedAcrossFeatures</a></td>
+<td>Number of detected expression values per group of features</td></tr>
+<tr><td style="width: 25%;"><a href="numDetectedAcrossFeatures.html">numDetectedAcrossFeatures-method</a></td>
+<td>Number of detected expression values per group of features</td></tr>
+<tr><td style="width: 25%;"><a href="isOutlier.html">outlier.filter</a></td>
+<td>Identify outlier values</td></tr>
+<tr><td style="width: 25%;"><a href="isOutlier.html">outlier.filter-class</a></td>
+<td>Identify outlier values</td></tr>
+<tr><td style="width: 25%;"><a href="perCellQCFilters.html">perCellQCFilters</a></td>
+<td>Compute filters for low-quality cells</td></tr>
+<tr><td style="width: 25%;"><a href="perCellQCMetrics.html">perCellQCMetrics</a></td>
+<td>Per-cell quality control metrics</td></tr>
+<tr><td style="width: 25%;"><a href="perCellQCMetrics.html">perCellQCMetrics-method</a></td>
+<td>Per-cell quality control metrics</td></tr>
+<tr><td style="width: 25%;"><a href="perFeatureQCMetrics.html">perFeatureQCMetrics</a></td>
+<td>Per-feature quality control metrics</td></tr>
+<tr><td style="width: 25%;"><a href="perFeatureQCMetrics.html">perFeatureQCMetrics-method</a></td>
+<td>Per-feature quality control metrics</td></tr>
+<tr><td style="width: 25%;"><a href="computePooledFactors.html">pooledSizeFactors</a></td>
+<td>Normalization by deconvolution</td></tr>
+<tr><td style="width: 25%;"><a href="computePooledFactors.html">pooledSizeFactors-method</a></td>
+<td>Normalization by deconvolution</td></tr>
+<tr><td style="width: 25%;"><a href="quickPerCellQC.html">quickPerCellQC</a></td>
+<td>Quick cell-level QC</td></tr>
+<tr><td style="width: 25%;"><a href="quickPerCellQC.html">quickPerCellQC-method</a></td>
+<td>Quick cell-level QC</td></tr>
+<tr><td style="width: 25%;"><a href="readSparseCounts.html">readSparseCounts</a></td>
+<td>Read sparse count matrix from file</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-pkg.html">scuttle-pkg</a></td>
+<td>Single-cell utilities</td></tr>
+<tr><td style="width: 25%;"><a href="scuttle-utils.html">scuttle-utils</a></td>
+<td>Developer utilities</td></tr>
+<tr><td style="width: 25%;"><a href="sumCountsAcrossCells.html">sumCountsAcrossCells</a></td>
+<td>Sum expression across groups of cells</td></tr>
+<tr><td style="width: 25%;"><a href="sumCountsAcrossCells.html">sumCountsAcrossCells-method</a></td>
+<td>Sum expression across groups of cells</td></tr>
+<tr><td style="width: 25%;"><a href="sumCountsAcrossFeatures.html">sumCountsAcrossFeatures</a></td>
+<td>Sum counts across feature sets</td></tr>
+<tr><td style="width: 25%;"><a href="sumCountsAcrossFeatures.html">sumCountsAcrossFeatures-method</a></td>
+<td>Sum counts across feature sets</td></tr>
+<tr><td style="width: 25%;"><a href="summarizeAssayByGroup.html">summarizeAssayByGroup</a></td>
+<td>Summarize an assay by group</td></tr>
+<tr><td style="width: 25%;"><a href="summarizeAssayByGroup.html">summarizeAssayByGroup-method</a></td>
+<td>Summarize an assay by group</td></tr>
+<tr><td style="width: 25%;"><a href="uniquifyFeatureNames.html">uniquifyFeatureNames</a></td>
+<td>Make feature names unique</td></tr>
+<tr><td style="width: 25%;"><a href="isOutlier.html">[.outlier.filter</a></td>
+<td>Identify outlier values</td></tr>
+</table>
+</div></body></html>

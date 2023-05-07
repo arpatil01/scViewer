@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Combine more images together</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Combine more images together</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scattermore)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="fl">1e5</span>), <span class="fu">rnorm</span>(<span class="fl">1e5</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">scatter_points_rgbwt</span>(points, <span class="at">RGBA=</span> <span class="fu">c</span>(<span class="dv">64</span>,<span class="dv">128</span>,<span class="dv">192</span>,<span class="dv">50</span>), <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">scatter_points_rgbwt</span>(points, <span class="at">RGBA=</span> <span class="fu">c</span>(<span class="dv">192</span>,<span class="dv">128</span>,<span class="dv">64</span>,<span class="dv">50</span>), <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>))</span></code></pre></div>
+<div id="merge-two-rgbwt-matrices" class="section level2">
+<h2>Merge two rgbwt matrices</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">merge_rgbwt</span>(l)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>raster <span class="ot">&lt;-</span> <span class="fu">rgba_int_to_raster</span>(<span class="fu">rgbwt_to_rgba_int</span>(merged))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(raster, <span class="at">interpolate=</span>F)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="blend-two-rgba-float-matrices" class="section level2">
+<h2>Blend two rgba float matrices</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p1_frgba <span class="ot">&lt;-</span> <span class="fu">rgbwt_to_rgba_float</span>(p1)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p2_frgba <span class="ot">&lt;-</span> <span class="fu">rgbwt_to_rgba_float</span>(p2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">list</span>(p1_frgba, p2_frgba)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>blended <span class="ot">&lt;-</span> <span class="fu">blend_rgba_float</span>(l)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>raster <span class="ot">&lt;-</span> <span class="fu">rgba_int_to_raster</span>(<span class="fu">rgba_float_to_rgba_int</span>(blended))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(raster, <span class="at">interpolate=</span>F)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

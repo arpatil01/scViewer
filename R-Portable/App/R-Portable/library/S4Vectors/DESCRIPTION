@@ -1,0 +1,55 @@
+Package: S4Vectors
+Title: Foundation of vector-like and list-like containers in
+        Bioconductor
+Description: The S4Vectors package defines the Vector and List virtual classes
+	and a set of generic functions that extend the semantic of ordinary
+	vectors and lists in R. Package developers can easily implement
+	vector-like or list-like objects as concrete subclasses of Vector or
+	List. In addition, a few low-level concrete subclasses of general
+	interest (e.g. DataFrame, Rle, Factor, and Hits) are implemented in
+	the S4Vectors package itself (many more are implemented in the IRanges
+	package and in other Bioconductor infrastructure packages).
+biocViews: Infrastructure, DataRepresentation
+URL: https://bioconductor.org/packages/S4Vectors
+BugReports: https://github.com/Bioconductor/S4Vectors/issues
+Version: 0.36.2
+License: Artistic-2.0
+Encoding: UTF-8
+Authors@R: c(
+	person("Hervé", "Pagès", role=c("aut", "cre"),
+		email="hpages.on.github@gmail.com"),
+	person("Michael", "Lawrence", role="aut"),
+	person("Patrick", "Aboyoun", role="aut"),
+	person("Aaron", "Lun", role="ctb"))
+Depends: R (>= 4.0.0), methods, utils, stats, stats4, BiocGenerics (>=
+        0.37.0)
+Suggests: IRanges, GenomicRanges, SummarizedExperiment, Matrix,
+        DelayedArray, ShortRead, graph, data.table, RUnit, BiocStyle
+Collate: S4-utils.R show-utils.R utils.R normarg-utils.R bindROWS.R
+        LLint-class.R isSorted.R subsetting-utils.R vector-utils.R
+        integer-utils.R character-utils.R raw-utils.R eval-utils.R
+        map_ranges_to_runs.R RectangularData-class.R Annotated-class.R
+        DataFrame_OR_NULL-class.R Vector-class.R Vector-comparison.R
+        Vector-setops.R Vector-merge.R Hits-class.R Hits-comparison.R
+        Hits-setops.R Rle-class.R Rle-utils.R Factor-class.R
+        List-class.R List-comparison.R splitAsList.R List-utils.R
+        SimpleList-class.R HitsList-class.R DataFrame-class.R
+        DataFrame-combine.R DataFrame-comparison.R DataFrame-utils.R
+        DataFrameFactor-class.R TransposedDataFrame-class.R
+        Pairs-class.R FilterRules-class.R stack-methods.R
+        expand-methods.R aggregate-methods.R shiftApply-methods.R zzz.R
+git_url: https://git.bioconductor.org/packages/S4Vectors
+git_branch: RELEASE_3_16
+git_last_commit: 1671008
+git_last_commit_date: 2023-02-25
+Date/Publication: 2023-02-26
+NeedsCompilation: yes
+Packaged: 2023-02-27 02:14:28 UTC; biocbuild
+Author: Hervé Pagès [aut, cre],
+  Michael Lawrence [aut],
+  Patrick Aboyoun [aut],
+  Aaron Lun [ctb]
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Built: R 4.2.2; x86_64-w64-mingw32; 2023-02-27 13:28:16 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

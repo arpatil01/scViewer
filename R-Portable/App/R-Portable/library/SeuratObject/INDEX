@@ -1,0 +1,98 @@
+AddMetaData             Add in metadata associated with either cells or
+                        features.
+Assay-class             The Assay Class
+Assay-methods           'Assay' Methods
+AssayData               Get and Set Assay Data
+Assays                  Query Specific Object Types
+AttachDeps              Attach Required Packages
+Boundaries              Get, Set, and Query Segmentation Boundaries
+Cells                   Cell and Feature Names
+CellsByIdentities       Get cell names grouped by identity class
+CellsByImage            Get a vector of cell names associated with an
+                        image (or set of images)
+Centroids-class         The 'Centroids' Class
+Centroids-methods       'Centroids' Methods
+CheckGC                 Conditional Garbage Collection
+Command                 Get SeuratCommands
+CreateAssayObject       Create an Assay object
+CreateCentroids         Create a 'Centroids' Objects
+CreateDimReducObject    Create a DimReduc object
+CreateFOV               Create Spatial Coordinates
+CreateMolecules         Create a 'Molecules' Object
+CreateSegmentation      Create a 'Segmentation' Objects
+CreateSeuratObject      Create a 'Seurat' object
+Crop                    Crop Coordinates
+DefaultAssay            Default Assay
+DefaultDimReduc         Find the default 'DimReduc'
+DefaultFOV              Get and Set the Default FOV
+DimReduc-class          The Dimensional Reduction Class
+DimReduc-methods        'DimReduc' Methods
+Distances               Get the Neighbor nearest neighbors distance
+                        matrix
+Embeddings              Get Cell Embeddings
+FOV-class               The Field of View Object
+FOV-methods             'FOV' Methods
+FetchData               Access cellular data
+FilterObjects           Find Sub-objects of a Certain Class
+GetImage                Get image data
+GetTissueCoordinates    Get tissue coordinates
+Graph-class             The Graph Class
+HVFInfo                 Highly Variable Features
+Idents                  Get, set, and manipulate an object's identity
+                        classes
+Images                  Pull spatial image names
+Index                   Get Neighbor algorithm index
+Indices                 Get Neighbor nearest neighbor index matrices
+IsGlobal                Is an object global/persistent?
+IsMatrixEmpty           Check if a matrix is empty
+IsNamedList             Check List Names
+JS                      Get and set JackStraw information
+JackStrawData-class     The JackStrawData Class
+JackStrawData-methods   'JackStrawData' Methods
+Key                     Get and set object keys
+Loadings                Get and set feature loadings
+LogMap-class            A Logical Map
+LogSeuratCommand        Log a command
+MatchCells              Match Cells
+Misc                    Get and set miscellaneous data
+Molecules-class         The Spatial Molecules Class
+Molecules-methods       'Molecules' Methods
+Neighbor-class          The Neighbor class
+Neighbor-methods        'Neighbor' Methods
+Overlay                 Overlay 'Spatial' Objects Over One Another
+PackageCheck            Check the existence of a package
+Project                 Get and set project information
+Radius                  Get the spot radius from an image
+RandomName              Generate a random name
+RenameAssays            Rename assays in a 'Seurat' object
+RenameCells             Rename cells
+RowMergeSparseMatrices
+                        Merge Sparse Matrices by Row
+Segmentation-class      The 'Segmentation' Class
+Segmentation-methods    'Segmentation' Methods
+Seurat-class            The Seurat Class
+Seurat-methods          Seurat Methods
+SeuratCommand-class     The SeuratCommand Class
+SeuratCommand-methods   'SeuratCommand' Methods
+SeuratObject-package    SeuratObject: Data Structures for Single Cell
+                        Data
+Simplify                Simplify Geometry
+SpatialImage-class      The SpatialImage class
+SpatialImage-methods    'SpatialImage' methods
+Stdev                   Get the standard deviations for an object
+Theta                   Get the offset angle
+Tool                    Get and set additional tool data
+UpdateSeuratObject      Update old Seurat object to accommodate new
+                        features
+UpdateSlots             Update slots in an object
+Version                 Get Version Information
+WhichCells              Identify cells matching certain criteria
+aggregate               Aggregate Molecules into an Expression Matrix
+as.Centroids            Convert Segmentation Layers
+as.Graph                Coerce to a 'Graph' Object
+as.Neighbor             Coerce to a 'Neighbor' Object
+as.Seurat               Coerce to a 'Seurat' Object
+as.sparse               Cast to Sparse
+pbmc_small              A small example version of the PBMC dataset
+s4list                  S4/List Conversion
+set-if-na               Set if 'NA'

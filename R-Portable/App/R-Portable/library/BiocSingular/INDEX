@@ -1,0 +1,11 @@
+BiocSingular-options    Global SVD options
+BiocSingularParam-class
+                        BiocSingularParam classes
+DeferredMatrix          The DeferredMatrix class
+LowRankMatrix           The LowRankMatrix class
+ResidualMatrix          The ResidualMatrix class
+runExactSVD             Exact SVD
+runIrlbaSVD             Approximate SVD with 'irlba'
+runPCA                  Principal components analysis
+runRandomSVD            Approximate SVD with 'rsvd'
+runSVD                  Run SVD

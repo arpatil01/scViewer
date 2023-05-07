@@ -1,0 +1,106 @@
+---
+title: Detecting all neighbors within range
+author: 
+- name: Aaron Lun
+  affiliation: Cancer Research UK Cambridge Institute, Cambridge, United Kingdom
+date: "Revised: 28 September 2018"
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: BiocNeighbors 
+vignette: >
+  %\VignetteIndexEntry{3. Detecting neighbors within range}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+bibliography: ref.bib  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+library(BiocNeighbors)
+```
+
+# Identifying all neighbors within range
+
+Another application of the KMKNN or VP tree algorithms is to identify all neighboring points within a certain distance^[The default here is Euclidean, but again, we can set `distance="Manhattan"` in the `BNPARAM` object if so desired.] of the current point.
+We first mock up some data:
+
+```{r}
+nobs <- 10000
+ndim <- 20
+data <- matrix(runif(nobs*ndim), ncol=ndim)
+```
+
+We apply the `findNeighbors()` function to `data`:
+
+```{r}
+fout <- findNeighbors(data, threshold=1)
+head(fout$index)
+head(fout$distance)
+```
+
+Each entry of the `index` list corresponds to a point in `data` and contains the row indices in `data` that are within `threshold`.
+For example, the 3rd point in `data` has the following neighbors:
+
+```{r}
+fout$index[[3]]
+```
+
+... with the following distances to those neighbors:
+
+```{r}
+fout$distance[[3]]
+```
+
+Note that, for this function, the reported neighbors are _not_ sorted by distance.
+The order of the output is completely arbitrary and will vary depending on the random seed.
+However, the identity of the neighbors is fully deterministic.
+
+# Querying another data set for neighbors 
+
+The `queryNeighbors()` function is also provided for identifying all points within a certain distance of a query point.
+Given a query data set:
+
+```{r}
+nquery <- 1000
+ndim <- 20
+query <- matrix(runif(nquery*ndim), ncol=ndim)
+```
+
+... we apply the `queryNeighbors()` function:
+
+```{r}
+qout <- queryNeighbors(data, query, threshold=1)
+length(qout$index)
+```
+
+... where each entry of `qout$index` corresponds to a row of `query` and contains its neighbors in `data`.
+Again, the order of the output is arbitrary but the identity of the neighbors is deterministic.
+
+# Further options
+
+Most of the options described for `findKNN()` are also applicable here.
+For example:
+
+- `subset` to identify neighbors for a subset of points.
+- `get.distance` to avoid retrieving distances when unnecessary.
+- `BPPARAM` to parallelize the calculations across multiple workers.
+- `raw.index` to return the raw indices from a precomputed index.
+
+Note that the argument for a precomputed index is `precomputed`:
+
+```{r}
+pre <- buildIndex(data, BNPARAM=KmknnParam())
+fout.pre <- findNeighbors(BNINDEX=pre, threshold=1)
+qout.pre <- queryNeighbors(BNINDEX=pre, query=query, threshold=1)
+```
+
+Users are referred to the documentation of each function for specific details.
+
+# Session information
+
+```{r}
+sessionInfo()
+```
+

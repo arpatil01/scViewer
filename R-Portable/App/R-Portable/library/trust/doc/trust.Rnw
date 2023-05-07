@@ -1,0 +1,531 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{natbib}
+
+\RequirePackage{amsfonts}
+\newcommand{\real}{\mathbb{R}}
+
+% \VignetteIndexEntry{Trust Regions Design Document}
+
+\begin{document}
+
+\title{Trust Regions}
+\author{Charles J. Geyer}
+\maketitle
+
+\section{Trust Region Theory}
+
+We follow \citet[Chapter~4]{naw}, using their notation.
+\citet[Section~5.1]{flet} discusses the same algorithm,
+but with slight differences.
+
+\subsection{Main Loop}
+
+Suppose $f : \real^n \to \real$ is a function we wish to minimize,
+and we do so by producing a sequence $x_1$, $x_2$, $\ldots$ of points
+in $\real^n$ that converge to a solution.
+
+This sequence of iterates is produced by the trust region main loop
+which repeatedly solves the \emph{trust region subproblem}.  First we form the
+Taylor series expansion of $f$ about $x_k$
+$$
+   m_k(p) = f_k + g_k^T p + \tfrac{1}{2} p^T B_k p
+$$
+where
+\begin{align*}
+   f_k & = f(x_k)
+   \\
+   g_k & = \nabla f(x_k)
+   \\
+   B_k & = \nabla^2 f(x_k)
+\end{align*}
+and the idea is we ``trust'' the Taylor series expansion only so far,
+so we minimize $m_k$ subject to the constraint $\lVert p \rVert \le \Delta_k$
+where $\lVert \,\cdot\, \rVert$ denotes the Euclidean norm.
+
+Suppose $p_k$ is a solution to the trust region subproblem
+(about which more in Section~\ref{sec:subproblem} below).
+The adjustment of $\Delta_k$ is done as follows
+\citep[Algorithm~4.1]{naw} based on
+\begin{equation} \label{eq:rhok}
+   \rho_k = \frac{f(x_k) - f(x_k + p_k)}{m_k(0) - m_k(p_k)}
+\end{equation}
+which is the actual decrease in the objective function $f$ in the step
+compared to the predicted decrease using $m_k$.  If $\rho_k$ is small
+or negative, then $m_k$ is a bad model at $x_k + p_k$ so the step should
+not be used and the trust region radius should be adjusted.
+The complete trust region main loop body solves the trust region subproblem
+and then adjusts the current point and trust region radius as follows
+\begin{tabbing}
+\textbf{if} ($\rho_k < 1 / 4$) \textbf{then} \\
+\qquad \= $x_{k + 1} := x_k$ \\
+\> $\Delta_{k + 1} = \lVert p_k \rVert / 4$ \\
+\textbf{else} \\
+\> $x_{k + 1} := x_k + p_k$ \\
+\> \textbf{if} ($\rho_k > 3 / 4$ and $\lVert p_k \rVert = \Delta_k$)
+\textbf{then} \\
+\> \qquad $\Delta_{k + 1} = \min( 2 \Delta_k, \bar{\Delta} )$ \\
+\> \textbf{fi} \\
+\textbf{fi}
+\end{tabbing}
+where $\bar{\Delta}$ is the maximum allowed $\Delta_k$.
+
+\subsection{Trust Region Subproblem} \label{sec:subproblem}
+
+Now we follow Section~4.2 of \citet{naw}.  We drop subscripts
+writing $m$ instead of $m_k$ and so forth.  So the subproblem is
+\begin{align*}
+   \text{minimize} &
+   \quad m(p) \stackrel{\text{def}}{=} f + g^T p + \tfrac{1}{2} p^T B p
+   \\
+   \text{subject to} & \quad \lVert p \lVert \le \Delta
+\end{align*}
+which minimizes a quadratic function over the closed ball of
+radius $\Delta$ centered at the origin.
+
+A vector $p^*$ is a global solution to the trust region subproblem
+if and only if
+\begin{subequations}
+\begin{equation} \label{eq:primal}
+   \lVert p^* \rVert \le \Delta
+\end{equation}
+and there exists a scalar $\lambda \ge 0$ such that
+\begin{gather}
+   (B + \lambda I) p^* = - g
+   \label{eq:derivative}
+   \\
+   \lambda = 0 \quad \text{or} \quad \lVert p^* \rVert = \Delta
+   \label{eq:complementary}
+   \\
+   B + \lambda I \ \text{is positive semidefinite}
+   \label{eq:second-order}
+\end{gather}
+\end{subequations}
+\cite[Theorem~4.3]{naw}.
+
+\subsubsection{Unconstrained Solutions}
+
+The $\lambda = 0$ case is easy.  If $B$ is positive definite and
+$p^* = - B^{-1} g$ satisfies \eqref{eq:primal}, then that is the solution.
+
+\subsubsection{Constrained Solutions}
+
+The $\lVert p^* \rVert = \Delta$ case is more complicated.  Define
+\begin{equation} \label{eq:plambda}
+   p(\lambda)
+   =
+   - (B + \lambda I)^{-1} g
+   =
+   - \sum_{j = 1}^{n} \frac{q_j^T g}{\lambda_j + \lambda} q_j
+\end{equation}
+where $\lambda_j$ are the eigenvalues of $B$ and $q_j$ are the corresponding
+orthonormal eigenvectors (this is valid only when $\lambda \neq - \lambda_j$
+for all $j$).  Then
+\begin{equation} \label{eq:plambda-norm-squared}
+   \lVert p(\lambda) \rVert^2
+   =
+   \sum_{j = 1}^{n} \left( \frac{q_j^T g}{\lambda_j + \lambda} \right)^2
+\end{equation}
+The analysis again splits into several cases.
+
+\paragraph{The Easy Case}
+
+Let $\lambda_{\text{min}}$ denote the minimum eigenvalue of $B$.
+If
+\begin{equation} \label{eq:easy-condition}
+   (q_j^T g) \neq 0, \qquad \text{for some $j$ such that
+   $\lambda_j = \lambda_{\text{min}}$}
+\end{equation}
+then $p(\lambda)$ is a continuous, strictly decreasing function on
+the open interval $(- \lambda_{\text{min}}, \infty)$ and goes to $\infty$
+as $\lambda \to - \lambda_{\text{min}}$ and to zero as $\lambda \to \infty$.
+Thus a $\lambda^*$
+such that $\lVert p(\lambda^*) \rVert^2 = \Delta^2$ exists and is unique,
+equation \eqref{eq:plambda-norm-squared} can be used to find it,
+and $p(\lambda^*)$ is the
+solution to the trust region subproblem.
+
+\paragraph{The Hard Case}
+
+In the other case, when \eqref{eq:easy-condition} is false,
+\eqref{eq:plambda-norm-squared} is continuous
+at $\lambda = \lambda_{\text{min}}$ and now 
+defines a continuous
+strictly decreasing function on
+the closed interval $[- \lambda_{\text{min}}, \infty)$, and $\lambda$
+must be in this interval in order for \eqref{eq:second-order} to hold.
+
+Now the analysis splits into two subcases yet again.
+
+\paragraph{Hard Case: Easy Part}
+
+If \eqref{eq:easy-condition} is false but
+\begin{equation} \label{eq:hard-easy-condition}
+   \lVert p(- \lambda_{\text{min}}) \rVert^2 > \Delta^2,
+\end{equation}
+then there is still a unique $\lambda^*$ in $(- \lambda_{\text{min}}, \infty)$
+such that $\lVert p(\lambda^*) \rVert^2 = \Delta^2$,
+equation \eqref{eq:plambda-norm-squared} can be used to find it,
+and $p(\lambda^*)$ is the
+solution to the trust region subproblem.
+
+\paragraph{Hard Case: Hard Part}
+
+Otherwise, when \eqref{eq:easy-condition} and \eqref{eq:hard-easy-condition}
+are both false,
+we must have $\lambda = - \lambda_{\text{min}}$.
+Then $B + \lambda I$ is singular, and \eqref{eq:plambda}
+can no longer be used.  Now solutions of \eqref{eq:derivative}
+are non-unique, and we have
+\begin{equation} \label{eq:ptau}
+   p_{\text{hard}}(\tau)
+   =
+   - \sum_{\substack{j = 1 \\ \lambda_j \neq \lambda_{\text{min}}}}^n
+   \frac{q_j^T g}{\lambda_j - \lambda_{\text{min}}} q_j
+   +
+   \sum_{\substack{j = 1 \\ \lambda_j = \lambda_{\text{min}}}}^n
+   \tau_j q_j
+\end{equation}
+is a solution of \eqref{eq:derivative} for every vector $\tau$.
+Since the first sum on the right hand side of \eqref{eq:ptau} has
+norm less than $\Delta$ by the falsity of \eqref{eq:hard-easy-condition},
+we can choose $\tau$ to make $\lVert p_{\text{hard}}(\tau) \rVert = \Delta$.
+
+Note that the solution $p^*$ obtained in this case is non-unique.
+Even if there is only one term in the second sum in \eqref{eq:ptau},
+$\tau_j$ of opposite signs produce $p_{\text{hard}}(\tau)$ of the same
+length.
+When there is more than one term in the second sum in \eqref{eq:ptau},
+there are even more possibilities of nonuniqueness.
+This nonuniqueness is not an issue, because (at least as far as the subproblem
+is concerned) one solution is just as good as another.
+
+\subsubsection{Numerical Stability}
+
+We need to examine how all this case splitting works when the
+arithmetic is inexact (as it is in a computer).  Let us take
+the eigendecomposition of $B$ that gives us equation \eqref{eq:plambda}
+or equation \eqref{eq:ptau}
+as authoritative.  We know the eigendecomposition is inexact,
+but we do not attempt to
+correct for its inexactness.
+
+If all of the $\lambda_j$ as calculated (inexactly) by the eigendecomposition
+routine are strictly positive, then \eqref{eq:plambda} with $\lambda = 0$
+gives an ``unconstrained'' solution, and this solution has squared norm
+\eqref{eq:plambda-norm-squared} that
+is either greater than $\Delta^2$ or not.  If not, we have found an inexact
+solution.  If greater, we decide to impose the constraint.
+This decision is stable in the sense that we will not want to undo it later.
+
+With inexact arithmetic, we are unlikely ever to get the ``hard'' case.
+Nevertheless, we allow for the possibility.
+Define
+\begin{subequations}
+\begin{align}
+    C_1 & = 
+   \sum_{\substack{j = 1 \\ \lambda_j \neq \lambda_{\text{min}}}}^n
+   \left( \frac{q_j^T g}{\lambda_j - \lambda_{\text{min}}} \right)^2
+   \label{eq:c1}
+   \\
+    C_2 & = 
+   \sum_{\substack{j = 1 \\ \lambda_j = \lambda_{\text{min}}}}^n
+   \left( q_j^T g \right)^2
+   \label{eq:c2}
+\end{align}
+\end{subequations}
+Then the constrained cases are distinguished as follows.
+\begin{itemize}
+\item \emph{easy case:} $C_2 \neq 0$.
+\item \emph{hard-easy case:} $C_2 = 0$ and $C_1 > \Delta^2$.
+\item \emph{hard-hard case:} $C_2 = 0$ and $C_1 \le \Delta^2$.
+\end{itemize}
+
+The ``hard-hard case'' is now obvious.  $\tau$ is adjusted so that
+the second term on the right hand side in \eqref{eq:ptau} has squared length
+$\Delta^2 - C_1$.
+
+In the other two cases we must find a zero of the function of $\lambda$
+given by
+\begin{subequations}
+\begin{equation} \label{eq:phifoo}
+   \lVert p(\lambda) \rVert^2 - \Delta
+\end{equation}
+or (what is equivalent) a zero of the function defined by
+\begin{equation} \label{eq:phi}
+   \phi(\lambda) = \frac{1}{\lVert p(\lambda) \rVert} - \frac{1}{\Delta}
+\end{equation}
+which is better behaved \citep[Chapter~4]{naw}.
+\end{subequations}
+Both are monotone, \eqref{eq:phifoo} strictly decreasing
+and \eqref{eq:phi} strictly increasing, but \eqref{eq:phi} is also
+nearly linear.
+
+We would like to bracket the zero, finding an interval containing the
+zero.  We know that $\lambda = - \lambda_{\text{min}}$ is a lower bound.
+We have
+$$
+   \phi(- \lambda_{\text{min}}) = \frac{1}{\sqrt{C_1}} - \frac{1}{\Delta}
+   < 0
+$$
+in the ``hard-easy case'' and
+$$
+   \phi(- \lambda_{\text{min}}) = - \frac{1}{\Delta}
+$$
+in the ``easy case''.  A better lower bound uses
+$$
+   \lVert p(\lambda) \rVert^2
+   \ge \frac{C_2}{(\lambda_{\text{min}} + \lambda)^2}
+$$
+from which (setting the right hand side equal to $\Delta^2$ and solving
+for $\lambda$) we get
+$$
+   \lambda_{\text{dn}} = \frac{\sqrt{C_2}}{\Delta} - \lambda_{\text{min}}
+$$
+as a lower bound for the $\lambda$ that
+makes $\lVert p(\lambda) \rVert = \Delta$.
+
+To get an upper bound, we note that
+if we define
+\begin{equation} \label{eq:c3}
+    C_3 = 
+   \sum_{j = 1}^n \left( q_j^T g \right)^2
+\end{equation}
+then we have
+$$
+   \lVert p(\lambda) \rVert^2
+   \le
+   \frac{C_3}{(\lambda_{\text{min}} + \lambda)^2}
+$$
+Setting the right hand side equal to $\Delta^2$ and solving for $\lambda$ gives
+$$
+   \lambda_{\text{up}} = \frac{\sqrt{C_3}}{\Delta} - \lambda_{\text{min}}
+$$
+as an upper bound.
+So now we know there is a solution
+in $[\lambda_{\text{dn}}, \lambda_{\text{up}}]$.
+
+\subsection{Rescaling} \label{sec:subproblem-modified}
+
+When the variables are ill-scaled, the trust region is badly designed
+and \citet[Section~4.4]{naw} recommend changing the trust region
+subproblem to
+\begin{equation} \label{eq:problem-rescale}
+\begin{split}
+   \text{minimize} &
+   \quad m(p) \stackrel{\text{def}}{=} f + g^T p + \tfrac{1}{2} p^T B p
+   \\
+   \text{subject to} & \quad \lVert D p \lVert \le \Delta
+\end{split}
+\end{equation}
+where $D$ is a strictly positive definite diagonal matrix
+(as will be seen below, $D$ can be any invertible matrix).
+
+We claim that this is equivalent to running our original algorithm
+(with no $D$ or, what is equivalent, with $D$ the identity matrix)
+on the function $\tilde{f}$ defined by
+$$
+   \tilde{f}(\tilde{x}) = f(D^{-1} \tilde{x})
+$$
+Consider a point $\tilde{x}_k = D x_k$.  Here, if $g$ and $B$ denote
+the gradient and Hessian of $f$, then
+\begin{subequations}
+\begin{align}
+   \tilde{g} & = D^{-1} g
+   \label{eq:modified-gradient}
+   \\
+   \widetilde{B} & = D^{-1} B D^{-1}
+   \label{eq:modified-hessian}
+\end{align}
+\end{subequations}
+are the gradient and Hessian of $f$.  The trust region subproblem
+(of the original kind with no $D$)
+for $\tilde{f}$ (for an iterate centered at $\tilde{x}_k$ using
+trust region ``radius'' $\Delta_k$) is
+\begin{equation} \label{eq:problem-modified}
+\begin{split}
+   \text{minimize} &
+   \quad \widetilde{m}(w) \stackrel{\text{def}}{=}
+   f + \tilde{g}^T w + \tfrac{1}{2} w^T \widetilde{B} w
+   \\
+   & \hphantom{\quad \widetilde{m}(w) \stackrel{\text{def}}{=} \vphantom{f}}
+   f + g^T D^{-1} w + \tfrac{1}{2} w^T D^{-1} B D^{-1} w
+   \\
+   \text{subject to} & \quad \lVert w \lVert \le \Delta_k
+\end{split}
+\end{equation}
+Let $w^*$ be a solution to \eqref{eq:problem-modified}, and
+define $p^* = D^{-1} w^*$.  Then $p^*$ solves \eqref{eq:problem-rescale}.
+
+Let $x_1$ is the starting point for the trust region problem
+of minimizing $f$ using rescaling $D$.
+Define $\tilde{x}_1 = D^{-1} x_1$, and consider it
+the starting point for the trust region problem
+of minimizing $\tilde{f}$ using no rescaling.
+Let $\tilde{x}_1$, $\tilde{x}_2$, $\ldots$ be the sequence of iterates
+produced in the latter problem.  Then we have
+\begin{align*}
+   \tilde{x}_{k + 1} - \tilde{x}_k
+   & =
+   w^*_k
+   \\
+   & =
+   D p^*_k
+   \\
+   & =
+   D (x_{k + 1} - x_k)
+\end{align*}
+whenever we have an accepted step (so $x_{k + 1} \neq x_k$).
+
+\section{Termination Criteria}
+
+Although not part of the trust region algorithm proper, termination
+criteria are important.  \citet{flet} discusses them on pp.~22--23 and~57 ff.
+The conventional criteria are to terminate when any of
+\begin{subequations}
+\begin{gather}
+   f(x_k) - f(x_{k + 1})
+   \label{eq:term-on-f}
+   \\
+   x_k - x_{k + 1}
+   \label{eq:term-on-x}
+   \\
+   \nabla f(x_k)
+   \label{eq:term-on-g}
+\end{gather}
+are small.  All are used in practice.
+Note that \eqref{eq:term-on-x} and \eqref{eq:term-on-g} are vectors,
+so what ``small'' means for them is more complicated.
+
+\citet[pp.~57 ff.]{flet} makes the point that it is desirable that
+an optimization algorithm be invariant under rescaling, perhaps under
+arbitrary affine transformation of the domain of the objective function,
+perhaps only under diagonal scaling.  A trust region algorithm is not
+invariant under rescaling unless the scaling matrix $D$ introduced
+in Section~\ref{sec:subproblem-modified} exactly matches the scaling.
+Nevertheless, invariant convergence tests still make sense and only
+\eqref{eq:term-on-f} among those considered above is invariant.
+
+Fletcher also suggests
+\begin{gather}
+   (x_{k + 1} - x_k)^T
+   \nabla f(x^k)
+   \label{eq:term-on-i}
+\end{gather}
+which is invariant when the step is a Newton step.
+
+It is also possible for $\Delta_k \to 0$ as $k \to \infty$
+\citep[see][proof of Theorem~5.1.1]{flet}.  Thus it is also necessary
+to consider termination when
+\begin{gather}
+   \Delta_k
+   \label{eq:term-on-d}
+\end{gather}
+\end{subequations}
+is small.
+
+\section{Algorithm}
+
+\subsection{Order of Operations}
+
+The algorithm has one main loop and (as described) does
+\begin{itemize}
+\item one objective function evaluation (value, gradient, and Hessian) and
+\item one adjustment of $\Delta_k$ and $x_k$
+\end{itemize}
+per iteration.  The main tricky bit is to decide where in the loop
+each part of the computation occurs.  We can break the body of the
+loop into the following parts.
+\begin{itemize}
+\item Solve trust region subproblem.
+\item Evaluate objective function and derivatives at $x_k + p_k$.
+\item Adjust current point $x_k$ and trust radius $\Delta_k$.
+\item Test for termination with $x_{k + 1}$ the solution.
+\end{itemize}
+The following considerations influence the order in which these
+steps are done.
+\begin{itemize}
+\item Evaluation of $f(x_k + p_k)$ must come between the solution
+    of the subproblem (which produces $p_k$) and the adjustment of
+    $x_k$ and $\Delta_k$, because the adjustment depends on \eqref{eq:rhok},
+    which depends on $p_k$.
+\item Thus all that remains to be decided is where in the Solve-Evaluate-Adjust
+    cycle to put the termination test.
+\begin{itemize}
+\item Solve-Test-Evaluate-Adjust and Solve-Evaluate-Test-Adjust are
+    senseless,
+    because we can't decide that $x_k + p_k$ is the solution until after we
+    decide whether or not to set $x_{k + 1} = x_k + p_k$ in the Adjust step,
+    and it makes no sense to do the work of producing $p_k$ and not let
+    $x_k + p_k$ be considered for the solution.
+\item Thus the order should be Solve-Evaluate-Adjust-Test as in the list
+    above.
+\end{itemize}
+\end{itemize}
+
+\subsection{Termination Test}
+
+Criteria for termination.
+\begin{enumerate}
+\item[(a)] The change in the objective function
+    value $\lvert f(x_k) - f(x_{k + 1}) \rvert$ is less than
+    the termination criterion $\epsilon_1$ in any step.
+\item[(b)] The change in the second-order Taylor-series model
+    of the objective function
+    value $\bigl\lvert (x_k - x_{k + 1})^T \bigl( g_k +
+    \tfrac{1}{2} B_k (x_k - x_{k - 1}) \bigr) \bigr\rvert$
+    is less than the termination criterion $\epsilon_3$ in
+    any step.
+\item[(c)] The trust region radius $\Delta_k$ has shrunk to less than
+    the termination criterion $\epsilon_4$ in any step.
+\end{enumerate}
+
+Condition (b) is also invariant under affine transformations of the
+parameter space.  It seems to make more sense than using the first-order
+series condition \eqref{eq:term-on-i} discussed above, especially since
+we are already calculating it, because it is the denominator
+in \eqref{eq:rhok}.
+
+Condition (c) appears to be redundant, since when the trust region
+shrinks to too small, this will force (a) and (b) to be small too.
+
+Now we have a nice unification of ideas.
+The object tested in (a) is the numerator in \eqref{eq:rhok},
+the object tested in (b) is the denominator in \eqref{eq:rhok}.
+When either is small, the ratio \eqref{eq:rhok} may be wildly
+erroneous due to inexact computer arithmetic, but then we terminate
+the algorithm anyway.
+
+However, this analysis tells us that our separation of work to do into
+``Adjust'' and ``Test'' steps is erroneous.  When we should terminate,
+we cannot adjust because we cannot (or should not) calculate the
+``Adjust'' criterion \eqref{eq:rhok}.
+The reason why we originally wanted ``Test'' after ``Adjust'' is that
+we thought that it made no sense to terminate when the ``Adjust''
+procedure rejects the step.
+But now we see that if it rejects the step based on a value of
+\eqref{eq:rhok} that is reliable, then we won't terminate anyway
+because we have decided to terminate if and only if we declare
+\eqref{eq:rhok} unreliable.
+
+\begin{thebibliography}{}
+
+\bibitem[Fletcher(1987)]{flet}
+Fletcher, R. (1987).
+\newblock \emph{Practical Methods of Optimization}, second edition.
+\newblock John Wiley.
+
+\bibitem[Nocedal and Wright(1999)]{naw}
+Nocedal, J. and Wright, S.~J. (1999).
+\newblock \emph{Numerical Optimization}.
+\newblock Springer-Verlag.
+
+\end{thebibliography}
+
+\end{document}
+
+\begin{center} \LARGE REVISED DOWN TO HERE \end{center}
+

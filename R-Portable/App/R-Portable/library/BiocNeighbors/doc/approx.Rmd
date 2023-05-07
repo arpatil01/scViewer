@@ -1,0 +1,111 @@
+---
+title: Detecting approximate nearest neighbors 
+author: 
+- name: Aaron Lun
+  affiliation: Cancer Research UK Cambridge Institute, Cambridge, United Kingdom
+date: "Revised: 2 December 2018"
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: BiocNeighbors 
+vignette: >
+  %\VignetteIndexEntry{2. Detecting approximate nearest neighbors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}    
+bibliography: ref.bib  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+library(BiocNeighbors)
+```
+
+# Introduction
+
+The `r Biocpkg("BiocNeighbors")` package provides several algorithms for approximate neighbor searches:
+
+- The [Annoy](https://github.com/spotify/annoy) (Approximate Nearest Neighbors Oh Yeah) method uses C++ code from the `r CRANpkg("RcppAnnoy")` package.
+It works by building a tree where a random hyperplane partitions a group of points into two child groups at each internal node.
+This is repeated to construct a forest of trees where the number of trees determines the accuracy of the search.
+Given a query data point, we identify all points in the same leaf node for each tree.
+We then take the union of leaf node sets across trees and search them exactly for the nearest neighbors.
+- The [HNSW](https://github.com/nmslib/hnswlib) (Hierarchical Navigable Small Worlds) method uses C++ code from the `r CRANpkg("RcppHNSW")` package.
+It works by building a series of nagivable small world graphs containing links between points across the entire data set.
+The algorithm walks through the graphs where each step is chosen to move closer to a given query point.
+Different graphs contain links of different lengths, yielding a hierarchy where earlier steps are large and later steps are small.
+The accuracy of the search is determined by the connectivity of the graphs and the size of the intermediate list of potential neighbors.
+
+These methods complement the exact algorithms `r Biocpkg("BiocNeighbors", vignette="exact.html", label="described previously")`.
+Again, it is straightforward to switch from one algorithm to another by simply changing the `BNPARAM` argument in `findKNN` and `queryKNN`.
+
+# Identifying nearest neighbors
+
+We perform the k-nearest neighbors search with the Annoy algorithm by specifying `BNPARAM=AnnoyParam()`.
+
+```{r}
+nobs <- 10000
+ndim <- 20
+data <- matrix(runif(nobs*ndim), ncol=ndim)
+
+fout <- findKNN(data, k=10, BNPARAM=AnnoyParam())
+head(fout$index)
+head(fout$distance)
+```
+
+We can also identify the k-nearest neighbors in one dataset based on query points in another dataset.
+
+```{r}
+nquery <- 1000
+ndim <- 20
+query <- matrix(runif(nquery*ndim), ncol=ndim)
+
+qout <- queryKNN(data, query, k=5, BNPARAM=AnnoyParam())
+head(qout$index)
+head(qout$distance)
+```
+
+It is similarly easy to use the HNSW algorithm by setting `BNPARAM=HnswParam()`.
+
+# Further options
+
+Most of the options described for the exact methods are also applicable here.
+For example:
+
+- `subset` to identify neighbors for a subset of points.
+- `get.distance` to avoid retrieving distances when unnecessary.
+- `BPPARAM` to parallelize the calculations across multiple workers.
+- `BNINDEX` to build the forest once for a given data set and re-use it across calls.
+
+The use of a pre-built `BNINDEX` is illustrated below:
+
+```{r}
+pre <- buildIndex(data, BNPARAM=AnnoyParam())
+out1 <- findKNN(BNINDEX=pre, k=5)
+out2 <- queryKNN(BNINDEX=pre, query=query, k=2)
+```
+
+Both Annoy and HNSW perform searches based on the Euclidean distance by default.
+Searching by Manhattan distance is done by simply setting `distance="Manhattan"` in `AnnoyParam()` or `HnswParam()`.
+
+Users are referred to the documentation of each function for specific details on the available arguments.
+
+# Saving the index files
+
+Both Annoy and HNSW generate indexing structures - a forest of trees and series of graphs, respectively -
+that are saved to file when calling `buildIndex()`.
+By default, this file is located in `tempdir()`^[On HPC file systems, you can change `TEMPDIR` to a location that is more amenable to concurrent access.] and will be removed when the session finishes.
+
+```{r}
+AnnoyIndex_path(pre)
+```
+
+If the index is to persist across sessions, the path of the index file can be directly specified in `buildIndex`.
+This can be used to construct an index object directly using the relevant constructors, e.g., `AnnoyIndex()`, `HnswIndex()`.
+However, it becomes the responsibility of the user to clean up any temporary indexing files after calculations are complete.
+
+# Session information
+
+```{r}
+sessionInfo()
+```

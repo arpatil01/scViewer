@@ -1,0 +1,3 @@
+RcppZiggurat-package    Collection and comparison of different Ziggurat
+                        RNGs
+zrnorm                  Collection of Ziggurat Normal RNGs

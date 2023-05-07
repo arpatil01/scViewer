@@ -1,0 +1,301 @@
+---
+title: "An introduction to the SingleCellExperiment class"
+author: 
+- name: Davide Risso
+  affiliation: Division of Biostatistics and Epidemiology, Weill Cornell Medicine 
+- name: Aaron Lun
+  email: infinite.monkeys.with.keyboards@gmail.com
+package: SingleCellExperiment
+output:
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{1. An introduction to the SingleCellExperiment class}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r options, include=FALSE, echo=FALSE}
+library(BiocStyle)
+knitr::opts_chunk$set(warning=FALSE, error=FALSE, message=FALSE)
+```
+
+# Motivation
+
+The `SingleCellExperiment` class is a lightweight Bioconductor container for storing and manipulating single-cell genomics data.
+It extends the `RangedSummarizedExperiment` class and follows similar conventions, 
+i.e., rows should represent features (genes, transcripts, genomic regions) and columns should represent cells.
+It provides methods for storing dimensionality reduction results and data for alternative feature sets (e.g., synthetic spike-in transcripts, antibody-derived tags).
+It is the central data structure for Bioconductor single-cell packages like `r Biocpkg("scater")` and `r Biocpkg("scran")`.
+
+# Creating SingleCellExperiment instances
+
+`SingleCellExperiment` objects can be created via the constructor of the same name.
+For example, if we have a count matrix in `counts`, we can simply call:
+
+```{r construct}
+library(SingleCellExperiment)
+counts <- matrix(rpois(100, lambda = 10), ncol=10, nrow=10)
+sce <- SingleCellExperiment(counts)
+sce
+```
+
+In practice, it is often more useful to name the assay by passing in a named list:
+
+```{r}
+sce <- SingleCellExperiment(list(counts=counts))
+sce
+```
+
+It is similarly easy to set the column and row metadata by passing values to the appropriate arguments.
+We will not go into much detail here as most of this is covered by the `r Biocpkg("SummarizedExperiment")` documentation,
+but to give an example:
+
+```{r}
+pretend.cell.labels <- sample(letters, ncol(counts), replace=TRUE)
+pretend.gene.lengths <- sample(10000, nrow(counts))
+
+sce <- SingleCellExperiment(list(counts=counts),
+    colData=DataFrame(label=pretend.cell.labels),
+    rowData=DataFrame(length=pretend.gene.lengths),
+    metadata=list(study="GSE111111")
+)
+sce
+```
+
+Alternatively, we can construct a `SingleCellExperiment` by coercing an existing `(Ranged)SummarizedExperiment` object:
+
+```{r coerce}
+se <- SummarizedExperiment(list(counts=counts))
+as(se, "SingleCellExperiment")
+```
+
+Any operation that can be applied to a `RangedSummarizedExperiment` is also applicable to any instance of a `SingleCellExperiment`.
+This includes access to assay data via `assay()`, column metadata with `colData()`, and so on.
+Again, without going into too much detail:
+
+```{r}
+dim(assay(sce))
+colnames(colData(sce))
+colnames(rowData(sce))
+```
+
+To demonstrate the use of the class in the rest of the vignette, we will use the Allen data set from the `r Biocpkg("scRNAseq")` package.
+
+```{r fluidigm}
+library(scRNAseq)
+sce <- ReprocessedAllenData("tophat_counts")
+sce
+```
+
+# Adding low-dimensional representations
+
+We compute log-transformed normalized expression values from the count matrix. 
+(We note that many of these steps can be performed as one-liners from the `r Biocpkg("scater")` package,
+but we will show them here in full to demonstrate the capabilities of the `SingleCellExperiment` class.)
+
+```{r subset}
+counts <- assay(sce, "tophat_counts")
+libsizes <- colSums(counts)
+size.factors <- libsizes/mean(libsizes)
+logcounts(sce) <- log2(t(t(counts)/size.factors) + 1)
+assayNames(sce)
+```
+
+We obtain the PCA and t-SNE representations of the data and add them to the object with the `reducedDims()<-` method.
+Alternatively, we can representations one at a time with the `reducedDim()<-` method (note the missing `s`).
+
+```{r pca}
+pca_data <- prcomp(t(logcounts(sce)), rank=50)
+
+library(Rtsne)
+set.seed(5252)
+tsne_data <- Rtsne(pca_data$x[,1:50], pca = FALSE)
+
+reducedDims(sce) <- list(PCA=pca_data$x, TSNE=tsne_data$Y)
+sce
+```
+
+The coordinates for all representations can be retrieved from a `SingleCellExperiment` _en masse_ with `reducedDims()`
+or one at a time by name/index with `reducedDim()`.
+Each row of the coordinate matrix is assumed to correspond to a cell while each column represents a dimension.
+
+```{r}
+reducedDims(sce)
+reducedDimNames(sce)
+head(reducedDim(sce, "PCA")[,1:2])
+head(reducedDim(sce, "TSNE")[,1:2])
+```
+
+Any subsetting by column of `sce_sub` will also lead to subsetting of the dimensionality reduction results by cell.
+This is convenient as it ensures our low-dimensional results are always synchronized with the gene expression data.
+
+```{r}
+dim(reducedDim(sce, "PCA"))
+dim(reducedDim(sce[,1:10], "PCA"))
+```
+
+# Convenient access to named assays
+
+In the `SingleCellExperiment`, users can assign arbitrary names to entries of `assays`.
+To assist interoperability between packages, we provide some suggestions for what the names should be for particular types of data:
+
+- `counts`: Raw count data, e.g., number of reads or transcripts for a particular gene.
+- `normcounts`: Normalized values on the same scale as the original counts.
+For example, counts divided by cell-specific size factors that are centred at unity.
+- `logcounts`: Log-transformed counts or count-like values.
+In most cases, this will be defined as log-transformed `normcounts`, e.g., using log base 2 and a pseudo-count of 1.
+- `cpm`: Counts-per-million.
+This is the read count for each gene in each cell, divided by the library size of each cell in millions.
+- `tpm`: Transcripts-per-million.
+This is the number of transcripts for each gene in each cell, divided by the total number of transcripts in that cell (in millions).
+
+Each of these suggested names has an appropriate getter/setter method for convenient manipulation of the `SingleCellExperiment`.
+For example, we can take the (very specifically named) `tophat_counts` name and assign it to `counts` instead:
+
+```{r}
+counts(sce) <- assay(sce, "tophat_counts")
+sce
+dim(counts(sce))
+```
+
+This means that functions expecting count data can simply call `counts()` without worrying about package-specific naming conventions.
+
+# Adding alternative feature sets
+
+Many scRNA-seq experiments contain sequencing data for multiple feature types beyond the endogenous genes:
+
+- Externally added spike-in transcripts for plate-based experiments.
+- Antibody tags for CITE-seq experiments.
+- CRISPR tags for CRISPR-seq experiments.
+- Allele information for experiments involving multiple genotypes.
+
+Such features can be stored inside the `SingleCellExperiment` via the concept of "alternative Experiments".
+These are nested `SummarizedExperiment` instances that are guaranteed to have the same number and ordering of columns as the main `SingleCellExperiment` itself.
+Data for endogenous genes and other features can thus be kept separate - which is often desirable as they need to be processed differently - while still retaining the synchronization of operations on a single object. 
+
+To illustrate, consider the case of the spike-in transcripts in the Allen data. 
+The `altExp()` method returns a self-contained `SingleCellExperiment` instance containing only the spike-in transcripts.
+
+```{r}
+altExp(sce)
+```
+
+Each alternative Experiment can have a different set of assays from the main `SingleCellExperiment`.
+This is useful in cases where the other feature types must be normalized or transformed differently.
+Similarly, the alternative Experiments can have different `rowData()` from the main object.
+
+```{r}
+rowData(altExp(sce))$concentration <- runif(nrow(altExp(sce)))
+rowData(altExp(sce))
+rowData(sce)
+```
+
+We provide the `splitAltExps()` utility to easily split a `SingleCellExperiment` into new alternative Experiments.
+For example, if we wanted to split the RIKEN transcripts into a separate Experiment
+- say, to ensure that they are not used in downstream analyses without explicitly throwing out the data -
+we would do:
+
+```{r}
+is.riken <- grepl("^[0-9]", rownames(sce))
+sce <- splitAltExps(sce, ifelse(is.riken, "RIKEN", "gene"))
+altExpNames(sce)
+```
+
+Alternatively, if we want to swap the main and alternative Experiments -
+perhaps because the RIKEN transcripts were more interesting than expected, and we want to perform our analyses on them -
+we can simply use `swapAltExp()` to switch the RIKEN alternative Experiment with the gene expression data:
+
+```{r}
+swapAltExp(sce, "RIKEN", saved="original")
+```
+
+# Storing row or column pairings
+
+A common procedure in single-cell analyses is to identify relationships between pairs of cells,
+e.g., to construct a nearest-neighbor graph or to mark putative physical interactions between cells.
+We can capture this information in the `SingleCellExperiment` class with the `colPairs()` functionality.
+To demonstrate, say we have 100 relationships between the cells in `sce`, characterized by some distance measure:
+
+```{r}
+cell1 <- sample(ncol(sce), 100, replace=TRUE)
+cell2 <- sample(ncol(sce), 100, replace=TRUE)
+distance <- runif(100)
+```
+
+We store this in the `SingleCellExperiment` as a `SelfHits` object using the `value` metadata field to hold our data.
+This is easily extracted as a `SelfHits` or, for logical or numeric data, as a sparse matrix from `r CRANpkg("Matrix")`.
+
+```{r}
+colPair(sce, "relationships") <- SelfHits(
+    cell1, cell2, nnode=ncol(sce), value=distance)
+colPair(sce, "relationships")
+class(colPair(sce, asSparse=TRUE))
+```
+
+A particularly useful feature is that the indices of the interacting cells are automatically remapped when `sce` is subsetted.
+This ensures that the pairings are always synchronized with the identities of the cells in `sce`.
+
+```{r}
+sub <- sce[,50:300]
+colPair(sub) # grabs the first pairing, if no 'type' is supplied.
+```
+
+Similar functionality is available for pairings between rows via the `rowPairs()` family of functions, 
+which is potentially useful for representing coexpression or regulatory networks.
+
+# Additional metadata fields
+
+The `SingleCellExperiment` class provides the `sizeFactors()` getter and setter methods,
+to set and retrieve size factors from the `colData` of the object.
+Each size factor represents the scaling factor applied to a cell to normalize expression values prior to downstream comparisons,
+e.g., to remove the effects of differences in library size and other cell-specific biases.
+These methods are primarily intended for programmatic use in functions implementing normalization methods,
+but users can also directly call this to inspect or define the size factors for their analysis.
+
+```{r}
+# Making up some size factors and storing them:
+sizeFactors(sce) <- 2^rnorm(ncol(sce))
+summary(sizeFactors(sce))
+
+# Deleting the size factors:
+sizeFactors(sce) <- NULL
+sizeFactors(sce)
+```
+
+The `colLabels()` getter and setters methods allow applications to set and retrieve cell labels from the `colData`.
+These labels can be derived from cluster annotations, assigned by classification algorithms, etc.
+and are often used in downstream visualization and analyses.
+While labels can be stored in any `colData` field, the `colLabels()` methods aim to provide some informal standardization
+to a default location that downstream functions can search first when attempting to retrieve annotations.
+
+```{r}
+# Making up some labels and storing them:
+colLabels(sce) <- sample(letters, ncol(sce), replace=TRUE)
+table(colLabels(sce))
+
+# Deleting the labels:
+colLabels(sce) <- NULL
+colLabels(sce)
+```
+
+In a similar vein, we provide the `rowSubset()` function for users to set and get row subsets from the `rowData`.
+This will store any vector of gene identities (e.g., row names, integer indices, logical vector) 
+in the `SingleCellExperiment` object for retrieval and use by downstream functions.
+Users can then easily pack multiple feature sets into the same object for synchronized manipulation.
+
+```{r}
+# Packs integer or character vectors into the rowData:
+rowSubset(sce, "my gene set 1") <- 1:10
+which(rowSubset(sce, "my gene set 1"))
+
+# Easy to delete:
+rowSubset(sce, "my gene set 1") <- NULL
+rowSubset(sce, "my gene set 1")
+```
+
+# Session information {-}
+
+```{r}
+sessionInfo()
+```

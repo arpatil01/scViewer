@@ -1,0 +1,13 @@
+geom_beeswarm_rast	geom_beeswarm_rast
+geom_boxplot_jitter	geom_boxplot_jitter
+geom_jitter_rast	geom_jitter_rast
+geom_point_rast	geom_point_rast
+geom_quasirandom_rast	geom_quasirandom_rast
+geom_tile_rast	geom_tile_rast
+geom_violin_rast	geom_violin_rast
+rasterise	rasterise
+rasterise.ggplot	rasterise
+rasterise.Layer	rasterise
+rasterise.list	rasterise
+rasterize	rasterise
+theme_pdf	theme_pdf

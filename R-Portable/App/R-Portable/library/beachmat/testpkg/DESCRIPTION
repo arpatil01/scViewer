@@ -1,0 +1,14 @@
+Package: beachtest
+Version: 1.0.0
+Date: 2019-03-07
+Title: Test whether we can link to beachmat properly
+Authors@R: person("Aaron", "Lun", role=c("cre", "aut"),
+    email="infinite.monkeys.with.keyboards@gmail.com")
+Imports: Rcpp, testthat, BiocGenerics, DelayedArray
+Suggests: beachmat, Matrix 
+Description: For testing beachmat compilation settings.
+License: GPL-3
+NeedsCompilation: yes
+SystemRequirements: C++11
+LinkingTo: Rcpp, beachmat
+RoxygenNote: 6.1.1

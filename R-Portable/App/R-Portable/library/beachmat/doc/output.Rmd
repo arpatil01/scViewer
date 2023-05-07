@@ -1,0 +1,266 @@
+---
+title: "Writing data into R matrix objects"
+author: "Aaron Lun"
+package: beachmat
+output: 
+  BiocStyle::html_document:
+    toc_float: yes
+vignette: >
+  %\VignetteIndexEntry{3. Writing data into R matrix objects (v2)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+# Overview of the output API
+
+**Note: this document refers to version 2 of the `r Biocpkg("beachmat")` API,
+which is still supported but no longer under active development.
+Developers writing new code are encouraged to use version 3, which is much more streamlined.**
+
+This document describes the use of the `r Biocpkg("beachmat")` API for storing data in R matrices.
+We will demonstrate the API on numeric matrices, though same semantics are used for matrices of other types (e.g., logical, integer, character).
+First, we include the relevant header file:
+
+```cpp
+#include "beachmat/numeric_matrix.h"
+```
+
+Three types of output matrices are supported - simple `matrix`, `*gCMatrix` and `HDF5Matrix` objects.
+For example, a simple numeric output matrix with `nrow` rows and `ncol` columns is created by:
+
+```cpp
+// returns a std::unique_ptr<numeric_output> object
+auto odptr=beachmat::create_numeric_output(
+    nrow, /* size_t */ 
+    ncol, /* size_t */
+    oparam /* beachmat::output_param */
+);
+```
+
+The `beachmat::output_param` class specifies the output matrix representation.
+It is simply constructed by passing the class and package names:
+
+```cpp
+beachmat::output_param simple_param; 
+beachmat::output_param simple_param2("matrix", "base"); /* default */
+beachmat::output_param sparse_param("dgCMatrix", "Matrix"); 
+```
+
+Other class/package combinations can be handled by external linkage if available.
+Otherwise, the `output_param` constructor will default to an ordinary matrix.
+
+# Dynamic choice of output type
+
+Another option is to allow the function to dynamically choose the output type to match that of an existing matrix.
+This is useful for automatically choosing an output format that reflects the choice of input format.
+For example, if data are supplied to a function in a simple matrix, it would be reasonable to expect that the output is similarly small enough to be stored as a simple matrix.
+On the other hand, if the input is file-backed, it suggests that the output may also be very large and thus require file-backed storage.
+
+Dynamic choice of output type is performed by using the `Rcpp::Robject` object containing the input matrix to initialize the `output_param` object.
+If we have a matrix object `dmat`, the output type can be matched to the input type with:
+
+```cpp
+beachmat::output_param oparam(dmat /* Rcpp::RObject */);
+auto odptr=beachmat::create_numeric_output(nrow, ncol, oparam);
+```
+
+A similar process can be used for a pointer `dptr` to an existing `*_matrix` instance:
+
+```cpp
+beachmat::output_param oparam(dptr->get_class(), dptr->get_package());
+```
+
+# Methods to store data
+
+## Storing data in columns
+
+ The `set_col()` method fills column `c` with elements pointed to by an iterator `out` to a _Rcpp_ vector.
+`c` should be a zero-indexed integer in `[0, ncol)`, and there should be at least `nrow` accessible elements, i.e., `*out` and `*(out+nrow-1)` should be valid entries.
+
+```cpp
+odptr->set_col(
+    c, /* size_t */ 
+    out /* Rcpp::Vector::iterator */
+);
+```
+    
+`out` can be an iterator to a `Rcpp::NumericVector`, `Rcpp::LogicalVector` or `Rcpp::IntegerVector`; type conversions will occur as expected to the type of the output matrix.
+No value is returned by this method.
+
+`set_col()` can also be used with `first` and `last` arguments.
+This will fill column `c` from rows `first` to `last-1` with the entries from `*out` to `*(out+last-first-1)`, respectively.
+Both `first` and `last` should be in `[0, nrow]` and zero-indexed, with the additional requirement that `last >= first`.
+
+```cpp
+odptr->set_col(
+    c, /* size_t */ 
+    out, /* Rcpp::Vector::iterator */
+    first, /* size_t */ 
+    last /* size_t */
+);
+````
+
+The `set_col_indexed()` method fills column `c` with the vector of elements starting at iterator `val` at a vector of row indices starting at `idx`.
+Row indices can be unordered and duplicated^[But obviously they should be zero-indexed.]; later entries will override earlier ones.
+Note that no check is performed for the sanity of the row indices.
+
+```cpp
+odptr->set_col_indexed(
+    c, /* size_t */ 
+    N, /* size_t */
+    idx, /* Rcpp::IntegerVector::iterator */
+    valm /* Rcpp::Vector::iterator */
+);
+```
+
+## Storing data in rows
+
+ The `set_row()` method fills row `r` with elements pointed to by an iterator `out` to a _Rcpp_ vector.
+`r` should be a zero-indexed integer in `[0, nrow)`, and there should be at least `nrow` accessible elements, i.e., `*out` and `*(out+nrow-1)` should be valid entries.
+No value is returned.
+
+```cpp
+odptr->set_row(
+    r, /* size_t */
+    out /* Rcpp::Vector::iterator */
+);
+```
+
+Filling of a range of the row can be achieved with the `first` and `last` arguments.
+This will fill row `r` from columns `first` to `last-1` with entries from `*out` to `*(out+last-first-1)`, respectively.
+Both `first` and `last` should be in `[0, ncol]` and zero-indexed, with the additional requirement that `last >= first`.
+
+```cpp
+odptr->set_row(
+    r, /* size_t */ 
+    out, /* Rcpp::Vector::iterator */
+    first, /* size_t */
+    last /* size_t */
+);
+```
+
+The `set_row_indexed()` method fills row `r` with the vector of elements starting at iterator `val` at a vector of column indices starting at `idx`.
+Column indices can be unordered and duplicated^[And again, zero-indexed.]; later entries will override earlier ones.
+Note that no check is performed for the sanity of the column indices.
+
+```cpp
+odptr->set_row_indexed(
+    r, /* size_t */ 
+    N,  /* size_t */
+    idx, /* Rcpp::IntegerVector::iterator */
+    val, /* Rcpp::Vector::iterator */
+);
+```
+
+## Storing data in individual cells
+
+The `set()` method fills the matrix entry at row `r` and column `c` with the double-precision value `Y`.
+Both `r` and `c` should be zero-indexed integers in `[0, nrow)` and `[0, ncol)` respectively.
+No value is returned by this method.
+
+```cpp
+odptr->set(
+    r, /* size_t */ 
+    c, /* size_t */
+    Y /* double */
+)
+```
+
+# Returning a matrix object to R
+
+The `yield()` method returns a `Rcpp::RObject` object containing a matrix to pass to R.
+
+```cpp
+Rcpp::RObject out = odptr->yield();
+```
+
+This is commonly used at the end of the function to return a matrix to R:
+
+```cpp
+return dptr->yield();
+```
+
+Note that this operation may involve an R-level memory allocation, which may subsequently trigger garbage collection.
+This is usually not a concern as `r CRANpkg("Rcpp")` is excellent at protecting against unintended collection of objects.
+However, one exception is that of random number generation, where the destruction of the `Rcpp::RNGScope` may trigger a collection of unprotected `SEXP`s.
+This will almost always be the case when using `yield()` naively, as the construction of the matrix `SEXP` is done at the end of the function:
+
+```cpp
+// Possible segfault:
+extern "C" SEXP dummy1 () {
+    auto odptr=beachmat::create_numeric_output(nrow, ncol, 
+        beachmat::output_param());
+    Rcpp::RNGScope rng;
+    // Do something with random numbers and store in odptr.
+    return odptr->yield();
+}
+```
+
+One solution is to restrict the scope of the `Rcpp::RNGScope`.
+This ensures that there are no unprotected `SEXP` objects upon destruction of the `RNGScope`, as `yield()` has not yet been called.
+
+```cpp
+extern "C" SEXP dummy2 () {
+    auto odptr=beachmat::create_numeric_output(nrow, ncol, 
+        beachmat::output_param());
+    {
+        Rcpp::RNGScope rng;
+        // Do something with random numbers and store in odptr.
+    }
+    return odptr->yield();
+}
+```
+
+# Methods to read data
+
+A subset of the access methods are also implemented for `*_output` objects:
+
+- `get_nrow()` and `get_ncol()`
+- `get_row()`, `get_col()` and `get()`
+- `get_class()`, `get_package()` and `clone()`.
+
+These methods behave as described `r Biocpkg("beachmat", vignette="input.html", label="previously")` for `*_matrix` objects.
+They may be useful in situations where data are stored in an intermediate matrix and need to be queried before the matrix is fully filled.
+
+In most applications, though, it is possible to fully fill the output matrix, call `yield()` and then create a `numeric_matrix` from the resulting `Rcpp::RObject`.
+This is often faster because certain optimizations become possible when `r Biocpkg("beachmat")` knows that the supplied matrix is read-only
+(for example, `get_const_col()` and `get_const_col_indexed()`).
+
+# Other matrix types
+
+Logical, integer and character output matrices are supported by changing the types in the creator function (and its variants):
+
+```cpp
+// returns a std::unique_ptr<integer_output> 
+auto oimat=beachmat::create_integer_output(nrow, ncol, beachmat::output_param());
+
+// returns a std::unique_ptr<logical_output> 
+auto olmat=beachmat::create_logical_output(nrow, ncol, beachmat::output_param());
+
+// returns a std::unique_ptr<character_output> 
+auto ocmat=beachmat::create_character_output(nrow, ncol, beachmat::output_param());
+```
+
+For integer, logical and numeric matrices, `out` can be an iterator for any `Rcpp::NumericVector`, `Rcpp::IntegerVector` or `Rcpp::LogicalVector` objects.
+For integer and logical matrices, `Y` should be an integer.
+For character matrices, `out` should be of type `Rcpp::StringVector::iterator` and `Y` should be a `Rcpp::String` object.
+
+**Additional notes**
+
+- Similar to the issue discussed `r Biocpkg("beachmat", vignette="input.html#other-data-types", label="previously")`, 
+it is probably unwise to use anything but a `Rcpp::LogicalVector::iterator` as `out` when storing data in a `logical_output`.
+This is because type conversion at the C++ level will not give the same results as conversion at the R level.
+
+# Handling parallelization
+
+The API is not thread-safe, due to (i) the use of cached class members and (ii) the potential for race conditions when writing to the same location on disk/memory.
+The first issue can be solved by using `clone()` to create `*_output` copies for use in each thread^[Excepting HDF5 matrices, see comments `r Biocpkg("beachmat", "input.html#cloning-matrix-instances", "here")`.].
+However, each copy may still read from and write to the same disk/memory location.
+Furthermore, even if each copy writes to different rows or columns, they are not guaranteed to affect different parts of memory.
+(Storage of rows of a sparse matrix, for example, is dependent on the nature of previous rows.)
+It is thus the responsibility of the calling function to ensure that access is locked and unlocked appropriately across multiple threads, e.g., via `#pragma omp critical`.

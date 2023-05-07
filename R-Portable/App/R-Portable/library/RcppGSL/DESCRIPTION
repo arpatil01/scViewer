@@ -1,0 +1,34 @@
+Package: RcppGSL
+Type: Package
+Title: 'Rcpp' Integration for 'GNU GSL' Vectors and Matrices
+Version: 0.3.13
+Date: 2023-01-12
+Author: Dirk Eddelbuettel and Romain Francois
+Maintainer: Dirk Eddelbuettel <edd@debian.org>
+Description: 'Rcpp' integration for 'GNU GSL' vectors and matrices
+ The 'GNU Scientific Library' (or 'GSL') is a collection of numerical routines for
+ scientific computing. It is particularly useful for C and C++ programs as it
+ provides a standard C interface to a wide range of mathematical routines. There
+ are over 1000 functions in total with an extensive test suite. The 'RcppGSL'
+ package provides an easy-to-use interface between 'GSL' data structures and
+ R using concepts from 'Rcpp' which is itself a package that eases the
+ interfaces between R and C++. This package also serves as a prime example of
+ how to build a package that uses 'Rcpp' to connect to another third-party
+ library. The 'autoconf' script, 'inline' plugin and example package can all
+ be used as a stanza to  write a similar package against another library.
+License: GPL (>= 2)
+LazyLoad: yes
+LinkingTo: Rcpp
+Imports: Rcpp (>= 0.11.0), stats
+Suggests: tinytest
+SystemRequirements: GNU GSL
+URL: https://github.com/eddelbuettel/rcppgsl,
+        https://dirk.eddelbuettel.com/code/rcpp.gsl.html
+BugReports: https://github.com/eddelbuettel/rcppgsl/issues
+NeedsCompilation: yes
+Packaged: 2023-01-12 23:38:26 UTC; edd
+Repository: CRAN
+Date/Publication: 2023-01-13 00:10:02 UTC
+Built: R 4.2.3; x86_64-w64-mingw32; 2023-05-01 00:48:49 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

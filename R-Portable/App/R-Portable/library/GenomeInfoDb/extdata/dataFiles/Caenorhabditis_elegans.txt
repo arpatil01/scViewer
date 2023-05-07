@@ -1,0 +1,8 @@
+circular	auto	sex	NCBI	UCSC	Ensembl
+F	T	F	I	chrI	I
+F	T	F	II	chrII	II
+F	T	F	III	chrIII	III
+F	T	F	IV	chrIV	IV
+F	T	F	V	chrV	V
+F	F	T	X	chrX	X
+T	T	F	MT	chrM	MtDNA

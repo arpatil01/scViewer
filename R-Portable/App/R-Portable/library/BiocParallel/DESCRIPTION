@@ -1,0 +1,73 @@
+Package: BiocParallel
+Type: Package
+Title: Bioconductor facilities for parallel evaluation
+Version: 1.32.6
+Authors@R: c(
+    person("Martin", "Morgan",
+        email = "mtmorgan.bioc@gmail.com",
+        role=c("aut", "cre")),
+    person("Jiefei", "Wang", role = "aut"),
+    person("Valerie", "Obenchain", role="aut"),
+    person("Michel", "Lang", email="michellang@gmail.com", role="aut"),
+    person("Ryan", "Thompson", email="rct@thompsonclan.org", role="aut"),
+    person("Nitesh", "Turaga", role="aut"),
+    person("Aaron", "Lun", role = "ctb"),
+    person("Henrik", "Bengtsson", role = "ctb"),
+    person("Madelyn", "Carlson", role = "ctb",
+        comment = "Translated 'Random Numbers' vignette from Sweave to RMarkdown / HTML."
+    ),
+    person("Phylis", "Atieno",role = "ctb",
+        comment = "Translated 'Introduction to BiocParallel' vignette from Sweave to Rmarkdown / HTML."
+    ))
+Description: This package provides modified versions and novel
+    implementation of functions for parallel evaluation, tailored to
+    use with Bioconductor objects.
+URL: https://github.com/Bioconductor/BiocParallel
+BugReports: https://github.com/Bioconductor/BiocParallel/issues
+biocViews: Infrastructure
+License: GPL-2 | GPL-3
+SystemRequirements: C++11
+Depends: methods, R (>= 3.5.0)
+Imports: stats, utils, futile.logger, parallel, snow, codetools
+Suggests: BiocGenerics, tools, foreach, BatchJobs, BBmisc, doParallel,
+        Rmpi, GenomicRanges, RNAseqData.HNRNPC.bam.chr14,
+        TxDb.Hsapiens.UCSC.hg19.knownGene, VariantAnnotation,
+        Rsamtools, GenomicAlignments, ShortRead, RUnit, BiocStyle,
+        knitr, batchtools, data.table
+Collate: AllGenerics.R DeveloperInterface.R prototype.R bploop.R
+        ErrorHandling.R log.R bpbackend-methods.R bpisup-methods.R
+        bplapply-methods.R bpiterate-methods.R bpstart-methods.R
+        bpstop-methods.R BiocParallelParam-class.R bpmapply-methods.R
+        bpschedule-methods.R bpvec-methods.R bpvectorize-methods.R
+        bpworkers-methods.R bpaggregate-methods.R bpvalidate.R
+        SnowParam-class.R MulticoreParam-class.R
+        TransientMulticoreParam-class.R register.R SerialParam-class.R
+        DoparParam-class.R SnowParam-utils.R BatchJobsParam-class.R
+        BatchtoolsParam-class.R progress.R ipcmutex.R utilities.R rng.R
+        bpinit.R reducer.R worker.R bpoptions.R cpp11.R
+LinkingTo: BH, cpp11
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+git_url: https://git.bioconductor.org/packages/BiocParallel
+git_branch: RELEASE_3_16
+git_last_commit: 994f4e7
+git_last_commit_date: 2023-03-17
+Date/Publication: 2023-03-17
+NeedsCompilation: yes
+Packaged: 2023-03-17 21:25:19 UTC; biocbuild
+Author: Martin Morgan [aut, cre],
+  Jiefei Wang [aut],
+  Valerie Obenchain [aut],
+  Michel Lang [aut],
+  Ryan Thompson [aut],
+  Nitesh Turaga [aut],
+  Aaron Lun [ctb],
+  Henrik Bengtsson [ctb],
+  Madelyn Carlson [ctb] (Translated 'Random Numbers' vignette from Sweave
+    to RMarkdown / HTML.),
+  Phylis Atieno [ctb] (Translated 'Introduction to BiocParallel' vignette
+    from Sweave to Rmarkdown / HTML.)
+Maintainer: Martin Morgan <mtmorgan.bioc@gmail.com>
+Built: R 4.2.2; x86_64-w64-mingw32; 2023-03-18 11:42:08 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64

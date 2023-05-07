@@ -1,0 +1,14 @@
+bibentry(
+    bibtype = "Article",
+    title = "beachmat: A Bioconductor C++ API for accessing high-throughput biological data from a variety of R matrix types",
+    author = c(person(c("Aaron", "T.", "L."), "Lun"),
+        person("Herv{\\'e}", "Pag{\\`e}s"),
+        person(c("Mike", "L."), "Smith")),
+    year = "2018",
+    volume="14",
+    number="5",
+    pages="e1006135",
+    journal="PLoS Comput. Biol.",
+    doi="10.1371/journal.pcbi.1006135"
+)
+

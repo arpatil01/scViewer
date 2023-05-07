@@ -1,0 +1,427 @@
+---
+title: "Reading data from R matrices in C++"
+author: "Aaron Lun"
+package: beachmat
+output: 
+  BiocStyle::html_document:
+    toc_float: yes
+vignette: >
+  %\VignetteIndexEntry{2. Reading data from R matrices in C++ (v2)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+# Overview of the input API
+
+**Note: this document refers to version 2 of the `r Biocpkg("beachmat")` API,
+which is still supported but no longer under active development.
+Developers writing new code are encouraged to use version 3, which is much more streamlined.**
+
+This document describes the use of the `r Biocpkg("beachmat")` API for accessing data in R matrices.
+We will demonstrate the API on numeric matrices, though same semantics are used for matrices of other types (e.g., logical, integer, character).
+First, we include the relevant header file:
+
+```cpp
+#include "beachmat/numeric_matrix.h"
+```
+
+A double-precision matrix object `dmat` is handled in C++ by passing the `SEXP` struct from `.Call` to `create_numeric_matrix`:
+
+```cpp
+auto dptr = beachmat::create_numeric_matrix(dmat);
+```
+
+This creates a unique pointer that points to an object of the `numeric_matrix` base class.
+The exact derived class that is actually instantiated depends on the type of matrix in `dmat`, though the behaviour of the user-level functions are not affected by this detail.
+
+**Additional notes**
+
+- The `auto` keyword just avoids the need to write the full type of the returned pointer, which is `std::unique_ptr<beachmat::numeric_matrix>`. 
+We use unique pointers to control ownership and smoothly handle destruction and memory deallocation at the end of the function.
+- The API will happily throw exceptions of the `std::exception` class, containing an informative error message.
+These should be caught and handled gracefully by the end-user code, otherwise a segmentation fault will probably occur.
+See the error-handling mechanism in `r CRANpkg("Rcpp")` for how to deal with these exceptions.
+
+# Querying matrix information
+
+The `get_nrow()` method returns the number of rows in the matrix:
+
+```cpp
+size_t nrow = dptr->get_nrow();
+```
+
+The `get_ncol()` method returns the number of columns in the matrix:
+
+```cpp
+size_t ncol = dptr->get_ncol();
+```
+
+The `get_class()` method returns the class of the matrix representation pointed to by `dptr`,
+while the `get_package()` method returns the package in which that class is defined^[In case two packages define the same class name.].
+
+```cpp
+std::string mat_type = dptr->get_class();
+```
+
+The `yield()` method returns the original R matrix that was used to create `dptr`.
+
+```cpp
+Rcpp::RObject original = dptr->yield();
+```
+
+# Basic data extraction 
+
+## From columns 
+
+The `get_col()` method fills an iterator `in` to an _Rcpp_ vector with values from a column `c` of the matrix.
+There should be at least `nrow` accessible elements, i.e., `*in` and `*(in+nrow-1)` should be valid entries.
+
+```cpp
+dptr->get_col(
+    c, /* size_t */
+    in /* Rcpp::Vector::iterator */
+);
+```
+
+Extraction of a range of the column can be specified with the `first` and `last` arguments.
+This will fill `in` with values at column `c` from row `first` to `last-1`.
+There should be at least `last-first` accessible elements, i.e., `*in` and `*(in+last-first-1)` should be valid entries.
+
+```cpp
+dptr->get_col(
+    c, /* size_t */ 
+    in, /* Rcpp::Vector::iterator */
+    first, /* size_t */
+    last /* size_t */
+);
+```
+
+No value is returned by either of these methods.
+Note that `c` should be a zero-indexed integer in `[0, ncol)`.
+Similarly, both `first` and `last` should be in `[0, nrow]` and zero-indexed, with the additional requirement that `last >= first`.
+
+## From rows
+
+The `get_row()` method takes an iterator `in` to a _Rcpp_ vector and fills it with values at row `r`.
+There should be at least `ncol` accessible elements, i.e., `*in` and `*(in+ncol-1)` should be valid entries.
+
+```cpp
+dptr->get_row(
+    r, /* size_t */
+    in /* Rcpp::Vector::iterator */
+);
+```              
+
+Extraction of a range of the row can be specified with the `first` and `last` arguments.
+This will fill `in` with values at row `r` from column `first` to `last-1`.
+There should be at least `last-first` accessible elements, i.e., `*in` and `*(in+last-first-1)` should be valid entries.
+
+```cpp
+dptr->get_row(
+    r, /* size_t */
+    in, /* Rcpp::Vector::iterator */
+    first, /* size_t */
+    last /* size_t */
+);
+```
+
+No value is returned by either of these methods.
+Again,  `r` should be a zero-indexed integer in `[0, nrow)`.
+Both `first` and `last` should be in `[0, ncol]` and zero-indexed, with the additional requirement that `last >= first`.
+
+## From individual cells
+
+The `get()` method returns a double-precision value at the matrix entry for row `r` and column `c`.
+Both `r` and `c` should be zero-indexed integers in `[0, nrow)` and `[0, ncol)` respectively. 
+
+```cpp
+double val = dptr->get(
+    r, /* size_t */
+    c /* size_t */
+);
+```
+
+## Type conversions
+
+If the object `in` is a `Rcpp::NumericVector::iterator` instance, matrix entries will be extracted as double-precision values.
+If it is a `Rcpp::IntegerVector::iterator` instance, matrix entries will be extracted as integers with implicit conversion from the double-precision type in `dptr`.
+It is also _possible_ to use a `Rcpp::LogicalVector::iterator`, though see the warnings [below](#type-coercion).
+
+# Multiple data extraction
+
+## From columns
+
+The `get_cols()` method fills an iterator `in` to an _Rcpp_ vector with values from multiple columns of the matrix.
+The `idx` iterator should point to an array of integers of length `n`, containing the column indices to use for extraction.
+The indices should be zero-based and _strictly increasing_, i.e., no duplicates.
+
+```cpp
+dptr->get_cols(
+    idx, /* Rcpp::IntegerVector::iterator */
+    n, /* size_t */
+    in, /* Rcpp::Vector::iterator */
+    first, /* size_t */
+    last /* size_t */
+);
+```
+
+For each column, the range of values in `[first, last)` are extracted.
+If `first` and `last` are not specified, the range will default to `[0, nrow)`.
+Thus, there should be at least `n*(last-first)` accessible elements pointed to by `in`.
+
+This method will extract values in column-major format.
+That is, if one were to compute a submatrix containing the selected columns and the chosen row range, that submatrix would be available in column-major form in `in`.
+
+No value is returned by this method.
+
+## From rows 
+
+The `get_rows()` method fills an iterator `in` to an _Rcpp_ vector with values from multiple rows of the matrix.
+The `idx` iterator should point to an array of integers of length `n`, containing the column indices to use for extraction.
+The indices should be zero-based and _strictly increasing_, i.e., no duplicates.
+
+```cpp
+dptr->get_rows(
+    idx, /* Rcpp::IntegerVector::iterator */
+    n, /* size_t */
+    in, /* Rcpp::Vector::iterator */
+    first, /* size_t */
+    last /* size_t */
+);
+```
+
+For each row, the range of values in `[first, last)` are extracted.
+If `first` and `last` are not specified, the range will default to `[0, ncol)`.
+Thus, there should be at least `n*(last-first)` accessible elements pointed to by `in`.
+
+Like `get_cols()`, this method will extract values in column-major format.
+That is, if one were to compute a submatrix containing the selected columns and the chosen row range, that submatrix would be available in column-major form in `in`.
+Note that this means that contiguous elements in `in` are _not_ from the same row!
+Rather, they will be from the same column, but only from the rows specified by `idx`.
+
+No value is returned by this method.
+
+# Generalizing to other matrices
+
+## Other data types {#type-coercion}
+
+To create logical, integer and character matrices, include the following header files:
+
+```cpp
+#include "beachmat/logical_matrix.h"
+#include "beachmat/integer_matrix.h"
+#include "beachmat/character_matrix.h"
+```
+
+The dispatch function changes correspondingly for logical matrix `lmat`, integer matrix `imat`  or character matrix `cmat`.
+Each function creates a unique pointer to a `*_matrix` of the appropriate type.
+
+
+```cpp
+// creates a std::unique_ptr<beachmat::logical_matrix>
+auto lptr=beachmat::create_logical_matrix(lmat);
+
+// creates a std::unique_ptr<beachmat::integer_matrix>
+auto iptr=beachmat::create_integer_matrix(imat);
+
+// creates a std::unique_ptr<beachmat::character_matrix>
+auto cptr=beachmat::create_character_matrix(cmat);
+```
+
+Equivalent methods are available for each matrix type with appropriate changes in type.
+
+For integer and logical matrices, `get()` will return an integer.
+`in` can be any type previously described for `numeric_matrix` objects.
+
+For character matrices, all iterators should be of type `Rcpp::StringVector::iterator`, and `get()` will return a `Rcpp::String`.
+
+**Additional notes**
+
+- If `in` is a `Rcpp::LogicalVector::iterator` for non-logical matrices, the result may not behave as expected.
+For `numeric_matrix` instances, double-precision values in `(-1, 1)` are coerced to zero due to double-to-integer casting in C++.
+This is not consistent with the behaviour in R for non-zero values, which are coerced to `TRUE`.
+For `integer_matrix` instances, integer values are not coerced to `{0, 1}` when they are assigned to `*in`.
+Thus, even though the interpretation is correct, the vector produced will not be equivalent to the result of an `as.logical` call.
+As a general rule, it is unwise to use `Rcpp::LogicalVector::iterator`s for anything other than `logical_matrix` access.
+- When accessing `character_matrix` data, we do not return raw `const char*` pointers to the C-style string. 
+Rather, the `Rcpp::String` class is used as it provides a convenient wrapper around the underlying `CHARSXP`. 
+This ensures that the string is stored in R's global cache and is suitably protected against garbage collection. 
+
+## Alternative matrix representations
+
+The following matrix classes are natively supported by the API:
+
+- numeric: `matrix`, `dgeMatrix`, `dgCMatrix`
+- integer: `matrix`
+- logical: `matrix`, `lgeMatrix`, `lgCMatrix`
+- character: `matrix`
+
+The API will also natively support `DelayedMatrix` objects using the above matrices as backends _and_ containing only subsetting or transposition operations.
+It is possible to natively support arbitrary user-supplied matrices, see `r Biocpkg("beachmat", vignette="external.html", label="here")` for more details and `r Biocpkg("HDF5Array")` for an example.
+
+For all other matrices, the API indirectly supports data access via a block processing mechanism.
+This involves a call to R to realize a block of the matrix (containing the requested row or column) as a dense contiguous array.
+A block is realized so that further requests to rows/columns within the same block do not involve a new call to R.
+The size of the blocks can be controlled using methods in the `r Biocpkg("DelayedArray")` package, see `?blockGrid` for details.
+
+**Additional notes**
+
+- For numeric matrices, _beachmat_ does not support higher-level matrix operations such as addition, multiplication or various factorizations. 
+Rather, the `yield` method can be used to obtain the original `Rcpp::RObject` for input to `r CRANpkg("RcppArmadillo")` or `r CRANpkg("RcppEigen")`.
+This functionality is generally limited to base matrices, though there is also limited support for sparse matrices in these libraries.
+
+# Specialized data extraction 
+
+## Overview
+
+For specific matrix representations, special methods are available that can improve the efficiency of column-level data access.
+
+- Ordinary matrices or `dgeMatrix` instances are stored as dense arrays, so it is possible to access the columns without copying by returning an iterator to the start of each column.
+- If the underlying matrix is a `dgCMatrix`, the column-sparse format allows us to access the non-zero values (and their row indices) directly for each column without copying.
+
+The `const_column` class provides a convenient wrapper to exploit these optimizations where possible.
+
+```cpp
+#include "beachmat/utils/const_column.h"
+
+// Need a get() as unique_ptr's are not copyable.
+beachmat::const_column<beachmat::numeric_matrix> col_holder(dptr.get());
+```
+
+The `fill` method will instruct the `const_column` object to obtain the relevant column,
+taking advantage of no-copy methods if supported by the representation.
+For other matrices, it simply calls `get_col()` to perform a copy to its internal storage.
+
+```cpp
+col_holder.fill(
+    c /* size_t */, 
+    first /* size_t */, 
+    last /* size_t */
+);
+```
+
+The `first` and `last` arguments are optional and behave as previously described.
+
+**Additional notes**
+
+- The lifetime of the `const_column` instance should not exceed that of the `numeric_matrix` with which it was constructed. 
+This is because the former holds a pointer to the latter, which would no longer be valid upon destruction.
+The `const_column` also keeps iterators to the underlying R-managed data, which could be invalidated upon `numeric_matrix` destruction in some contrived scenarios.
+
+## Interpreting the iterators
+
+An iterator to the values of the column is obtained with `get_values`:
+
+```cpp
+Rcpp::NumericVector::iterator val=col_holder.get_values(); 
+```
+
+An iterator to the row index of each value is obtained with `get_indices`:
+
+```cpp
+Rcpp::IntegerVector::iterator idx=col_holder.get_indices();
+```
+
+The number of values pointed to by the iterator is obtained with `get_n`:
+
+```cpp
+size_t n=col_holder.get_n(); 
+```
+
+Obviously, sparse matrices will not store any zeroes in the array of values pointed to by `get_values()`,
+nor will the row indices for zeroes be present in the array pointed to by `get_indices()`.
+This may or may not require some custom code to take maximum advantage of sparsity:
+
+```cpp
+if (col_holder.is_sparse()) {
+    // Do something fast with non-zero elements.
+} else {
+    // Do something with all elements.
+}
+```
+
+## Further options 
+
+Some applications require representation of all elements including zeroes, e.g., when the subsequent array needs to be accessed by row index.
+We can ensure that we obtain an iterator to a dense array by constructing the `const_column` with the `allow_sparsity` argument turned off:
+
+```cpp
+beachmat::const_column<beachmat::numeric_matrix> col_holder(
+    dptr.get(), false);
+```
+
+Doing so will force `const_column` to use `get_col()` for accessing sparse matrices, instead of obtaining iterators to the raw structure.
+However, no-copy optimizations for dense matrices will still be active.
+
+For non-sparse matrices, calling `get_indices()` will cause an internal array to be populated with consecutive iterators.
+One can share this array across many `const_column` instances by calling `get_indices()` prior to construction of copies:
+
+```cpp
+beachmat::const_column<beachmat::numeric_matrix> col_holder(dptr.get());
+col_holder.get_indices(); // Effectively 'static' indices.
+
+// Make any number of copies without re-generating the indices.
+auto holder_copy=col_holder;
+```
+
+This can save some memory if many `const_column` objects are to be created.
+
+# Cloning matrix instances
+
+The `clone()` method returns a unique pointer to a `numeric_matrix` instance of the same type as that pointed to by `dptr`.
+```cpp
+auto dptr_copy = dptr->clone();
+```
+
+This is occasionally useful, e.g., when row and column access is simultaneously required from the same matrix.
+In such cases, row-specific settings in a single `numeric_matrix` instance (e.g., for HDF5 caching) would preclude efficient column extraction, and vice versa.
+These problems are avoided by having two separate instances for row and column access.
+
+Cloning also enables multi-threaded access to the same matrix data.
+Ordinarily, the `get*` methods in `r Biocpkg("beachmat")` are not thread safe.
+Some methods use cached class members for greater efficiency, and simultaneous calls will cause race conditions. 
+It is the responsibility of the calling function to coordinate data access across threads.
+To this end, the `clone` method can be called to generate a unique pointer to a _new_ `*_matrix` instance, which can be used concurrently in another thread.
+This is fairly cheap as the underlying matrix data are not copied.
+
+An example of parallelized `r Biocpkg("beachmat")` code using OpenMP might look like this:
+
+```cpp
+#pragma omp parallel num_threads(nthreads)
+{
+    beachmat::numeric_matrix* rptr=NULL;
+    std::unique_ptr<beachmat::numeric_matrix> uptr=nullptr;
+    if (omp_get_thread_num()==0) {
+        rptr=dptr.get();
+    } else {
+        uptr=dptr->clone();
+        rptr=uptr.get();
+    }
+
+    const size_t NC=rptr->get_ncol();
+    Rcpp::NumericVector output(rptr->get_nrow());
+
+    #pragma omp for schedule(static)
+    for (size_t col=0; col<NC; ++col) {
+        // Do parallel operation here.
+        rptr->get_col(col, output.begin());
+    }
+}
+```
+
+The start of the parallel region uses the existing `dptr` in the master thread and clones a new matrix in the other threads.
+The parallelized `for` loop then uses `rptr` to avoid race conditions in cached variables.
+Note that a static schedule may be faster than other schedule types, as several of the matrix implementations in `r Biocpkg("beachmat")` are optimized for consecutive row/column access.
+
+**Additional notes**
+
+- For community-defined matrices, `r Biocpkg("beachmat")` may use external linkage to natively access data.
+Developers of the corresponding shared libraries should ensure that their routines depend on thread-safe libraries.
+For example, the HDF5 library is not thread safe, so `r Biocpkg("HDF5Array")` inputs will likely break OpenMP code.
+This is admittedly rather frustrating as HDF5-backed matrices are often used for large data sets that most require parallel processing.
+As a workaround, we suggest parallelizing at the R level with `r Biocpkg("BiocParallel")`.

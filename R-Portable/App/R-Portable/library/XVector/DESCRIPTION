@@ -1,0 +1,38 @@
+Package: XVector
+Title: Foundation of external vector representation and manipulation in
+        Bioconductor
+Description: Provides memory efficient S4 classes for storing sequences
+	"externally" (e.g. behind an R external pointer, or on disk).
+biocViews: Infrastructure, DataRepresentation
+URL: https://bioconductor.org/packages/XVector
+BugReports: https://github.com/Bioconductor/XVector/issues
+Version: 0.38.0
+License: Artistic-2.0
+Encoding: UTF-8
+Author: Hervé Pagès and Patrick Aboyoun
+Maintainer: Hervé Pagès <hpages.on.github@gmail.com>
+Depends: R (>= 4.0.0), methods, BiocGenerics (>= 0.37.0), S4Vectors (>=
+        0.27.12), IRanges (>= 2.23.9)
+Imports: methods, utils, tools, zlibbioc, BiocGenerics, S4Vectors,
+        IRanges
+LinkingTo: S4Vectors, IRanges
+Suggests: Biostrings, drosophila2probe, RUnit
+Collate: io-utils.R RDS-random-access.R SharedVector-class.R
+        SharedRaw-class.R SharedInteger-class.R SharedDouble-class.R
+        XVector-class.R XRaw-class.R XInteger-class.R XDouble-class.R
+        XVectorList-class.R XRawList-class.R XRawList-comparison.R
+        XIntegerViews-class.R XDoubleViews-class.R OnDiskRaw-class.R
+        RdaCollection-class.R RdsCollection-class.R
+        intra-range-methods.R compact-methods.R reverse-methods.R
+        slice-methods.R view-summarization-methods.R
+        updateObject-methods.R zzz.R
+git_url: https://git.bioconductor.org/packages/XVector
+git_branch: RELEASE_3_16
+git_last_commit: 8cad084
+git_last_commit_date: 2022-11-01
+Date/Publication: 2022-11-01
+NeedsCompilation: yes
+Packaged: 2022-11-02 03:57:25 UTC; biocbuild
+Built: R 4.2.1; x86_64-w64-mingw32; 2022-11-02 14:33:26 UTC; windows
+ExperimentalWindowsRuntime: ucrt
+Archs: x64
