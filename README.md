@@ -1,6 +1,6 @@
 # scViewer Application- A single-cell data viewer shiny application
 
-![image](https://user-images.githubusercontent.com/105444693/222185076-9efcc6da-803e-44e8-8fbb-96f72cc0eb22.png)
+![image](https://github.com/arpatil01/scViewer/assets/105444693/cf816d63-1477-4e36-b030-ca8487a923a5)
 
 
 
@@ -25,10 +25,16 @@ The package dependencies can also be found here- ```scViewer -> app -> packages.
   ```install.packages("stringr")```
   ```install.packages("ggpubr")```
   ```install.packages("tibble")```
+  ```install.packages("nebula")```
+  ```install.packages("scater")```
+  ```install.packages("SingleCellExperiment")```
+  ```install.packages("gridExtra")```
+  ```install.packages("cowplot")```
 
   Option2- Linux/ Mac users can also redirect by loading the pre-compiled libraries from ```scViewer -> app -> library ``` folder instead of installing them.
 
 For ex, ```library(devtools)``` then load package w/o installing using the PATH of pre-installed packages using- ```load_all('/scViewer/app/library/packagename')```
+R v 4.1.2 was used to develop the shiny app. All the packages version are mentioned in the manuscript.
  
 4. Go to ```scViewer -> app -> shiny``` folder where you can locate the data, www folder, and app.R script to run the shiny app.
 5. Run the shiny app using the ```app.R``` script
