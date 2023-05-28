@@ -48,3 +48,7 @@ Users can store the processed single-cell RNA_seq data (Seurat .RDS object) in t
 The scRNA-seq data processing code can be found in the vignette here ```scViewer -> Supplementary_File.html```
 
 We provide the step-by-step example code documentation for processing the scRNA-seq data. We also provide the metadata format for the scRNA-seq data that is compatible with the app. 
+
+## Publication to cite
+Patil, A.R.; Kumar, G.; Zhou, H.; Warren, L. scViewer: An Interactive Single-Cell Gene Expression Visualization Tool. Cells 2023, 12, 1489. https://doi.org/10.3390/cells12111489
+
