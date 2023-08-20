@@ -1353,7 +1353,8 @@ for Differential Expression Analysis of ScRNA-Seq Data) from nebula package. <br
         nCells <- c(gene1.all, gene2.all, genes.both);# genes.none
         print(nCells)
         
-        total.cells <- sum(gene1.all, gene2.all, genes.both) # genes.none
+        #total.cells <- sum(gene1.all, gene2.all, genes.both) # genes.none
+        total.cells <- dim(sc_file)[2]
         
         perc.gene1.only <- round(gene1.only/total.cells*100,2)
         perc.gene2.only <- round(gene2.only/total.cells*100,2)
@@ -1562,7 +1563,8 @@ for Differential Expression Analysis of ScRNA-Seq Data) from nebula package. <br
          nCells <- c(gene1.all, gene2.all, genes.both); #genes.none
          print(nCells)
          
-         total.cells <- sum(gene1.all, gene2.all, genes.both) #genes.none
+         #total.cells <- sum(gene1.all, gene2.all, genes.both) #genes.none
+         total.cells <- dim(sc_file)[2]
          
          perc.gene1.only <- round(gene1.only/total.cells*100,2)
          perc.gene2.only <- round(gene2.only/total.cells*100,2)
